@@ -3,13 +3,20 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { demoFormSchema, type DemoFormValues } from "@/lib/validations/contact";
+import {
+  consultationFormSchema,
+  type ConsultationFormValues,
+} from "@/lib/validations/contact";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
-export function DemoForm() {
+export function ConsultationForm({
+  defaultIntent = "consultation",
+}: {
+  defaultIntent?: "consultation" | "proqpay-demo" | "sales";
+}) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
   );
@@ -20,10 +27,10 @@ export function DemoForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<DemoFormValues>({
-    resolver: zodResolver(demoFormSchema) as never,
+  } = useForm<ConsultationFormValues>({
+    resolver: zodResolver(consultationFormSchema) as never,
     defaultValues: {
-      intent: "demo",
+      intent: defaultIntent,
       name: "",
       email: "",
       company: "",
@@ -31,12 +38,15 @@ export function DemoForm() {
       role: "",
       employeeCount: "",
       preferredDate: "",
-      message: "I would like to schedule a ProQPay product demo.",
+      message:
+        defaultIntent === "proqpay-demo"
+          ? "I would like a ProQPay product demonstration."
+          : "I would like a consultation with the MSG team.",
       website: "",
     },
   });
 
-  const onSubmit = async (values: DemoFormValues) => {
+  const onSubmit = async (values: ConsultationFormValues) => {
     setStatus("loading");
     setErrorMessage("");
     try {
@@ -44,10 +54,8 @@ export function DemoForm() {
         ...values,
         message: [
           values.message,
-          `Employee count: ${values.employeeCount}`,
-          values.preferredDate
-            ? `Preferred date: ${values.preferredDate}`
-            : null,
+          values.employeeCount ? `Employee/team size: ${values.employeeCount}` : null,
+          values.preferredDate ? `Preferred date: ${values.preferredDate}` : null,
         ]
           .filter(Boolean)
           .join("\n"),
@@ -61,7 +69,7 @@ export function DemoForm() {
         const data = (await res.json().catch(() => null)) as {
           error?: string;
         } | null;
-        throw new Error(data?.error ?? "Unable to submit demo request.");
+        throw new Error(data?.error ?? "Unable to submit request.");
       }
       setStatus("success");
       reset();
@@ -76,9 +84,10 @@ export function DemoForm() {
   if (status === "success") {
     return (
       <div className="rounded-2xl border border-border bg-muted/40 p-8 text-center">
-        <h3 className="text-xl font-semibold">Demo request received</h3>
+        <h3 className="text-xl font-semibold">Request received</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          Thank you. Our team will contact you shortly to schedule a walkthrough.
+          Thank you. Our team will contact you shortly to schedule a consultation
+          or demo.
         </p>
       </div>
     );
@@ -88,15 +97,15 @@ export function DemoForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="demo-name">Full name</Label>
-          <Input id="demo-name" {...register("name")} />
+          <Label htmlFor="c-name">Full name</Label>
+          <Input id="c-name" {...register("name")} />
           {errors.name ? (
             <p className="text-xs text-destructive">{errors.name.message}</p>
           ) : null}
         </div>
         <div className="space-y-2">
-          <Label htmlFor="demo-email">Work email</Label>
-          <Input id="demo-email" type="email" {...register("email")} />
+          <Label htmlFor="c-email">Work email</Label>
+          <Input id="c-email" type="email" {...register("email")} />
           {errors.email ? (
             <p className="text-xs text-destructive">{errors.email.message}</p>
           ) : null}
@@ -105,47 +114,55 @@ export function DemoForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="demo-company">Company</Label>
-          <Input id="demo-company" {...register("company")} />
+          <Label htmlFor="c-company">Company</Label>
+          <Input id="c-company" {...register("company")} />
           {errors.company ? (
             <p className="text-xs text-destructive">{errors.company.message}</p>
           ) : null}
         </div>
         <div className="space-y-2">
-          <Label htmlFor="demo-phone">Phone (optional)</Label>
-          <Input id="demo-phone" {...register("phone")} />
+          <Label htmlFor="c-phone">Phone (optional)</Label>
+          <Input id="c-phone" {...register("phone")} />
         </div>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="employeeCount">Employee count</Label>
+          <Label htmlFor="intent">Intent</Label>
+          <select
+            id="intent"
+            className="flex h-11 w-full rounded-xl border border-input bg-background px-3 text-sm shadow-sm"
+            {...register("intent")}
+          >
+            <option value="consultation">Workforce consultation</option>
+            <option value="proqpay-demo">ProQPay demo</option>
+            <option value="sales">Talk to sales</option>
+          </select>
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="employeeCount">Team / employee scale (optional)</Label>
           <select
             id="employeeCount"
             className="flex h-11 w-full rounded-xl border border-input bg-background px-3 text-sm shadow-sm"
             {...register("employeeCount")}
           >
             <option value="">Select range</option>
-            <option value="1-100">1–100</option>
-            <option value="101-500">101–500</option>
-            <option value="501-2000">501–2,000</option>
-            <option value="2000+">2,000+</option>
+            <option value="1-50">1–50</option>
+            <option value="51-200">51–200</option>
+            <option value="201-1000">201–1,000</option>
+            <option value="1000+">1,000+</option>
           </select>
-          {errors.employeeCount ? (
-            <p className="text-xs text-destructive">
-              {errors.employeeCount.message}
-            </p>
-          ) : null}
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="preferredDate">Preferred date (optional)</Label>
-          <Input id="preferredDate" type="date" {...register("preferredDate")} />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="demo-message">Notes</Label>
-        <Textarea id="demo-message" {...register("message")} />
+        <Label htmlFor="preferredDate">Preferred date (optional)</Label>
+        <Input id="preferredDate" type="date" {...register("preferredDate")} />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="c-message">Notes</Label>
+        <Textarea id="c-message" {...register("message")} />
         {errors.message ? (
           <p className="text-xs text-destructive">{errors.message.message}</p>
         ) : null}
@@ -160,7 +177,7 @@ export function DemoForm() {
       ) : null}
 
       <Button type="submit" variant="accent" size="lg" disabled={status === "loading"}>
-        {status === "loading" ? "Submitting..." : "Request Demo"}
+        {status === "loading" ? "Submitting..." : "Request Consultation"}
       </Button>
     </form>
   );

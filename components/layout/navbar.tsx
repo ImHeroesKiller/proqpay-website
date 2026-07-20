@@ -37,10 +37,13 @@ export function Navbar() {
         scrolled && "border-border shadow-sm",
       )}
     >
-      <div className="container-pro flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
+      <div className="container-pro flex h-16 items-center justify-between gap-3 lg:h-[4.5rem]">
         <Logo compact />
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        <nav
+          className="hidden items-center gap-0.5 xl:flex"
+          aria-label="Primary"
+        >
           {mainNavigation.map((item) => {
             const hasMega = Boolean(item.mega);
             const hasChildren = Boolean(item.children?.length);
@@ -51,7 +54,7 @@ export function Navbar() {
                 <Link
                   key={item.title}
                   href={item.href}
-                  className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition hover:bg-muted hover:text-foreground"
+                  className="rounded-lg px-2.5 py-2 text-sm font-medium text-foreground/80 transition hover:bg-muted hover:text-foreground"
                 >
                   {item.title}
                 </Link>
@@ -67,7 +70,7 @@ export function Navbar() {
               >
                 <button
                   type="button"
-                  className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition hover:bg-muted hover:text-foreground"
+                  className="inline-flex items-center gap-1 rounded-lg px-2.5 py-2 text-sm font-medium text-foreground/80 transition hover:bg-muted hover:text-foreground"
                   aria-expanded={isOpen}
                   onClick={() => setOpenMenu(isOpen ? null : item.title)}
                 >
@@ -105,19 +108,22 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           <ThemeToggle />
-          <Button asChild variant="ghost">
-            <a href={siteConfig.appUrl} rel="noopener noreferrer">
-              Login
+          <Button asChild variant="ghost" size="sm">
+            <Link href="/products/proqpay">Discover ProQPay</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <a href={siteConfig.proqpayAppUrl} rel="noopener noreferrer">
+              ProQPay Login
             </a>
           </Button>
-          <Button asChild variant="accent">
-            <Link href="/request-demo">Request Demo</Link>
+          <Button asChild variant="accent" size="sm">
+            <Link href="/request-consultation">Request Consultation</Link>
           </Button>
         </div>
 
-        <div className="flex items-center gap-1 lg:hidden">
+        <div className="flex items-center gap-1 xl:hidden">
           <ThemeToggle />
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
@@ -171,16 +177,24 @@ export function Navbar() {
                 ))}
                 <div className="mt-4 flex flex-col gap-2">
                   <Button asChild variant="outline">
-                    <a href={siteConfig.appUrl} rel="noopener noreferrer">
-                      Login
+                    <Link
+                      href="/products/proqpay"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Discover ProQPay
+                    </Link>
+                  </Button>
+                  <Button asChild variant="ghost">
+                    <a href={siteConfig.proqpayAppUrl} rel="noopener noreferrer">
+                      ProQPay Login
                     </a>
                   </Button>
                   <Button asChild variant="accent">
                     <Link
-                      href="/request-demo"
+                      href="/request-consultation"
                       onClick={() => setMobileOpen(false)}
                     >
-                      Request Demo
+                      Request Consultation
                     </Link>
                   </Button>
                 </div>

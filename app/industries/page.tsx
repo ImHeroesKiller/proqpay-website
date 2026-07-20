@@ -1,16 +1,16 @@
+import Link from "next/link";
 import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
 import { CtaBand } from "@/components/sections/cta-band";
 import { industries } from "@/lib/content/industries";
 import { buildMetadata } from "@/lib/seo";
-import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Industries",
   description:
-    "ProQPay supports manufacturing, retail, construction, logistics, professional services, and outsourcing payroll operations.",
+    "MSG supports manufacturing, retail, construction and engineering, logistics, professional services, and financial services organizations.",
   path: "/industries",
 });
 
@@ -18,8 +18,8 @@ export default function IndustriesPage() {
   return (
     <>
       <PageHero
-        title="Industry-ready payroll operations"
-        description="Purpose-built approaches for the workforce models and control needs of Indonesia’s most demanding sectors."
+        title="Industry-ready workforce solutions"
+        description="MSG supports enterprises where staffing reliability, operational supervision, and process discipline are critical."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Industries" },

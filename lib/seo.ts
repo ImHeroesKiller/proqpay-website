@@ -22,7 +22,9 @@ export function buildMetadata({
   const url = absoluteUrl(path);
   const ogImage = image.startsWith("http") ? image : absoluteUrl(image);
   const fullTitle =
-    title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
+    title === siteConfig.name || title === siteConfig.legalName
+      ? `${siteConfig.legalName} | ${siteConfig.tagline}`
+      : `${title} | ${siteConfig.name}`;
 
   return {
     title,
@@ -35,7 +37,7 @@ export function buildMetadata({
       title: fullTitle,
       description,
       url,
-      siteName: siteConfig.name,
+      siteName: siteConfig.legalName,
       locale: siteConfig.locale,
       type,
       images: [
@@ -63,16 +65,31 @@ export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: siteConfig.name,
+    name: siteConfig.legalName,
+    alternateName: siteConfig.name,
     url: siteConfig.url,
-    logo: absoluteUrl("/brand/logo-proqpay.png"),
+    logo: absoluteUrl("/icons/icon-512.png"),
     description: siteConfig.description,
     foundingDate: String(siteConfig.founded),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.contact.addressDetail,
+      addressLocality: "South Jakarta",
+      addressCountry: "ID",
+    },
     contactPoint: [
       {
         "@type": "ContactPoint",
+        contactType: "customer service",
+        email: siteConfig.contact.email,
+        telephone: siteConfig.contact.phone,
+        areaServed: "ID",
+        availableLanguage: ["English", "Indonesian"],
+      },
+      {
+        "@type": "ContactPoint",
         contactType: "sales",
-        email: siteConfig.contact.salesEmail,
+        email: siteConfig.contact.marketingEmail,
         telephone: siteConfig.contact.phone,
         areaServed: "ID",
         availableLanguage: ["English", "Indonesian"],
@@ -90,19 +107,18 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: siteConfig.name,
+    name: siteConfig.legalName,
+    alternateName: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
     publisher: {
       "@type": "Organization",
-      name: siteConfig.name,
+      name: siteConfig.legalName,
     },
   };
 }
 
-export function breadcrumbJsonLd(
-  items: { name: string; path: string }[],
-) {
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -147,14 +163,14 @@ export function articleJsonLd(input: {
     dateModified: input.dateModified ?? input.datePublished,
     author: {
       "@type": "Organization",
-      name: input.author ?? siteConfig.name,
+      name: input.author ?? siteConfig.legalName,
     },
     publisher: {
       "@type": "Organization",
-      name: siteConfig.name,
+      name: siteConfig.legalName,
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/brand/logo-proqpay.png"),
+        url: absoluteUrl("/icons/icon-512.png"),
       },
     },
     mainEntityOfPage: absoluteUrl(input.path),

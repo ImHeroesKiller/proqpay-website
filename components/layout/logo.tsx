@@ -21,7 +21,7 @@ export function Logo({
     <Link
       href="/"
       className={cn("inline-flex flex-col leading-none", className)}
-      aria-label="ProQPay home"
+      aria-label="MSG home — PT Mandiri Semesta Gemilang"
     >
       <span
         className={cn(
@@ -29,18 +29,17 @@ export function Logo({
           wordmarkClass,
         )}
       >
-        Pro
-        <span className="text-logo-orange">Q</span>
-        Pay
+        <span className="text-orange">M</span>
+        <span>SG</span>
       </span>
       {!compact ? (
         <span
           className={cn(
-            "mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em]",
+            "mt-0.5 max-w-[11rem] text-[9px] font-semibold uppercase tracking-[0.12em]",
             variant === "light" ? "text-white/70" : "text-muted-foreground",
           )}
         >
-          Your Payroll Solution
+          Mandiri Semesta Gemilang
         </span>
       ) : null}
     </Link>

@@ -17,56 +17,85 @@ export type NavItem = {
 
 export const mainNavigation: NavItem[] = [
   { title: "Home", href: "/" },
+  { title: "About", href: "/about" },
   {
-    title: "Solutions",
-    href: "/solutions",
+    title: "Services",
+    href: "/services",
     mega: {
       columns: [
         {
-          heading: "Core Services",
+          heading: "Workforce Services",
           items: [
             {
-              title: "Payroll Processing",
-              href: "/solutions/payroll-processing",
-              description: "End-to-end payroll management with accuracy guaranteed.",
+              title: "Workforce Outsourcing",
+              href: "/services/workforce-outsourcing",
+              description: "Scalable staffing and field workforce deployment.",
             },
             {
-              title: "Payroll Disbursement",
-              href: "/solutions/payroll-disbursement",
-              description: "Fast, secure multi-bank salary payments at scale.",
+              title: "Engineering Outsourcing",
+              href: "/services/engineering-outsourcing",
+              description: "Specialized engineering talent for project delivery.",
             },
             {
-              title: "Payroll Working Capital",
-              href: "/solutions/payroll-working-capital",
-              description: "Structured support so payroll is always on time.",
+              title: "Business Process Outsourcing",
+              href: "/services/business-process-outsourcing",
+              description: "Admin support, data entry, and back-office delivery.",
             },
           ],
         },
         {
-          heading: "Control & Compliance",
+          heading: "Technology & Growth",
           items: [
             {
-              title: "Approval Workflow",
-              href: "/solutions/approval-workflow",
-              description: "Multi-level approvals with full auditability.",
+              title: "Managed Security",
+              href: "/services/managed-security",
+              description: "Monitoring, threat awareness, and compliance support.",
             },
             {
-              title: "Reports",
-              href: "/solutions/reports",
-              description: "Real-time dashboards for finance and HR leaders.",
+              title: "IT Infrastructure",
+              href: "/services/it-infrastructure",
+              description: "Cloud, network, and help desk operations.",
             },
             {
-              title: "Compliance",
-              href: "/solutions/compliance",
-              description: "PPh 21, BPJS, and regulatory alignment built in.",
+              title: "Sales & Lead Generation",
+              href: "/services/sales-lead-generation",
+              description: "B2B pipeline support and appointment setting.",
             },
           ],
         },
       ],
       cta: {
-        title: "Talk to Sales",
-        description: "See how ProQPay fits your payroll operating model.",
-        href: "/contact?intent=sales",
+        title: "Explore all services",
+        description: "See how MSG integrates people, operations, and technology.",
+        href: "/services",
+      },
+    },
+  },
+  {
+    title: "Products",
+    href: "/products",
+    mega: {
+      columns: [
+        {
+          heading: "Technology Products",
+          items: [
+            {
+              title: "ProQPay",
+              href: "/products/proqpay",
+              description: "Enterprise payroll infrastructure — an MSG technology product.",
+            },
+            {
+              title: "Future Products",
+              href: "/products",
+              description: "Content Coming Soon — additional MSG products will appear here.",
+            },
+          ],
+        },
+      ],
+      cta: {
+        title: "Discover ProQPay",
+        description: "Payroll processing, disbursement, and controlled working capital.",
+        href: "/products/proqpay",
       },
     },
   },
@@ -76,73 +105,53 @@ export const mainNavigation: NavItem[] = [
     children: [
       { title: "Manufacturing", href: "/industries/manufacturing" },
       { title: "Retail", href: "/industries/retail" },
-      { title: "Construction", href: "/industries/construction" },
+      { title: "Construction & Engineering", href: "/industries/construction-engineering" },
       { title: "Logistics", href: "/industries/logistics" },
       { title: "Professional Services", href: "/industries/professional-services" },
-      { title: "Outsourcing", href: "/industries/outsourcing" },
+      { title: "Financial Services", href: "/industries/financial-services" },
     ],
   },
-  {
-    title: "Platform",
-    href: "/platform",
-    children: [
-      { title: "Architecture", href: "/platform#architecture" },
-      { title: "Security", href: "/platform#security" },
-      { title: "Approval Workflow", href: "/platform#approval-workflow" },
-      { title: "Role Management", href: "/platform#role-management" },
-      { title: "Audit Trail", href: "/platform#audit-trail" },
-      { title: "Multi Company", href: "/platform#multi-company" },
-      { title: "Scalability", href: "/platform#scalability" },
-      { title: "Integrations", href: "/platform#integrations" },
-      { title: "Future AI", href: "/platform#future-ai" },
-    ],
-  },
-  { title: "About", href: "/about" },
+  { title: "Operational Excellence", href: "/operational-excellence" },
+  { title: "Portfolio", href: "/portfolio" },
   {
     title: "Resources",
     href: "/resources",
     children: [
       { title: "Blog", href: "/resources/blog" },
-      { title: "Payroll Guide", href: "/resources/guides" },
+      { title: "Guides", href: "/resources/guides" },
       { title: "FAQ", href: "/resources/faq" },
-      { title: "Downloads", href: "/resources/downloads" },
     ],
   },
+  { title: "Careers", href: "/careers" },
   { title: "Contact", href: "/contact" },
 ];
 
 export const footerNavigation = {
-  solutions: [
-    { title: "Payroll Processing", href: "/solutions/payroll-processing" },
-    { title: "Payroll Disbursement", href: "/solutions/payroll-disbursement" },
-    { title: "Working Capital", href: "/solutions/payroll-working-capital" },
-    { title: "Compliance", href: "/solutions/compliance" },
+  services: [
+    { title: "Workforce Outsourcing", href: "/services/workforce-outsourcing" },
+    { title: "Business Process Outsourcing", href: "/services/business-process-outsourcing" },
+    { title: "Engineering Outsourcing", href: "/services/engineering-outsourcing" },
+    { title: "IT Infrastructure", href: "/services/it-infrastructure" },
   ],
-  industries: [
-    { title: "Manufacturing", href: "/industries/manufacturing" },
-    { title: "Outsourcing", href: "/industries/outsourcing" },
-    { title: "Logistics", href: "/industries/logistics" },
-    { title: "Retail", href: "/industries/retail" },
-  ],
-  platform: [
-    { title: "Overview", href: "/platform" },
-    { title: "Security", href: "/platform#security" },
-    { title: "Integrations", href: "/platform#integrations" },
-    { title: "Future AI", href: "/platform#future-ai" },
+  products: [
+    { title: "ProQPay", href: "/products/proqpay" },
+    { title: "All Products", href: "/products" },
   ],
   company: [
-    { title: "About", href: "/about" },
+    { title: "About MSG", href: "/about" },
+    { title: "Operational Excellence", href: "/operational-excellence" },
+    { title: "Portfolio", href: "/portfolio" },
+    { title: "Careers", href: "/careers" },
     { title: "Contact", href: "/contact" },
-    { title: "Request Demo", href: "/request-demo" },
   ],
   resources: [
     { title: "Blog", href: "/resources/blog" },
     { title: "Guides", href: "/resources/guides" },
     { title: "FAQ", href: "/resources/faq" },
-    { title: "Downloads", href: "/resources/downloads" },
+    { title: "Request Consultation", href: "/request-consultation" },
   ],
   legal: [
     { title: "Privacy Policy", href: "/privacy" },
-    { title: "Terms of Service", href: "/terms" },
+    { title: "Terms of Use", href: "/terms" },
   ],
 };

@@ -4,12 +4,13 @@ import { ContactForm } from "@/components/forms/contact-form";
 import { ComingSoon } from "@/components/shared/coming-soon";
 import { siteConfig } from "@/lib/site-config";
 import { buildMetadata } from "@/lib/seo";
+import type { ContactFormValues } from "@/lib/validations/contact";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Contact",
   description:
-    "Contact ProQPay sales and support. Request a demo or speak with our enterprise payroll team.",
+    "Contact PT Mandiri Semesta Gemilang (MSG). Head office in South Jakarta. Email info@msg-os.com or WhatsApp our sales team.",
   path: "/contact",
 });
 
@@ -19,16 +20,22 @@ export default async function ContactPage({
   searchParams: Promise<{ intent?: string }>;
 }) {
   const params = await searchParams;
-  const intent =
-    params.intent === "demo" || params.intent === "sales"
-      ? params.intent
-      : "general";
+  const allowed: ContactFormValues["intent"][] = [
+    "consultation",
+    "proqpay-demo",
+    "sales",
+    "careers",
+    "general",
+  ];
+  const intent = allowed.includes(params.intent as ContactFormValues["intent"])
+    ? (params.intent as ContactFormValues["intent"])
+    : "general";
 
   return (
     <>
       <PageHero
-        title="Contact ProQPay"
-        description="Talk with our team about payroll processing, disbursement, compliance, or a product demonstration."
+        title="Contact MSG"
+        description="Talk with our team about workforce solutions, operational excellence, engineering talent, IT support, or ProQPay."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Contact" },
@@ -49,7 +56,7 @@ export default async function ContactPage({
                     {siteConfig.contact.email}
                   </a>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Sales: {siteConfig.contact.salesEmail}
+                    Marketing: {siteConfig.contact.marketingEmail}
                   </p>
                 </div>
               </div>
@@ -58,9 +65,20 @@ export default async function ContactPage({
               <div className="flex items-start gap-3">
                 <Phone className="mt-0.5 h-5 w-5 text-orange" />
                 <div>
-                  <p className="font-semibold">Phone</p>
+                  <p className="font-semibold">Phone & WhatsApp</p>
                   <p className="text-sm text-muted-foreground">
-                    {siteConfig.contact.phone}
+                    {siteConfig.contact.phoneDisplay}
+                  </p>
+                  <a
+                    href={siteConfig.contact.whatsappUrl}
+                    className="mt-1 block text-sm text-orange hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    WhatsApp {siteConfig.contact.whatsappDisplay}
+                  </a>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {siteConfig.contact.salesRole}: {siteConfig.contact.salesContact}
                   </p>
                 </div>
               </div>
@@ -69,18 +87,15 @@ export default async function ContactPage({
               <div className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-5 w-5 text-orange" />
                 <div>
-                  <p className="font-semibold">Office</p>
+                  <p className="font-semibold">Head Office</p>
                   <p className="text-sm text-muted-foreground">
-                    {siteConfig.contact.address}
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
                     {siteConfig.contact.addressDetail}
                   </p>
                 </div>
               </div>
             </div>
             <ComingSoon
-              title="Google Map"
+              title="Map"
               description="Content Coming Soon — interactive map placeholder."
             />
           </div>

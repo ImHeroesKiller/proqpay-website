@@ -23,8 +23,8 @@ export function FaqSection({
       <Container className="max-w-3xl">
         <SectionTitle
           eyebrow="FAQ"
-          title="Questions decision-makers ask"
-          description="Clear answers on processing, disbursement, compliance, and how ProQPay works with enterprise teams."
+          title="Questions enterprises ask about MSG"
+          description="Clear answers about MSG services, operations, ProQPay, and how we partner with enterprise teams."
           align="center"
         />
         <Accordion type="single" collapsible className="mt-10">

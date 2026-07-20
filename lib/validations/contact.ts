@@ -1,6 +1,12 @@
 import { z } from "zod";
 
-export const contactIntentEnum = z.enum(["demo", "sales", "general"]);
+export const contactIntentEnum = z.enum([
+  "consultation",
+  "proqpay-demo",
+  "sales",
+  "careers",
+  "general",
+]);
 
 export const contactFormSchema = z.object({
   name: z.string().min(2, "Please enter your full name."),
@@ -13,15 +19,15 @@ export const contactFormSchema = z.object({
     .string()
     .min(10, "Please provide a bit more detail (at least 10 characters).")
     .max(5000, "Message is too long."),
-  website: z.string().max(0).optional(), // honeypot
+  website: z.string().max(0).optional(),
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
 
-export const demoFormSchema = contactFormSchema.extend({
-  employeeCount: z.string().min(1, "Please select employee count."),
+export const consultationFormSchema = contactFormSchema.extend({
+  employeeCount: z.string().optional(),
   preferredDate: z.string().optional(),
-  intent: z.literal("demo"),
+  intent: z.enum(["consultation", "proqpay-demo", "sales"]),
 });
 
-export type DemoFormValues = z.infer<typeof demoFormSchema>;
+export type ConsultationFormValues = z.infer<typeof consultationFormSchema>;

@@ -1,42 +1,42 @@
 export const faqs = [
   {
-    question: "What does ProQPay do?",
+    question: "What is MSG?",
     answer:
-      "ProQPay provides payroll processing, payroll disbursement, compliance support for Indonesian statutory requirements, reporting, and optional payroll working capital support for approved clients.",
+      "PT Mandiri Semesta Gemilang (MSG) is an enterprise workforce solutions company that combines people, operational expertise, and technology to help organizations build efficient, compliant, and scalable workforce operations.",
   },
   {
-    question: "Who is ProQPay built for?",
+    question: "What services does MSG provide?",
     answer:
-      "We serve enterprise companies, manufacturers, outsourcing firms, and multi-entity organizations—especially HR directors, CFOs, and finance managers who need reliable, auditable payroll operations.",
+      "MSG provides workforce outsourcing, business process outsourcing, engineering outsourcing, managed security services, IT infrastructure outsourcing, sales and lead generation support, and technology products such as ProQPay.",
   },
   {
-    question: "How is ProQPay different from a generic HRIS?",
+    question: "Is MSG only a manpower outsourcing company?",
     answer:
-      "ProQPay is focused on the payroll value chain: accurate processing, controlled approvals, multi-bank disbursement, local compliance, and operational reliability on payday—not a broad HR suite that treats payroll as a side module.",
+      "No. MSG is positioned as an integrated workforce solutions company—covering staffing and recruitment, operational supervision, engineering talent, IT and security support, compliance-aware practices, and digital products.",
   },
   {
-    question: "What is Payroll Working Capital?",
+    question: "What is ProQPay?",
     answer:
-      "It is a structured facility that can help approved clients fund payroll when cash-flow timing differs from payday obligations. It is designed as a business enabler for on-time payroll, subject to onboarding, limits, and risk policy—not an open consumer loan product.",
+      "ProQPay is MSG's flagship technology product for enterprise payroll infrastructure, including processing, approvals, disbursement, reporting, auditability, and structured payroll working capital support.",
   },
   {
-    question: "Does ProQPay support multi-company groups?",
+    question: "Where is MSG located?",
     answer:
-      "Yes. The platform and operating model are designed for multi-entity and multi-branch organizations that need shared standards with controlled local variation.",
+      "MSG's head office is at Pondok Pinang Office Center No. 22, South Jakarta. Contact details are available on the Contact page.",
   },
   {
-    question: "How do approvals work?",
+    question: "How do I request a consultation?",
     answer:
-      "Payroll runs can follow configurable multi-level approval chains—typically involving HR validation and finance authorization—before disbursement is released. Every material approval is retained for audit.",
+      "Use Request Consultation or Contact Our Team. Sales and marketing can also be reached via marketing@msg-os.com or WhatsApp at 0813-1667-1371.",
   },
   {
-    question: "Can we request a demo?",
+    question: "Does MSG support multi-location operations?",
     answer:
-      "Yes. Use Request Demo or Contact Sales. Our team will walk through processing, disbursement, compliance, and governance workflows mapped to your operating model.",
+      "Yes. MSG's operating model emphasizes hybrid and field supervision, standardized SOPs, and command-center coordination designed for multi-location workforce environments.",
   },
   {
-    question: "Where is ProQPay based?",
+    question: "How should I interpret portfolio references?",
     answer:
-      "ProQPay is an Indonesian payroll company serving local enterprises, with Jakarta as our primary market base. Full office details are available on the Contact page.",
+      "Portfolio materials describe selected project experience and team deployments. They are not presented as formal client endorsements or contractual claims.",
   },
 ];

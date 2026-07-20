@@ -14,13 +14,13 @@ export default function AppleIcon() {
           alignItems: "center",
           justifyContent: "center",
           background: "#0B1F33",
-          color: "#FF5400",
-          fontSize: 110,
+          color: "#F28C28",
+          fontSize: 96,
           fontWeight: 800,
           fontFamily: "sans-serif",
         }}
       >
-        Q
+        MSG
       </div>
     ),
     { ...size },

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
-import { solutionSlugs } from "@/lib/content/solutions";
+import { serviceSlugs } from "@/lib/content/services";
 import { industrySlugs } from "@/lib/content/industries";
 import { getBlogPosts, getGuides } from "@/lib/mdx";
 
@@ -10,28 +10,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = [
     "",
-    "/solutions",
-    "/industries",
-    "/platform",
     "/about",
+    "/services",
+    "/products",
+    "/products/proqpay",
+    "/industries",
+    "/operational-excellence",
+    "/portfolio",
     "/resources",
     "/resources/blog",
     "/resources/guides",
     "/resources/faq",
-    "/resources/downloads",
+    "/careers",
     "/contact",
-    "/request-demo",
+    "/request-consultation",
     "/privacy",
     "/terms",
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : 0.7,
+    priority: path === "" ? 1 : path === "/products/proqpay" ? 0.9 : 0.7,
   }));
 
-  const solutions = solutionSlugs.map((slug) => ({
-    url: `${base}/solutions/${slug}`,
+  const services = serviceSlugs.map((slug) => ({
+    url: `${base}/services/${slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.8,
@@ -41,7 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${base}/industries/${slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: 0.8,
+    priority: 0.75,
   }));
 
   const posts = getBlogPosts().map((post) => ({
@@ -58,5 +61,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...solutions, ...industries, ...posts, ...guides];
+  return [...staticRoutes, ...services, ...industries, ...posts, ...guides];
 }

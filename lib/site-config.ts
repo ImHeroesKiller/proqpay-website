@@ -1,42 +1,54 @@
 export const siteConfig = {
-  name: "ProQPay",
-  legalName: "ProQPay",
-  tagline: "YOUR PAYROLL SOLUTION",
+  name: "MSG",
+  legalName: "PT Mandiri Semesta Gemilang",
+  brand: "MSG",
+  tagline: "Empowering Businesses Through People, Operations & Technology",
+  supportingLine:
+    "Integrated workforce solutions built for sustainable business growth.",
   description:
-    "Modern payroll processing and disbursement platform for Indonesian enterprises. Accurate, compliant, and built for scale.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://proqpay.id",
-  appUrl: "https://app.proqpay.id",
+    "PT Mandiri Semesta Gemilang (MSG) is an enterprise workforce solutions company combining people, operational expertise, and technology to help clients build efficient, compliant, and scalable workforce operations.",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://msg-os.com",
+  websiteDisplay: "www.msg-os.com",
+  /** ProQPay product login — intentional product destination */
+  proqpayAppUrl: "https://app.proqpay.id",
   locale: "en_US",
   founded: 2019,
-  slogan: "Payroll Made Simple. Business Made Better.",
+  companyMessage: "Reliable Outsourcing Solution Strategic Partner",
+  slogan: "Empowering Businesses Through People, Operations & Technology",
   hero: {
-    headline: "Simplifying Payroll.\nEmpowering Indonesia's Workforce.",
+    eyebrow: "PT Mandiri Semesta Gemilang",
+    headline: "Enterprise Workforce Solutions\nPowered by People, Operations & Technology",
     subheadline:
-      "Modern Payroll Processing & Payroll Disbursement Platform for Indonesian Enterprises.",
+      "MSG helps organizations build scalable, efficient, and compliant workforce operations through outsourcing services, operational management, engineering talent, IT solutions, and digital products.",
   },
   contact: {
-    email: "hello@proqpay.id",
-    salesEmail: "sales@proqpay.id",
-    phone: "+62 21 0000 0000",
-    address: "Jakarta, Indonesia",
-    addressDetail: "Content Coming Soon — office address will be published here.",
+    email: "info@msg-os.com",
+    marketingEmail: "marketing@msg-os.com",
+    phone: "+62 856-9766-6101",
+    phoneDisplay: "+62 856-9766-6101",
+    whatsapp: "081316671371",
+    whatsappDisplay: "0813-1667-1371",
+    whatsappUrl: "https://wa.me/6281316671371",
+    address: "South Jakarta, Indonesia",
+    addressDetail: "Pondok Pinang Office Center No. 22, South Jakarta",
+    salesContact: "Dina Marliana",
+    salesRole: "Sales and Marketing",
   },
   social: {
-    linkedin: "https://www.linkedin.com/company/proqpay",
-    twitter: "https://x.com/proqpay",
-    instagram: "https://www.instagram.com/proqpay",
+    linkedin: "https://www.linkedin.com/company/msg-os",
+    twitter: "https://x.com/msg_os",
+    instagram: "https://www.instagram.com/msg.os",
   },
-  stats: [
-    { label: "Founded", value: 2019, suffix: "", prefix: "" },
-    { label: "Corporate Clients", value: 3, suffix: "", prefix: "" },
-    { label: "Employees Processed Monthly", value: 500, suffix: "+", prefix: "" },
-    {
-      label: "Payroll Value Managed Monthly",
-      value: 650,
-      suffix: "M+",
-      prefix: "IDR ",
+  products: {
+    proqpay: {
+      name: "ProQPay",
+      label: "An MSG Technology Product",
+      headline: "Enterprise Payroll Infrastructure for Indonesian Businesses",
+      description:
+        "ProQPay transforms MSG's operational workforce experience into a technology platform for payroll processing, approval, disbursement, working capital support, and reporting.",
+      appUrl: "https://app.proqpay.id",
     },
-  ],
+  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;

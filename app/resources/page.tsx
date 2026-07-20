@@ -3,39 +3,35 @@ import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
 import { buildMetadata } from "@/lib/seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, BookOpen, Download, FileText, HelpCircle } from "lucide-react";
+import { ArrowRight, BookOpen, FileText, HelpCircle } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Resources",
   description:
-    "Payroll guides, articles, FAQ, and downloads from ProQPay for HR, finance, and enterprise leaders.",
+    "MSG resources: workforce, outsourcing, payroll, compliance, technology, and operations insights.",
   path: "/resources",
 });
 
 const resources = [
   {
     title: "Blog",
-    description: "Insights on enterprise payroll, compliance, and operating models.",
+    description:
+      "Insights on workforce, outsourcing, payroll, compliance, technology, and operations.",
     href: "/resources/blog",
     icon: FileText,
   },
   {
-    title: "Payroll Guide",
-    description: "Practical guidance for Indonesian payroll cycle design and controls.",
+    title: "Guides",
+    description:
+      "Practical guidance for Indonesian workforce and payroll operating models.",
     href: "/resources/guides",
     icon: BookOpen,
   },
   {
     title: "FAQ",
-    description: "Answers to common questions from HR, finance, and operations leaders.",
+    description: "Answers about MSG services, ProQPay, and how we work with enterprises.",
     href: "/resources/faq",
     icon: HelpCircle,
-  },
-  {
-    title: "Downloads",
-    description: "Brochures and materials for internal evaluation. Content Coming Soon.",
-    href: "/resources/downloads",
-    icon: Download,
   },
 ];
 
@@ -44,14 +40,14 @@ export default function ResourcesPage() {
     <>
       <PageHero
         title="Resources"
-        description="Knowledge for enterprise payroll leaders—articles, guides, FAQs, and downloadable materials."
+        description="Knowledge for HR, operations, finance, and technology leaders building reliable workforce operations."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Resources" },
         ]}
       />
       <section className="section-padding">
-        <Container className="grid gap-6 sm:grid-cols-2">
+        <Container className="grid gap-6 sm:grid-cols-3">
           {resources.map((resource) => (
             <Link key={resource.href} href={resource.href}>
               <Card className="h-full transition hover:-translate-y-0.5 hover:border-orange/40">

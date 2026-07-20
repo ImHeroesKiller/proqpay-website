@@ -2,45 +2,45 @@ export const aboutContent = {
   story: {
     title: "Company Story",
     paragraphs: [
-      "Founded in 2019, ProQPay is an Indonesian Payroll Processing BPO and Payroll Disbursement Platform that helps businesses automate payroll operations with accuracy, compliance, and efficiency.",
-      "We combine advanced technology, deep payroll expertise, and strong local compliance knowledge to deliver reliable payroll solutions for companies of all sizes—especially enterprises, manufacturers, and outsourcing organizations that cannot afford payday failure.",
-      "Our ambition is clear: build Indonesia’s next trusted workforce financial platform—starting with the most mission-critical moment in the employee relationship: getting paid correctly and on time.",
+      "PT Mandiri Semesta Gemilang (MSG) was established in 2019 to provide maximum contribution through mutually beneficial cooperation with its business partners.",
+      "MSG specializes in innovative solutions and reliable services across multiple industries, focusing on long-term growth, sustainable partnerships, trust, quality, and shared success.",
+      "Today MSG operates as an integrated workforce solutions company—combining people, operational expertise, and technology so enterprise clients can build efficient, compliant, and scalable workforce operations.",
     ],
   },
   mission:
-    "Simplify payroll operations so Indonesian businesses can run accurately, stay compliant, and pay their people with confidence.",
+    "To empower businesses with cutting-edge technologies and exceptional service, fostering long-term relationships built on trust, quality, and shared success.",
   vision:
-    "Become Indonesia’s most trusted workforce financial platform for payroll processing, disbursement, and payroll-linked financial enablement.",
+    "To be a leading provider of innovative solutions, setting standards for excellence and sustainable growth through strategic partnerships.",
   values: [
     {
-      title: "Accuracy",
+      title: "Trust",
       description:
-        "Payroll is binary for employees—right or wrong. We design for precision at every step.",
+        "We build partnerships on transparency, reliability, and accountable delivery.",
     },
     {
-      title: "Reliability",
+      title: "Excellence",
       description:
-        "Payday is non-negotiable. Our processes and platform are built around on-time delivery.",
-    },
-    {
-      title: "Integrity",
-      description:
-        "We handle sensitive compensation and banking data with discipline and accountability.",
+        "We pursue disciplined execution and continuous improvement in every engagement.",
     },
     {
       title: "Partnership",
       description:
-        "We operate as an extension of HR and finance teams—not a distant vendor.",
+        "We work as an extension of client teams—aligned to shared outcomes, not short-term transactions.",
     },
     {
-      title: "Compliance",
+      title: "Agility",
       description:
-        "Indonesian tax, labor, and social security requirements are first-class concerns.",
+        "We adapt people, processes, and capacity to changing operational demand.",
     },
     {
-      title: "Continuous Improvement",
+      title: "Responsibility",
       description:
-        "From BPO excellence to platform scale, we keep raising the operating standard.",
+        "We take labor, compliance, and operational risk seriously across deployments.",
+    },
+    {
+      title: "Innovation",
+      description:
+        "We combine operational practice with technology products such as ProQPay to improve how workforce operations run.",
     },
   ],
   timeline: [
@@ -48,147 +48,197 @@ export const aboutContent = {
       year: "2019",
       title: "Founded",
       description:
-        "ProQPay is established to simplify payroll processing for Indonesian businesses.",
+        "PT Mandiri Semesta Gemilang is established to support partners with reliable outsourcing and operational solutions.",
     },
     {
       year: "2020–2022",
-      title: "Operational foundation",
+      title: "Service foundation",
       description:
-        "Built delivery discipline across payroll processing, compliance support, and client operations.",
+        "Expanded workforce and operational service delivery across enterprise environments and multi-location needs.",
     },
     {
       year: "2023–2024",
-      title: "Platform expansion",
+      title: "Capability expansion",
       description:
-        "Strengthened disbursement capabilities and multi-entity operating models for growing clients.",
+        "Strengthened engineering outsourcing, IT support, and operational supervision models.",
     },
     {
       year: "2025–2026",
-      title: "Enterprise platform era",
+      title: "Technology integration",
       description:
-        "Advancing the enterprise payroll platform, working capital enablement, and investor-ready growth trajectory.",
+        "Advanced ProQPay as MSG's flagship payroll technology product within the broader workforce operating model.",
     },
     {
       year: "Future",
-      title: "Workforce financial platform",
+      title: "Integrated platform direction",
       description:
-        "Expanding into deeper analytics, integrations, and responsible AI-assisted operations.",
+        "Continue expanding people, operations, and technology capabilities for sustainable enterprise partnerships.",
     },
   ],
+  operatingModel: [
+    {
+      title: "People",
+      description:
+        "Recruitment, staffing, engineering professionals, and scalable talent pools.",
+    },
+    {
+      title: "Operations",
+      description:
+        "Command center, field supervision, standardized SOP, SLA management, and compliance awareness.",
+    },
+    {
+      title: "Technology",
+      description:
+        "IT infrastructure, managed security, reporting visibility, and ProQPay payroll infrastructure.",
+    },
+  ],
+  proqpayRelation:
+    "ProQPay is MSG's enterprise payroll infrastructure product. It translates MSG's experience managing workforce operations into a technology platform for payroll processing, approval workflow, disbursement, working capital support, reporting, and auditability.",
 };
 
-export const homeFeatures = [
+export const pillars = [
   {
-    title: "Payroll Processing",
+    title: "People",
     description:
-      "End-to-end payroll management with accuracy and compliance guaranteed.",
-    href: "/solutions/payroll-processing",
-    icon: "Calculator",
+      "Recruitment, staffing, engineering professionals, and scalable talent pools that help enterprises stay ready for operational demand.",
+    items: [
+      "Recruitment and assessment",
+      "Workforce staffing",
+      "Engineering professionals",
+      "Scalable talent pools",
+    ],
   },
   {
-    title: "Payroll Disbursement",
+    title: "Operations",
     description:
-      "Fast and secure salary disbursement through multi-bank integration.",
-    href: "/solutions/payroll-disbursement",
-    icon: "Banknote",
+      "Command-center discipline, field supervision, standardized SOPs, SLA management, and compliance-aware delivery.",
+    items: [
+      "Command center",
+      "Field supervision",
+      "Standardized SOP",
+      "SLA management",
+      "Compliance awareness",
+    ],
   },
   {
-    title: "Working Capital",
+    title: "Technology",
     description:
-      "Structured support to help clients keep payroll on time every cycle.",
-    href: "/solutions/payroll-working-capital",
-    icon: "Landmark",
-  },
-  {
-    title: "Compliance",
-    description:
-      "Automated PPh 21 and BPJS calculations aligned with Indonesian regulations.",
-    href: "/solutions/compliance",
-    icon: "ShieldCheck",
-  },
-  {
-    title: "Reports",
-    description:
-      "Real-time dashboards and reports for better finance and HR decisions.",
-    href: "/solutions/reports",
-    icon: "BarChart3",
+      "IT infrastructure, managed security, operational visibility, and ProQPay as MSG's flagship payroll product.",
+    items: [
+      "IT infrastructure",
+      "Managed security",
+      "ProQPay",
+      "Reporting and visibility",
+    ],
   },
 ];
 
-export const whyProQPay = [
+export const howMsgWorks = [
+  { step: 1, title: "Consultation", description: "Understand business goals, workforce needs, and operating constraints." },
+  { step: 2, title: "Workforce Planning", description: "Define roles, volumes, locations, and service model." },
+  { step: 3, title: "Recruitment and Assessment", description: "Source, screen, interview, and shortlist the right people." },
+  { step: 4, title: "Deployment and Onboarding", description: "Place teams with clear ownership and operational readiness." },
+  { step: 5, title: "Operations and Supervision", description: "Run field and hybrid supervision with SOP discipline." },
+  { step: 6, title: "Payroll through ProQPay", description: "Process, approve, and disburse payroll with controlled workflows." },
+  { step: 7, title: "Reporting and Continuous Improvement", description: "Review performance, risks, and refinement opportunities." },
+];
+
+export const whyMsg = [
   {
-    title: "Accurate every time",
+    title: "Fast SLA",
     description:
-      "Calculation discipline and exception handling designed for enterprise cut-offs.",
+      "Operating routines designed to respond with speed and clarity when service levels matter.",
   },
   {
-    title: "On time every payroll",
+    title: "Field Supervision",
     description:
-      "Operational processes and disbursement controls centered on payday reliability.",
+      "Hybrid and field supervision models that keep multi-location teams accountable.",
   },
   {
-    title: "Compliant by design",
+    title: "Lean Structure",
     description:
-      "Local statutory requirements are embedded into the operating model—not bolted on.",
+      "A practical operating structure that prioritizes delivery efficiency and client focus.",
   },
   {
-    title: "Secure by standard",
+    title: "HR Availability",
     description:
-      "Sensitive payroll data is handled with role controls and auditability.",
+      "Accessible HR support so workforce issues can be addressed without unnecessary delay.",
   },
   {
-    title: "Scalable for growth",
+    title: "Legal Compliance",
     description:
-      "From multi-site manufacturers to outsourcing networks, the model scales with you.",
+      "Practices aligned with Indonesian labor regulations and proactive risk awareness.",
   },
   {
-    title: "Business enabler",
+    title: "Technology-Enabled Operations",
     description:
-      "Optional working capital support helps protect continuity when cash-flow timing is tight.",
+      "Operational visibility and payroll infrastructure through MSG technology capabilities including ProQPay.",
   },
 ];
 
-export const workflowSteps = [
-  { step: 1, title: "Employee Data", description: "Centralized employee and company structure." },
-  { step: 2, title: "Attendance", description: "Capture attendance inputs in a controlled flow." },
-  { step: 3, title: "Payroll Engine", description: "Automate salary, allowances, and deductions." },
-  { step: 4, title: "Approval Workflow", description: "Multi-level review before lock." },
-  { step: 5, title: "Salary Disbursement", description: "Mass payment across banks." },
-  { step: 6, title: "Digital Payslip", description: "Employees receive payslips securely." },
-  { step: 7, title: "BPJS Administration", description: "Social security calculation support." },
-  { step: 8, title: "PPh 21 Calculation", description: "Tax calculation and reporting support." },
-  { step: 9, title: "Analytics & Reports", description: "Dashboards for leadership decisions." },
-];
-
-export const testimonials = [
+export const operationalExcellence = [
   {
-    quote:
-      "Content Coming Soon — client testimonials will appear here once approved for publication.",
-    name: "Client Name",
-    role: "HR Director",
-    company: "Enterprise Client",
+    title: "Centralized command center",
+    description:
+      "A coordination hub for operational status, issue handling, and multi-location oversight.",
   },
   {
-    quote:
-      "Content Coming Soon — statements from finance leaders will be featured in this section.",
-    name: "Client Name",
-    role: "Finance Manager",
-    company: "Manufacturing Client",
+    title: "Hybrid field supervision",
+    description:
+      "Field presence combined with centralized control for broader coverage and faster escalation.",
   },
   {
-    quote:
-      "Content Coming Soon — outsourcing partner feedback will be published after formal clearance.",
-    name: "Client Name",
-    role: "Operations Lead",
-    company: "Outsourcing Client",
+    title: "Standardized SOPs",
+    description:
+      "Shared operating standards across locations to reduce process variation.",
+  },
+  {
+    title: "Timely operational visibility",
+    description:
+      "Designed to provide timely operational visibility for managers and client stakeholders.",
+  },
+  {
+    title: "Risk mitigation",
+    description:
+      "Structured issue escalation, quality control, and compliance oversight practices.",
+  },
+  {
+    title: "Labor-law alignment",
+    description:
+      "Workforce practices that emphasize adherence to Indonesian labor regulations and BPJS awareness.",
   },
 ];
 
-export const clientLogos = [
-  "Client One",
-  "Client Two",
-  "Client Three",
-  "Partner Bank",
-  "Group Entity",
-  "Enterprise Co.",
+export const portfolioHighlights = [
+  {
+    title: "Workforce deployment experience",
+    description:
+      "Teams deployed across enterprise environments with multi-location coordination needs.",
+    tag: "Workforce",
+  },
+  {
+    title: "Engineering project support",
+    description:
+      "Project experience supporting specialized engineering talent and flexible delivery models.",
+    tag: "Engineering",
+  },
+  {
+    title: "Business operations support",
+    description:
+      "Back-office and operational assistance for organizations that need reliable process capacity.",
+    tag: "Operations",
+  },
+  {
+    title: "Selected enterprise engagements",
+    description:
+      "Portfolio highlights from enterprise-oriented activities and team deployments. Not an endorsement list.",
+    tag: "Enterprise",
+  },
+];
+
+export const recruitmentFlow = [
+  { step: 1, title: "Sourcing and attraction", description: "Reach candidates aligned to role requirements." },
+  { step: 2, title: "Screening and shortlisting", description: "Filter for capability, availability, and fit." },
+  { step: 3, title: "Interview and assessment", description: "Validate readiness with structured evaluation." },
+  { step: 4, title: "Hiring and onboarding", description: "Complete placement with clear operational handover." },
 ];

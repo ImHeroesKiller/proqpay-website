@@ -14,13 +14,13 @@ export default function Icon() {
           alignItems: "center",
           justifyContent: "center",
           background: "#0B1F33",
-          color: "#FF5400",
-          fontSize: 22,
+          color: "#F28C28",
+          fontSize: 18,
           fontWeight: 800,
           fontFamily: "sans-serif",
         }}
       >
-        Q
+        M
       </div>
     ),
     { ...size },

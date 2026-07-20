@@ -2,12 +2,38 @@ import Link from "next/link";
 import { Container } from "@/components/shared/container";
 import { Button } from "@/components/ui/button";
 
+function CtaLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  const external = href.startsWith("http");
+  if (external) {
+    return (
+      <a href={href} rel="noopener noreferrer">
+        {children}
+      </a>
+    );
+  }
+  return <Link href={href}>{children}</Link>;
+}
+
 export function CtaBand({
-  title = "Ready to simplify enterprise payroll?",
-  description = "Request a demo and see how ProQPay supports processing, disbursement, compliance, and controlled working capital for Indonesian organizations.",
+  title = "Build a More Efficient Workforce Operation with MSG",
+  description = "Talk with our team about workforce solutions, operational excellence, engineering talent, IT support, or ProQPay payroll infrastructure.",
+  primaryHref = "/request-consultation",
+  primaryLabel = "Request Consultation",
+  secondaryHref = "/contact",
+  secondaryLabel = "Contact Our Team",
 }: {
   title?: string;
   description?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
 }) {
   return (
     <section className="section-padding bg-navy-dark text-white">
@@ -22,14 +48,14 @@ export function CtaBand({
         </div>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <Button asChild variant="accent" size="lg">
-            <Link href="/request-demo">Request Demo</Link>
+            <CtaLink href={primaryHref}>{primaryLabel}</CtaLink>
           </Button>
           <Button
             asChild
             size="lg"
             className="border border-white/20 bg-transparent text-white hover:bg-white/10"
           >
-            <Link href="/contact?intent=sales">Talk to Sales</Link>
+            <CtaLink href={secondaryHref}>{secondaryLabel}</CtaLink>
           </Button>
         </div>
       </Container>

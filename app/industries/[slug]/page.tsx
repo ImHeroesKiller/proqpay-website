@@ -20,7 +20,7 @@ export async function generateMetadata({
   const industry = getIndustry(slug);
   if (!industry) return {};
   return buildMetadata({
-    title: `${industry.title} Payroll`,
+    title: `${industry.title} Solutions`,
     description: industry.summary,
     path: `/industries/${slug}`,
   });
@@ -45,14 +45,14 @@ export default async function IndustryDetailPage({
         ])}
       />
       <PageHero
-        title={`${industry.title} Payroll`}
+        title={`${industry.title} Solutions`}
         description={industry.description}
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Industries", href: "/industries" },
           { label: industry.title },
         ]}
-        cta={{ label: "Talk to Sales", href: "/contact?intent=sales" }}
+        cta={{ label: "Request Consultation", href: "/request-consultation" }}
       />
 
       <section className="section-padding">
@@ -68,7 +68,7 @@ export default async function IndustryDetailPage({
             </ul>
           </div>
           <div>
-            <h2 className="text-2xl font-bold">How ProQPay helps</h2>
+            <h2 className="text-2xl font-bold">How MSG helps</h2>
             <ul className="mt-6 space-y-3">
               {industry.howWeHelp.map((item) => (
                 <li key={item} className="flex gap-3 text-sm leading-relaxed">
@@ -92,7 +92,7 @@ export default async function IndustryDetailPage({
         </Container>
       </section>
 
-      <CtaBand title={`Modernize ${industry.title.toLowerCase()} payroll`} />
+      <CtaBand title={`Modernize ${industry.title.toLowerCase()} workforce operations`} />
     </>
   );
 }
