@@ -78,9 +78,9 @@ async function generateWithKey(
     },
     contents: toGeminiContents(messages),
     generationConfig: {
-      temperature: 0.4,
+      temperature: 0.55,
       topP: 0.9,
-      maxOutputTokens: 1024,
+      maxOutputTokens: 512,
     },
     safetySettings: [
       { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
