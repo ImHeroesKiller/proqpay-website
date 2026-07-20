@@ -9,8 +9,7 @@
       <stop offset="1" stop-color="#0B3A6E"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="96" fill="#0B1930"/>
-  <!-- Simplified MSG mark: orange + blue wing forms -->
+  <rect width="512" height="512" rx="96" fill="#FFFFFF"/>
   <path d="M120 300 C140 180 220 90 340 70 C280 130 250 200 248 290 C210 270 160 280 120 300Z" fill="url(#og)"/>
   <path d="M200 360 C230 250 300 170 420 140 C360 210 340 280 335 360 C290 340 240 345 200 360Z" fill="url(#bg)"/>
   <path d="M250 420 C275 340 330 280 420 250 C375 310 360 360 355 420 C320 405 280 410 250 420Z" fill="url(#bg)" opacity="0.85"/>

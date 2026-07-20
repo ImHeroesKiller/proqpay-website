@@ -4,12 +4,12 @@
 | --- | --- | --- | --- | --- |
 | `public/brand/logo-msg.png` | Company-provided (`~/Downloads/logo-msg.png`) | Proprietary — MSG brand asset | 2026-07-20 | Primary corporate logo |
 | `public/brand/logo-msg.webp` | Derived from `logo-msg.png` via cwebp | Proprietary — MSG brand asset | 2026-07-20 | Optimized logo for web |
-| `public/brand/icon-msg.png` | Company-provided (`~/Downloads/icon-msg.png`) | Proprietary — MSG brand mark | 2026-07-20 | Square brand mark source |
+| `public/brand/icon-msg.png` | Company-provided (`~/Downloads/icon-msg.png`, updated) | Proprietary — MSG brand mark (white rounded tile) | 2026-07-20 | Square brand mark source |
 | `public/brand/icon-msg-256.png` | Derived from `icon-msg.png` | Proprietary | 2026-07-20 | UI brand mark (256px) |
 | `public/logos/logo-msg.png` | Same as brand logo | Proprietary — MSG brand asset | 2026-07-20 | Public logos folder copy |
 | `public/brand/logo-proqpay.png` | Company-provided ProQPay asset | Proprietary — MSG product asset | existing | ProQPay product surfaces |
 | `public/brand/logo-proqpay.svg` | Company-provided ProQPay asset | Proprietary — MSG product asset | existing | ProQPay product surfaces |
-| `public/icons/icon-source.png` | Copy of `~/Downloads/icon-msg.png` | Proprietary | 2026-07-20 | Master PWA/icon source |
+| `public/icons/icon-source.png` | Copy of updated `~/Downloads/icon-msg.png` | Proprietary | 2026-07-20 | Master PWA/icon source |
 | `public/icons/favicon-32x32.png` | Resized from `icon-msg.png` | Proprietary | 2026-07-20 | Favicon |
 | `public/icons/favicon-192x192.png` | Resized from `icon-msg.png` | Proprietary | 2026-07-20 | PWA / high-res icon |
 | `public/icons/apple-touch-icon.png` | Resized from `icon-msg.png` | Proprietary | 2026-07-20 | Apple touch icon |
