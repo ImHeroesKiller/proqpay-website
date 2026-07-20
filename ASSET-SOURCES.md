@@ -13,6 +13,7 @@
 | `public/icons/icon-192.png` | Derived from MSG logo | Proprietary | 2026-07-20 | App icon |
 | `public/icons/icon-512.png` | Derived from MSG logo | Proprietary | 2026-07-20 | App icon |
 | `public/og/og-default.png` | Existing project OG image | Proprietary | existing | Open Graph default |
+| `public/videos/hero-workforce.mp4` | Pexels free stock video (ID 3209298), compressed for web | Pexels License (free commercial use, no attribution required) | 2026-07-20 | Homepage hero background video |
 
 ## Notes
 
