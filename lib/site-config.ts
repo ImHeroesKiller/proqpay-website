@@ -6,24 +6,25 @@ export const siteConfig = {
   supportingLine:
     "Integrated workforce solutions built for sustainable business growth.",
   description:
-    "PT Mandiri Semesta Gemilang (MSG) is an enterprise workforce solutions company combining people, operational expertise, and technology to help clients build efficient, compliant, and scalable workforce operations.",
+    "PT Mandiri Semesta Gemilang (MSG) is an Indonesian enterprise workforce solutions company. We combine people, operations, and technology to help organizations scale with confidence.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://msg-os.com",
   websiteDisplay: "www.msg-os.com",
-  /** ProQPay product login — intentional product destination */
-  proqpayAppUrl: "https://app.proqpay.id",
+  /** Product application under the corporate domain */
+  appUrl: "https://msg-os.com/app",
   locale: "en_US",
   founded: 2019,
   companyMessage: "Reliable Outsourcing Solution Strategic Partner",
   slogan: "Empowering Businesses Through People, Operations & Technology",
   hero: {
     eyebrow: "PT Mandiri Semesta Gemilang",
-    headline: "Enterprise Workforce Solutions\nPowered by People, Operations & Technology",
+    headline: "Enterprise Workforce Solutions",
     subheadline:
-      "MSG helps organizations build scalable, efficient, and compliant workforce operations through outsourcing services, operational management, engineering talent, IT solutions, and digital products.",
+      "MSG helps Indonesian enterprises build efficient, compliant, and scalable workforce operations through people, operational excellence, and technology.",
   },
   contact: {
     email: "info@msg-os.com",
     marketingEmail: "marketing@msg-os.com",
+    supportEmail: "info@msg-os.com",
     phone: "+62 856-9766-6101",
     phoneDisplay: "+62 856-9766-6101",
     whatsapp: "081316671371",
@@ -45,8 +46,8 @@ export const siteConfig = {
       label: "An MSG Technology Product",
       headline: "Enterprise Payroll Infrastructure for Indonesian Businesses",
       description:
-        "ProQPay transforms MSG's operational workforce experience into a technology platform for payroll processing, approval, disbursement, working capital support, and reporting.",
-      appUrl: "https://app.proqpay.id",
+        "ProQPay is MSG's payroll technology product for processing, approval, disbursement, working capital support, and reporting.",
+      appUrl: "https://msg-os.com/app",
     },
   },
 } as const;

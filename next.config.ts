@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/request-demo",
-        destination: "/request-consultation?intent=proqpay-demo",
+        destination: "/contact?intent=payroll-demo",
         permanent: true,
       },
       {

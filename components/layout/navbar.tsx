@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { ChevronDown, Menu } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
-import { MegaMenu } from "@/components/layout/mega-menu";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -33,28 +32,24 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b border-transparent bg-background/90 backdrop-blur-sm transition-shadow",
+        "sticky top-0 z-50 border-b border-transparent bg-background/95 backdrop-blur-sm transition-shadow",
         scrolled && "border-border shadow-sm",
       )}
     >
-      <div className="container-pro flex h-16 items-center justify-between gap-3 lg:h-[4.5rem]">
+      <div className="container-pro flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
         <Logo compact />
 
-        <nav
-          className="hidden items-center gap-0.5 xl:flex"
-          aria-label="Primary"
-        >
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
           {mainNavigation.map((item) => {
-            const hasMega = Boolean(item.mega);
             const hasChildren = Boolean(item.children?.length);
             const isOpen = openMenu === item.title;
 
-            if (!hasMega && !hasChildren) {
+            if (!hasChildren) {
               return (
                 <Link
                   key={item.title}
                   href={item.href}
-                  className="rounded-lg px-2.5 py-2 text-sm font-medium text-foreground/80 transition hover:bg-muted hover:text-foreground"
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition hover:bg-muted hover:text-foreground"
                 >
                   {item.title}
                 </Link>
@@ -70,7 +65,7 @@ export function Navbar() {
               >
                 <button
                   type="button"
-                  className="inline-flex items-center gap-1 rounded-lg px-2.5 py-2 text-sm font-medium text-foreground/80 transition hover:bg-muted hover:text-foreground"
+                  className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition hover:bg-muted hover:text-foreground"
                   aria-expanded={isOpen}
                   onClick={() => setOpenMenu(isOpen ? null : item.title)}
                 >
@@ -82,23 +77,23 @@ export function Navbar() {
                     )}
                   />
                 </button>
-                {isOpen && item.mega ? (
-                  <MegaMenu
-                    columns={item.mega.columns}
-                    cta={item.mega.cta}
-                    onNavigate={() => setOpenMenu(null)}
-                  />
-                ) : null}
                 {isOpen && item.children ? (
-                  <div className="absolute left-0 top-full z-50 w-64 rounded-2xl border border-border bg-background p-2 shadow-sm">
+                  <div className="absolute left-0 top-full z-50 w-72 rounded-2xl border border-border bg-background p-2 shadow-sm">
                     {item.children.map((child) => (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block rounded-xl px-3 py-2 text-sm text-foreground/80 transition hover:bg-muted hover:text-foreground"
+                        className="block rounded-xl px-3 py-2.5 transition hover:bg-muted"
                         onClick={() => setOpenMenu(null)}
                       >
-                        {child.title}
+                        <div className="text-sm font-semibold text-foreground">
+                          {child.title}
+                        </div>
+                        {child.description ? (
+                          <p className="mt-0.5 text-xs text-muted-foreground">
+                            {child.description}
+                          </p>
+                        ) : null}
                       </Link>
                     ))}
                   </div>
@@ -108,22 +103,19 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-2 xl:flex">
+        <div className="hidden items-center gap-2 lg:flex">
           <ThemeToggle />
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/products/proqpay">Discover ProQPay</Link>
-          </Button>
           <Button asChild variant="outline" size="sm">
-            <a href={siteConfig.proqpayAppUrl} rel="noopener noreferrer">
-              ProQPay Login
+            <a href={siteConfig.appUrl} rel="noopener noreferrer">
+              Product Login
             </a>
           </Button>
-          <Button asChild variant="accent" size="sm">
-            <Link href="/request-consultation">Request Consultation</Link>
+          <Button asChild size="sm" className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
+            <Link href="/contact">Contact</Link>
           </Button>
         </div>
 
-        <div className="flex items-center gap-1 xl:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
           <ThemeToggle />
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
@@ -147,54 +139,27 @@ export function Navbar() {
                     >
                       {item.title}
                     </Link>
-                    {item.mega
-                      ? item.mega.columns.flatMap((column) =>
-                          column.items.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              className="block px-3 py-1.5 text-sm text-muted-foreground"
-                              onClick={() => setMobileOpen(false)}
-                            >
-                              {child.title}
-                            </Link>
-                          )),
-                        )
-                      : null}
-                    {item.children
-                      ? item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className="block px-3 py-1.5 text-sm text-muted-foreground"
-                            onClick={() => setMobileOpen(false)}
-                          >
-                            {child.title}
-                          </Link>
-                        ))
-                      : null}
+                    {item.children?.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block px-3 py-1.5 text-sm text-muted-foreground"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {child.title}
+                      </Link>
+                    ))}
                   </div>
                 ))}
                 <div className="mt-4 flex flex-col gap-2">
                   <Button asChild variant="outline">
-                    <Link
-                      href="/products/proqpay"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      Discover ProQPay
-                    </Link>
-                  </Button>
-                  <Button asChild variant="ghost">
-                    <a href={siteConfig.proqpayAppUrl} rel="noopener noreferrer">
-                      ProQPay Login
+                    <a href={siteConfig.appUrl} rel="noopener noreferrer">
+                      Product Login
                     </a>
                   </Button>
-                  <Button asChild variant="accent">
-                    <Link
-                      href="/request-consultation"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      Request Consultation
+                  <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
+                    <Link href="/contact" onClick={() => setMobileOpen(false)}>
+                      Contact
                     </Link>
                   </Button>
                 </div>

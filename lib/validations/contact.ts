@@ -1,10 +1,11 @@
 import { z } from "zod";
 
 export const contactIntentEnum = z.enum([
-  "consultation",
-  "proqpay-demo",
   "sales",
-  "careers",
+  "support",
+  "payroll-demo",
+  "partnership",
+  "career",
   "general",
 ]);
 
@@ -27,7 +28,7 @@ export type ContactFormValues = z.infer<typeof contactFormSchema>;
 export const consultationFormSchema = contactFormSchema.extend({
   employeeCount: z.string().optional(),
   preferredDate: z.string().optional(),
-  intent: z.enum(["consultation", "proqpay-demo", "sales"]),
+  intent: z.enum(["sales", "payroll-demo", "partnership", "support"]),
 });
 
 export type ConsultationFormValues = z.infer<typeof consultationFormSchema>;

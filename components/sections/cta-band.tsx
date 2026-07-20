@@ -23,10 +23,10 @@ function CtaLink({
 export function CtaBand({
   title = "Build a More Efficient Workforce Operation with MSG",
   description = "Talk with our team about workforce solutions, operational excellence, engineering talent, IT support, or ProQPay payroll infrastructure.",
-  primaryHref = "/request-consultation",
-  primaryLabel = "Request Consultation",
-  secondaryHref = "/contact",
-  secondaryLabel = "Contact Our Team",
+  primaryHref = "/contact",
+  primaryLabel = "Contact MSG",
+  secondaryHref = "/request-consultation",
+  secondaryLabel = "Request Consultation",
 }: {
   title?: string;
   description?: string;

@@ -81,16 +81,16 @@ export function ContactForm({
       <div className="rounded-2xl border border-border bg-muted/40 p-8 text-center">
         <h3 className="text-xl font-semibold">Thank you</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          Our team will respond shortly. For urgent requests, email{" "}
+          MSG will respond shortly. For urgent matters:{" "}
           <a
-            className="font-medium text-orange"
-            href={`mailto:${siteConfig.contact.marketingEmail}`}
+            className="font-medium text-[#0B3A6E] dark:text-blue-300"
+            href={`mailto:${siteConfig.contact.email}`}
           >
-            {siteConfig.contact.marketingEmail}
+            {siteConfig.contact.email}
           </a>{" "}
           or WhatsApp{" "}
           <a
-            className="font-medium text-orange"
+            className="font-medium text-[#0B3A6E] dark:text-blue-300"
             href={siteConfig.contact.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -142,46 +142,47 @@ export function ContactForm({
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="role">Role (optional)</Label>
-          <Input id="role" {...register("role")} placeholder="HR Director, Operations..." />
+          <Input id="role" {...register("role")} />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="intent">Intent</Label>
+          <Label htmlFor="intent">Category</Label>
           <select
             id="intent"
             className="flex h-11 w-full rounded-xl border border-input bg-background px-3 text-sm shadow-sm"
             {...register("intent")}
           >
-            <option value="general">General inquiry</option>
-            <option value="consultation">Request consultation</option>
-            <option value="proqpay-demo">ProQPay demo</option>
-            <option value="sales">Talk to sales</option>
-            <option value="careers">Careers</option>
+            <option value="sales">Sales</option>
+            <option value="support">Support</option>
+            <option value="payroll-demo">Payroll Demo</option>
+            <option value="partnership">Partnership</option>
+            <option value="career">Career</option>
+            <option value="general">General</option>
           </select>
         </div>
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="message">Message</Label>
-        <Textarea
-          id="message"
-          {...register("message")}
-          placeholder="Tell us about your workforce needs, operations goals, or ProQPay interest."
-        />
+        <Textarea id="message" {...register("message")} />
         {errors.message ? (
           <p className="text-xs text-destructive">{errors.message.message}</p>
         ) : null}
       </div>
 
-      <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden>
-        <Label htmlFor="website">Website</Label>
-        <Input id="website" tabIndex={-1} autoComplete="off" {...register("website")} />
+      <div className="absolute left-[-9999px]" aria-hidden>
+        <Input tabIndex={-1} autoComplete="off" {...register("website")} />
       </div>
 
       {status === "error" ? (
         <p className="text-sm text-destructive">{errorMessage}</p>
       ) : null}
 
-      <Button type="submit" variant="accent" size="lg" disabled={status === "loading"}>
+      <Button
+        type="submit"
+        size="lg"
+        className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]"
+        disabled={status === "loading"}
+      >
         {status === "loading" ? "Sending..." : "Send message"}
       </Button>
     </form>

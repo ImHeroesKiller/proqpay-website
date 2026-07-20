@@ -27,7 +27,7 @@ export default function CareersPage() {
         ]}
         cta={{
           label: "Contact HR / Talent",
-          href: `/contact?intent=careers`,
+          href: `/contact?intent=career`,
         }}
       />
 
@@ -78,7 +78,7 @@ export default function CareersPage() {
           </div>
           <div className="mt-8">
             <Button asChild variant="outline">
-              <Link href="/contact?intent=careers">Contact careers team</Link>
+              <Link href="/contact?intent=career">Contact careers team</Link>
             </Button>
           </div>
         </Container>
@@ -86,7 +86,7 @@ export default function CareersPage() {
 
       <CtaBand
         title="Interested in joining MSG?"
-        primaryHref="/contact?intent=careers"
+        primaryHref="/contact?intent=career"
         primaryLabel="Contact Careers"
         secondaryHref="/about"
         secondaryLabel="About MSG"

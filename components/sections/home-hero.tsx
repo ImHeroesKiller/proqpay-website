@@ -6,105 +6,79 @@ import { siteConfig } from "@/lib/site-config";
 
 export function HomeHero() {
   return (
-    <section className="relative overflow-hidden bg-navy-dark text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(242,140,40,0.16),transparent_42%)]" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[linear-gradient(135deg,transparent_40%,rgba(255,255,255,0.03)_100%)]" />
-      <Container className="relative grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
+    <section className="relative overflow-hidden bg-[#0B3A6E] text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.12),transparent_50%)]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-white/10" />
+      <Container className="relative grid items-center gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:py-28">
         <FadeIn>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-orange">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
             {siteConfig.hero.eyebrow}
           </p>
-          <h1 className="mt-4 whitespace-pre-line text-4xl font-bold tracking-tight sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
+          <h1 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl lg:leading-[1.05]">
             {siteConfig.hero.headline}
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80">
             {siteConfig.hero.subheadline}
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button asChild variant="accent" size="lg">
-              <Link href="/services">Explore Our Solutions</Link>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-[#0B3A6E] hover:bg-white/90"
+            >
+              <Link href="/services">Our Services</Link>
             </Button>
             <Button
               asChild
               size="lg"
-              className="border border-white/20 bg-transparent text-white hover:bg-white/10"
+              className="border border-white/30 bg-transparent text-white hover:bg-white/10"
             >
-              <Link href="/request-consultation">Request Consultation</Link>
+              <Link href="/contact">Contact MSG</Link>
             </Button>
-          </div>
-          <div className="mt-5">
-            <Link
-              href="/products/proqpay"
-              className="text-sm font-semibold text-orange hover:underline"
-            >
-              Discover ProQPay →
-            </Link>
-          </div>
-          <div className="mt-10 flex flex-wrap gap-6 text-sm text-white/70">
-            <span>People</span>
-            <span className="text-white/30">|</span>
-            <span>Operations</span>
-            <span className="text-white/30">|</span>
-            <span>Technology</span>
           </div>
         </FadeIn>
 
         <FadeIn delay={0.08}>
+          {/* Corporate visual panel — Indonesian enterprise atmosphere */}
           <div
-            className="overflow-hidden rounded-2xl border border-white/10 bg-[#0f2438] p-5 shadow-sm"
+            className="relative min-h-[320px] overflow-hidden rounded-2xl border border-white/15 bg-[#082B52]"
             aria-hidden="true"
           >
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <p className="text-xs uppercase tracking-wide text-white/45">
-                  MSG Operating Model
-                </p>
-                <p className="mt-1 text-sm font-semibold text-white">
-                  People · Operations · Technology
-                </p>
-              </div>
-              <div className="rounded-full bg-orange/20 px-2.5 py-1 text-[10px] font-semibold text-orange">
-                Enterprise
-              </div>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {["People", "Operations", "Technology"].map((pillar, index) => (
-                <div
-                  key={pillar}
-                  className="rounded-xl border border-white/10 bg-white/5 p-3"
-                >
-                  <div className="text-[10px] uppercase tracking-wide text-white/45">
-                    Pillar 0{index + 1}
+            <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(255,255,255,0.08)_0%,transparent_45%,rgba(0,0,0,0.25)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/55">
+                Indonesia · Enterprise Operations
+              </p>
+              <p className="mt-2 text-xl font-semibold text-white">
+                People. Operations. Technology.
+              </p>
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                {["Jakarta HO", "Multi-site teams", "Payroll tech"].map((label) => (
+                  <div
+                    key={label}
+                    className="rounded-lg border border-white/10 bg-white/5 px-2 py-3 text-center text-[11px] text-white/75"
+                  >
+                    {label}
                   </div>
-                  <div className="mt-1 font-semibold text-white">{pillar}</div>
-                  <div className="mt-3 space-y-1.5">
-                    <div className="h-1.5 rounded bg-white/10" />
-                    <div className="h-1.5 w-4/5 rounded bg-white/10" />
-                    <div className="h-1.5 w-3/5 rounded bg-orange/50" />
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <p className="text-sm font-medium text-white">
-                  Workforce Operating Flow
-                </p>
-                <span className="text-[10px] text-white/45">ProQPay-ready</span>
-              </div>
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-                {["Plan", "Recruit", "Deploy", "Supervise", "Payroll", "Report"].map(
-                  (step) => (
-                    <div
-                      key={step}
-                      className="rounded-lg bg-white/5 px-2 py-2 text-center text-xs text-white/75"
-                    >
-                      {step}
-                    </div>
-                  ),
-                )}
+                ))}
               </div>
             </div>
+            {/* Abstract skyline silhouette */}
+            <svg
+              className="absolute bottom-24 right-0 h-40 w-full opacity-20"
+              viewBox="0 0 400 120"
+              fill="none"
+              aria-hidden
+            >
+              <rect x="20" y="40" width="28" height="80" fill="white" />
+              <rect x="55" y="20" width="36" height="100" fill="white" />
+              <rect x="100" y="50" width="24" height="70" fill="white" />
+              <rect x="135" y="10" width="42" height="110" fill="white" />
+              <rect x="185" y="35" width="30" height="85" fill="white" />
+              <rect x="225" y="25" width="48" height="95" fill="white" />
+              <rect x="285" y="45" width="26" height="75" fill="white" />
+              <rect x="320" y="15" width="40" height="105" fill="white" />
+            </svg>
           </div>
         </FadeIn>
       </Container>

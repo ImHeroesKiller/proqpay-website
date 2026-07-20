@@ -136,6 +136,6 @@ export const proqpayFaqs = [
   {
     question: "How do I request a demo?",
     answer:
-      "Use Request Consultation or Contact on the MSG website and select a ProQPay / demo intent. Product login is available at app.proqpay.id for authorized users.",
+      "Use Contact on msg-os.com and select Payroll Demo. Authorized users access the application at msg-os.com/app.",
   },
 ];

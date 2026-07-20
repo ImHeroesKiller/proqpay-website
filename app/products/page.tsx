@@ -13,7 +13,7 @@ import { ArrowRight } from "lucide-react";
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "MSG technology products including ProQPay—enterprise payroll infrastructure for Indonesian businesses.",
+    "MSG technology products including ProQPay — enterprise payroll infrastructure.",
   path: "/products",
 });
 
@@ -21,8 +21,8 @@ export default function ProductsPage() {
   return (
     <>
       <PageHero
-        title="MSG Technology Products"
-        description="Digital products that extend MSG's workforce and operational expertise into scalable technology platforms."
+        title="Products"
+        description="Technology products developed within the MSG ecosystem."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Products" },
@@ -35,8 +35,8 @@ export default function ProductsPage() {
               <Badge variant="accent" className="w-fit">
                 {siteConfig.products.proqpay.label}
               </Badge>
-              <CardTitle className="mt-3 text-2xl">
-                {siteConfig.products.proqpay.name}
+              <CardTitle className="mt-3 font-heading text-2xl">
+                Pro<span className="text-orange">Q</span>Pay
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -53,26 +53,23 @@ export default function ProductsPage() {
                   </Link>
                 </Button>
                 <Button asChild variant="outline">
-                  <a
-                    href={siteConfig.proqpayAppUrl}
-                    rel="noopener noreferrer"
-                  >
-                    ProQPay Login
+                  <a href={siteConfig.appUrl} rel="noopener noreferrer">
+                    Open App
                   </a>
                 </Button>
               </div>
             </CardContent>
           </Card>
           <ComingSoon
-            title="Future Products"
-            description="Content Coming Soon — additional MSG technology products will be published here."
+            title="Future products"
+            description="Content Coming Soon — additional MSG products will appear here."
           />
         </Container>
       </section>
       <CtaBand
         title="Interested in ProQPay?"
-        primaryHref="/request-consultation?intent=proqpay-demo"
-        primaryLabel="Request a Demo"
+        primaryHref="/contact?intent=payroll-demo"
+        primaryLabel="Payroll Demo"
         secondaryHref="/products/proqpay"
         secondaryLabel="Explore ProQPay"
       />

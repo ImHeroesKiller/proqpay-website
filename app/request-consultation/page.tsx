@@ -6,7 +6,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Request Consultation",
   description:
-    "Request a consultation with PT Mandiri Semesta Gemilang for workforce solutions, operations, or a ProQPay demo.",
+    "Request a consultation with MSG for workforce solutions or a ProQPay payroll demo.",
   path: "/request-consultation",
 });
 
@@ -17,15 +17,17 @@ export default async function RequestConsultationPage({
 }) {
   const params = await searchParams;
   const intent =
-    params.intent === "proqpay-demo" || params.intent === "sales"
+    params.intent === "payroll-demo" ||
+    params.intent === "partnership" ||
+    params.intent === "support"
       ? params.intent
-      : "consultation";
+      : "sales";
 
   return (
     <>
       <PageHero
         title="Request a consultation"
-        description="Tell us about your workforce, operations, engineering, IT, or payroll technology needs. Our team will follow up with next steps."
+        description="Tell MSG about your workforce, operations, or payroll technology needs."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Request Consultation" },

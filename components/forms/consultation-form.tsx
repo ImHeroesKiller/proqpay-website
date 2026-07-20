@@ -13,9 +13,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
 export function ConsultationForm({
-  defaultIntent = "consultation",
+  defaultIntent = "sales",
 }: {
-  defaultIntent?: "consultation" | "proqpay-demo" | "sales";
+  defaultIntent?: "sales" | "payroll-demo" | "partnership" | "support";
 }) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
@@ -39,9 +39,9 @@ export function ConsultationForm({
       employeeCount: "",
       preferredDate: "",
       message:
-        defaultIntent === "proqpay-demo"
-          ? "I would like a ProQPay product demonstration."
-          : "I would like a consultation with the MSG team.",
+        defaultIntent === "payroll-demo"
+          ? "I would like a ProQPay payroll demo."
+          : "I would like a consultation with MSG.",
       website: "",
     },
   });
@@ -54,7 +54,7 @@ export function ConsultationForm({
         ...values,
         message: [
           values.message,
-          values.employeeCount ? `Employee/team size: ${values.employeeCount}` : null,
+          values.employeeCount ? `Team size: ${values.employeeCount}` : null,
           values.preferredDate ? `Preferred date: ${values.preferredDate}` : null,
         ]
           .filter(Boolean)
@@ -86,8 +86,7 @@ export function ConsultationForm({
       <div className="rounded-2xl border border-border bg-muted/40 p-8 text-center">
         <h3 className="text-xl font-semibold">Request received</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          Thank you. Our team will contact you shortly to schedule a consultation
-          or demo.
+          Thank you. MSG will contact you shortly.
         </p>
       </div>
     );
@@ -121,43 +120,18 @@ export function ConsultationForm({
           ) : null}
         </div>
         <div className="space-y-2">
-          <Label htmlFor="c-phone">Phone (optional)</Label>
-          <Input id="c-phone" {...register("phone")} />
-        </div>
-      </div>
-
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="space-y-2">
-          <Label htmlFor="intent">Intent</Label>
+          <Label htmlFor="intent">Category</Label>
           <select
             id="intent"
             className="flex h-11 w-full rounded-xl border border-input bg-background px-3 text-sm shadow-sm"
             {...register("intent")}
           >
-            <option value="consultation">Workforce consultation</option>
-            <option value="proqpay-demo">ProQPay demo</option>
-            <option value="sales">Talk to sales</option>
+            <option value="sales">Sales</option>
+            <option value="payroll-demo">Payroll Demo</option>
+            <option value="partnership">Partnership</option>
+            <option value="support">Support</option>
           </select>
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="employeeCount">Team / employee scale (optional)</Label>
-          <select
-            id="employeeCount"
-            className="flex h-11 w-full rounded-xl border border-input bg-background px-3 text-sm shadow-sm"
-            {...register("employeeCount")}
-          >
-            <option value="">Select range</option>
-            <option value="1-50">1–50</option>
-            <option value="51-200">51–200</option>
-            <option value="201-1000">201–1,000</option>
-            <option value="1000+">1,000+</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="preferredDate">Preferred date (optional)</Label>
-        <Input id="preferredDate" type="date" {...register("preferredDate")} />
       </div>
 
       <div className="space-y-2">
@@ -176,8 +150,13 @@ export function ConsultationForm({
         <p className="text-sm text-destructive">{errorMessage}</p>
       ) : null}
 
-      <Button type="submit" variant="accent" size="lg" disabled={status === "loading"}>
-        {status === "loading" ? "Submitting..." : "Request Consultation"}
+      <Button
+        type="submit"
+        size="lg"
+        className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]"
+        disabled={status === "loading"}
+      >
+        {status === "loading" ? "Submitting..." : "Submit"}
       </Button>
     </form>
   );

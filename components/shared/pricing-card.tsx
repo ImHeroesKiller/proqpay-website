@@ -15,7 +15,7 @@ export function PricingCard() {
           operating model.
         </p>
         <Button asChild variant="accent">
-          <Link href="/request-consultation?intent=proqpay-demo">Request Demo</Link>
+          <Link href="/contact?intent=payroll-demo">Request Demo</Link>
         </Button>
       </CardContent>
     </Card>

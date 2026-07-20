@@ -15,52 +15,45 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0B1F33",
+          background: "#0B3A6E",
           color: "white",
           padding: "64px",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 52, fontWeight: 700 }}>
-            <span style={{ color: "#F28C28" }}>M</span>SG
-          </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <div
             style={{
-              marginTop: 12,
-              fontSize: 18,
-              letterSpacing: 2,
-              color: "#9FB3C8",
-              textTransform: "uppercase",
+              width: 64,
+              height: 64,
+              borderRadius: 12,
+              background: "white",
+              color: "#0B3A6E",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontWeight: 800,
+              fontSize: 22,
             }}
           >
-            PT Mandiri Semesta Gemilang
+            MSG
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ fontSize: 36, fontWeight: 700 }}>MSG</div>
+            <div style={{ fontSize: 16, color: "rgba(255,255,255,0.75)" }}>
+              PT Mandiri Semesta Gemilang
+            </div>
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div
-            style={{
-              fontSize: 48,
-              fontWeight: 700,
-              lineHeight: 1.15,
-              maxWidth: 980,
-            }}
-          >
-            Enterprise Workforce Solutions Powered by People, Operations &
-            Technology
+          <div style={{ fontSize: 52, fontWeight: 700, lineHeight: 1.1, maxWidth: 900 }}>
+            Enterprise Workforce Solutions
           </div>
-          <div style={{ fontSize: 22, color: "#CBD5E1", maxWidth: 860 }}>
-            Integrated workforce solutions built for sustainable business growth.
+          <div style={{ fontSize: 22, color: "rgba(255,255,255,0.8)", maxWidth: 800 }}>
+            People. Operations. Technology.
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            color: "#F28C28",
-            fontSize: 20,
-            fontWeight: 600,
-          }}
-        >
+        <div style={{ fontSize: 20, fontWeight: 600, color: "rgba(255,255,255,0.7)" }}>
           msg-os.com
         </div>
       </div>
