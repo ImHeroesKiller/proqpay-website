@@ -10,7 +10,7 @@ import { ArrowRight } from "lucide-react";
 export const metadata = buildMetadata({
   title: "Services",
   description:
-    "MSG services: workforce outsourcing, BPO, engineering outsourcing, managed security, IT infrastructure, and sales lead generation.",
+    "MSG enterprise workforce services: workforce outsourcing, engineering talent, business support services, and managed workforce operations.",
   path: "/services",
 });
 
@@ -18,8 +18,8 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        title="Integrated workforce and operational services"
-        description="MSG supports enterprise clients across workforce services, business operations, and technology—connected by operational discipline and digital products such as ProQPay."
+        title="Enterprise workforce services"
+        description="MSG helps organizations build, manage, and improve workforce operations through people, operational discipline, and technology—not manpower placement alone."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Services" },
@@ -42,41 +42,46 @@ export default function ServicesPage() {
                     <Link
                       key={service.slug}
                       href={`/services/${service.slug}`}
-                      className="block h-full"
+                      className="group block h-full"
                     >
-                      <Card className="h-full transition hover:border-orange/40">
+                      <Card className="h-full transition duration-300 hover:-translate-y-0.5 hover:border-[#0B3A6E]/40 hover:shadow-md">
                         <CardHeader>
-                          <CardTitle className="text-lg">{service.title}</CardTitle>
+                          <CardTitle className="text-lg group-hover:text-[#0B3A6E] dark:group-hover:text-blue-300">
+                            {service.title}
+                          </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-3">
                           <p className="text-sm text-muted-foreground">
                             {service.summary}
                           </p>
-                          <p className="text-sm font-medium">
-                            Outcome: {service.outcome}
+                          <p className="text-sm font-medium text-foreground/85">
+                            {service.benefit}
                           </p>
-                          <span className="inline-flex items-center gap-1 text-sm font-semibold text-orange">
-                            View service <ArrowRight className="h-4 w-4" />
+                          <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#0B3A6E] dark:text-blue-300">
+                            Learn more{" "}
+                            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                           </span>
                         </CardContent>
                       </Card>
                     </Link>
                   ))}
                   {group.id === "technology" ? (
-                    <Link href="/products/proqpay" className="block h-full">
-                      <Card className="h-full border-orange/30 transition hover:border-orange/50">
+                    <Link href="/products/proqpay" className="group block h-full">
+                      <Card className="h-full border-[#0B3A6E]/25 transition duration-300 hover:-translate-y-0.5 hover:border-[#0B3A6E]/50 hover:shadow-md">
                         <CardHeader>
                           <CardTitle className="text-lg">ProQPay</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-3">
                           <p className="text-sm text-muted-foreground">
-                            MSG&apos;s enterprise payroll infrastructure product.
+                            MSG&apos;s payroll technology product for visibility,
+                            approval, disbursement, and reporting.
                           </p>
                           <p className="text-sm font-medium">
-                            Outcome: Controlled payroll processing and disbursement.
+                            Payroll visibility for modern workforce operations.
                           </p>
-                          <span className="inline-flex items-center gap-1 text-sm font-semibold text-orange">
-                            Explore product <ArrowRight className="h-4 w-4" />
+                          <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#0B3A6E] dark:text-blue-300">
+                            Explore product{" "}
+                            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                           </span>
                         </CardContent>
                       </Card>
@@ -88,7 +93,14 @@ export default function ServicesPage() {
           })}
         </Container>
       </section>
-      <CtaBand />
+      <CtaBand
+        title="Discuss your workforce needs"
+        description="Talk with MSG about workforce outsourcing, engineering talent, business support, managed operations, or ProQPay."
+        primaryHref="/request-consultation"
+        primaryLabel="Request Consultation"
+        secondaryHref="/contact"
+        secondaryLabel="Contact MSG"
+      />
     </>
   );
 }

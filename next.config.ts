@@ -6,6 +6,22 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       // Legacy ProQPay-first routes → MSG architecture
@@ -40,12 +56,60 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/industries/logistics",
+        destination: "/industries/logistics-distribution",
+        permanent: true,
+      },
+      {
+        source: "/industries/retail",
+        destination: "/industries/retail-consumer",
+        permanent: true,
+      },
+      // Legacy service slugs
+      {
+        source: "/services/engineering-outsourcing",
+        destination: "/services/engineering-talent",
+        permanent: true,
+      },
+      {
+        source: "/services/business-process-outsourcing",
+        destination: "/services/business-support",
+        permanent: true,
+      },
+      {
+        source: "/services/managed-security",
+        destination: "/services/managed-workforce",
+        permanent: true,
+      },
+      {
+        source: "/services/it-infrastructure",
+        destination: "/services/business-support",
+        permanent: true,
+      },
+      {
+        source: "/services/sales-lead-generation",
+        destination: "/services/business-support",
+        permanent: true,
+      },
+      {
         source: "/resources/downloads",
         destination: "/resources",
+        permanent: false,
+      },
+      // Clean aliases keep canonical content pages too
+      {
+        source: "/resources/blog",
+        destination: "/news",
+        permanent: false,
+      },
+      {
+        source: "/resources/faq",
+        destination: "/faq",
         permanent: false,
       },
     ];
   },
 };
+
 
 export default nextConfig;

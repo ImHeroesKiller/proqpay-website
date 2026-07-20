@@ -15,7 +15,7 @@ const resources = [
   {
     title: "News",
     description: "Insights and updates for workforce and operations leaders.",
-    href: "/resources/blog",
+    href: "/news",
     icon: FileText,
   },
   {
@@ -27,7 +27,7 @@ const resources = [
   {
     title: "FAQ",
     description: "Answers about MSG services, ProQPay, and how we work.",
-    href: "/resources/faq",
+    href: "/faq",
     icon: HelpCircle,
   },
 ];

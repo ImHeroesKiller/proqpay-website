@@ -31,15 +31,16 @@ export const metadata: Metadata = {
   keywords: [
     "MSG",
     "PT Mandiri Semesta Gemilang",
-    "workforce solutions",
-    "outsourcing Indonesia",
-    "business process outsourcing",
-    "engineering outsourcing",
-    "managed security",
-    "IT infrastructure outsourcing",
+    "enterprise workforce solutions",
+    "workforce outsourcing Indonesia",
+    "outsourcing tenaga kerja",
+    "engineering talent",
+    "managed workforce",
+    "business support services",
     "ProQPay",
     "enterprise payroll Indonesia",
-    "operational excellence",
+    "Jakarta outsourcing company",
+    "People Operations Technology",
   ],
   authors: [{ name: siteConfig.legalName }],
   openGraph: {
@@ -63,6 +64,8 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/favicon-192x192.png", sizes: "192x192", type: "image/png" },
       { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
       { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
     ],

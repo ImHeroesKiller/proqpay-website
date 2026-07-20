@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ChevronDown, Menu } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { mainNavigation } from "@/lib/content/navigation";
-import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -23,7 +22,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -32,14 +31,16 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b border-transparent bg-background/95 backdrop-blur-sm transition-shadow",
-        scrolled && "border-border shadow-sm",
+        "sticky top-0 z-50 border-b transition-[background-color,box-shadow,border-color] duration-300",
+        scrolled
+          ? "border-border bg-background/95 shadow-sm backdrop-blur-md"
+          : "border-transparent bg-background/80 backdrop-blur-sm",
       )}
     >
       <div className="container-pro flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
         <Logo compact />
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
           {mainNavigation.map((item) => {
             const hasChildren = Boolean(item.children?.length);
             const isOpen = openMenu === item.title;
@@ -67,22 +68,30 @@ export function Navbar() {
                   type="button"
                   className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition hover:bg-muted hover:text-foreground"
                   aria-expanded={isOpen}
+                  aria-haspopup="true"
                   onClick={() => setOpenMenu(isOpen ? null : item.title)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") setOpenMenu(null);
+                  }}
                 >
                   {item.title}
                   <ChevronDown
                     className={cn(
-                      "h-4 w-4 transition-transform",
+                      "h-4 w-4 transition-transform duration-200",
                       isOpen && "rotate-180",
                     )}
                   />
                 </button>
                 {isOpen && item.children ? (
-                  <div className="absolute left-0 top-full z-50 w-72 rounded-2xl border border-border bg-background p-2 shadow-sm">
+                  <div
+                    className="absolute left-0 top-full z-50 w-80 rounded-2xl border border-border bg-background p-2 shadow-lg"
+                    role="menu"
+                  >
                     {item.children.map((child) => (
                       <Link
-                        key={child.href}
+                        key={child.href + child.title}
                         href={child.href}
+                        role="menuitem"
                         className="block rounded-xl px-3 py-2.5 transition hover:bg-muted"
                         onClick={() => setOpenMenu(null)}
                       >
@@ -90,7 +99,7 @@ export function Navbar() {
                           {child.title}
                         </div>
                         {child.description ? (
-                          <p className="mt-0.5 text-xs text-muted-foreground">
+                          <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
                             {child.description}
                           </p>
                         ) : null}
@@ -103,27 +112,26 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           <ThemeToggle />
-          <Button asChild variant="outline" size="sm">
-            <a href={siteConfig.appLoginUrl} rel="noopener noreferrer">
-              Product Login
-            </a>
-          </Button>
-          <Button asChild size="sm" className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
-            <Link href="/contact">Contact</Link>
+          <Button
+            asChild
+            size="sm"
+            className="bg-[#0B3A6E] text-white hover:bg-[#0a3360] hover:-translate-y-px transition-transform"
+          >
+            <Link href="/request-consultation">Request Consultation</Link>
           </Button>
         </div>
 
-        <div className="flex items-center gap-1 lg:hidden">
+        <div className="flex items-center gap-1 xl:hidden">
           <ThemeToggle />
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Open menu">
-                <Menu className="h-5 w-5" />
+                {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent className="w-full max-w-md">
               <SheetHeader>
                 <SheetTitle>
                   <Logo compact />
@@ -141,7 +149,7 @@ export function Navbar() {
                     </Link>
                     {item.children?.map((child) => (
                       <Link
-                        key={child.href}
+                        key={child.href + child.title}
                         href={child.href}
                         className="block px-3 py-1.5 text-sm text-muted-foreground"
                         onClick={() => setMobileOpen(false)}
@@ -151,15 +159,21 @@ export function Navbar() {
                     ))}
                   </div>
                 ))}
-                <div className="mt-4 flex flex-col gap-2">
-                  <Button asChild variant="outline">
-                    <a href={siteConfig.appLoginUrl} rel="noopener noreferrer">
-                      Product Login
-                    </a>
+                <div className="mt-6 space-y-2 px-1">
+                  <Button
+                    asChild
+                    className="w-full bg-[#0B3A6E] text-white hover:bg-[#0a3360]"
+                  >
+                    <Link
+                      href="/request-consultation"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Request Consultation
+                    </Link>
                   </Button>
-                  <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
+                  <Button asChild variant="outline" className="w-full">
                     <Link href="/contact" onClick={() => setMobileOpen(false)}>
-                      Contact
+                      Contact MSG
                     </Link>
                   </Button>
                 </div>

@@ -1,9 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 /**
- * MSG corporate logo — navy/blue enterprise identity.
- * Never use ProQPay orange branding for MSG.
+ * MSG corporate logo — official brand mark from PT Mandiri Semesta Gemilang.
+ * Source: public/brand/logo-msg.webp (from Downloads/logo-msg.png).
  */
 export function Logo({
   className,
@@ -14,17 +15,7 @@ export function Logo({
   compact?: boolean;
   variant?: "auto" | "light" | "dark";
 }) {
-  const markClass =
-    variant === "light"
-      ? "text-white"
-      : variant === "dark"
-        ? "text-[#0B3A6E]"
-        : "text-[#0B3A6E] dark:text-white";
-
-  const subClass =
-    variant === "light"
-      ? "text-white/70"
-      : "text-[#486581] dark:text-muted-foreground";
+  const needsLightTreatment = variant === "light";
 
   return (
     <Link
@@ -32,35 +23,20 @@ export function Logo({
       className={cn("inline-flex items-center gap-2.5 leading-none", className)}
       aria-label="MSG home — PT Mandiri Semesta Gemilang"
     >
-      <span
+      <Image
+        src="/brand/logo-msg.webp"
+        alt="MSG — Mandiri Semesta Gemilang"
+        width={compact ? 120 : 148}
+        height={compact ? 42 : 52}
         className={cn(
-          "flex h-9 w-9 items-center justify-center rounded-lg bg-[#0B3A6E] text-sm font-bold tracking-tight text-white dark:bg-[#1B4F8A]",
-          variant === "light" && "bg-white text-[#0B3A6E]",
+          "h-9 w-auto object-contain sm:h-10",
+          needsLightTreatment && "brightness-0 invert",
         )}
-        aria-hidden
-      >
-        MSG
-      </span>
-      <span className="flex flex-col">
-        <span
-          className={cn(
-            "font-heading text-lg font-bold tracking-tight sm:text-xl",
-            markClass,
-          )}
-        >
-          MSG
-        </span>
-        {!compact ? (
-          <span
-            className={cn(
-              "text-[9px] font-semibold uppercase tracking-[0.14em]",
-              subClass,
-            )}
-          >
-            Mandiri Semesta Gemilang
-          </span>
-        ) : null}
-      </span>
+        priority
+      />
+      {compact ? null : (
+        <span className="sr-only">PT Mandiri Semesta Gemilang</span>
+      )}
     </Link>
   );
 }

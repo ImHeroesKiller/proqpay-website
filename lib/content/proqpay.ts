@@ -1,7 +1,7 @@
 export const proqpayProduct = {
   name: "ProQPay",
   label: "An MSG Technology Product",
-  headline: "Enterprise Payroll Infrastructure for Indonesian Businesses",
+  headline: "Simplify Payroll. Improve Visibility. Strengthen Workforce Operations.",
   description:
     "ProQPay is MSG's enterprise payroll operating system for validation, multi-level approval, payment instructions, client-funded execution orchestration, optional working capital, reconciliation, audit, and reporting.",
   problem: {

@@ -5,12 +5,14 @@ export type Service = {
   summary: string;
   description: string;
   outcome: string;
+  benefit: string;
   painPoints: string[];
   approach: string[];
   capabilities: string[];
   workflow: { step: number; title: string; description: string }[];
   outcomes: string[];
   industries: string[];
+  faq: { question: string; answer: string }[];
 };
 
 export const services: Service[] = [
@@ -19,59 +21,203 @@ export const services: Service[] = [
     title: "Workforce Outsourcing",
     group: "workforce",
     summary:
-      "Scalable staffing and field workforce deployment with structured supervision.",
+      "Penyediaan dan pengelolaan tenaga kerja sesuai kebutuhan perusahaan.",
     description:
-      "MSG helps enterprises staff and operate distributed workforces—from administrative roles to field teams—with recruitment support, deployment discipline, and operational oversight aligned to Indonesian labor practices.",
-    outcome: "Reliable headcount readiness with controlled deployment and ongoing support.",
+      "MSG helps enterprises plan, source, deploy, and manage workforce capacity—from administrative roles to field teams—with structured recruitment, onboarding, attendance coordination, payroll administration support, and continuity management aligned to Indonesian labor practices.",
+    outcome:
+      "Reliable headcount readiness with controlled deployment and ongoing operational support.",
+    benefit: "Scalable staffing with structured supervision and continuity support.",
     painPoints: [
       "Hiring velocity does not match operational demand",
       "Multi-site teams are hard to supervise consistently",
       "HR capacity is stretched by volume recruitment",
       "Compliance risk grows as deployments scale",
+      "Replacement and continuity are reactive rather than planned",
     ],
     approach: [
       "Structured workforce planning with the client",
       "Recruitment and assessment aligned to role requirements",
       "Onboarding and deployment with clear accountability",
-      "Field and hybrid supervision with SLA awareness",
+      "Attendance, payroll coordination, and employee relations support",
+      "Replacement readiness and service continuity routines",
     ],
     capabilities: [
       "Workforce planning and role mapping",
-      "Sourcing, screening, and shortlisting",
-      "Interview coordination and assessment support",
-      "Hiring and onboarding coordination",
-      "Field supervision and escalation paths",
-      "Labor-aware operating practices and BPJS awareness",
+      "Talent sourcing, screening, and shortlisting",
+      "Recruitment and interview coordination",
+      "Onboarding and deployment support",
+      "Attendance coordination",
+      "Payroll administration support",
+      "Employee relations support",
+      "Operational reporting",
+      "Replacement and continuity support",
     ],
     workflow: [
-      { step: 1, title: "Consultation", description: "Clarify workforce needs, locations, and SLAs." },
-      { step: 2, title: "Planning", description: "Define roles, volumes, and deployment timeline." },
-      { step: 3, title: "Recruitment", description: "Source, screen, and assess candidates." },
-      { step: 4, title: "Deployment", description: "Onboard and place teams with clear ownership." },
-      { step: 5, title: "Supervision", description: "Operate with field and hybrid oversight." },
+      {
+        step: 1,
+        title: "Understand",
+        description: "Clarify workforce needs, locations, volumes, and SLAs.",
+      },
+      {
+        step: 2,
+        title: "Design",
+        description: "Define roles, service model, and deployment timeline.",
+      },
+      {
+        step: 3,
+        title: "Mobilize",
+        description: "Source, screen, onboard, and place talent.",
+      },
+      {
+        step: 4,
+        title: "Operate",
+        description: "Run attendance, admin, payroll coordination, and support.",
+      },
+      {
+        step: 5,
+        title: "Measure",
+        description: "Track service performance and workforce readiness.",
+      },
+      {
+        step: 6,
+        title: "Improve",
+        description: "Refine processes using operational feedback.",
+      },
     ],
     outcomes: [
       "Faster readiness for operational roles",
       "More consistent multi-site workforce control",
       "Reduced burden on internal HR capacity",
       "Clearer accountability for deployed teams",
+      "Stronger continuity when replacements are needed",
     ],
-    industries: ["Manufacturing", "Retail", "Logistics", "Construction & Engineering"],
+    industries: [
+      "Manufacturing",
+      "Retail and Consumer",
+      "Logistics and Distribution",
+      "Construction and Engineering",
+      "Technology and Telecommunications",
+    ],
+    faq: [
+      {
+        question: "What roles can MSG support through workforce outsourcing?",
+        answer:
+          "MSG supports a range of operational, administrative, and field roles based on client requirements. Scope is defined during consultation and workforce planning.",
+      },
+      {
+        question: "Does MSG handle onboarding and ongoing administration?",
+        answer:
+          "Yes. Depending on the service model, MSG can support onboarding, attendance coordination, payroll administration support, employee relations, and operational reporting.",
+      },
+      {
+        question: "How does replacement and continuity work?",
+        answer:
+          "MSG builds replacement readiness into the operating model so workforce continuity is managed with clear escalation and deployment routines.",
+      },
+    ],
   },
   {
-    slug: "business-process-outsourcing",
-    title: "Business Process Outsourcing",
+    slug: "engineering-talent",
+    title: "Engineering Talent",
+    group: "workforce",
+    summary:
+      "Tenaga ahli dan technical workforce untuk proyek, engineering, IT, dan kebutuhan khusus.",
+    description:
+      "MSG provides access to engineering professionals, IT and digital talent, project-based specialists, field technical workforce, and supervisory roles—so organizations can accelerate delivery with flexible team models and structured project administration.",
+    outcome: "Faster project staffing with flexible technical capacity.",
+    benefit: "Specialized technical talent with flexible deployment models.",
+    painPoints: [
+      "Specialized engineering and IT roles are hard to fill quickly",
+      "Project timelines slip due to talent gaps",
+      "Fixed headcount models raise cost risk",
+      "Field technical and supervisory coverage is inconsistent",
+      "Project administration and reporting lack structure",
+    ],
+    approach: [
+      "Clarify project skill requirements and delivery model",
+      "Source and assess specialized engineering and technical talent",
+      "Deploy flexible teams with clear project ownership",
+      "Support integration with local stakeholders and operations",
+      "Provide project administration and continuity support",
+    ],
+    capabilities: [
+      "Engineering professionals",
+      "IT and digital talent",
+      "Project-based specialists",
+      "Field technical workforce",
+      "Supervisory roles",
+      "Talent deployment coordination",
+      "Project administration support",
+    ],
+    workflow: [
+      {
+        step: 1,
+        title: "Requirement mapping",
+        description: "Define skills, duration, locations, and outcomes.",
+      },
+      {
+        step: 2,
+        title: "Talent search",
+        description: "Source and shortlist specialists.",
+      },
+      {
+        step: 3,
+        title: "Assessment",
+        description: "Evaluate fit for project requirements.",
+      },
+      {
+        step: 4,
+        title: "Deployment",
+        description: "Onboard and integrate with project teams.",
+      },
+      {
+        step: 5,
+        title: "Support",
+        description: "Maintain continuity and replacement readiness.",
+      },
+    ],
+    outcomes: [
+      "Reduced time-to-staff for critical technical roles",
+      "More flexible cost structures for project delivery",
+      "Accelerated project staffing capacity",
+      "Stronger access to specialized skills",
+    ],
+    industries: [
+      "Construction and Engineering",
+      "Energy and Utilities",
+      "Manufacturing",
+      "Technology and Telecommunications",
+    ],
+    faq: [
+      {
+        question: "Can MSG support short-term project talent needs?",
+        answer:
+          "Yes. Engineering Talent can be structured for project-based, fixed-term, or flexible deployment models depending on scope and duration.",
+      },
+      {
+        question: "Does MSG only place engineering roles?",
+        answer:
+          "No. Scope may include engineering professionals, IT and digital talent, field technical workforce, and supervisory roles based on client needs.",
+      },
+    ],
+  },
+  {
+    slug: "business-support",
+    title: "Business Support Services",
     group: "operations",
     summary:
-      "Admin support, virtual assistance, data entry, and back-office delivery.",
+      "Dukungan tenaga kerja untuk administrasi, keuangan, customer service, sales support, dan fungsi pendukung lainnya.",
     description:
-      "MSG provides outsourced administrative and back-office capacity so client teams can focus on core business priorities while routine processes run with structure and accountability.",
-    outcome: "Stable back-office throughput without expanding fixed internal headcount.",
+      "MSG provides structured business support capacity for administration, finance support, customer service, sales support, data processing, helpdesk, back-office services, and operational support—so client teams can focus on core priorities.",
+    outcome:
+      "Stable support capacity without expanding fixed internal headcount unnecessarily.",
+    benefit: "Reliable back-office and support capacity with clear ownership.",
     painPoints: [
       "Admin work consumes high-cost internal capacity",
-      "Data entry and documentation quality varies",
-      "Peak volumes create process bottlenecks",
+      "Support quality varies during peak volumes",
+      "Data processing and documentation quality is inconsistent",
       "Process ownership is unclear across teams",
+      "Customer and sales support coverage is hard to sustain",
     ],
     approach: [
       "Map priority processes and service levels",
@@ -80,18 +226,41 @@ export const services: Service[] = [
       "Continuously refine throughput and quality",
     ],
     capabilities: [
-      "Virtual assistance and admin support",
-      "Data entry and document processing",
-      "Back-office operational delivery",
-      "Process documentation and SOP alignment",
-      "Quality checks and volume reporting",
+      "Administration support",
+      "Finance support",
+      "Customer service",
+      "Sales support",
+      "Data processing",
+      "Helpdesk support",
+      "Back-office services",
+      "Operational support",
     ],
     workflow: [
-      { step: 1, title: "Process discovery", description: "Identify workflows ready for outsourcing." },
-      { step: 2, title: "Service design", description: "Define scope, SLAs, and controls." },
-      { step: 3, title: "Team setup", description: "Staff, train, and equip the delivery team." },
-      { step: 4, title: "Operate", description: "Run daily operations with supervision." },
-      { step: 5, title: "Improve", description: "Review quality, volume, and refinements." },
+      {
+        step: 1,
+        title: "Process discovery",
+        description: "Identify workflows ready for structured support.",
+      },
+      {
+        step: 2,
+        title: "Service design",
+        description: "Define scope, SLAs, and controls.",
+      },
+      {
+        step: 3,
+        title: "Team setup",
+        description: "Staff, train, and equip the delivery team.",
+      },
+      {
+        step: 4,
+        title: "Operate",
+        description: "Run daily operations with supervision.",
+      },
+      {
+        step: 5,
+        title: "Improve",
+        description: "Review quality, volume, and refinements.",
+      },
     ],
     outcomes: [
       "More predictable admin and back-office delivery",
@@ -99,179 +268,119 @@ export const services: Service[] = [
       "Clearer process ownership and reporting",
       "Flexible capacity for demand peaks",
     ],
-    industries: ["Professional Services", "Financial Services", "Retail", "Manufacturing"],
+    industries: [
+      "Professional Services",
+      "Financial Services",
+      "Retail and Consumer",
+      "Manufacturing",
+      "Technology and Telecommunications",
+    ],
+    faq: [
+      {
+        question: "What business support functions can MSG cover?",
+        answer:
+          "Typical scope includes administration, finance support, customer service, sales support, data processing, helpdesk, and other back-office functions agreed in the service model.",
+      },
+      {
+        question: "Can support capacity scale up during peak periods?",
+        answer:
+          "Yes. Service models can be designed with flexible capacity for volume peaks, subject to lead time and role requirements.",
+      },
+    ],
   },
   {
-    slug: "managed-security",
-    title: "Managed Security Services",
-    group: "technology",
-    summary:
-      "Remote monitoring support, threat awareness, and compliance-oriented practices.",
-    description:
-      "MSG supports organizations that need structured security operations assistance—including monitoring support, threat awareness workflows, and compliance-oriented process management—without overstating uncertified guarantees.",
-    outcome: "Stronger day-to-day security operations discipline and response readiness.",
-    painPoints: [
-      "Security operations are understaffed",
-      "Alerts lack structured triage and ownership",
-      "Compliance tasks are reactive rather than planned",
-      "Documentation for audits is incomplete",
-    ],
-    approach: [
-      "Define monitoring and response operating models",
-      "Support remote monitoring and escalation routines",
-      "Align process documentation to client policy",
-      "Improve reporting visibility for leadership",
-    ],
-    capabilities: [
-      "Remote monitoring support",
-      "Threat awareness and triage workflows",
-      "Compliance process management support",
-      "Operational reporting for security stakeholders",
-      "Escalation coordination with client IT owners",
-    ],
-    workflow: [
-      { step: 1, title: "Scope", description: "Clarify systems, coverage windows, and contacts." },
-      { step: 2, title: "Operate", description: "Run monitoring and awareness routines." },
-      { step: 3, title: "Triage", description: "Classify and escalate material events." },
-      { step: 4, title: "Report", description: "Provide structured operational summaries." },
-      { step: 5, title: "Review", description: "Improve controls with client stakeholders." },
-    ],
-    outcomes: [
-      "Clearer ownership of security operations tasks",
-      "Faster awareness-to-escalation pathways",
-      "Better documentation for reviews",
-      "Reduced operational blind spots",
-    ],
-    industries: ["Financial Services", "Professional Services", "Manufacturing", "Retail"],
-  },
-  {
-    slug: "it-infrastructure",
-    title: "IT Infrastructure Outsourcing",
-    group: "technology",
-    summary:
-      "Cloud management, network support, and help desk services for enterprise operations.",
-    description:
-      "MSG helps organizations stabilize and scale IT operations through infrastructure support, help desk delivery, and cloud or network operational assistance tailored to business priorities.",
-    outcome: "More reliable IT support capacity for users and operations teams.",
-    painPoints: [
-      "Help desk queues grow faster than internal capacity",
-      "Network and cloud issues disrupt operations",
-      "IT documentation is incomplete or outdated",
-      "Support quality varies by location or shift",
-    ],
-    approach: [
-      "Assess current IT support model and priorities",
-      "Define service coverage and response expectations",
-      "Deploy support capacity with clear escalation paths",
-      "Report service performance and improvement opportunities",
-    ],
-    capabilities: [
-      "Help desk and end-user support",
-      "Network support coordination",
-      "Cloud management assistance",
-      "Operational documentation support",
-      "Incident logging and escalation routines",
-    ],
-    workflow: [
-      { step: 1, title: "Assessment", description: "Review systems, tickets, and support gaps." },
-      { step: 2, title: "Service design", description: "Agree coverage model and priorities." },
-      { step: 3, title: "Transition", description: "Onboard knowledge and access paths." },
-      { step: 4, title: "Delivery", description: "Operate help desk and infrastructure support." },
-      { step: 5, title: "Optimization", description: "Reduce repeat issues and improve SLAs." },
-    ],
-    outcomes: [
-      "More consistent user support experience",
-      "Better operational continuity for IT services",
-      "Clearer escalation and ownership",
-      "Flexible support capacity without overstaffing",
-    ],
-    industries: ["Professional Services", "Financial Services", "Manufacturing", "Logistics"],
-  },
-  {
-    slug: "sales-lead-generation",
-    title: "Sales and Lead Generation",
+    slug: "managed-workforce",
+    title: "Managed Workforce Operations",
     group: "operations",
     summary:
-      "B2B lead generation, appointment setting, and sales pipeline support.",
+      "Pengelolaan workforce secara menyeluruh dari sourcing hingga reporting dan performance monitoring.",
     description:
-      "MSG supports growth teams with structured outbound and pipeline assistance—helping generate qualified conversations and keep sales processes moving with disciplined follow-up.",
-    outcome: "More consistent top-of-funnel activity and cleaner pipeline hygiene.",
+      "MSG delivers end-to-end workforce operations management—covering governance, service-level monitoring, workforce analytics, multi-location coordination, issue management, performance reporting, and continuous improvement—so people operations run with discipline and visibility.",
+    outcome:
+      "A managed operating model that connects workforce delivery, control, and improvement.",
+    benefit: "End-to-end workforce governance with measurable operational visibility.",
     painPoints: [
-      "Sales teams spend too much time on non-selling admin",
-      "Lead follow-up is inconsistent",
-      "Pipeline data quality is weak",
-      "Appointment volume is hard to sustain",
+      "Workforce operations are fragmented across vendors and teams",
+      "Service performance is hard to measure consistently",
+      "Multi-location coordination lacks a single operating rhythm",
+      "Issue management is reactive",
+      "Leadership lacks clear workforce performance visibility",
     ],
     approach: [
-      "Align target segments and messaging with sales leadership",
-      "Run structured outreach and qualification routines",
-      "Support appointment setting and pipeline updates",
-      "Report activity and conversion insights regularly",
+      "Define governance and service operating model",
+      "Integrate sourcing, deployment, and administration workflows",
+      "Monitor service levels and operational KPIs",
+      "Coordinate multi-location execution and issue handling",
+      "Report performance and improve continuously",
     ],
     capabilities: [
-      "B2B lead generation support",
-      "Appointment setting",
-      "Sales pipeline management assistance",
-      "CRM hygiene support",
-      "Weekly activity and conversion reporting",
+      "End-to-end workforce operations",
+      "Operational governance",
+      "Service-level monitoring",
+      "Workforce analytics",
+      "Multi-location coordination",
+      "Issue management",
+      "Performance reporting",
+      "Continuous improvement routines",
     ],
     workflow: [
-      { step: 1, title: "Target design", description: "Define ICP, territories, and offers." },
-      { step: 2, title: "Outreach", description: "Execute structured lead generation activity." },
-      { step: 3, title: "Qualify", description: "Screen interest and readiness." },
-      { step: 4, title: "Book", description: "Set appointments for sales owners." },
-      { step: 5, title: "Report", description: "Track pipeline and conversion signals." },
+      {
+        step: 1,
+        title: "Understand",
+        description: "Assess workforce and operational requirements.",
+      },
+      {
+        step: 2,
+        title: "Design",
+        description: "Design the managed service model and controls.",
+      },
+      {
+        step: 3,
+        title: "Mobilize",
+        description: "Deploy teams, routines, and reporting cadence.",
+      },
+      {
+        step: 4,
+        title: "Operate",
+        description: "Run day-to-day workforce administration and support.",
+      },
+      {
+        step: 5,
+        title: "Measure",
+        description: "Monitor SLAs, issues, and workforce performance.",
+      },
+      {
+        step: 6,
+        title: "Improve",
+        description: "Use operational data to refine the model.",
+      },
     ],
     outcomes: [
-      "Higher consistency in outbound activity",
-      "Better use of sales team time",
-      "Cleaner pipeline visibility",
-      "More predictable appointment flow",
+      "Clearer ownership of workforce operations",
+      "Better multi-location coordination",
+      "Stronger visibility for leadership",
+      "More disciplined issue handling and reporting",
+      "Continuous improvement grounded in operating data",
     ],
-    industries: ["Professional Services", "Financial Services", "Technology", "Manufacturing"],
-  },
-  {
-    slug: "engineering-outsourcing",
-    title: "Engineering Outsourcing",
-    group: "workforce",
-    summary:
-      "Specialized engineering talent with flexible team models and local integration.",
-    description:
-      "MSG provides access to engineering professionals and flexible team structures so organizations can accelerate project delivery, reduce overhead pressure, and integrate specialized capability with local operating needs.",
-    outcome: "Faster project staffing with flexible engineering capacity.",
-    painPoints: [
-      "Specialized engineering roles are hard to fill quickly",
-      "Project timelines slip due to talent gaps",
-      "Fixed headcount models raise cost risk",
-      "Global expertise is difficult to integrate locally",
+    industries: [
+      "Manufacturing",
+      "Logistics and Distribution",
+      "Retail and Consumer",
+      "Construction and Engineering",
+      "Energy and Utilities",
     ],
-    approach: [
-      "Clarify project skill requirements and delivery model",
-      "Source and assess specialized engineering talent",
-      "Deploy flexible teams with clear project ownership",
-      "Support integration with local stakeholders and operations",
+    faq: [
+      {
+        question: "How is Managed Workforce different from basic outsourcing?",
+        answer:
+          "Managed Workforce focuses on end-to-end operations—governance, monitoring, multi-location coordination, analytics, and continuous improvement—not placement alone.",
+      },
+      {
+        question: "Can Managed Workforce include ProQPay?",
+        answer:
+          "Where relevant, MSG can integrate technology-enabled payroll and workforce visibility through ProQPay as part of a broader operating model.",
+      },
     ],
-    capabilities: [
-      "Specialized engineering talent sourcing",
-      "Scalable and flexible team models",
-      "Project-aligned staffing support",
-      "Local integration coordination",
-      "Delivery timeline acceleration support",
-    ],
-    workflow: [
-      { step: 1, title: "Requirement mapping", description: "Define skills, duration, and outcomes." },
-      { step: 2, title: "Talent search", description: "Source and shortlist specialists." },
-      { step: 3, title: "Assessment", description: "Evaluate fit for project requirements." },
-      { step: 4, title: "Deployment", description: "Onboard and integrate with project teams." },
-      { step: 5, title: "Support", description: "Maintain continuity and replacement readiness." },
-    ],
-    outcomes: [
-      "Reduced time-to-staff for critical roles",
-      "More flexible cost structures",
-      "Accelerated project delivery capacity",
-      "Stronger access to specialized skills",
-    ],
-    industries: ["Construction & Engineering", "Manufacturing", "Energy", "Infrastructure"],
   },
 ];
 
@@ -285,16 +394,28 @@ export const serviceGroups = [
   {
     id: "workforce",
     title: "Workforce Services",
-    description: "Recruitment, staffing, engineering professionals, and scalable talent pools.",
+    description:
+      "Recruitment, staffing, engineering talent, and scalable workforce deployment.",
   },
   {
     id: "operations",
-    title: "Business Operations",
-    description: "Administrative support, sales enablement, and process delivery.",
+    title: "Managed Operations",
+    description:
+      "Business support, governance, multi-location coordination, and performance reporting.",
   },
   {
     id: "technology",
-    title: "Technology and Security",
-    description: "IT infrastructure, managed security, and MSG digital products.",
+    title: "Technology Enablement",
+    description:
+      "Digital visibility for workforce and payroll operations through products such as ProQPay.",
   },
 ] as const;
+
+/** Legacy slugs redirected in next.config.ts */
+export const legacyServiceRedirects: Record<string, string> = {
+  "engineering-outsourcing": "engineering-talent",
+  "business-process-outsourcing": "business-support",
+  "managed-security": "managed-workforce",
+  "it-infrastructure": "business-support",
+  "sales-lead-generation": "business-support",
+};

@@ -20,11 +20,15 @@ export default async function ContactPage({
 }) {
   const params = await searchParams;
   const allowed: ContactFormValues["intent"][] = [
-    "sales",
-    "support",
+    "workforce-outsourcing",
+    "engineering-talent",
+    "business-support",
+    "managed-workforce",
     "payroll-demo",
     "partnership",
     "career",
+    "sales",
+    "support",
     "general",
   ];
   const intent = allowed.includes(params.intent as ContactFormValues["intent"])

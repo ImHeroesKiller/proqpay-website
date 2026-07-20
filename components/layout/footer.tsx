@@ -44,17 +44,21 @@ export function Footer() {
   return (
     <footer className="bg-[#0B1F33] text-white">
       <Container className="section-padding">
-        <div className="grid gap-10 lg:grid-cols-[1.3fr_2fr]">
+        <div className="grid gap-10 lg:grid-cols-[1.4fr_2.6fr]">
           <div>
             <Logo variant="light" />
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
-              {siteConfig.legalName}. Enterprise workforce solutions for Indonesian
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
+              {siteConfig.legalName} — Enterprise workforce solutions for Indonesian
               businesses.
             </p>
             <p className="mt-3 text-sm text-white/55">{siteConfig.websiteDisplay}</p>
+            <p className="mt-4 text-xs font-medium uppercase tracking-[0.16em] text-white/40">
+              People · Operations · Technology
+            </p>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            <FooterColumn title="MSG" links={footerNavigation.company} />
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+            <FooterColumn title="Company" links={footerNavigation.company} />
+            <FooterColumn title="Services" links={footerNavigation.services} />
             <FooterColumn title="Products" links={footerNavigation.products} />
             <FooterColumn title="Resources" links={footerNavigation.resources} />
             <FooterColumn title="Legal" links={footerNavigation.legal} />
@@ -92,7 +96,17 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {siteConfig.legalName}. All rights reserved.
           </p>
-          <p className="text-white/40">Career · Privacy · Terms</p>
+          <div className="flex gap-4 text-white/40">
+            <Link href="/privacy" className="hover:text-white/70">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-white/70">
+              Terms
+            </Link>
+            <Link href="/careers" className="hover:text-white/70">
+              Careers
+            </Link>
+          </div>
         </div>
       </Container>
     </footer>

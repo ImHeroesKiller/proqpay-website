@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 export const metadata = buildMetadata({
   title: "About MSG",
   description:
-    "About PT Mandiri Semesta Gemilang (MSG): Indonesian enterprise workforce solutions company established in 2019.",
+    "About PT Mandiri Semesta Gemilang (MSG): Indonesian enterprise workforce solutions company established in 2019. People · Operations · Technology.",
   path: "/about",
 });
 
@@ -20,23 +20,62 @@ export default function AboutPage() {
     <>
       <PageHero
         title="About MSG"
-        description={`${siteConfig.legalName} — enterprise workforce solutions for Indonesian businesses.`}
+        description={`${siteConfig.legalName} is an Indonesian enterprise workforce solutions company. We help organizations grow through people, operational excellence, and technology.`}
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "About" },
         ]}
+        cta={{ label: "Request Consultation", href: "/request-consultation" }}
       />
 
       <section className="section-padding">
-        <Container className="mx-auto max-w-3xl">
-          <h2 className="text-2xl font-bold">Who we are</h2>
+        <Container className="mx-auto max-w-4xl">
+          <h2 className="text-2xl font-bold sm:text-3xl">Company overview</h2>
           <div className="mt-4 space-y-4 text-base leading-relaxed text-muted-foreground">
             {aboutContent.whoWeAre.map((p) => (
               <p key={p.slice(0, 36)}>{p}</p>
             ))}
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {[
+              { label: "Established", value: String(siteConfig.founded) },
+              { label: "Positioning", value: "Enterprise Workforce" },
+              { label: "Framework", value: "People · Ops · Tech" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="rounded-2xl border border-border bg-card p-5"
+              >
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  {item.label}
+                </p>
+                <p className="mt-2 font-semibold">{item.value}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">
+            People · Operations · Technology
+          </h2>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            MSG integrates three pillars so workforce delivery stays reliable as
+            the business grows.
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {aboutContent.pillars.map((pillar) => (
+              <Card key={pillar.id}>
+                <CardHeader>
+                  <CardTitle>{pillar.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm leading-relaxed text-muted-foreground">
+                  {pillar.description}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2">
             <Card>
               <CardHeader>
                 <CardTitle>Vision</CardTitle>
@@ -55,7 +94,40 @@ export default function AboutPage() {
             </Card>
           </div>
 
-          <h2 className="mt-14 text-2xl font-bold">Core services</h2>
+          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">Company values</h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {aboutContent.values.map((value) => (
+              <div
+                key={value.title}
+                className="rounded-2xl border border-border bg-card p-5"
+              >
+                <h3 className="font-semibold">{value.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {value.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">How we work</h2>
+          <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {aboutContent.howWeWork.map((step) => (
+              <li
+                key={step.title}
+                className="rounded-2xl border border-border bg-card p-5"
+              >
+                <span className="text-xs font-semibold uppercase tracking-wide text-orange">
+                  Step {step.step}
+                </span>
+                <h3 className="mt-2 font-semibold">{step.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {step.description}
+                </p>
+              </li>
+            ))}
+          </ol>
+
+          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">Core services</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {aboutContent.coreServices.map((service) => (
               <Link
@@ -71,7 +143,27 @@ export default function AboutPage() {
             ))}
           </div>
 
-          <h2 className="mt-14 text-2xl font-bold">Company timeline</h2>
+          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">Leadership</h2>
+          <div className="mt-4 rounded-2xl border border-dashed border-border bg-muted/30 p-6">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Leadership profiles will be published after internal confirmation.
+              Do not treat this section as complete until names and roles are
+              approved.
+            </p>
+            {siteConfig.placeholders.leadership.length === 0 ? (
+              <p className="mt-3 text-sm font-medium text-foreground/80">
+                Placeholder ready in{" "}
+                <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  lib/site-config.ts
+                </code>
+                .
+              </p>
+            ) : null}
+          </div>
+
+          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">
+            Company timeline
+          </h2>
           <ol className="mt-6 space-y-5 border-l border-border pl-6">
             {aboutContent.timeline.map((item) => (
               <li key={item.year} className="relative">
@@ -79,7 +171,7 @@ export default function AboutPage() {
                 <div className="text-sm font-semibold text-[#0B3A6E] dark:text-blue-300">
                   {item.year}
                 </div>
-                <div className="mt-1 font-semibold">{item.title}</div>
+                <h3 className="mt-1 font-semibold">{item.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {item.description}
                 </p>
@@ -87,30 +179,55 @@ export default function AboutPage() {
             ))}
           </ol>
 
-          <h2 className="mt-14 text-2xl font-bold">Corporate values</h2>
+          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">
+            Legal & office information
+          </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {aboutContent.values.map((value) => (
-              <div
-                key={value.title}
-                className="rounded-2xl border border-border bg-card p-5"
+            <div className="rounded-2xl border border-border bg-card p-5 text-sm">
+              <p className="font-semibold">{aboutContent.legalInfo.companyName}</p>
+              <p className="mt-2 text-muted-foreground">
+                Established {aboutContent.legalInfo.founded}
+              </p>
+              <p className="mt-2 text-muted-foreground">
+                {aboutContent.legalInfo.office}
+              </p>
+              <p className="mt-4 text-xs text-muted-foreground">
+                {aboutContent.legalInfo.note}
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-card p-5 text-sm">
+              <p className="text-muted-foreground">Email</p>
+              <a
+                href={`mailto:${aboutContent.legalInfo.email}`}
+                className="font-medium text-[#0B3A6E] dark:text-blue-300"
               >
-                <h3 className="font-semibold">{value.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {value.description}
-                </p>
+                {aboutContent.legalInfo.email}
+              </a>
+              <p className="mt-4 text-muted-foreground">Phone</p>
+              <a
+                href={`tel:${aboutContent.legalInfo.phone.replace(/\s/g, "")}`}
+                className="font-medium text-[#0B3A6E] dark:text-blue-300"
+              >
+                {aboutContent.legalInfo.phone}
+              </a>
+              <div className="mt-6">
+                <Button asChild variant="outline" size="sm">
+                  <Link href="/contact">Contact office</Link>
+                </Button>
               </div>
-            ))}
-          </div>
-
-          <div className="mt-12">
-            <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
-              <Link href="/contact">Contact MSG</Link>
-            </Button>
+            </div>
           </div>
         </Container>
       </section>
 
-      <CtaBand />
+      <CtaBand
+        title="Partner with MSG"
+        description="Discuss workforce outsourcing, engineering talent, business support, managed operations, or ProQPay with our team."
+        primaryHref="/request-consultation"
+        primaryLabel="Request Consultation"
+        secondaryHref="/contact"
+        secondaryLabel="Contact MSG"
+      />
     </>
   );
 }

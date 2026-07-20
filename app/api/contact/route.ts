@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     }
 
     // Placeholder email delivery — replace with Resend/SendGrid in production.
-    console.info("[ProQPay Contact]", {
+    console.info("[MSG Contact]", {
       ...parsed.data,
       receivedAt: new Date().toISOString(),
     });

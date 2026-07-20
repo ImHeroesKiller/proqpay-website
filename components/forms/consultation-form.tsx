@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -15,7 +16,7 @@ import { Label } from "@/components/ui/label";
 export function ConsultationForm({
   defaultIntent = "sales",
 }: {
-  defaultIntent?: "sales" | "payroll-demo" | "partnership" | "support";
+  defaultIntent?: ConsultationFormValues["intent"];
 }) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
@@ -42,6 +43,7 @@ export function ConsultationForm({
         defaultIntent === "payroll-demo"
           ? "I would like a ProQPay payroll demo."
           : "I would like a consultation with MSG.",
+      privacyConsent: false,
       website: "",
     },
   });
@@ -72,7 +74,22 @@ export function ConsultationForm({
         throw new Error(data?.error ?? "Unable to submit request.");
       }
       setStatus("success");
-      reset();
+      reset({
+        intent: defaultIntent,
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        role: "",
+        employeeCount: "",
+        preferredDate: "",
+        message:
+          defaultIntent === "payroll-demo"
+            ? "I would like a ProQPay payroll demo."
+            : "I would like a consultation with MSG.",
+        privacyConsent: false,
+        website: "",
+      });
     } catch (error) {
       setStatus("error");
       setErrorMessage(
@@ -93,20 +110,24 @@ export function ConsultationForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} className="relative space-y-5" noValidate>
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="c-name">Full name</Label>
           <Input id="c-name" {...register("name")} />
           {errors.name ? (
-            <p className="text-xs text-destructive">{errors.name.message}</p>
+            <p className="text-xs text-destructive" role="alert">
+              {errors.name.message}
+            </p>
           ) : null}
         </div>
         <div className="space-y-2">
           <Label htmlFor="c-email">Work email</Label>
           <Input id="c-email" type="email" {...register("email")} />
           {errors.email ? (
-            <p className="text-xs text-destructive">{errors.email.message}</p>
+            <p className="text-xs text-destructive" role="alert">
+              {errors.email.message}
+            </p>
           ) : null}
         </div>
       </div>
@@ -116,21 +137,38 @@ export function ConsultationForm({
           <Label htmlFor="c-company">Company</Label>
           <Input id="c-company" {...register("company")} />
           {errors.company ? (
-            <p className="text-xs text-destructive">{errors.company.message}</p>
+            <p className="text-xs text-destructive" role="alert">
+              {errors.company.message}
+            </p>
           ) : null}
         </div>
         <div className="space-y-2">
-          <Label htmlFor="intent">Category</Label>
+          <Label htmlFor="intent">Service interest</Label>
           <select
             id="intent"
             className="flex h-11 w-full rounded-xl border border-input bg-background px-3 text-sm shadow-sm"
             {...register("intent")}
           >
-            <option value="sales">Sales</option>
-            <option value="payroll-demo">Payroll Demo</option>
+            <option value="workforce-outsourcing">Workforce Outsourcing</option>
+            <option value="engineering-talent">Engineering Talent</option>
+            <option value="business-support">Business Support</option>
+            <option value="managed-workforce">Managed Workforce</option>
+            <option value="payroll-demo">ProQPay Demo</option>
             <option value="partnership">Partnership</option>
+            <option value="sales">Sales</option>
             <option value="support">Support</option>
           </select>
+        </div>
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div className="space-y-2">
+          <Label htmlFor="employeeCount">Estimated team size</Label>
+          <Input id="employeeCount" placeholder="e.g. 50" {...register("employeeCount")} />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="preferredDate">Preferred contact date</Label>
+          <Input id="preferredDate" type="date" {...register("preferredDate")} />
         </div>
       </div>
 
@@ -138,16 +176,44 @@ export function ConsultationForm({
         <Label htmlFor="c-message">Notes</Label>
         <Textarea id="c-message" {...register("message")} />
         {errors.message ? (
-          <p className="text-xs text-destructive">{errors.message.message}</p>
+          <p className="text-xs text-destructive" role="alert">
+            {errors.message.message}
+          </p>
         ) : null}
       </div>
+
+      <div className="flex items-start gap-3">
+        <input
+          id="c-privacy"
+          type="checkbox"
+          className="mt-1 h-4 w-4 rounded border-input"
+          {...register("privacyConsent")}
+        />
+        <Label htmlFor="c-privacy" className="text-sm font-normal leading-relaxed">
+          I agree to the processing of my information in accordance with the{" "}
+          <Link
+            href="/privacy"
+            className="font-medium text-[#0B3A6E] underline-offset-2 hover:underline dark:text-blue-300"
+          >
+            Privacy Policy
+          </Link>
+          .
+        </Label>
+      </div>
+      {errors.privacyConsent ? (
+        <p className="text-xs text-destructive" role="alert">
+          {errors.privacyConsent.message}
+        </p>
+      ) : null}
 
       <div className="absolute left-[-9999px]" aria-hidden>
         <Input tabIndex={-1} autoComplete="off" {...register("website")} />
       </div>
 
       {status === "error" ? (
-        <p className="text-sm text-destructive">{errorMessage}</p>
+        <p className="text-sm text-destructive" role="alert">
+          {errorMessage}
+        </p>
       ) : null}
 
       <Button
@@ -156,7 +222,7 @@ export function ConsultationForm({
         className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]"
         disabled={status === "loading"}
       >
-        {status === "loading" ? "Submitting..." : "Submit"}
+        {status === "loading" ? "Submitting..." : "Request Consultation"}
       </Button>
     </form>
   );

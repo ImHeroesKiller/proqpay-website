@@ -2,15 +2,30 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
+  /* Design tokens derived from MSG logo (deep navy + amber orange) */
+  --color-primary: #0b3a6e;
+  --color-primary-dark: #0b1930;
+  --color-primary-light: #eaf2ff;
+  --color-secondary: #102a43;
+  --color-accent: #f28c28;
+  --color-background: #fafaf8;
+  --color-surface: #ffffff;
+  --color-text: #102a43;
+  --color-text-muted: #486581;
+  --color-border: #e2e8f0;
+  --color-success: #0f9f8f;
+  --color-warning: #d97706;
+  --color-error: #b91c1c;
+
+  --background: #fafaf8;
   --foreground: #102a43;
   --card: #ffffff;
   --card-foreground: #102a43;
   --popover: #ffffff;
   --popover-foreground: #102a43;
-  --primary: #102a43;
+  --primary: #0b3a6e;
   --primary-foreground: #ffffff;
-  --secondary: #f8fafc;
+  --secondary: #f1f5f9;
   --secondary-foreground: #102a43;
   --muted: #f1f5f9;
   --muted-foreground: #486581;
@@ -21,11 +36,11 @@
   --border: #e2e8f0;
   --input: #e2e8f0;
   --ring: #f28c28;
-  --navy: #102a43;
-  --navy-dark: #0b1f33;
+  --navy: #0b3a6e;
+  --navy-dark: #0b1930;
   --orange: #f28c28;
-  --logo-orange: #ff5400;
-  --gray-bg: #f8fafc;
+  --logo-orange: #f28c28;
+  --gray-bg: #f4f6f8;
   --radius: 0.75rem;
 }
 
@@ -101,6 +116,8 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
   }
 
   h1,
@@ -111,6 +128,10 @@
   h6 {
     font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
     @apply tracking-tight text-balance;
+  }
+
+  p {
+    max-width: 70ch;
   }
 
   :focus-visible {
