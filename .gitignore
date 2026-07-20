@@ -46,3 +46,4 @@ next-env.d.ts
 .vercel-deploy-input.json
 .vercel
 .env*.local
+.env.local

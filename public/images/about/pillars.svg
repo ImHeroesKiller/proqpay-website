@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" fill="none">
+  <rect width="1200" height="640" fill="#F4F6F8"/>
+  <text x="60" y="70" fill="#0B3A6E" font-family="system-ui,sans-serif" font-size="28" font-weight="800">People · Operations · Technology</text>
+  <text x="60" y="110" fill="#486581" font-family="system-ui,sans-serif" font-size="16">Three integrated pillars of MSG delivery</text>
+  <g font-family="system-ui,sans-serif">
+    <rect x="60" y="180" width="340" height="360" rx="28" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="60" y="180" width="340" height="10" rx="5" fill="#F28C28"/>
+    <circle cx="120" cy="250" r="28" fill="#0B3A6E"/>
+    <text x="112" y="257" fill="#FFFFFF" font-size="18" font-weight="700">P</text>
+    <text x="168" y="258" fill="#0B3A6E" font-size="24" font-weight="800">People</text>
+    <text x="100" y="320" fill="#486581" font-size="15">Sourcing, onboarding,</text>
+    <text x="100" y="345" fill="#486581" font-size="15">deployment, and admin</text>
+    <text x="100" y="400" fill="#486581" font-size="14">• Talent readiness</text>
+    <text x="100" y="430" fill="#486581" font-size="14">• Role alignment</text>
+    <text x="100" y="460" fill="#486581" font-size="14">• Continuity support</text>
+    <rect x="430" y="180" width="340" height="360" rx="28" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="430" y="180" width="340" height="10" rx="5" fill="#0B3A6E"/>
+    <circle cx="490" cy="250" r="28" fill="#0B3A6E"/>
+    <text x="481" y="257" fill="#FFFFFF" font-size="18" font-weight="700">O</text>
+    <text x="538" y="258" fill="#0B3A6E" font-size="24" font-weight="800">Operations</text>
+    <text x="470" y="320" fill="#486581" font-size="15">Governance, attendance,</text>
+    <text x="470" y="345" fill="#486581" font-size="15">payroll coord, reporting</text>
+    <text x="470" y="400" fill="#486581" font-size="14">• SOP discipline</text>
+    <text x="470" y="430" fill="#486581" font-size="14">• Multi-site control</text>
+    <text x="470" y="460" fill="#486581" font-size="14">• Escalation paths</text>
+    <rect x="800" y="180" width="340" height="360" rx="28" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="800" y="180" width="340" height="10" rx="5" fill="#F28C28"/>
+    <circle cx="860" cy="250" r="28" fill="#F28C28"/>
+    <text x="852" y="257" fill="#FFFFFF" font-size="18" font-weight="700">T</text>
+    <text x="908" y="258" fill="#0B3A6E" font-size="24" font-weight="800">Technology</text>
+    <text x="840" y="320" fill="#486581" font-size="15">Dashboards, automation,</text>
+    <text x="840" y="345" fill="#486581" font-size="15">and ProQPay payroll</text>
+    <text x="840" y="400" fill="#486581" font-size="14">• Process visibility</text>
+    <text x="840" y="430" fill="#486581" font-size="14">• Digital workflows</text>
+    <text x="840" y="460" fill="#486581" font-size="14">• Decision support</text>
+  </g>
+</svg>

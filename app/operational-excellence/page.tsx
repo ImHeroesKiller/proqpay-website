@@ -1,6 +1,11 @@
+import Image from "next/image";
 import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
 import { CtaBand } from "@/components/sections/cta-band";
+import {
+  OperationsLayerGraph,
+  ProcessFlow,
+} from "@/components/shared/process-flow";
 import { operationalExcellence, recruitmentFlow } from "@/lib/content/about";
 import { buildMetadata } from "@/lib/seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,6 +16,63 @@ export const metadata = buildMetadata({
     "MSG operational excellence: command center coordination, hybrid field supervision, standardized SOPs, SLA monitoring, and compliance-aware practices.",
   path: "/operational-excellence",
 });
+
+const opsLayers = [
+  {
+    label: "Layer 1",
+    title: "Command Center",
+    accent: true,
+    items: [
+      "Status coordination",
+      "Issue intake",
+      "Escalation routing",
+      "SLA monitoring",
+    ],
+  },
+  {
+    label: "Layer 2",
+    title: "Hybrid Supervision",
+    items: [
+      "Field presence",
+      "Wide-reaching coverage",
+      "Quality control",
+      "Local issue handling",
+    ],
+  },
+  {
+    label: "Layer 3",
+    title: "Workforce Delivery",
+    items: [
+      "Deployed teams",
+      "SOP execution",
+      "Payroll via ProQPay",
+      "Continuous reporting",
+    ],
+  },
+];
+
+const opsCycle = [
+  {
+    step: 1,
+    title: "Signal intake",
+    description: "Capture operational status, exceptions, and field signals.",
+  },
+  {
+    step: 2,
+    title: "Triage & escalate",
+    description: "Route issues to the right ownership path with clear priority.",
+  },
+  {
+    step: 3,
+    title: "Field action",
+    description: "Hybrid supervision resolves local issues and confirms quality.",
+  },
+  {
+    step: 4,
+    title: "Close & report",
+    description: "Document outcomes and feed performance visibility to stakeholders.",
+  },
+];
 
 export default function OperationalExcellencePage() {
   return (
@@ -55,66 +117,44 @@ export default function OperationalExcellencePage() {
           <p className="mt-2 text-muted-foreground">
             A simplified view of MSG&apos;s multi-layer operating control.
           </p>
-          <div className="mt-10 overflow-hidden rounded-3xl border border-border bg-card p-6 sm:p-8">
-            <div className="grid gap-4 lg:grid-cols-3">
-              <div className="rounded-2xl border border-border bg-navy-dark p-5 text-white">
-                <p className="text-xs uppercase tracking-wide text-orange">Layer 1</p>
-                <h3 className="mt-2 text-lg font-semibold">Command Center</h3>
-                <ul className="mt-4 space-y-2 text-sm text-white/75">
-                  <li>Status coordination</li>
-                  <li>Issue intake</li>
-                  <li>Escalation routing</li>
-                  <li>SLA monitoring</li>
-                </ul>
-              </div>
-              <div className="rounded-2xl border border-border bg-muted/40 p-5">
-                <p className="text-xs uppercase tracking-wide text-orange">Layer 2</p>
-                <h3 className="mt-2 text-lg font-semibold">Hybrid Supervision</h3>
-                <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                  <li>Field presence</li>
-                  <li>Wide-reaching coverage</li>
-                  <li>Quality control</li>
-                  <li>Local issue handling</li>
-                </ul>
-              </div>
-              <div className="rounded-2xl border border-border bg-muted/40 p-5">
-                <p className="text-xs uppercase tracking-wide text-orange">Layer 3</p>
-                <h3 className="mt-2 text-lg font-semibold">Workforce Delivery</h3>
-                <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                  <li>Deployed teams</li>
-                  <li>SOP execution</li>
-                  <li>Payroll via ProQPay</li>
-                  <li>Continuous reporting</li>
-                </ul>
-              </div>
-            </div>
+          <div className="mt-8 overflow-hidden rounded-3xl border border-border shadow-sm">
+            <Image
+              src="/images/operations/ops-layers.svg"
+              alt="MSG operational control layers diagram"
+              width={1200}
+              height={520}
+              className="h-auto w-full"
+              unoptimized
+            />
+          </div>
+          <div className="mt-10">
+            <OperationsLayerGraph layers={opsLayers} />
           </div>
         </Container>
       </section>
 
       <section className="section-padding">
         <Container>
-          <h2 className="text-2xl font-bold">Recruitment workflow</h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {recruitmentFlow.map((step) => (
-              <div
-                key={step.step}
-                className="rounded-2xl border border-border bg-card p-5 shadow-sm"
-              >
-                <div className="text-xs font-semibold uppercase tracking-wide text-orange">
-                  Step {step.step}
-                </div>
-                <h3 className="mt-2 font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {step.description}
-                </p>
-              </div>
-            ))}
+          <h2 className="text-2xl font-bold">Issue-to-resolution flow</h2>
+          <p className="mt-2 max-w-2xl text-muted-foreground">
+            How operational signals move from intake to closed-loop reporting.
+          </p>
+          <div className="mt-10">
+            <ProcessFlow steps={opsCycle} variant="horizontal" tone="orange" />
           </div>
         </Container>
       </section>
 
       <section className="section-padding bg-gray-bg dark:bg-background">
+        <Container>
+          <h2 className="text-2xl font-bold">Recruitment workflow</h2>
+          <div className="mt-8">
+            <ProcessFlow steps={recruitmentFlow} variant="vertical" />
+          </div>
+        </Container>
+      </section>
+
+      <section className="section-padding">
         <Container className="grid gap-6 lg:grid-cols-2">
           <Card>
             <CardHeader>

@@ -1,9 +1,11 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
 import { CtaBand } from "@/components/sections/cta-band";
 import { FaqSection } from "@/components/sections/faq-section";
 import { JsonLd } from "@/components/shared/json-ld";
+import { ProcessFlow } from "@/components/shared/process-flow";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { getService, serviceSlugs } from "@/lib/content/services";
 import { Check } from "lucide-react";
@@ -128,21 +130,22 @@ export default async function ServiceDetailPage({
       <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
           <h2 className="text-2xl font-bold">Process</h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-            {service.workflow.map((step) => (
-              <div
-                key={step.step}
-                className="rounded-2xl border border-border bg-card p-5 shadow-sm"
-              >
-                <div className="text-xs font-semibold uppercase tracking-wide text-orange">
-                  Step {step.step}
-                </div>
-                <h3 className="mt-2 font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {step.description}
-                </p>
-              </div>
-            ))}
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            End-to-end service flow from understanding requirements to continuous
+            improvement.
+          </p>
+          <div className="mt-8 overflow-hidden rounded-3xl border border-border shadow-sm">
+            <Image
+              src="/images/services/service-flow.svg"
+              alt={`${service.title} delivery process flow`}
+              width={1400}
+              height={420}
+              className="h-auto w-full"
+              unoptimized
+            />
+          </div>
+          <div className="mt-10">
+            <ProcessFlow steps={service.workflow} variant="horizontal" />
           </div>
         </Container>
       </section>

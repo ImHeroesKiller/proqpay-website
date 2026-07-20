@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" fill="none">
+  <rect width="1200" height="520" rx="28" fill="#F4F6F8"/>
+  <text x="48" y="56" fill="#0B3A6E" font-family="system-ui,sans-serif" font-size="24" font-weight="800">Operational control layers</text>
+  <text x="48" y="90" fill="#486581" font-family="system-ui,sans-serif" font-size="15">Command center → hybrid supervision → workforce delivery</text>
+  <rect x="48" y="140" width="340" height="300" rx="24" fill="#0B1F33"/>
+  <text x="80" y="185" fill="#F28C28" font-family="system-ui,sans-serif" font-size="12" font-weight="700" letter-spacing="2">LAYER 1</text>
+  <text x="80" y="225" fill="#FFFFFF" font-family="system-ui,sans-serif" font-size="22" font-weight="800">Command Center</text>
+  <text x="80" y="270" fill="#9FB3C8" font-family="system-ui,sans-serif" font-size="14">• Status coordination</text>
+  <text x="80" y="300" fill="#9FB3C8" font-family="system-ui,sans-serif" font-size="14">• Issue intake</text>
+  <text x="80" y="330" fill="#9FB3C8" font-family="system-ui,sans-serif" font-size="14">• Escalation routing</text>
+  <text x="80" y="360" fill="#9FB3C8" font-family="system-ui,sans-serif" font-size="14">• SLA monitoring</text>
+  <path d="M400 290 H430" stroke="#F28C28" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="430,280 450,290 430,300" fill="#F28C28"/>
+  <rect x="460" y="140" width="340" height="300" rx="24" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="492" y="185" fill="#F28C28" font-family="system-ui,sans-serif" font-size="12" font-weight="700" letter-spacing="2">LAYER 2</text>
+  <text x="492" y="225" fill="#0B3A6E" font-family="system-ui,sans-serif" font-size="22" font-weight="800">Hybrid Supervision</text>
+  <text x="492" y="270" fill="#486581" font-family="system-ui,sans-serif" font-size="14">• Field presence</text>
+  <text x="492" y="300" fill="#486581" font-family="system-ui,sans-serif" font-size="14">• Wide-reaching coverage</text>
+  <text x="492" y="330" fill="#486581" font-family="system-ui,sans-serif" font-size="14">• Quality control</text>
+  <text x="492" y="360" fill="#486581" font-family="system-ui,sans-serif" font-size="14">• Local issue handling</text>
+  <path d="M812 290 H842" stroke="#F28C28" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="842,280 862,290 842,300" fill="#F28C28"/>
+  <rect x="872" y="140" width="280" height="300" rx="24" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="900" y="185" fill="#F28C28" font-family="system-ui,sans-serif" font-size="12" font-weight="700" letter-spacing="2">LAYER 3</text>
+  <text x="900" y="225" fill="#0B3A6E" font-family="system-ui,sans-serif" font-size="20" font-weight="800">Workforce Delivery</text>
+  <text x="900" y="270" fill="#486581" font-family="system-ui,sans-serif" font-size="14">• Deployed teams</text>
+  <text x="900" y="300" fill="#486581" font-family="system-ui,sans-serif" font-size="14">• SOP execution</text>
+  <text x="900" y="330" fill="#486581" font-family="system-ui,sans-serif" font-size="14">• Payroll via ProQPay</text>
+  <text x="900" y="360" fill="#486581" font-family="system-ui,sans-serif" font-size="14">• Continuous reporting</text>
+</svg>

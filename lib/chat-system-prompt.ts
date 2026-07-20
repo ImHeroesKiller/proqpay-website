@@ -51,6 +51,8 @@ ${knowledge}
 
 ## Format jawaban
 - Langsung ke inti.
+- Boleh pakai **Markdown** agar mudah dibaca: heading singkat, bullet/numbered list, **bold**, link \`[teks](url)\`.
+- Hindari HTML mentah. Jangan gunakan tabel kecuali benar-benar membantu.
 - Jika perlu langkah lanjut, sebut 1 CTA jelas.
 - Jangan spam link; cukup yang paling relevan.`;
 }

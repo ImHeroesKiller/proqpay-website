@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/shared/container";
 import { CtaBand } from "@/components/sections/cta-band";
 import { FaqSection } from "@/components/sections/faq-section";
+import { ProcessFlow } from "@/components/shared/process-flow";
 import { ProQPayLogo } from "@/components/layout/logo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,6 +12,29 @@ import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
 import { proqpayFaqs, proqpayProduct } from "@/lib/content/proqpay";
 import { Check } from "lucide-react";
+
+const payrollFlow = [
+  {
+    step: 1,
+    title: "Prepare & validate",
+    description: "Attendance, pay items, exceptions, and readiness checks.",
+  },
+  {
+    step: 2,
+    title: "Multi-level approval",
+    description: "Configurable HR and finance authorization before money moves.",
+  },
+  {
+    step: 3,
+    title: "Payment instructions",
+    description: "Client-funded orchestration with optional working capital path.",
+  },
+  {
+    step: 4,
+    title: "Reconcile & report",
+    description: "Settlement visibility, audit trail, and leadership reporting.",
+  },
+];
 
 export const metadata = buildMetadata({
   title: "ProQPay",
@@ -143,6 +168,32 @@ export default function ProQPayProductPage() {
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             {proqpayProduct.solution.description}
           </p>
+        </Container>
+      </section>
+
+      {/* Payroll process graph */}
+      <section className="section-padding">
+        <Container>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">
+            Process
+          </p>
+          <h2 className="mt-3 text-3xl font-bold">Payroll operating flow</h2>
+          <p className="mt-2 max-w-2xl text-muted-foreground">
+            A clear control plane from preparation through reconciliation.
+          </p>
+          <div className="mt-8 overflow-hidden rounded-3xl border border-border shadow-sm">
+            <Image
+              src="/images/products/proqpay-flow.svg"
+              alt="ProQPay payroll process: validate, approve, instruct, reconcile"
+              width={1200}
+              height={400}
+              className="h-auto w-full"
+              unoptimized
+            />
+          </div>
+          <div className="mt-10">
+            <ProcessFlow steps={payrollFlow} variant="horizontal" tone="orange" />
+          </div>
         </Container>
       </section>
 

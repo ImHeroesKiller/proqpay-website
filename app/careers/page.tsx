@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
 import { CtaBand } from "@/components/sections/cta-band";
+import { ProcessFlow } from "@/components/shared/process-flow";
 import {
   careerFraudWarning,
   careerValues,
@@ -62,21 +64,21 @@ export default function CareersPage() {
       <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
           <h2 className="text-2xl font-bold sm:text-3xl">Recruitment process</h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {recruitmentFlow.map((step) => (
-              <div
-                key={step.step}
-                className="rounded-2xl border border-border bg-card p-5 shadow-sm"
-              >
-                <div className="text-xs font-semibold uppercase tracking-wide text-orange">
-                  Step {step.step}
-                </div>
-                <h3 className="mt-2 font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {step.description}
-                </p>
-              </div>
-            ))}
+          <p className="mt-2 max-w-2xl text-muted-foreground">
+            Transparent hiring steps. MSG never charges candidates recruitment fees.
+          </p>
+          <div className="mt-8 overflow-hidden rounded-3xl border border-border shadow-sm">
+            <Image
+              src="/images/careers/recruitment-flow.svg"
+              alt="MSG recruitment process flow"
+              width={1200}
+              height={360}
+              className="h-auto w-full"
+              unoptimized
+            />
+          </div>
+          <div className="mt-10">
+            <ProcessFlow steps={recruitmentFlow} variant="horizontal" tone="orange" />
           </div>
         </Container>
       </section>

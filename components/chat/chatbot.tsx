@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
 import { MessageCircle, Send, X, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { MarkdownMessage } from "@/components/chat/markdown-message";
 import { cn } from "@/lib/utils";
 
 type ChatRole = "user" | "assistant";
@@ -258,7 +259,10 @@ export function Chatbot() {
                       : "border border-border bg-card text-foreground shadow-sm",
                   )}
                 >
-                  <p className="whitespace-pre-wrap">{msg.content}</p>
+                  <MarkdownMessage
+                    content={msg.content}
+                    variant={msg.role === "user" ? "user" : "assistant"}
+                  />
                 </div>
                 {msg.role === "user" ? (
                   <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">

@@ -1,8 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
 import { CtaBand } from "@/components/sections/cta-band";
+import { ProcessFlow } from "@/components/shared/process-flow";
 import { services, serviceGroups } from "@/lib/content/services";
+import { aboutContent } from "@/lib/content/about";
 import { buildMetadata } from "@/lib/seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
@@ -26,6 +29,28 @@ export default function ServicesPage() {
         ]}
         cta={{ label: "Request Consultation", href: "/request-consultation" }}
       />
+
+      <section className="section-padding bg-gray-bg dark:bg-background">
+        <Container>
+          <h2 className="text-2xl font-bold sm:text-3xl">How service delivery works</h2>
+          <p className="mt-2 max-w-2xl text-muted-foreground">
+            A shared operating flow across MSG workforce and operations services.
+          </p>
+          <div className="mt-8 overflow-hidden rounded-3xl border border-border shadow-sm">
+            <Image
+              src="/images/services/service-flow.svg"
+              alt="MSG service delivery process flow"
+              width={1400}
+              height={420}
+              className="h-auto w-full"
+              unoptimized
+            />
+          </div>
+          <div className="mt-10">
+            <ProcessFlow steps={aboutContent.howWeWork} variant="cycle" />
+          </div>
+        </Container>
+      </section>
 
       <section className="section-padding">
         <Container className="space-y-16">

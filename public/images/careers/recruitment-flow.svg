@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" fill="none">
+  <rect width="1200" height="360" rx="28" fill="#F4F6F8"/>
+  <text x="40" y="50" fill="#0B3A6E" font-family="system-ui,sans-serif" font-size="22" font-weight="800">Recruitment process</text>
+  <text x="40" y="80" fill="#486581" font-family="system-ui,sans-serif" font-size="14">Transparent steps · no candidate fees</text>
+
+  <g font-family="system-ui,sans-serif">
+    <rect x="40" y="120" width="260" height="180" rx="20" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="40" y="120" width="8" height="180" rx="4" fill="#F28C28"/>
+    <text x="70" y="165" fill="#F28C28" font-size="12" font-weight="700">STEP 1</text>
+    <text x="70" y="200" fill="#0B3A6E" font-size="18" font-weight="800">Sourcing</text>
+    <text x="70" y="235" fill="#486581" font-size="13">Attract aligned talent</text>
+  </g>
+  <g font-family="system-ui,sans-serif">
+    <rect x="330" y="120" width="260" height="180" rx="20" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="330" y="120" width="8" height="180" rx="4" fill="#F28C28"/>
+    <text x="360" y="165" fill="#F28C28" font-size="12" font-weight="700">STEP 2</text>
+    <text x="360" y="200" fill="#0B3A6E" font-size="18" font-weight="800">Screening</text>
+    <text x="360" y="235" fill="#486581" font-size="13">Capability shortlist</text>
+  </g>
+  <g font-family="system-ui,sans-serif">
+    <rect x="620" y="120" width="260" height="180" rx="20" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="620" y="120" width="8" height="180" rx="4" fill="#0B3A6E"/>
+    <text x="650" y="165" fill="#F28C28" font-size="12" font-weight="700">STEP 3</text>
+    <text x="650" y="200" fill="#0B3A6E" font-size="18" font-weight="800">Assessment</text>
+    <text x="650" y="235" fill="#486581" font-size="13">Structured evaluation</text>
+  </g>
+  <g font-family="system-ui,sans-serif">
+    <rect x="910" y="120" width="260" height="180" rx="20" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <rect x="910" y="120" width="8" height="180" rx="4" fill="#0B3A6E"/>
+    <text x="940" y="165" fill="#F28C28" font-size="12" font-weight="700">STEP 4</text>
+    <text x="940" y="200" fill="#0B3A6E" font-size="18" font-weight="800">Onboarding</text>
+    <text x="940" y="235" fill="#486581" font-size="13">Clear handover</text>
+  </g>
+  <path d="M300 210 H330 M590 210 H620 M880 210 H910" stroke="#0B3A6E" stroke-width="2" stroke-dasharray="4 4"/>
+</svg>

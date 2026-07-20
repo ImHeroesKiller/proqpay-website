@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="420" viewBox="0 0 1400 420" fill="none">
+  <rect width="1400" height="420" rx="32" fill="#0B1F33"/>
+  <text x="48" y="52" fill="#F28C28" font-family="system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="3">SERVICE DELIVERY FLOW</text>
+  <text x="48" y="90" fill="#FFFFFF" font-family="system-ui,sans-serif" font-size="28" font-weight="800">From requirement to continuous improvement</text>
+  <g font-family="system-ui,sans-serif">
+    <g>
+      <rect x="48" y="140" width="200" height="180" rx="20" fill="#ffffff" fill-opacity=".08" stroke="#ffffff" stroke-opacity=".12"/>
+      <circle cx="88" cy="180" r="18" fill="#F28C28"/>
+      <text x="82" y="186" fill="#FFFFFF" font-size="14" font-weight="700">1</text>
+      <text x="68" y="230" fill="#FFFFFF" font-size="16" font-weight="700">Understand</text>
+      <text x="68" y="260" fill="#9FB3C8" font-size="12">Needs & SLAs</text>
+    </g>
+    <g>
+      <rect x="268" y="140" width="200" height="180" rx="20" fill="#ffffff" fill-opacity=".08" stroke="#ffffff" stroke-opacity=".12"/>
+      <circle cx="308" cy="180" r="18" fill="#2E6BFF"/>
+      <text x="302" y="186" fill="#FFFFFF" font-size="14" font-weight="700">2</text>
+      <text x="288" y="230" fill="#FFFFFF" font-size="16" font-weight="700">Design</text>
+      <text x="288" y="260" fill="#9FB3C8" font-size="12">Service model</text>
+    </g>
+    <g>
+      <rect x="488" y="140" width="200" height="180" rx="20" fill="#ffffff" fill-opacity=".08" stroke="#ffffff" stroke-opacity=".12"/>
+      <circle cx="528" cy="180" r="18" fill="#F28C28"/>
+      <text x="522" y="186" fill="#FFFFFF" font-size="14" font-weight="700">3</text>
+      <text x="508" y="230" fill="#FFFFFF" font-size="16" font-weight="700">Mobilize</text>
+      <text x="508" y="260" fill="#9FB3C8" font-size="12">Source & place</text>
+    </g>
+    <g>
+      <rect x="708" y="140" width="200" height="180" rx="20" fill="#ffffff" fill-opacity=".08" stroke="#ffffff" stroke-opacity=".12"/>
+      <circle cx="748" cy="180" r="18" fill="#2E6BFF"/>
+      <text x="742" y="186" fill="#FFFFFF" font-size="14" font-weight="700">4</text>
+      <text x="728" y="230" fill="#FFFFFF" font-size="16" font-weight="700">Operate</text>
+      <text x="728" y="260" fill="#9FB3C8" font-size="12">Run operations</text>
+    </g>
+    <g>
+      <rect x="928" y="140" width="200" height="180" rx="20" fill="#ffffff" fill-opacity=".08" stroke="#ffffff" stroke-opacity=".12"/>
+      <circle cx="968" cy="180" r="18" fill="#F28C28"/>
+      <text x="962" y="186" fill="#FFFFFF" font-size="14" font-weight="700">5</text>
+      <text x="948" y="230" fill="#FFFFFF" font-size="16" font-weight="700">Measure</text>
+      <text x="948" y="260" fill="#9FB3C8" font-size="12">Track quality</text>
+    </g>
+    <g>
+      <rect x="1148" y="140" width="200" height="180" rx="20" fill="#ffffff" fill-opacity=".08" stroke="#ffffff" stroke-opacity=".12"/>
+      <circle cx="1188" cy="180" r="18" fill="#2E6BFF"/>
+      <text x="1182" y="186" fill="#FFFFFF" font-size="14" font-weight="700">6</text>
+      <text x="1168" y="230" fill="#FFFFFF" font-size="16" font-weight="700">Improve</text>
+      <text x="1168" y="260" fill="#9FB3C8" font-size="12">Refine delivery</text>
+    </g><path d="M248 230 H268 M468 230 H488 M688 230 H708 M908 230 H928 M1128 230 H1148" stroke="#F28C28" stroke-width="3" stroke-linecap="round"/></g>
+</svg>

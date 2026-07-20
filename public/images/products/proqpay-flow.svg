@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" fill="none">
+  <rect width="1200" height="400" rx="28" fill="#0B1F33"/>
+  <text x="48" y="50" fill="#F28C28" font-family="system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="3">PROQPAY PAYROLL FLOW</text>
+  <text x="48" y="90" fill="#FFFFFF" font-family="system-ui,sans-serif" font-size="26" font-weight="800">Validate → Approve → Instruct → Reconcile</text>
+
+  <g font-family="system-ui,sans-serif">
+    <rect x="48" y="140" width="250" height="180" rx="18" fill="#ffffff" fill-opacity=".08" stroke="#F28C28" stroke-opacity=".35"/>
+    <text x="72" y="185" fill="#F28C28" font-size="12" font-weight="700">01</text>
+    <text x="72" y="225" fill="#FFFFFF" font-size="18" font-weight="800">Prepare & validate</text>
+    <text x="72" y="260" fill="#9FB3C8" font-size="13">Attendance, pay items, exceptions</text>
+  </g>
+  <g font-family="system-ui,sans-serif">
+    <rect x="333" y="140" width="250" height="180" rx="18" fill="#ffffff" fill-opacity=".08" stroke="#F28C28" stroke-opacity=".35"/>
+    <text x="357" y="185" fill="#F28C28" font-size="12" font-weight="700">02</text>
+    <text x="357" y="225" fill="#FFFFFF" font-size="18" font-weight="800">Multi-level approval</text>
+    <text x="357" y="260" fill="#9FB3C8" font-size="13">HR & finance authorization</text>
+  </g>
+  <g font-family="system-ui,sans-serif">
+    <rect x="618" y="140" width="250" height="180" rx="18" fill="#ffffff" fill-opacity=".08" stroke="#F28C28" stroke-opacity=".35"/>
+    <text x="642" y="185" fill="#F28C28" font-size="12" font-weight="700">03</text>
+    <text x="642" y="225" fill="#FFFFFF" font-size="18" font-weight="800">Payment instructions</text>
+    <text x="642" y="260" fill="#9FB3C8" font-size="13">Client-funded orchestration</text>
+  </g>
+  <g font-family="system-ui,sans-serif">
+    <rect x="903" y="140" width="250" height="180" rx="18" fill="#ffffff" fill-opacity=".08" stroke="#F28C28" stroke-opacity=".35"/>
+    <text x="927" y="185" fill="#F28C28" font-size="12" font-weight="700">04</text>
+    <text x="927" y="225" fill="#FFFFFF" font-size="18" font-weight="800">Reconcile & report</text>
+    <text x="927" y="260" fill="#9FB3C8" font-size="13">Audit trail & visibility</text>
+  </g>
+  <path d="M298 230 H333 M583 230 H618 M868 230 H903" stroke="#F28C28" stroke-width="3"/>
+</svg>

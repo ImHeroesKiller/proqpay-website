@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -11,6 +12,7 @@ import { CtaBand } from "@/components/sections/cta-band";
 import { Container } from "@/components/shared/container";
 import { SectionTitle } from "@/components/shared/section-title";
 import { FadeIn } from "@/components/shared/fade-in";
+import { ProcessFlow } from "@/components/shared/process-flow";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -208,28 +210,18 @@ export default function HomePage() {
             title="How MSG works"
             description="A disciplined operating flow from requirement understanding to continuous improvement."
           />
-          <div className="mt-12">
-            <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-              {aboutContent.howWeWork.map((step, index) => (
-                <li
-                  key={step.title}
-                  className="relative rounded-2xl border border-border bg-card p-5"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0B3A6E] text-xs font-bold text-white">
-                      {step.step}
-                    </span>
-                    {index < aboutContent.howWeWork.length - 1 ? (
-                      <span className="hidden h-px flex-1 bg-border xl:block" />
-                    ) : null}
-                  </div>
-                  <h3 className="mt-4 text-base font-semibold">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {step.description}
-                  </p>
-                </li>
-              ))}
-            </ol>
+          <div className="mt-10 overflow-hidden rounded-3xl border border-border shadow-sm">
+            <Image
+              src="/images/home/workforce-hero.svg"
+              alt="MSG workforce process: understand, mobilize, operate, improve"
+              width={1200}
+              height={800}
+              className="h-auto w-full object-cover"
+              unoptimized
+            />
+          </div>
+          <div className="mt-10">
+            <ProcessFlow steps={aboutContent.howWeWork} variant="cycle" />
           </div>
         </Container>
       </section>
