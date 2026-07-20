@@ -3,6 +3,7 @@ import { Inter, Manrope } from "next/font/google";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { ThemeProvider } from "@/components/layout/theme-provider";
+import { Chatbot } from "@/components/chat/chatbot";
 import { JsonLd } from "@/components/shared/json-ld";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
@@ -93,6 +94,7 @@ export default function RootLayout({
           <Navbar />
           <main id="main-content">{children}</main>
           <Footer />
+          <Chatbot />
         </ThemeProvider>
       </body>
     </html>
