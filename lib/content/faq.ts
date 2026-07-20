@@ -29,4 +29,9 @@ export const faqs = [
     answer:
       "Authorized users sign in at proqpay.msg-os.com/login.",
   },
+  {
+    question: "Does ProQPay always fund payroll?",
+    answer:
+      "No. Client-funded payroll is the default: payroll money stays in the client's designated bank account while ProQPay orchestrates validation, approval, payment instructions, execution monitoring, reconciliation, and audit. Working capital is an optional, separately approved path for eligible organizations.",
+  },
 ];

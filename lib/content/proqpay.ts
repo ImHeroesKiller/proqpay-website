@@ -3,7 +3,7 @@ export const proqpayProduct = {
   label: "An MSG Technology Product",
   headline: "Enterprise Payroll Infrastructure for Indonesian Businesses",
   description:
-    "ProQPay transforms MSG's operational workforce experience into a technology platform for payroll processing, approval, disbursement, working capital support, and reporting.",
+    "ProQPay is MSG's enterprise payroll operating system for validation, multi-level approval, payment instructions, client-funded execution orchestration, optional working capital, reconciliation, audit, and reporting.",
   problem: {
     title: "Payroll is more complex than ever",
     description:
@@ -18,33 +18,33 @@ export const proqpayProduct = {
     ],
   },
   solution: {
-    title: "One integrated payroll control model",
+    title: "Two payroll execution models under one control plane",
     description:
-      "ProQPay connects employee data, calculation, multi-level approval, disbursement, reconciliation, and reporting into a governed operating flow.",
+      "ProQPay connects payroll preparation, validation, multi-level approval, source-of-funds decisioning, payment instructions, execution monitoring, reconciliation, and reporting. Client-funded payroll is the default; working capital is an optional branch.",
   },
   features: [
     {
-      title: "Payroll Processing",
+      title: "Client-Funded Payroll",
       description:
-        "End-to-end payroll management with accuracy and controlled cut-off discipline.",
+        "The organization keeps payroll funds in its designated bank account while ProQPay orchestrates validation, approval, payment instructions, execution monitoring, reconciliation, and audit.",
       status: "Available" as const,
     },
     {
       title: "Approval Workflow",
       description:
-        "Configurable multi-level approvals before payroll is locked for payment.",
+        "Configurable multi-level approvals before payment instructions are generated.",
       status: "Available" as const,
     },
     {
-      title: "Payroll Disbursement",
+      title: "Payment Instructions",
       description:
-        "Mass salary payment support through multi-bank disbursement pathways.",
+        "Generate and track payment instructions for client-bank or funded execution paths. Integration may be simulated, file-based, or API-connected depending on deployment.",
       status: "Available" as const,
     },
     {
-      title: "Payroll Working Capital",
+      title: "Optional Working Capital",
       description:
-        "Structured support model to help approved clients keep payroll on time when cash-flow timing is tight.",
+        "Eligible organizations may request temporary payroll-funding support through a separately approved funding workflow. Not required for every payroll period.",
       status: "Available" as const,
     },
     {
@@ -79,12 +79,16 @@ export const proqpayProduct = {
       body: "Route multi-level review so HR and finance authorize payroll before money moves.",
     },
     {
-      title: "Working capital model",
-      body: "When approved and policy-aligned, structured support can help bridge cash-flow timing for on-time payroll.",
+      title: "Client-funded execution",
+      body: "Default path: source of funds remains the client bank account; ProQPay does not own client payroll money.",
     },
     {
-      title: "Payroll disbursement",
-      body: "Build and track payment batches across multi-bank environments.",
+      title: "Optional working capital",
+      body: "When approved and policy-aligned, temporary funding may bridge cash-flow timing—never forced on every cycle.",
+    },
+    {
+      title: "Payment instructions & execution",
+      body: "Build payment instructions and monitor execution status with reconciliation and audit.",
     },
     {
       title: "Reconciliation",
@@ -137,5 +141,10 @@ export const proqpayFaqs = [
     question: "How do I request a demo?",
     answer:
       "Use Contact on www.msg-os.com and select Payroll Demo. Authorized users sign in at proqpay.msg-os.com/login.",
+  },
+  {
+    question: "What is client-funded payroll vs working capital?",
+    answer:
+      "Client-funded payroll keeps source of funds in the client bank account; ProQPay coordinates execution without owning the money. Working capital is optional temporary funding support that requires a separate approval and allocation workflow.",
   },
 ];
