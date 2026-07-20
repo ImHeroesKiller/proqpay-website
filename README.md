@@ -2,9 +2,10 @@
 
 Official website for **PT Mandiri Semesta Gemilang (MSG)**.
 
-- Corporate domain: **https://msg-os.com**
-- Product app: **https://msg-os.com/app**
-- Flagship product: **ProQPay** at `/products/proqpay`
+- Corporate domain: **https://www.msg-os.com**
+- ProQPay app: **https://proqpay.msg-os.com**
+- ProQPay login: **https://proqpay.msg-os.com/login**
+- Flagship product page: `/products/proqpay`
 
 MSG is the company. ProQPay is a product.
 
@@ -37,5 +38,6 @@ pnpm build
 ## Environment
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://msg-os.com
+NEXT_PUBLIC_SITE_URL=https://www.msg-os.com
+NEXT_PUBLIC_PROQPAY_APP_URL=https://proqpay.msg-os.com
 ```

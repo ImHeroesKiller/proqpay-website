@@ -7,10 +7,15 @@ export const siteConfig = {
     "Integrated workforce solutions built for sustainable business growth.",
   description:
     "PT Mandiri Semesta Gemilang (MSG) is an Indonesian enterprise workforce solutions company. We combine people, operations, and technology to help organizations scale with confidence.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://msg-os.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.msg-os.com",
   websiteDisplay: "www.msg-os.com",
-  /** Product application under the corporate domain */
-  appUrl: "https://msg-os.com/app",
+  /** ProQPay payroll application (subdomain) */
+  appUrl:
+    process.env.NEXT_PUBLIC_PROQPAY_APP_URL ?? "https://proqpay.msg-os.com",
+  appLoginUrl:
+    process.env.NEXT_PUBLIC_PROQPAY_APP_URL
+      ? `${process.env.NEXT_PUBLIC_PROQPAY_APP_URL.replace(/\/$/, "")}/login`
+      : "https://proqpay.msg-os.com/login",
   locale: "en_US",
   founded: 2019,
   companyMessage: "Reliable Outsourcing Solution Strategic Partner",
@@ -47,7 +52,8 @@ export const siteConfig = {
       headline: "Enterprise Payroll Infrastructure for Indonesian Businesses",
       description:
         "ProQPay is MSG's payroll technology product for processing, approval, disbursement, working capital support, and reporting.",
-      appUrl: "https://msg-os.com/app",
+      appUrl:
+        process.env.NEXT_PUBLIC_PROQPAY_APP_URL ?? "https://proqpay.msg-os.com",
     },
   },
 } as const;

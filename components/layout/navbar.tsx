@@ -106,7 +106,7 @@ export function Navbar() {
         <div className="hidden items-center gap-2 lg:flex">
           <ThemeToggle />
           <Button asChild variant="outline" size="sm">
-            <a href={siteConfig.appUrl} rel="noopener noreferrer">
+            <a href={siteConfig.appLoginUrl} rel="noopener noreferrer">
               Product Login
             </a>
           </Button>
@@ -153,7 +153,7 @@ export function Navbar() {
                 ))}
                 <div className="mt-4 flex flex-col gap-2">
                   <Button asChild variant="outline">
-                    <a href={siteConfig.appUrl} rel="noopener noreferrer">
+                    <a href={siteConfig.appLoginUrl} rel="noopener noreferrer">
                       Product Login
                     </a>
                   </Button>

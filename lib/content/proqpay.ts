@@ -136,6 +136,6 @@ export const proqpayFaqs = [
   {
     question: "How do I request a demo?",
     answer:
-      "Use Contact on msg-os.com and select Payroll Demo. Authorized users access the application at msg-os.com/app.",
+      "Use Contact on www.msg-os.com and select Payroll Demo. Authorized users sign in at proqpay.msg-os.com/login.",
   },
 ];

@@ -27,6 +27,6 @@ export const faqs = [
   {
     question: "Where do I log in to ProQPay?",
     answer:
-      "Authorized users access the application at msg-os.com/app.",
+      "Authorized users sign in at proqpay.msg-os.com/login.",
   },
 ];

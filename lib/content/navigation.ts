@@ -68,7 +68,7 @@ export const footerNavigation = {
   ],
   products: [
     { title: "ProQPay", href: "/products/proqpay" },
-    { title: "Product Login", href: "https://msg-os.com/app" },
+    { title: "Product Login", href: "https://proqpay.msg-os.com/login" },
   ],
   resources: [
     { title: "News", href: "/resources/blog" },
