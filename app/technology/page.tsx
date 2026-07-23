@@ -156,7 +156,10 @@ export default function TechnologyPage() {
         </Container>
       </section>
 
-      <section className="section-padding bg-gray-bg dark:bg-background">
+      <section
+        id="future"
+        className="section-padding scroll-mt-28 bg-gray-bg dark:bg-background"
+      >
         <Container>
           <h2 className="text-2xl font-bold sm:text-3xl">Future products</h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">

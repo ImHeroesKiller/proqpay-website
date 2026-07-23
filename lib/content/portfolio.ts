@@ -46,6 +46,12 @@ export type PortfolioCompany = {
   heroSubheadline: string;
   cardDescription: string;
   featuredLabel: string;
+  /** Public cover image under /public */
+  coverImage: string;
+  coverImageAlt: string;
+  /** Brand logo under /public */
+  logoImage: string;
+  logoImageAlt: string;
   coreCapabilities: string[];
   technologyProfile: {
     name: string;
@@ -164,6 +170,11 @@ export const portfolioCompanies: PortfolioCompany[] = [
       "Manpower, field execution, and brand activation capabilities for Indonesia’s FMCG industry.",
     cardDescription:
       "MKB provides field workforce and brand activation capabilities for Indonesia’s FMCG sector. Through MSG’s Strategic Advisory and Value Creation Program, the company is being strengthened across operations, technology, governance, growth, and strategic readiness.",
+    coverImage: "/images/portfolio/mkb/mkb-portfolio-cover.webp",
+    coverImageAlt:
+      "PT Mitra Kreasi Bersama field workforce and brand activation operations at FMCG events",
+    logoImage: "/brand/logo-mkb.webp",
+    logoImageAlt: "PT Mitra Kreasi Bersama logo",
     coreCapabilities: [
       "Sales Promotion Workforce",
       "Merchandising Operations",
@@ -293,6 +304,10 @@ export function toPublicPortfolioCard(company: PortfolioCompany) {
     overview: company.overview,
     cardDescription: company.cardDescription,
     heroSubheadline: company.heroSubheadline,
+    coverImage: company.coverImage,
+    coverImageAlt: company.coverImageAlt,
+    logoImage: company.logoImage,
+    logoImageAlt: company.logoImageAlt,
     coreCapabilities: company.coreCapabilities,
     technologyProfile: company.technologyProfile,
     valueCreationAreas: company.valueCreationAreas,

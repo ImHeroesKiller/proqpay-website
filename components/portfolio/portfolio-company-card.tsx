@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -24,10 +25,35 @@ export function PortfolioCompanyCard({
     <Card
       className={
         dark
-          ? "h-full border-white/15 bg-white/5 text-white"
-          : "h-full border-border"
+          ? "h-full overflow-hidden border-white/15 bg-white/5 text-white"
+          : "h-full overflow-hidden border-border"
       }
     >
+      <div className="relative aspect-[21/9] w-full overflow-hidden">
+        <Image
+          src={card.coverImage}
+          alt={card.coverImageAlt}
+          fill
+          sizes="(max-width: 1024px) 100vw, 900px"
+          className="object-cover"
+        />
+        <div
+          className={
+            dark
+              ? "absolute inset-0 bg-gradient-to-t from-[#0B1F33]/80 to-transparent"
+              : "absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"
+          }
+        />
+        <div className="absolute bottom-4 left-4 rounded-xl border border-white/20 bg-white/95 p-2 shadow-sm">
+          <Image
+            src={card.logoImage}
+            alt={card.logoImageAlt}
+            width={80}
+            height={74}
+            className="h-9 w-auto object-contain"
+          />
+        </div>
+      </div>
       <CardHeader className="space-y-3">
         <div className="flex flex-wrap gap-2">
           <Badge
@@ -62,9 +88,7 @@ export function PortfolioCompanyCard({
         >
           <div>
             <dt className="inline font-medium text-inherit">Industry Focus: </dt>
-            <dd className="inline">
-              {card.industryFocus.join(" & ")}
-            </dd>
+            <dd className="inline">{card.industryFocus.join(" & ")}</dd>
           </div>
           <div>
             <dt className="inline font-medium text-inherit">Established: </dt>

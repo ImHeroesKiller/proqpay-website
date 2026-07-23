@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExternalLink, Check } from "lucide-react";
@@ -102,45 +103,66 @@ export default async function PortfolioCompanyPage({
       />
 
       <section className="border-b border-border bg-[#0B1F33] py-10 text-white">
-        <Container>
-          <Badge className="bg-orange/20 text-orange hover:bg-orange/20">
-            {company.badge}
-          </Badge>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/75">
-            {company.summaryEn}
-          </p>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/55">
-            {company.summaryId}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild variant="accent">
-              <a
-                href={company.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5"
-              >
-                Explore MKB Website
-                <ExternalLink className="h-4 w-4" aria-hidden />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-            </Button>
-            {interestEnabled ? (
+        <Container className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge className="bg-orange/20 text-orange hover:bg-orange/20">
+                {company.badge}
+              </Badge>
+              <Image
+                src={company.logoImage}
+                alt={company.logoImageAlt}
+                width={88}
+                height={80}
+                className="h-10 w-auto rounded-md bg-white/95 object-contain p-1"
+              />
+            </div>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/75">
+              {company.summaryEn}
+            </p>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/55">
+              {company.summaryId}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild variant="accent">
+                <a
+                  href={company.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5"
+                >
+                  Explore MKB Website
+                  <ExternalLink className="h-4 w-4" aria-hidden />
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              </Button>
+              {interestEnabled ? (
+                <Button
+                  asChild
+                  className="border border-white/20 bg-transparent text-white hover:bg-white/10"
+                >
+                  <Link href={interestHref}>Discuss Strategic Opportunity</Link>
+                </Button>
+              ) : null}
               <Button
                 asChild
                 className="border border-white/20 bg-transparent text-white hover:bg-white/10"
               >
-                <Link href={interestHref}>Discuss Strategic Opportunity</Link>
+                <Link href="/request-consultation?intent=strategic-advisory">
+                  Contact MSG Advisory
+                </Link>
               </Button>
-            ) : null}
-            <Button
-              asChild
-              className="border border-white/20 bg-transparent text-white hover:bg-white/10"
-            >
-              <Link href="/request-consultation?intent=strategic-advisory">
-                Contact MSG Advisory
-              </Link>
-            </Button>
+            </div>
+          </div>
+          <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/10 shadow-lg">
+            <Image
+              src={company.coverImage}
+              alt={company.coverImageAlt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 480px"
+              className="object-cover"
+              priority={false}
+            />
           </div>
         </Container>
       </section>

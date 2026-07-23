@@ -8,6 +8,8 @@ import {
   Users,
 } from "lucide-react";
 import { HomeHero } from "@/components/sections/home-hero";
+import { HomeProductHighlight } from "@/components/sections/home-product-highlight";
+import { HomePortfolioHighlight } from "@/components/sections/home-portfolio-highlight";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Container } from "@/components/shared/container";
 import { SectionTitle } from "@/components/shared/section-title";
@@ -34,7 +36,6 @@ import {
   getPublishedPortfolioCompanies,
   isManagedPortfolioPublished,
 } from "@/lib/content/portfolio";
-import { PortfolioCompanyCard } from "@/components/portfolio/portfolio-company-card";
 import { getBlogPosts } from "@/lib/mdx";
 
 export const metadata = buildMetadata({
@@ -56,10 +57,17 @@ export default function HomePage() {
   const technology = servicePillars[2];
   const portfolioPublished = isManagedPortfolioPublished();
   const portfolioCompanies = getPublishedPortfolioCompanies();
+  const featuredPortfolio = portfolioCompanies[0];
 
   return (
     <>
       <HomeHero />
+
+      <HomeProductHighlight />
+
+      {portfolioPublished && featuredPortfolio ? (
+        <HomePortfolioHighlight company={featuredPortfolio} />
+      ) : null}
 
       {/* Trusted by Indonesian Businesses */}
       <section className="border-b border-border bg-background">
@@ -155,7 +163,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Strategic Advisory — Featured (largest after hero) */}
+      {/* Strategic Advisory — Featured */}
       <section className="section-padding relative overflow-hidden bg-[#0B1F33] text-white">
         <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-[#0B3A6E]/40 blur-3xl" />
         <div className="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-orange/10 blur-3xl" />
@@ -189,7 +197,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild variant="accent" size="lg">
               <Link href="/services/strategic-advisory">
                 Explore Strategic Advisory
@@ -204,37 +212,18 @@ export default function HomePage() {
                 Request Strategic Assessment
               </Link>
             </Button>
+            {portfolioPublished ? (
+              <Button
+                asChild
+                size="lg"
+                className="border border-white/20 bg-transparent text-white hover:bg-white/10"
+              >
+                <Link href="/portfolio">View Portfolio Companies</Link>
+              </Button>
+            ) : null}
           </div>
         </Container>
       </section>
-
-      {/* Managed Portfolio */}
-      {portfolioPublished && portfolioCompanies.length > 0 ? (
-        <section className="section-padding bg-gray-bg dark:bg-background">
-          <Container>
-            <SectionTitle
-              eyebrow="Managed Portfolio"
-              title="Managed Portfolio"
-              description="Businesses being strengthened through strategic advisory, operational improvement, technology, and long-term value creation."
-            />
-            <div className="mt-12 grid gap-6">
-              {portfolioCompanies.slice(0, 1).map((company) => (
-                <PortfolioCompanyCard key={company.slug} company={company} />
-              ))}
-            </div>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
-                <Link href="/portfolio">View Managed Portfolio</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href={`/portfolio/${portfolioCompanies[0].slug}`}>
-                  Explore MKB
-                </Link>
-              </Button>
-            </div>
-          </Container>
-        </section>
-      ) : null}
 
       {/* Workforce Solutions */}
       <section className="section-padding bg-background">
@@ -278,61 +267,45 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Workforce Technology */}
+      {/* Workforce Technology — category overview (not full product highlight) */}
       <section className="section-padding bg-gray-bg dark:bg-background">
-        <Container className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <Badge className="bg-orange/15 text-orange hover:bg-orange/15">
-              {siteConfig.products.proqpay.label}
-            </Badge>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              Workforce Technology
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              {technology.positioning} ProQPay is the first product—built for payroll
-              process visibility, approval discipline, and operational control.
-            </p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Future products (HR Platform, Workforce Analytics, AI Solutions, and
-              more) are planned with Coming Soon status—no fabricated features.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
-                <Link href="/technology">Explore Technology</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="/products/proqpay">Explore ProQPay</Link>
-              </Button>
-            </div>
-          </div>
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              Flagship product
-            </p>
-            <p className="mt-2 font-heading text-2xl font-bold">
-              Pro<span className="text-orange">Q</span>Pay
-            </p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              {siteConfig.products.proqpay.headline}
-            </p>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {[
-                "Payroll process visibility",
-                "Employee data",
-                "Attendance integration",
-                "Reporting",
-                "Approval workflow",
-                "Secure access",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-2 rounded-xl border border-border bg-background px-3 py-3 text-sm"
-                >
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0B3A6E] dark:text-blue-300" />
-                  {item}
-                </div>
-              ))}
-            </div>
+        <Container>
+          <SectionTitle
+            eyebrow="Workforce Technology"
+            title="A growing technology stack"
+            description={`${technology.positioning} ProQPay is the flagship product; additional platforms are planned without overstating unreleased features.`}
+          />
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {[
+              {
+                title: "ProQPay",
+                body: "Payroll and workforce operations platform — explore the full product page.",
+                href: "/products/proqpay",
+              },
+              {
+                title: "Technology overview",
+                body: "How MSG builds workforce technology with operational discipline.",
+                href: "/technology",
+              },
+              {
+                title: "Future products",
+                body: "HR Platform, analytics, AI solutions, and dashboards — Coming Soon.",
+                href: "/technology#future",
+              },
+            ].map((item) => (
+              <Link key={item.title} href={item.href} className="group block h-full">
+                <Card className="h-full transition hover:border-[#0B3A6E]/40 hover:shadow-sm">
+                  <CardHeader>
+                    <CardTitle className="text-lg group-hover:text-[#0B3A6E] dark:group-hover:text-blue-300">
+                      {item.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-sm text-muted-foreground">
+                    {item.body}
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
           </div>
         </Container>
       </section>
