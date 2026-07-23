@@ -196,3 +196,12 @@ See `UNVERIFIED-INFORMATION.md`. Notably empty/pending:
 - Enable: set `NEXT_PUBLIC_MANAGED_PORTFOLIO=true` or clear pending flags after written approval
 - Unverified MKB metrics (headcount, cities, logos, dashboard figures) stored in `unverifiedFacts` and never rendered
 - Chatbot Sinta: portfolio knowledge only when gate open; careful routing for investor/acquisition intents
+
+
+## MKB Public Publication — 2026-07-23
+
+- Legal gate opened for PT Mitra Kreasi Bersama (`publicationStatus: public`, `legalApprovalStatus: approved`)
+- Routes active: `/portfolio`, `/portfolio/mitra-kreasi-bersama`, `/contact/strategic-interest`
+- Homepage, Strategic Advisory, nav, footer, Sinta knowledge enabled for MKB
+- Approval metadata: `docs/LEGAL-APPROVALS.md` (no original legal documents in repo)
+- Unverified marketing metrics remain non-rendered

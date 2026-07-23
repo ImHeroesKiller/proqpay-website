@@ -1,10 +1,22 @@
 /**
  * Managed Portfolio — companies supported through MSG Strategic Advisory.
  *
- * LEGAL GATE: Set pendingLegalApproval to false (and obtain written approvals)
- * before enabling public managed-portfolio claims / investor CTAs.
- * Override for staging: NEXT_PUBLIC_MANAGED_PORTFOLIO=true
+ * Publication is controlled per company via publicationStatus.
+ * Global env override: NEXT_PUBLIC_MANAGED_PORTFOLIO=true|false
+ * (false forces all closed; true does not force draft companies public)
  */
+
+export type PortfolioPublicationStatus =
+  | "draft"
+  | "pending-approval"
+  | "public"
+  | "archived";
+
+export type PortfolioLegalApprovalStatus =
+  | "not-requested"
+  | "pending"
+  | "approved"
+  | "revoked";
 
 export type PortfolioUnverifiedFact = {
   id: string;
@@ -16,8 +28,10 @@ export type PortfolioCompany = {
   slug: string;
   name: string;
   shortName: string;
-  status: "managed-portfolio";
+  /** Public badge label */
   badge: string;
+  publicationStatus: PortfolioPublicationStatus;
+  legalApprovalStatus: PortfolioLegalApprovalStatus;
   sector: string;
   industryFocus: string[];
   establishedYear: number;
@@ -25,12 +39,13 @@ export type PortfolioCompany = {
   website: string;
   publicTransactionStatus: "strategic-partnership-open" | "not-disclosed";
   requiresNda: true;
-  pendingLegalApproval: boolean;
   engagement: string;
   summaryId: string;
   summaryEn: string;
+  overview: string;
   heroSubheadline: string;
   cardDescription: string;
+  featuredLabel: string;
   coreCapabilities: string[];
   technologyProfile: {
     name: string;
@@ -43,25 +58,28 @@ export type PortfolioCompany = {
   confidentialityNotice: string;
   disclaimer: string;
   verifiedFacts: string[];
-  /** Never rendered on public pages */
+  /** Internal only — never render, never pass to chatbot client bundles as public copy */
   unverifiedFacts: PortfolioUnverifiedFact[];
 };
 
 export const managedPortfolioConfig = {
   /**
-   * Global gate for public managed-portfolio listing & investor CTAs.
-   * Flip to false only after documented legal/commercial approval.
+   * Global default: portfolio feature is approved for production use.
+   * Per-company publicationStatus still controls individual listings.
+   * Env NEXT_PUBLIC_MANAGED_PORTFOLIO=false forces everything closed.
    */
-  pendingLegalApproval: true,
+  featureEnabled: true,
   sectionTitle: "Managed Portfolio",
   sectionTitleId: "Portofolio yang Dikelola",
   sectionSubtitle:
-    "Companies being strengthened, transformed, and prepared for sustainable growth or strategic transactions through MSG Strategic Advisory.",
+    "Businesses being strengthened through strategic advisory, operational improvement, technology, and long-term value creation.",
   sectionSubtitleId:
     "Perusahaan yang sedang diperkuat, ditransformasi, dan dipersiapkan untuk pertumbuhan berkelanjutan maupun transaksi strategis melalui Strategic Advisory MSG.",
   pageHeroTitle: "Building Value Through Strategic Transformation",
   pageHeroDescription:
-    "MSG works alongside selected businesses to strengthen operations, improve performance, develop technology, and prepare for sustainable growth or strategic opportunities.",
+    "MSG works alongside selected businesses to strengthen operations, improve performance, develop technology, and prepare for sustainable growth and strategic opportunities.",
+  advisoryIntegrationCopy:
+    "MSG applies its Strategic Advisory capabilities directly through selected portfolio engagements, combining operational improvement, technology, governance, growth strategy, and transaction readiness.",
   valueCreationApproach: [
     {
       title: "Assess",
@@ -89,19 +107,34 @@ export const managedPortfolioConfig = {
 } as const;
 
 /**
- * Public managed portfolio is enabled only when legal gate is cleared
- * or explicitly overridden via env (for staging / approved launch).
+ * Global feature flag with env override.
+ * - NEXT_PUBLIC_MANAGED_PORTFOLIO=false|0 → force closed
+ * - NEXT_PUBLIC_MANAGED_PORTFOLIO=true|1 → allow public companies (still per-company status)
+ * - unset → use managedPortfolioConfig.featureEnabled
  */
-export function isManagedPortfolioPublished(): boolean {
+export function isManagedPortfolioFeatureEnabled(): boolean {
   const env = process.env.NEXT_PUBLIC_MANAGED_PORTFOLIO;
-  if (env === "true" || env === "1") return true;
   if (env === "false" || env === "0") return false;
-  return !managedPortfolioConfig.pendingLegalApproval;
+  if (env === "true" || env === "1") return true;
+  return managedPortfolioConfig.featureEnabled;
 }
 
-/** Investor / strategic-interest CTAs — only when portfolio is public. */
+/** True when at least one portfolio company is publicly listable. */
+export function isManagedPortfolioPublished(): boolean {
+  return getPublishedPortfolioCompanies().length > 0;
+}
+
+/** Strategic interest form when feature is on and at least one public company exists. */
 export function isStrategicInterestEnabled(): boolean {
-  return isManagedPortfolioPublished();
+  return isManagedPortfolioFeatureEnabled() && isManagedPortfolioPublished();
+}
+
+function isCompanyPubliclyVisible(company: PortfolioCompany): boolean {
+  if (!isManagedPortfolioFeatureEnabled()) return false;
+  return (
+    company.publicationStatus === "public" &&
+    company.legalApprovalStatus === "approved"
+  );
 }
 
 export const portfolioCompanies: PortfolioCompany[] = [
@@ -109,8 +142,9 @@ export const portfolioCompanies: PortfolioCompany[] = [
     slug: "mitra-kreasi-bersama",
     name: "PT Mitra Kreasi Bersama",
     shortName: "MKB",
-    status: "managed-portfolio",
-    badge: "MSG Managed Portfolio",
+    badge: "MSG Portfolio Company",
+    publicationStatus: "public",
+    legalApprovalStatus: "approved",
     sector: "Manpower & Brand Activation",
     industryFocus: ["FMCG", "Retail Execution"],
     establishedYear: 2009,
@@ -118,16 +152,18 @@ export const portfolioCompanies: PortfolioCompany[] = [
     website: "https://mkb-website-pi.vercel.app/",
     publicTransactionStatus: "strategic-partnership-open",
     requiresNda: true,
-    pendingLegalApproval: true,
     engagement: "Business Transformation & Strategic Value Enhancement",
+    featuredLabel: "Featured Portfolio Company",
     summaryId:
-      "PT Mitra Kreasi Bersama merupakan perusahaan manpower dan brand activation yang sedang dikelola dan dikembangkan melalui Strategic Advisory MSG untuk memperkuat operasional, teknologi, pertumbuhan, dan kesiapan kemitraan strategis.",
+      "PT Mitra Kreasi Bersama merupakan perusahaan portofolio yang dikelola dan dikembangkan melalui program Strategic Advisory dan Value Creation MSG.",
     summaryEn:
-      "PT Mitra Kreasi Bersama is a manpower and brand activation company being managed and developed through MSG Strategic Advisory to strengthen its operations, technology, growth, and strategic partnership readiness.",
+      "PT Mitra Kreasi Bersama is a portfolio company managed and developed through MSG’s Strategic Advisory and Value Creation Program.",
+    overview:
+      "PT Mitra Kreasi Bersama is a manpower and brand activation company serving Indonesia’s FMCG and retail execution ecosystem. MKB supports field operations through trained workforce deployment, merchandising, promotion, activation, and field reporting capabilities.",
     heroSubheadline:
       "Manpower, field execution, and brand activation capabilities for Indonesia’s FMCG industry.",
     cardDescription:
-      "MKB menyediakan tenaga lapangan dan layanan brand activation untuk industri FMCG. MSG mendukung transformasi perusahaan melalui penguatan operasional, optimalisasi model bisnis, pengembangan teknologi, perbaikan profitabilitas, dan kesiapan terhadap investor maupun mitra strategis.",
+      "MKB provides field workforce and brand activation capabilities for Indonesia’s FMCG sector. Through MSG’s Strategic Advisory and Value Creation Program, the company is being strengthened across operations, technology, governance, growth, and strategic readiness.",
     coreCapabilities: [
       "Sales Promotion Workforce",
       "Merchandising Operations",
@@ -140,9 +176,9 @@ export const portfolioCompanies: PortfolioCompany[] = [
     technologyProfile: {
       name: "JUPITER Field Reporting System",
       ownershipNote:
-        "JUPITER is presented as MKB field technology (not an MSG product).",
+        "JUPITER is MKB field technology—not an MSG product.",
       description:
-        "JUPITER supports field visibility through attendance monitoring, operational reporting, evidence capture, and stakeholder dashboards.",
+        "JUPITER supports field visibility through attendance monitoring, operational reporting, evidence capture, and management dashboards.",
     },
     valueCreationAreas: [
       "Corporate and operational assessment",
@@ -159,96 +195,93 @@ export const portfolioCompanies: PortfolioCompany[] = [
       "M&A or strategic exit preparation",
     ],
     valueCreationIntro:
-      "MSG is supporting MKB through a structured value-creation program designed to strengthen operational resilience, profitability, technology, governance, and strategic readiness.",
+      "MSG is supporting MKB through a structured value-creation program designed to strengthen operational resilience, profitability, technology, governance, growth, and strategic readiness.",
     strategicOpportunityCopy:
-      "MSG welcomes confidential discussions with qualified investors, operators, and strategic partners interested in supporting the next stage of MKB’s growth and transformation.",
+      "MSG welcomes confidential discussions with qualified investors, industry operators, and strategic partners interested in supporting the next stage of MKB’s growth and transformation.",
     confidentialityNotice:
       "Certain financial, legal, operational, client, and transaction-related information is confidential and will only be shared with qualified parties following internal review and, where required, the execution of a non-disclosure agreement.",
     disclaimer:
       "The information presented on this page is intended as a general corporate and strategic overview. It does not constitute an offer to sell securities, a binding sale mandate, investment advice, or a guarantee that any investment, merger, acquisition, or corporate transaction will be completed.",
     verifiedFacts: [
       "Company name: PT Mitra Kreasi Bersama",
-      "Positioned as manpower and brand activation for FMCG",
-      "Public website reference lists establishment year 2009",
-      "Public website reference describes JUPITER field reporting capabilities",
-      "Core service themes: SPG, merchandising, beauty advisor, sales motorist, brand activation",
+      "Portfolio company managed and developed through MSG Strategic Advisory and Value Creation Program",
+      "Sector: Manpower & Brand Activation",
+      "Industry focus: FMCG and retail execution",
+      "Established year: 2009 (approved public reference)",
+      "Capability themes: SPG, merchandising, beauty advisor, sales motorist, brand activation, field operations",
+      "JUPITER field reporting technology (MKB technology)",
     ],
     unverifiedFacts: [
       {
         id: "years-experience",
         claim: "17+ years of experience",
-        source: "mkb-website-pi.vercel.app marketing claims",
+        source: "third-party marketing claims",
       },
       {
         id: "field-workforce",
         claim: "1.000+ field personnel",
-        source: "mkb-website-pi.vercel.app marketing claims",
+        source: "third-party marketing claims",
       },
       {
         id: "city-coverage",
         claim: "30+ cities coverage",
-        source: "mkb-website-pi.vercel.app marketing claims",
+        source: "third-party marketing claims",
       },
       {
         id: "brand-partners",
         claim: "50+ brand partners",
-        source: "mkb-website-pi.vercel.app marketing claims",
+        source: "third-party marketing claims",
       },
       {
         id: "city-headcount",
         claim: "Per-city personnel counts",
-        source: "mkb-website-pi.vercel.app marketing claims",
+        source: "third-party marketing claims",
       },
       {
         id: "client-logos",
         claim: "Named client logos and brand list",
-        source: "mkb-website-pi.vercel.app marketing claims",
+        source: "third-party marketing claims",
       },
       {
         id: "jupiter-dashboard-metrics",
         claim: "Live JUPITER dashboard operational metrics",
-        source: "mkb-website-pi.vercel.app marketing UI",
+        source: "third-party marketing UI",
       },
       {
-        id: "msg-mandate",
+        id: "equity-ownership",
         claim:
-          "Formal ownership / management mandate of MSG over MKB (requires written confirmation)",
+          "Equity ownership / subsidiary relationship between MSG and MKB (not claimed publicly)",
       },
       {
-        id: "transaction-mandate",
-        claim:
-          "Formal investment, sale, or M&A mandate status (requires written confirmation)",
+        id: "financials",
+        claim: "Revenue, EBITDA, profit, debt, valuation, sale price",
       },
     ],
   },
 ];
 
 export function getPublishedPortfolioCompanies(): PortfolioCompany[] {
-  if (!isManagedPortfolioPublished()) return [];
-  // Per-company pendingLegalApproval is informational when the global gate is open
-  // via env override for staging; production should clear both flags after approval.
-  return portfolioCompanies;
+  return portfolioCompanies.filter(isCompanyPubliclyVisible);
 }
 
 export function getPortfolioCompany(slug: string): PortfolioCompany | undefined {
-  if (!isManagedPortfolioPublished()) return undefined;
-  return portfolioCompanies.find((c) => c.slug === slug);
+  const company = portfolioCompanies.find((c) => c.slug === slug);
+  if (!company || !isCompanyPubliclyVisible(company)) return undefined;
+  return company;
 }
 
 export function getPortfolioSlugs(): string[] {
   return getPublishedPortfolioCompanies().map((c) => c.slug);
 }
 
-/** Safe public facts only — never expose unverifiedFacts to client components that might bundle them wrongly.
- *  Server components may import this module; unverifiedFacts are for internal docs / non-rendered use.
- */
+/** Public card projection — excludes unverifiedFacts intentionally. */
 export function toPublicPortfolioCard(company: PortfolioCompany) {
   return {
     slug: company.slug,
     name: company.name,
     shortName: company.shortName,
-    status: company.status,
     badge: company.badge,
+    featuredLabel: company.featuredLabel,
     sector: company.sector,
     industryFocus: company.industryFocus,
     establishedYear: company.establishedYear,
@@ -257,6 +290,7 @@ export function toPublicPortfolioCard(company: PortfolioCompany) {
     engagement: company.engagement,
     summaryEn: company.summaryEn,
     summaryId: company.summaryId,
+    overview: company.overview,
     cardDescription: company.cardDescription,
     heroSubheadline: company.heroSubheadline,
     coreCapabilities: company.coreCapabilities,
@@ -268,4 +302,23 @@ export function toPublicPortfolioCard(company: PortfolioCompany) {
     disclaimer: company.disclaimer,
     href: `/portfolio/${company.slug}`,
   };
+}
+
+/** Chatbot-safe public facts only (no unverifiedFacts). */
+export function getPortfolioChatFacts(company: PortfolioCompany): string {
+  return [
+    `${company.name} (${company.shortName}) is an MSG portfolio company.`,
+    company.summaryEn,
+    company.summaryId,
+    `Sector: ${company.sector}. Focus: ${company.industryFocus.join(", ")}.`,
+    `Established: ${company.establishedYear}.`,
+    `Technology: ${company.technologyProfile.name} — ${company.technologyProfile.ownershipNote}`,
+    `Capabilities: ${company.coreCapabilities.join("; ")}.`,
+    company.valueCreationIntro,
+    "Do not state MSG owns MKB or that MKB is a subsidiary unless verified.",
+    "Do not provide price, valuation, financials, shareholding, or guarantee a transaction.",
+    `Profile: /portfolio/${company.slug}`,
+    `Website: ${company.website}`,
+    "CTA: /contact/strategic-interest",
+  ].join(" ");
 }

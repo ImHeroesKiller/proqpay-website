@@ -25,16 +25,17 @@ Three capabilities:
 
 ```text
 Managed Portfolio
-- PT Mitra Kreasi Bersama
+- PT Mitra Kreasi Bersama (public)
 - Strategic transformation mandate
 - Confidential investor engagement
 ```
 
-- Data: `lib/content/portfolio.ts`
-- Public listing is **gated** until legal approval (`pendingLegalApproval` or `NEXT_PUBLIC_MANAGED_PORTFOLIO=true`)
+- Data: `lib/content/portfolio.ts` (per-company `publicationStatus` + `legalApprovalStatus`)
 - Detail route: `/portfolio/mitra-kreasi-bersama`
 - Strategic interest form: `/contact/strategic-interest`
-- See [UNVERIFIED-INFORMATION.md](./UNVERIFIED-INFORMATION.md) before publishing named portfolio claims
+- Approval metadata: [docs/LEGAL-APPROVALS.md](./docs/LEGAL-APPROVALS.md)
+- Unverified metrics: [UNVERIFIED-INFORMATION.md](./UNVERIFIED-INFORMATION.md)
+- Kill-switch: `NEXT_PUBLIC_MANAGED_PORTFOLIO=false`
 
 ## Brand hierarchy
 
@@ -95,8 +96,8 @@ pnpm smoke
 ```bash
 NEXT_PUBLIC_SITE_URL=https://www.msg-os.com
 NEXT_PUBLIC_PROQPAY_APP_URL=https://proqpay.msg-os.com
-# Only after written legal approval for managed portfolio public claims:
-# NEXT_PUBLIC_MANAGED_PORTFOLIO=true
+# Optional kill-switch for all managed portfolio public listings:
+# NEXT_PUBLIC_MANAGED_PORTFOLIO=false
 ```
 
 ## Content & assets
@@ -116,4 +117,4 @@ Production is deployed on **Vercel** with custom domain `msg-os.com` / `www.msg-
 - Do not change MX records when updating DNS.
 - Deploy only after `pnpm build` succeeds.
 - Prefer preview deployments before promoting to production.
-- Do **not** enable managed portfolio public claims without legal confirmation.
+- Portfolio company claims must match `docs/LEGAL-APPROVALS.md` scope.

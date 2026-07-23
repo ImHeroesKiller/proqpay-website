@@ -4,8 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { PortfolioCompany } from "@/lib/content/portfolio";
-import { toPublicPortfolioCard } from "@/lib/content/portfolio";
-import { isStrategicInterestEnabled } from "@/lib/content/portfolio";
+import {
+  isStrategicInterestEnabled,
+  toPublicPortfolioCard,
+} from "@/lib/content/portfolio";
 
 export function PortfolioCompanyCard({
   company,
@@ -35,19 +37,16 @@ export function PortfolioCompanyCard({
                 : "bg-orange/15 text-orange hover:bg-orange/15"
             }
           >
-            Managed Portfolio
+            {card.badge}
           </Badge>
-          <Badge variant="secondary">Featured Company</Badge>
-          <Badge variant="secondary">Strategic Transformation</Badge>
+          <Badge variant="secondary">{card.featuredLabel}</Badge>
         </div>
         <CardTitle className={dark ? "text-white" : undefined}>
           {card.name}
         </CardTitle>
         <p
           className={
-            dark
-              ? "text-sm text-white/70"
-              : "text-sm text-muted-foreground"
+            dark ? "text-sm text-white/70" : "text-sm text-muted-foreground"
           }
         >
           <span className="font-medium">Sector:</span> {card.sector}
@@ -63,7 +62,9 @@ export function PortfolioCompanyCard({
         >
           <div>
             <dt className="inline font-medium text-inherit">Industry Focus: </dt>
-            <dd className="inline">{card.industryFocus.join(" and ")}</dd>
+            <dd className="inline">
+              {card.industryFocus.join(" & ")}
+            </dd>
           </div>
           <div>
             <dt className="inline font-medium text-inherit">Established: </dt>
@@ -105,7 +106,9 @@ export function PortfolioCompanyCard({
             asChild
             size="sm"
             variant="outline"
-            className={dark ? "border-white/30 bg-transparent text-white" : undefined}
+            className={
+              dark ? "border-white/30 bg-transparent text-white" : undefined
+            }
           >
             <a
               href={card.website}
@@ -123,7 +126,9 @@ export function PortfolioCompanyCard({
               asChild
               size="sm"
               variant="outline"
-              className={dark ? "border-white/30 bg-transparent text-white" : undefined}
+              className={
+                dark ? "border-white/30 bg-transparent text-white" : undefined
+              }
             >
               <Link href={`/contact/strategic-interest?company=${card.slug}`}>
                 Discuss Strategic Opportunity

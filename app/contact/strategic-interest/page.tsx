@@ -4,8 +4,8 @@ import { Container } from "@/components/shared/container";
 import { StrategicInterestForm } from "@/components/forms/strategic-interest-form";
 import { buildMetadata } from "@/lib/seo";
 import {
+  getPortfolioCompany,
   isStrategicInterestEnabled,
-  portfolioCompanies,
 } from "@/lib/content/portfolio";
 import { siteConfig } from "@/lib/site-config";
 import { Button } from "@/components/ui/button";
@@ -13,9 +13,8 @@ import { Button } from "@/components/ui/button";
 export const metadata = buildMetadata({
   title: "Strategic Interest | MSG Advisory",
   description:
-    "Request a confidential discussion with MSG Strategic Advisory regarding managed portfolio companies, partnerships, or strategic opportunities.",
+    "Request a confidential discussion with MSG Strategic Advisory regarding portfolio companies, partnerships, or strategic opportunities.",
   path: "/contact/strategic-interest",
-  noIndex: !isStrategicInterestEnabled(),
 });
 
 export default async function StrategicInterestPage({
@@ -25,8 +24,9 @@ export default async function StrategicInterestPage({
 }) {
   const params = await searchParams;
   const enabled = isStrategicInterestEnabled();
-  const slug = params.company;
-  const company = portfolioCompanies.find((c) => c.slug === slug);
+  const company = params.company
+    ? getPortfolioCompany(params.company)
+    : undefined;
 
   return (
     <>
@@ -63,6 +63,12 @@ export default async function StrategicInterestPage({
                 </p>
                 <p className="mt-2 font-semibold text-foreground">{company.name}</p>
                 <p className="mt-2">{company.sector}</p>
+                <Link
+                  href={`/portfolio/${company.slug}`}
+                  className="mt-3 inline-block font-medium text-[#0B3A6E] hover:underline dark:text-blue-300"
+                >
+                  View portfolio profile
+                </Link>
               </div>
             ) : null}
             <div className="rounded-2xl border border-border bg-card p-6">
@@ -82,16 +88,14 @@ export default async function StrategicInterestPage({
 
           <div>
             {enabled ? (
-              <StrategicInterestForm portfolioSlug={slug} />
+              <StrategicInterestForm portfolioSlug={params.company} />
             ) : (
               <div className="rounded-2xl border border-dashed border-border bg-muted/30 p-8">
                 <h2 className="text-xl font-semibold">
-                  Strategic interest form not yet public
+                  Strategic interest form unavailable
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  Public investor and strategic-partner pathways for managed
-                  portfolio companies will open after internal legal approval.
-                  You may still contact MSG Strategic Advisory through the general
+                  Please contact MSG Strategic Advisory through the general
                   consultation channel.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">

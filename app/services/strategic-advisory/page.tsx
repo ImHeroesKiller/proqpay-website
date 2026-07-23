@@ -142,26 +142,41 @@ export default function StrategicAdvisoryPage() {
             {managedPortfolioConfig.sectionTitleId}
           </p>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/75">
+            {managedPortfolioConfig.advisoryIntegrationCopy}
+          </p>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/55">
             {managedPortfolioConfig.sectionSubtitle}
           </p>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/55">
-            {managedPortfolioConfig.sectionSubtitleId}
-          </p>
           {portfolioPublished && portfolioCompanies.length > 0 ? (
-            <div className="mt-10 grid gap-6">
-              {portfolioCompanies.map((company) => (
-                <PortfolioCompanyCard
-                  key={company.slug}
-                  company={company}
-                  variant="dark"
-                />
-              ))}
-            </div>
+            <>
+              <div className="mt-10 grid gap-6">
+                {portfolioCompanies.map((company) => (
+                  <PortfolioCompanyCard
+                    key={company.slug}
+                    company={company}
+                    variant="dark"
+                  />
+                ))}
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button asChild variant="accent">
+                  <Link href={`/portfolio/${portfolioCompanies[0].slug}`}>
+                    View MKB Profile
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  className="border border-white/20 bg-transparent text-white hover:bg-white/10"
+                >
+                  <Link href="/contact/strategic-interest">
+                    Discuss Portfolio Opportunities
+                  </Link>
+                </Button>
+              </div>
+            </>
           ) : (
             <div className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-6 text-sm text-white/70">
-              Named managed portfolio companies will appear here after internal
-              legal confirmation. MSG Strategic Advisory remains available for
-              confidential transformation and partnership discussions.
+              Portfolio company profiles will appear here when published.
               <div className="mt-4">
                 <Button
                   asChild

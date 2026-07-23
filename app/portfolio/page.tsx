@@ -7,7 +7,6 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import {
   getPublishedPortfolioCompanies,
-  isManagedPortfolioPublished,
   isStrategicInterestEnabled,
   managedPortfolioConfig,
 } from "@/lib/content/portfolio";
@@ -17,13 +16,11 @@ import { Button } from "@/components/ui/button";
 export const metadata = buildMetadata({
   title: "Managed Portfolio Companies | MSG Strategic Advisory",
   description:
-    "Explore businesses being strengthened and developed through MSG Strategic Advisory, including operational transformation, investor readiness, and strategic value creation.",
+    "Explore businesses being strengthened and developed through MSG Strategic Advisory, operational transformation, investor readiness, and strategic value creation.",
   path: "/portfolio",
-  noIndex: !isManagedPortfolioPublished(),
 });
 
 export default function PortfolioPage() {
-  const published = isManagedPortfolioPublished();
   const companies = getPublishedPortfolioCompanies();
   const interestEnabled = isStrategicInterestEnabled();
 
@@ -55,17 +52,10 @@ export default function PortfolioPage() {
           { label: "Home", href: "/" },
           { label: "Portfolio" },
         ]}
-        cta={
-          published
-            ? {
-                label: "Explore Our Portfolio",
-                href: "#portfolio-companies",
-              }
-            : {
-                label: "Talk to Strategic Advisory",
-                href: "/request-consultation?intent=strategic-advisory",
-              }
-        }
+        cta={{
+          label: "Explore Our Portfolio",
+          href: "#portfolio-companies",
+        }}
       />
 
       <section className="section-padding">
@@ -82,51 +72,53 @@ export default function PortfolioPage() {
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             {managedPortfolioConfig.sectionSubtitleId}
           </p>
-          {!published ? (
-            <div className="mt-8 rounded-2xl border border-dashed border-border bg-muted/30 p-6 text-sm text-muted-foreground">
-              <p className="font-semibold text-foreground">
-                Listing status: pending legal approval
-              </p>
-              <p className="mt-2">
-                Managed portfolio company profiles and public strategic-interest
-                pathways will be published after internal confirmation that MSG
-                has authorization to present named companies, use related brand
-                materials, and open qualified partner discussions.
-              </p>
-              <p className="mt-3">
-                Until then, please contact{" "}
-                <Link
-                  href="/services/strategic-advisory"
-                  className="font-medium text-[#0B3A6E] hover:underline dark:text-blue-300"
-                >
-                  MSG Strategic Advisory
-                </Link>{" "}
-                for general transformation and partnership conversations.
-              </p>
-            </div>
-          ) : null}
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            Portfolio companies are managed and developed through MSG Strategic
+            Advisory and Value Creation Program. This does not imply equity
+            ownership unless separately disclosed.
+          </p>
         </Container>
       </section>
 
-      {published && companies.length > 0 ? (
-        <section
-          id="portfolio-companies"
-          className="section-padding bg-gray-bg dark:bg-background"
-        >
-          <Container>
-            <h2 className="text-2xl font-bold sm:text-3xl">Portfolio companies</h2>
-            <p className="mt-3 max-w-2xl text-muted-foreground">
-              Selected businesses supported through MSG value-creation and
-              strategic advisory capabilities.
-            </p>
-            <div className="mt-10 grid gap-6 lg:grid-cols-1">
+      <section
+        id="portfolio-companies"
+        className="section-padding bg-gray-bg dark:bg-background"
+      >
+        <Container>
+          <h2 className="text-2xl font-bold sm:text-3xl">Portfolio companies</h2>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Selected businesses supported through MSG value-creation and strategic
+            advisory capabilities.
+          </p>
+          {companies.length > 0 ? (
+            <div className="mt-10 grid gap-6">
               {companies.map((company) => (
                 <PortfolioCompanyCard key={company.slug} company={company} />
               ))}
             </div>
-          </Container>
-        </section>
-      ) : null}
+          ) : (
+            <p className="mt-8 text-sm text-muted-foreground">
+              No public portfolio companies are listed at this time.
+            </p>
+          )}
+          {companies.length > 0 ? (
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
+                <Link href={`/portfolio/${companies[0].slug}`}>
+                  View Company Profile
+                </Link>
+              </Button>
+              {interestEnabled ? (
+                <Button asChild variant="outline">
+                  <Link href="/contact/strategic-interest">
+                    Discuss Strategic Partnership
+                  </Link>
+                </Button>
+              ) : null}
+            </div>
+          ) : null}
+        </Container>
+      </section>
 
       <section className="section-padding">
         <Container>
@@ -154,7 +146,7 @@ export default function PortfolioPage() {
 
       <section className="section-padding bg-gray-bg dark:bg-background">
         <Container className="mx-auto max-w-3xl">
-          <h2 className="text-2xl font-bold">Partnership and investor discussions</h2>
+          <h2 className="text-2xl font-bold">Strategic partnership opportunity</h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             MSG may facilitate confidential conversations with qualified investors,
             operators, and strategic partners where appropriate. No financials,
@@ -175,14 +167,25 @@ export default function PortfolioPage() {
               </Button>
             )}
             <Button asChild variant="outline">
-              <Link href="/services/strategic-advisory">Explore Strategic Advisory</Link>
+              <Link href="/services/strategic-advisory">
+                Explore Strategic Advisory
+              </Link>
             </Button>
           </div>
         </Container>
       </section>
 
       <section className="section-padding">
-        <Container className="mx-auto max-w-3xl">
+        <Container className="mx-auto max-w-3xl space-y-4">
+          <div className="rounded-2xl border border-border bg-card p-6 text-sm leading-relaxed text-muted-foreground">
+            <p className="font-semibold text-foreground">Confidentiality notice</p>
+            <p className="mt-2">
+              Certain financial, legal, operational, client, and transaction-related
+              information is confidential and will only be shared with qualified
+              parties following internal review and, where required, the execution
+              of a non-disclosure agreement.
+            </p>
+          </div>
           <div className="rounded-2xl border border-border bg-card p-6 text-sm leading-relaxed text-muted-foreground">
             <p className="font-semibold text-foreground">Disclaimer</p>
             <p className="mt-2">{managedPortfolioConfig.generalDisclaimer}</p>
@@ -192,7 +195,7 @@ export default function PortfolioPage() {
 
       <CtaBand
         title="Discuss strategic partnership"
-        description="Talk with MSG Strategic Advisory about transformation programs, managed portfolio inquiries, or confidential partnership discussions."
+        description="Talk with MSG Strategic Advisory about portfolio engagements, transformation programs, or confidential partnership discussions."
         primaryHref={
           interestEnabled
             ? "/contact/strategic-interest"

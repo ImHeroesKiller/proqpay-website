@@ -14,11 +14,11 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { siteConfig } from "@/lib/site-config";
 
 export function generateStaticParams() {
-  // Always prebuild known slugs so enabling the gate does not require route changes.
-  return portfolioCompanies.map((c) => ({ slug: c.slug }));
+  return portfolioCompanies
+    .filter((c) => c.publicationStatus === "public")
+    .map((c) => ({ slug: c.slug }));
 }
 
 export async function generateMetadata({
@@ -27,14 +27,19 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const company = portfolioCompanies.find((c) => c.slug === slug);
-  if (!company) return {};
-  const published = Boolean(getPortfolioCompany(slug));
+  const company = getPortfolioCompany(slug);
+  if (!company) {
+    return buildMetadata({
+      title: "Portfolio company",
+      description: "MSG managed portfolio company profile.",
+      path: `/portfolio/${slug}`,
+      noIndex: true,
+    });
+  }
   return buildMetadata({
-    title: `${company.name} | MSG Managed Portfolio`,
+    title: `${company.name} | MSG Portfolio Company`,
     description: company.summaryEn,
     path: `/portfolio/${slug}`,
-    noIndex: !published,
   });
 }
 
@@ -45,46 +50,7 @@ export default async function PortfolioCompanyPage({
 }) {
   const { slug } = await params;
   const company = getPortfolioCompany(slug);
-  if (!company) {
-    // Gate closed or unknown slug
-    if (portfolioCompanies.some((c) => c.slug === slug)) {
-      return (
-        <>
-          <PageHero
-            title="Portfolio profile not yet public"
-            description="This managed portfolio profile is prepared but not published pending internal legal and commercial confirmation."
-            breadcrumbs={[
-              { label: "Home", href: "/" },
-              { label: "Portfolio", href: "/portfolio" },
-              { label: "Pending" },
-            ]}
-            cta={{
-              label: "Contact MSG Advisory",
-              href: "/request-consultation?intent=strategic-advisory",
-            }}
-          />
-          <section className="section-padding">
-            <Container className="mx-auto max-w-2xl text-sm text-muted-foreground">
-              <p>
-                When authorization is confirmed, this page will present a general
-                corporate and strategic overview—without financials, valuations, or
-                confidential client data.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
-                  <Link href="/portfolio">Back to Portfolio</Link>
-                </Button>
-                <Button asChild variant="outline">
-                  <Link href="/services/strategic-advisory">Strategic Advisory</Link>
-                </Button>
-              </div>
-            </Container>
-          </section>
-        </>
-      );
-    }
-    notFound();
-  }
+  if (!company) notFound();
 
   const interestEnabled = isStrategicInterestEnabled();
   const interestHref = `/contact/strategic-interest?company=${company.slug}`;
@@ -107,18 +73,14 @@ export default async function PortfolioCompanyPage({
           url: company.website,
           foundingDate: String(company.establishedYear),
           description: company.summaryEn,
-          parentOrganization: {
-            "@type": "Organization",
-            name: siteConfig.legalName,
-            url: siteConfig.url,
-          },
+          knowsAbout: company.coreCapabilities,
         }}
       />
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: `${company.name} | MSG Managed Portfolio`,
+          name: `${company.name} | MSG Portfolio Company`,
           description: company.summaryEn,
         }}
       />
@@ -187,24 +149,12 @@ export default async function PortfolioCompanyPage({
         <Container className="grid gap-10 lg:grid-cols-2">
           <div>
             <h2 className="text-2xl font-bold">Company overview</h2>
-            <ul className="mt-6 space-y-3 text-sm leading-relaxed text-muted-foreground">
-              <li>Established {company.establishedYear}.</li>
-              <li>
-                Focus on manpower and brand activation for the FMCG industry.
-              </li>
-              <li>Provides professional field workforce capabilities.</li>
-              <li>
-                Operates field reporting technology known as{" "}
-                {company.technologyProfile.name}.
-              </li>
-              <li>
-                Supports field operations and operational reporting visibility.
-              </li>
-            </ul>
-            <p className="mt-6 text-xs text-muted-foreground">
-              Public marketing metrics from third-party sites (headcount, city
-              counts, brand lists, dashboard figures) are not republished here
-              until independently verified in writing.
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              {company.overview}
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Managed and developed through MSG Strategic Advisory and Value
+              Creation Program.
             </p>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6">
@@ -225,6 +175,12 @@ export default async function PortfolioCompanyPage({
               </div>
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Established
+                </dt>
+                <dd className="mt-1 font-medium">{company.establishedYear}</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   Engagement
                 </dt>
                 <dd className="mt-1 font-medium">{company.engagement}</dd>
@@ -233,7 +189,7 @@ export default async function PortfolioCompanyPage({
                 <dt className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   Status
                 </dt>
-                <dd className="mt-1 font-medium">Managed Portfolio Company</dd>
+                <dd className="mt-1 font-medium">Portfolio Company</dd>
               </div>
             </dl>
           </div>
@@ -281,7 +237,7 @@ export default async function PortfolioCompanyPage({
                 "Attendance monitoring",
                 "Operational reporting",
                 "Evidence capture",
-                "Stakeholder dashboards",
+                "Management dashboards",
               ].map((item) => (
                 <div key={item} className="flex gap-2">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#0B3A6E] dark:text-blue-300" />
@@ -300,7 +256,7 @@ export default async function PortfolioCompanyPage({
             {company.valueCreationIntro}
           </p>
           <p className="mt-2 text-sm text-muted-foreground">
-            The following areas describe the program focus—not guaranteed results.
+            The following areas describe program focus—not guaranteed results.
           </p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {company.valueCreationAreas.map((item) => (
@@ -323,16 +279,21 @@ export default async function PortfolioCompanyPage({
             {company.strategicOpportunityCopy}
           </p>
           <p className="mt-4 text-sm text-muted-foreground">
-            Discussions may be relevant for strategic investors, financial investors,
-            FMCG ecosystem partners, outsourcing operators, technology partners,
-            potential acquirers, and joint venture partners—subject to qualification
-            and confidentiality requirements.
+            Discussions may be relevant for strategic investors, financial
+            investors, FMCG ecosystem partners, outsourcing operators, technology
+            partners, potential acquirers, and joint venture partners—subject to
+            qualification and confidentiality requirements.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             {interestEnabled ? (
-              <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
-                <Link href={interestHref}>Request Confidential Discussion</Link>
-              </Button>
+              <>
+                <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
+                  <Link href={interestHref}>Request Confidential Discussion</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href={interestHref}>Submit Strategic Interest</Link>
+                </Button>
+              </>
             ) : null}
             <Button asChild variant="outline">
               <Link href="/request-consultation?intent=strategic-advisory">

@@ -50,6 +50,11 @@ export const mainNavigation: NavItem[] = [
           "Companies strengthened through MSG Strategic Advisory.",
       },
       {
+        title: "PT Mitra Kreasi Bersama",
+        href: "/portfolio/mitra-kreasi-bersama",
+        description: "Manpower & brand activation portfolio company.",
+      },
+      {
         title: "Strategic Partnership",
         href: "/contact/strategic-interest",
         description: "Confidential discussions for qualified parties.",

@@ -82,10 +82,10 @@ export function StrategicInterestForm({
   if (status === "success") {
     return (
       <div className="rounded-2xl border border-border bg-muted/40 p-8 text-center">
-        <h3 className="text-xl font-semibold">Inquiry received</h3>
+        <h3 className="text-xl font-semibold">Thank you</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          MSG Strategic Advisory will review your submission. Qualified parties
-          may be contacted for a confidential discussion. For urgent matters:{" "}
+          Our Strategic Advisory team will review your submission and contact
+          you if the opportunity is relevant. For other inquiries:{" "}
           <a
             className="font-medium text-[#0B3A6E] dark:text-blue-300"
             href={`mailto:${siteConfig.contact.email}`}

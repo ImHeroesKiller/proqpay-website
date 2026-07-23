@@ -210,12 +210,12 @@ export default function HomePage() {
 
       {/* Managed Portfolio */}
       {portfolioPublished && portfolioCompanies.length > 0 ? (
-        <section className="section-padding bg-background">
+        <section className="section-padding bg-gray-bg dark:bg-background">
           <Container>
             <SectionTitle
               eyebrow="Managed Portfolio"
-              title="Businesses strengthened through strategic value creation"
-              description="Businesses being strengthened through MSG’s strategic advisory and value-creation capabilities."
+              title="Managed Portfolio"
+              description="Businesses being strengthened through strategic advisory, operational improvement, technology, and long-term value creation."
             />
             <div className="mt-12 grid gap-6">
               {portfolioCompanies.slice(0, 1).map((company) => (
@@ -225,6 +225,11 @@ export default function HomePage() {
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
                 <Link href="/portfolio">View Managed Portfolio</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href={`/portfolio/${portfolioCompanies[0].slug}`}>
+                  Explore MKB
+                </Link>
               </Button>
             </div>
           </Container>

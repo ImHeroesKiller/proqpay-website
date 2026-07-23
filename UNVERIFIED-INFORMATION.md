@@ -22,33 +22,26 @@ The following items are intentionally incomplete or provisional. Do not invent v
 
 | Item | Status | Notes |
 | --- | --- | --- |
-| Public managed portfolio listing | **Pending legal approval** | `lib/content/portfolio.ts` → `managedPortfolioConfig.pendingLegalApproval` |
-| Enable public listing / investor CTAs | Env override | `NEXT_PUBLIC_MANAGED_PORTFOLIO=true` after written approval |
-| MSG ownership / management mandate over MKB | **Unverified** | Required before public “managed portfolio” claims |
-| Right to use MKB name, logo, website materials | **Unverified** | Written brand permission needed |
-| Formal investment / sale / M&A mandate | **Unverified** | Do not imply active sale without mandate |
-| Authorized strategic inquiry inbox | **Unverified** | Currently routes via contact log + `info@msg-os.com` |
-| 17+ years experience claim | Unverified marketing | In `unverifiedFacts` — not rendered |
-| 1.000+ field workforce | Unverified marketing | Not rendered |
-| 30+ cities / 50+ brand partners | Unverified marketing | Not rendered |
-| Per-city headcount | Unverified marketing | Not rendered |
-| Named FMCG client logos | Unverified / no logo rights | Not rendered |
-| JUPITER live dashboard metrics | Unverified UI claims | Not rendered |
-| Legal ownership of JUPITER IP | Assumed MKB tech; confirm | Described carefully as MKB technology |
+| Public portfolio listing | **Approved / Public** | See `docs/LEGAL-APPROVALS.md` |
+| Portfolio framing | **Approved** | Managed & developed via Strategic Advisory & Value Creation — not equity ownership claim |
+| Strategic interest form | **Active** | `/contact/strategic-interest` |
+| Established year 2009 | **Approved for public reference** | Within approval scope |
+| Capability themes | **Approved** | SPG, merchandising, BA, motorist, activation, field ops |
+| JUPITER as MKB technology | **Approved** | Not an MSG product |
+| 17+ years experience | **Unverified** | `unverifiedFacts` — not rendered |
+| 1.000+ field workforce | **Unverified** | Not rendered |
+| 30+ cities / 50+ brand partners | **Unverified** | Not rendered |
+| Per-city headcount | **Unverified** | Not rendered |
+| Named client logos | **Unverified** | Not rendered |
+| JUPITER live dashboard metrics | **Unverified** | Not rendered |
+| Equity ownership / subsidiary | **Not claimed** | Do not publish without separate approval |
+| Financials / valuation / sale price | **Not published** | Never render |
 
-### Safe public framing (when gate is open)
+### Safe public framing
 
-- MKB is a manpower & brand activation company (FMCG field execution).
-- Established year 2009 (from public website reference; still confirm for formal materials).
-- Supported through MSG Strategic Advisory for operational strengthening, technology, growth, and strategic partnership readiness.
-- No financials, valuations, shareholding, or “for sale” language.
-
-### How to publish after approval
-
-1. Obtain written confirmation for: mandate, brand use, partner inquiry authority.
-2. Set `managedPortfolioConfig.pendingLegalApproval = false` **or** deploy with `NEXT_PUBLIC_MANAGED_PORTFOLIO=true`.
-3. Optionally set `portfolioCompanies[0].pendingLegalApproval = false`.
-4. Re-run typecheck, build, smoke, then deploy.
+- MKB is a **portfolio company** managed and developed through MSG Strategic Advisory and Value Creation Program.
+- Sector: manpower & brand activation for FMCG / retail execution.
+- No “for sale”, distressed, bankruptcy, or guaranteed transaction language.
 
 ## Safe claims currently used (MSG)
 

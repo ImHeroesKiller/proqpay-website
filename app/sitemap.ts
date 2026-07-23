@@ -2,13 +2,15 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { serviceSlugs } from "@/lib/content/services";
 import { industrySlugs } from "@/lib/content/industries";
-import { getPortfolioSlugs, isManagedPortfolioPublished } from "@/lib/content/portfolio";
+import {
+  getPortfolioSlugs,
+  isStrategicInterestEnabled,
+} from "@/lib/content/portfolio";
 import { getBlogPosts, getGuides } from "@/lib/mdx";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
   const now = new Date();
-  const portfolioPublic = isManagedPortfolioPublished();
 
   const staticRoutes = [
     "",
@@ -29,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/careers",
     "/contact",
     "/request-consultation",
-    ...(portfolioPublic ? ["/contact/strategic-interest"] : []),
+    ...(isStrategicInterestEnabled() ? ["/contact/strategic-interest"] : []),
     "/privacy",
     "/terms",
   ].map((path) => ({

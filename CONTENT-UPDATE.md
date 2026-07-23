@@ -34,11 +34,13 @@ Managed Portfolio
 3. Never put financials, valuations, or client-confidential data in public fields.
 4. Ensure `isManagedPortfolioPublished()` is true only after legal approval.
 
-### Publish / unpublish portfolio
+### Publish / unpublish a portfolio company
 
-- Gate: `managedPortfolioConfig.pendingLegalApproval`
-- Staging override: `NEXT_PUBLIC_MANAGED_PORTFOLIO=true`
-- Investor form: `/contact/strategic-interest` (blocked with 403 when gate closed)
+- Per company: `publicationStatus` (`draft` | `pending-approval` | `public` | `archived`)
+- Per company: `legalApprovalStatus` (`not-requested` | `pending` | `approved` | `revoked`)
+- Global kill-switch: `NEXT_PUBLIC_MANAGED_PORTFOLIO=false`
+- Legal metadata: `docs/LEGAL-APPROVALS.md` (no original documents)
+- Investor form: `/contact/strategic-interest`
 
 ## Common updates
 

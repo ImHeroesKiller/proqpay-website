@@ -5,6 +5,7 @@ import { faqs } from "@/lib/content/faq";
 import { aboutContent } from "@/lib/content/about";
 import { proqpayProduct } from "@/lib/content/proqpay";
 import {
+  getPortfolioChatFacts,
   getPublishedPortfolioCompanies,
   isManagedPortfolioPublished,
   managedPortfolioConfig,
@@ -273,8 +274,9 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         "Strategic assessment: /request-consultation?intent=strategic-advisory",
         "Contact form: /contact",
         "ProQPay demo: /contact?intent=payroll-demo atau /products/proqpay",
-        "Strategic interest (jika publik): /contact/strategic-interest",
+        "Strategic interest: /contact/strategic-interest",
         "Portfolio: /portfolio",
+        "MKB: /portfolio/mitra-kreasi-bersama",
         "Jangan sebut harga pasti jika belum ada data resmi; arahkan ke konsultasi.",
       ].join(" "),
     },
@@ -284,26 +286,29 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
       tags: [
         "portfolio",
         "managed portfolio",
+        "portfolio company",
         "investor",
         "akuisisi",
         "acquisition",
         "strategic partnership",
         "mitra strategis",
         "investment",
+        "dijual",
       ],
       content: isManagedPortfolioPublished()
         ? [
             managedPortfolioConfig.sectionTitle,
             managedPortfolioConfig.sectionSubtitle,
-            "MSG mendukung selected businesses melalui Strategic Advisory untuk penguatan operasional, teknologi, pertumbuhan, dan kesiapan kemitraan strategis.",
+            "Portfolio companies dikelola dan dikembangkan melalui Strategic Advisory dan Value Creation Program MSG.",
+            "Bukan klaim kepemilikan saham / anak perusahaan kecuali dinyatakan terpisah.",
             "Informasi transaksi bersifat confidential; NDA dapat diperlukan.",
             "Tidak ada valuasi, data keuangan, atau penawaran sekuritas di website.",
             "URL: /portfolio · CTA: /contact/strategic-interest",
+            "Jika ditanya apakah MKB dijual: jawab bahwa MKB dikelola dan dikembangkan melalui program Strategic Advisory dan Value Creation MSG; MSG terbuka untuk diskusi confidential dengan investor/mitra yang memenuhi kualifikasi; detail transaksi hanya setelah review internal dan bila perlu NDA.",
           ].join(" ")
         : [
-            "Managed portfolio listings dan jalur investor publik menunggu konfirmasi legal internal.",
-            "Untuk diskusi transformasi atau kemitraan strategis, arahkan ke Strategic Advisory: /services/strategic-advisory atau /request-consultation?intent=strategic-advisory.",
-            "Jangan mengklaim nama perusahaan portfolio jika listing belum publik.",
+            "Tidak ada portfolio company publik saat ini.",
+            "Arahkan ke Strategic Advisory: /services/strategic-advisory",
           ].join(" "),
     },
   ];
@@ -327,23 +332,9 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
           "investor",
           "akuisisi",
           "partnership",
+          "dijual",
         ],
-        content: [
-          `${company.name} (${company.shortName}) adalah Managed Portfolio Company MSG.`,
-          company.summaryEn,
-          company.summaryId,
-          `Sector: ${company.sector}. Focus: ${company.industryFocus.join(", ")}.`,
-          `Established: ${company.establishedYear}. Technology: ${company.technology.join(", ")}.`,
-          company.engagement,
-          `Capabilities: ${company.coreCapabilities.join("; ")}.`,
-          company.technologyProfile.ownershipNote,
-          company.valueCreationIntro,
-          "Jangan sebut harga, valuasi, data keuangan, atau bahwa perusahaan pasti dijual.",
-          "MSG terbuka untuk diskusi confidential dengan investor/mitra yang memenuhi kualifikasi.",
-          `URL: /portfolio/${company.slug}`,
-          `Website MKB: ${company.website}`,
-          "CTA: Request Confidential Discussion /contact/strategic-interest",
-        ].join(" "),
+        content: getPortfolioChatFacts(company),
       });
     }
   }
