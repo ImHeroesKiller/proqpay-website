@@ -5,9 +5,15 @@ import { CtaBand } from "@/components/sections/cta-band";
 import { FaqSection } from "@/components/sections/faq-section";
 import { JsonLd } from "@/components/shared/json-ld";
 import { ProcessFlow } from "@/components/shared/process-flow";
+import { PortfolioCompanyCard } from "@/components/portfolio/portfolio-company-card";
 import { breadcrumbJsonLd, buildMetadata, faqJsonLd } from "@/lib/seo";
 import { strategicAdvisoryContent } from "@/lib/content/services";
 import { industriesWeSupport } from "@/lib/content/about";
+import {
+  getPublishedPortfolioCompanies,
+  isManagedPortfolioPublished,
+  managedPortfolioConfig,
+} from "@/lib/content/portfolio";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,6 +28,8 @@ export const metadata = buildMetadata({
 
 export default function StrategicAdvisoryPage() {
   const content = strategicAdvisoryContent;
+  const portfolioPublished = isManagedPortfolioPublished();
+  const portfolioCompanies = getPublishedPortfolioCompanies();
 
   return (
     <>
@@ -122,6 +130,48 @@ export default function StrategicAdvisoryPage() {
               </Card>
             ))}
           </div>
+        </Container>
+      </section>
+
+      <section className="section-padding bg-[#0B1F33] text-white">
+        <Container>
+          <h2 className="text-2xl font-bold sm:text-3xl">
+            {managedPortfolioConfig.sectionTitle}
+          </h2>
+          <p className="mt-2 text-sm font-medium text-white/60">
+            {managedPortfolioConfig.sectionTitleId}
+          </p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/75">
+            {managedPortfolioConfig.sectionSubtitle}
+          </p>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/55">
+            {managedPortfolioConfig.sectionSubtitleId}
+          </p>
+          {portfolioPublished && portfolioCompanies.length > 0 ? (
+            <div className="mt-10 grid gap-6">
+              {portfolioCompanies.map((company) => (
+                <PortfolioCompanyCard
+                  key={company.slug}
+                  company={company}
+                  variant="dark"
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-6 text-sm text-white/70">
+              Named managed portfolio companies will appear here after internal
+              legal confirmation. MSG Strategic Advisory remains available for
+              confidential transformation and partnership discussions.
+              <div className="mt-4">
+                <Button
+                  asChild
+                  className="border border-white/20 bg-transparent text-white hover:bg-white/10"
+                >
+                  <Link href="/portfolio">View Managed Portfolio</Link>
+                </Button>
+              </div>
+            </div>
+          )}
         </Container>
       </section>
 

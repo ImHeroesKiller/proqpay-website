@@ -11,16 +11,40 @@ MSG is the company. ProQPay is a product.
 
 ## Positioning
 
-**Enterprise workforce solutions** through **People · Operations · Technology**.
+**Enterprise Workforce Solutions & Business Transformation Partner**
 
-> More than manpower. Workforce built for performance.
+Three capabilities:
+
+1. **Strategic Advisory** (featured)
+2. **Workforce Solutions**
+3. **Workforce Technology** (ProQPay + future products)
+
+> Building better businesses through people, operations & technology.
+
+## Managed Portfolio
+
+```text
+Managed Portfolio
+- PT Mitra Kreasi Bersama
+- Strategic transformation mandate
+- Confidential investor engagement
+```
+
+- Data: `lib/content/portfolio.ts`
+- Public listing is **gated** until legal approval (`pendingLegalApproval` or `NEXT_PUBLIC_MANAGED_PORTFOLIO=true`)
+- Detail route: `/portfolio/mitra-kreasi-bersama`
+- Strategic interest form: `/contact/strategic-interest`
+- See [UNVERIFIED-INFORMATION.md](./UNVERIFIED-INFORMATION.md) before publishing named portfolio claims
 
 ## Brand hierarchy
 
 ```
 MSG (Company)
-└── Products
-    └── ProQPay (Payroll technology product)
+├── Strategic Advisory
+│   └── Managed Portfolio (e.g. PT Mitra Kreasi Bersama)
+├── Workforce Solutions
+└── Workforce Technology
+    └── ProQPay
 ```
 
 ## Site structure
@@ -29,10 +53,15 @@ MSG (Company)
 /
 ├── about
 ├── services
+│   ├── strategic-advisory
+│   ├── workforce-solutions
 │   ├── workforce-outsourcing
 │   ├── engineering-talent
 │   ├── business-support
 │   └── managed-workforce
+├── portfolio
+│   └── mitra-kreasi-bersama
+├── technology
 ├── products
 │   └── proqpay
 ├── industries
@@ -40,6 +69,7 @@ MSG (Company)
 ├── news
 ├── faq
 ├── contact
+│   └── strategic-interest
 ├── request-consultation
 ├── privacy
 └── terms
@@ -57,6 +87,7 @@ pnpm dev
 pnpm lint
 pnpm typecheck
 pnpm build
+pnpm smoke
 ```
 
 ## Environment
@@ -64,6 +95,8 @@ pnpm build
 ```bash
 NEXT_PUBLIC_SITE_URL=https://www.msg-os.com
 NEXT_PUBLIC_PROQPAY_APP_URL=https://proqpay.msg-os.com
+# Only after written legal approval for managed portfolio public claims:
+# NEXT_PUBLIC_MANAGED_PORTFOLIO=true
 ```
 
 ## Content & assets
@@ -83,3 +116,4 @@ Production is deployed on **Vercel** with custom domain `msg-os.com` / `www.msg-
 - Do not change MX records when updating DNS.
 - Deploy only after `pnpm build` succeeds.
 - Prefer preview deployments before promoting to production.
+- Do **not** enable managed portfolio public claims without legal confirmation.

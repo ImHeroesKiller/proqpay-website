@@ -2,11 +2,13 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { serviceSlugs } from "@/lib/content/services";
 import { industrySlugs } from "@/lib/content/industries";
+import { getPortfolioSlugs, isManagedPortfolioPublished } from "@/lib/content/portfolio";
 import { getBlogPosts, getGuides } from "@/lib/mdx";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
   const now = new Date();
+  const portfolioPublic = isManagedPortfolioPublished();
 
   const staticRoutes = [
     "",
@@ -27,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/careers",
     "/contact",
     "/request-consultation",
+    ...(portfolioPublic ? ["/contact/strategic-interest"] : []),
     "/privacy",
     "/terms",
   ].map((path) => ({
@@ -38,7 +41,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ? 1
         : path === "/services/strategic-advisory" ||
             path === "/technology" ||
-            path === "/products/proqpay"
+            path === "/products/proqpay" ||
+            path === "/portfolio"
           ? 0.9
           : 0.7,
   }));
@@ -57,6 +61,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
+  const portfolio = getPortfolioSlugs().map((slug) => ({
+    url: `${base}/portfolio/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
+  }));
+
   const posts = getBlogPosts().map((post) => ({
     url: `${base}/resources/blog/${post.slug}`,
     lastModified: new Date(post.date),
@@ -71,5 +82,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...services, ...industries, ...posts, ...guides];
+  return [
+    ...staticRoutes,
+    ...services,
+    ...industries,
+    ...portfolio,
+    ...posts,
+    ...guides,
+  ];
 }

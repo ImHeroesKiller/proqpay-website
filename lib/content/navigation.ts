@@ -40,6 +40,23 @@ export const mainNavigation: NavItem[] = [
     ],
   },
   {
+    title: "Portfolio",
+    href: "/portfolio",
+    children: [
+      {
+        title: "Managed Portfolio",
+        href: "/portfolio",
+        description:
+          "Companies strengthened through MSG Strategic Advisory.",
+      },
+      {
+        title: "Strategic Partnership",
+        href: "/contact/strategic-interest",
+        description: "Confidential discussions for qualified parties.",
+      },
+    ],
+  },
+  {
     title: "Industries",
     href: "/industries",
     children: [
@@ -99,6 +116,14 @@ export const footerNavigation = {
     { title: "Workforce Solutions", href: "/services/workforce-solutions" },
     { title: "Workforce Technology", href: "/technology" },
     { title: "Workforce Outsourcing", href: "/services/workforce-outsourcing" },
+  ],
+  portfolio: [
+    { title: "Managed Portfolio", href: "/portfolio" },
+    {
+      title: "PT Mitra Kreasi Bersama",
+      href: "/portfolio/mitra-kreasi-bersama",
+    },
+    { title: "Strategic Partnership", href: "/contact/strategic-interest" },
   ],
   products: [
     { title: "ProQPay", href: "/products/proqpay" },

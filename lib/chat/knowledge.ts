@@ -4,6 +4,11 @@ import { industries } from "@/lib/content/industries";
 import { faqs } from "@/lib/content/faq";
 import { aboutContent } from "@/lib/content/about";
 import { proqpayProduct } from "@/lib/content/proqpay";
+import {
+  getPublishedPortfolioCompanies,
+  isManagedPortfolioPublished,
+  managedPortfolioConfig,
+} from "@/lib/content/portfolio";
 
 export type KnowledgeChunk = {
   id: string;
@@ -268,10 +273,80 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         "Strategic assessment: /request-consultation?intent=strategic-advisory",
         "Contact form: /contact",
         "ProQPay demo: /contact?intent=payroll-demo atau /products/proqpay",
+        "Strategic interest (jika publik): /contact/strategic-interest",
+        "Portfolio: /portfolio",
         "Jangan sebut harga pasti jika belum ada data resmi; arahkan ke konsultasi.",
       ].join(" "),
     },
+    {
+      id: "managed-portfolio-overview",
+      title: "Managed Portfolio MSG",
+      tags: [
+        "portfolio",
+        "managed portfolio",
+        "investor",
+        "akuisisi",
+        "acquisition",
+        "strategic partnership",
+        "mitra strategis",
+        "investment",
+      ],
+      content: isManagedPortfolioPublished()
+        ? [
+            managedPortfolioConfig.sectionTitle,
+            managedPortfolioConfig.sectionSubtitle,
+            "MSG mendukung selected businesses melalui Strategic Advisory untuk penguatan operasional, teknologi, pertumbuhan, dan kesiapan kemitraan strategis.",
+            "Informasi transaksi bersifat confidential; NDA dapat diperlukan.",
+            "Tidak ada valuasi, data keuangan, atau penawaran sekuritas di website.",
+            "URL: /portfolio · CTA: /contact/strategic-interest",
+          ].join(" ")
+        : [
+            "Managed portfolio listings dan jalur investor publik menunggu konfirmasi legal internal.",
+            "Untuk diskusi transformasi atau kemitraan strategis, arahkan ke Strategic Advisory: /services/strategic-advisory atau /request-consultation?intent=strategic-advisory.",
+            "Jangan mengklaim nama perusahaan portfolio jika listing belum publik.",
+          ].join(" "),
+    },
   ];
+
+  if (isManagedPortfolioPublished()) {
+    for (const company of getPublishedPortfolioCompanies()) {
+      chunks.push({
+        id: `portfolio-${company.slug}`,
+        title: company.name,
+        tags: [
+          company.slug,
+          company.shortName.toLowerCase(),
+          company.name.toLowerCase(),
+          "mkb",
+          "mitra kreasi",
+          "manpower",
+          "brand activation",
+          "fmcg",
+          "jupiter",
+          "portfolio",
+          "investor",
+          "akuisisi",
+          "partnership",
+        ],
+        content: [
+          `${company.name} (${company.shortName}) adalah Managed Portfolio Company MSG.`,
+          company.summaryEn,
+          company.summaryId,
+          `Sector: ${company.sector}. Focus: ${company.industryFocus.join(", ")}.`,
+          `Established: ${company.establishedYear}. Technology: ${company.technology.join(", ")}.`,
+          company.engagement,
+          `Capabilities: ${company.coreCapabilities.join("; ")}.`,
+          company.technologyProfile.ownershipNote,
+          company.valueCreationIntro,
+          "Jangan sebut harga, valuasi, data keuangan, atau bahwa perusahaan pasti dijual.",
+          "MSG terbuka untuk diskusi confidential dengan investor/mitra yang memenuhi kualifikasi.",
+          `URL: /portfolio/${company.slug}`,
+          `Website MKB: ${company.website}`,
+          "CTA: Request Confidential Discussion /contact/strategic-interest",
+        ].join(" "),
+      });
+    }
+  }
 
   for (const pillar of servicePillars) {
     chunks.push({

@@ -186,3 +186,13 @@ See `UNVERIFIED-INFORMATION.md`. Notably empty/pending:
 ## 20. Production URL
 
 **https://www.msg-os.com**
+
+
+## Managed Portfolio (MKB) — 2026-07-23
+
+- Data model: `lib/content/portfolio.ts`
+- Routes: `/portfolio`, `/portfolio/mitra-kreasi-bersama`, `/contact/strategic-interest`
+- Legal gate: `pendingLegalApproval=true` by default (no public MKB claims / investor CTAs until approved)
+- Enable: set `NEXT_PUBLIC_MANAGED_PORTFOLIO=true` or clear pending flags after written approval
+- Unverified MKB metrics (headcount, cities, logos, dashboard figures) stored in `unverifiedFacts` and never rendered
+- Chatbot Sinta: portfolio knowledge only when gate open; careful routing for investor/acquisition intents

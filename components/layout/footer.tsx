@@ -56,9 +56,10 @@ export function Footer() {
               Improve · Operate · Transform · Grow · Scale
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
             <FooterColumn title="Company" links={footerNavigation.company} />
             <FooterColumn title="Services" links={footerNavigation.services} />
+            <FooterColumn title="Portfolio" links={footerNavigation.portfolio} />
             <FooterColumn title="Products" links={footerNavigation.products} />
             <FooterColumn title="Resources" links={footerNavigation.resources} />
             <FooterColumn title="Legal" links={footerNavigation.legal} />

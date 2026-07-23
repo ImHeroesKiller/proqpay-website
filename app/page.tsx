@@ -30,6 +30,11 @@ import {
   strategicAdvisoryContent,
   workforceSubServices,
 } from "@/lib/content/services";
+import {
+  getPublishedPortfolioCompanies,
+  isManagedPortfolioPublished,
+} from "@/lib/content/portfolio";
+import { PortfolioCompanyCard } from "@/components/portfolio/portfolio-company-card";
 import { getBlogPosts } from "@/lib/mdx";
 
 export const metadata = buildMetadata({
@@ -49,6 +54,8 @@ export default function HomePage() {
   const advisory = servicePillars[0];
   const workforce = servicePillars[1];
   const technology = servicePillars[2];
+  const portfolioPublished = isManagedPortfolioPublished();
+  const portfolioCompanies = getPublishedPortfolioCompanies();
 
   return (
     <>
@@ -200,6 +207,29 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      {/* Managed Portfolio */}
+      {portfolioPublished && portfolioCompanies.length > 0 ? (
+        <section className="section-padding bg-background">
+          <Container>
+            <SectionTitle
+              eyebrow="Managed Portfolio"
+              title="Businesses strengthened through strategic value creation"
+              description="Businesses being strengthened through MSG’s strategic advisory and value-creation capabilities."
+            />
+            <div className="mt-12 grid gap-6">
+              {portfolioCompanies.slice(0, 1).map((company) => (
+                <PortfolioCompanyCard key={company.slug} company={company} />
+              ))}
+            </div>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
+                <Link href="/portfolio">View Managed Portfolio</Link>
+              </Button>
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       {/* Workforce Solutions */}
       <section className="section-padding bg-background">
