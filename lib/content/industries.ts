@@ -17,9 +17,9 @@ export const industries: Industry[] = [
     slug: "technology-telecommunications",
     title: "Technology and Telecommunications",
     summary:
-      "Technical talent, operations support, and scalable workforce models for tech-driven organizations.",
+      "Workforce solutions and business transformation support for tech-driven organizations.",
     description:
-      "Technology and telecommunications organizations need specialized talent, flexible capacity, and disciplined operations support. MSG helps with technical workforce deployment, business support, and technology-enabled payroll visibility.",
+      "Technology and telecommunications organizations need specialized talent, flexible capacity, disciplined operations, and often operating-model improvement. MSG supports technical workforce deployment, business support, technology-enabled payroll visibility, and advisory where transformation is required.",
     painPoints: [
       "Specialized technical roles are competitive to fill",
       "Project and support capacity needs fluctuate",
@@ -28,6 +28,7 @@ export const industries: Industry[] = [
     ],
     howWeHelp: [
       "Engineering and IT talent deployment",
+      "Strategic advisory for operating-model improvement where needed",
       "Business support for operations and customer-facing roles",
       "Managed workforce coordination where multi-site coverage matters",
       "ProQPay for payroll process visibility where needed",
@@ -43,9 +44,9 @@ export const industries: Industry[] = [
     slug: "construction-engineering",
     title: "Construction and Engineering",
     summary:
-      "Project-based teams, engineering talent, and site-aware operations support.",
+      "Engineering talent, project workforce, and operational improvement for construction and engineering firms.",
     description:
-      "Construction and engineering projects depend on specialized skills and mobile teams. MSG supports engineering talent, project staffing, and operational coordination.",
+      "Construction and engineering projects depend on specialized skills, mobile teams, and reliable site operations. MSG supports engineering talent, project staffing, operational coordination, and advisory for performance and scale readiness.",
     painPoints: [
       "Specialized talent is hard to secure on timeline",
       "Project teams move across sites frequently",

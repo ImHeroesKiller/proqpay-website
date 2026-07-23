@@ -2,22 +2,27 @@ export const faqs = [
   {
     question: "What is MSG?",
     answer:
-      "PT Mandiri Semesta Gemilang (MSG) is an Indonesian enterprise workforce solutions company. We help organizations build, manage, and develop workforce operations through people, operational excellence, and technology—not manpower placement alone.",
+      "PT Mandiri Semesta Gemilang (MSG) is an Indonesian Enterprise Workforce Solutions & Business Transformation Partner. We help organizations improve, operate, transform, grow, and scale through Strategic Advisory, Workforce Solutions, and Workforce Technology.",
   },
   {
     question: "What services does MSG provide?",
     answer:
-      "Core services include Workforce Outsourcing, Engineering Talent, Business Support Services, and Managed Workforce Operations, supported by technology products such as ProQPay.",
+      "MSG delivers three integrated pillars: Strategic Advisory (featured), Workforce Solutions (outsourcing, engineering talent, business support, managed workforce), and Workforce Technology (including ProQPay).",
+  },
+  {
+    question: "What is Strategic Advisory?",
+    answer:
+      "Strategic Advisory is MSG’s featured service covering business recovery, outsourcing business advisory, investment readiness, M&A advisory, and business transformation. MSG provides advisory tailored to each company and does not guarantee funding, investment, or transaction outcomes.",
   },
   {
     question: "Is ProQPay the same as MSG?",
     answer:
-      "No. MSG is the company. ProQPay is MSG’s payroll technology product under the technology pillar.",
+      "No. MSG is the company. ProQPay is MSG’s flagship Workforce Technology product for payroll visibility and operational control.",
   },
   {
     question: "How is MSG different from a traditional manpower provider?",
     answer:
-      "MSG integrates workforce delivery with operational governance, administration support, reporting, and technology-enabled visibility. The goal is reliable workforce operations—not placement transactions alone.",
+      "MSG is not only a workforce supplier. We combine strategic advisory, end-to-end workforce solutions, and workforce technology so enterprises can improve performance—not just fill headcount.",
   },
   {
     question: "Where is MSG located?",
@@ -27,12 +32,11 @@ export const faqs = [
   {
     question: "How do I request a consultation or ProQPay demo?",
     answer:
-      "Use the Contact page or Request Consultation form and select the relevant service interest. Everything routes through MSG corporate operations.",
+      "Use the Contact page or Request Consultation form and select the relevant interest—strategic advisory, workforce solutions, or ProQPay demo.",
   },
   {
     question: "Where do I log in to ProQPay?",
-    answer:
-      "Authorized users sign in at proqpay.msg-os.com/login.",
+    answer: "Authorized users sign in at proqpay.msg-os.com/login.",
   },
   {
     question: "Does ProQPay always fund payroll?",

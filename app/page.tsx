@@ -3,8 +3,8 @@ import Link from "next/link";
 import {
   ArrowRight,
   CheckCircle2,
-  Cog,
   LineChart,
+  Sparkles,
   Users,
 } from "lucide-react";
 import { HomeHero } from "@/components/sections/home-hero";
@@ -25,30 +25,41 @@ import {
   trustStrip,
   whyMsg,
 } from "@/lib/content/about";
+import {
+  servicePillars,
+  strategicAdvisoryContent,
+  workforceSubServices,
+} from "@/lib/content/services";
 import { getBlogPosts } from "@/lib/mdx";
 
 export const metadata = buildMetadata({
-  title: `${siteConfig.legalName} | Workforce Built for Performance`,
+  title: `${siteConfig.legalName} | Enterprise Workforce Solutions & Business Transformation`,
   description: siteConfig.description,
   path: "/",
 });
 
 const pillarIcons = {
-  people: Users,
-  operations: Cog,
+  advisory: Sparkles,
+  workforce: Users,
   technology: LineChart,
 } as const;
 
 export default function HomePage() {
   const posts = getBlogPosts().slice(0, 3);
+  const advisory = servicePillars[0];
+  const workforce = servicePillars[1];
+  const technology = servicePillars[2];
 
   return (
     <>
       <HomeHero />
 
-      {/* Trust strip */}
+      {/* Trusted by Indonesian Businesses */}
       <section className="border-b border-border bg-background">
         <Container className="py-6">
+          <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            Trusted by Indonesian Businesses
+          </p>
           <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 sm:justify-between">
             {trustStrip.map((item) => (
               <li key={item.label} className="text-center sm:text-left">
@@ -64,7 +75,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* More Than Manpower */}
+      {/* Integrated Workforce Solutions */}
       <section className="section-padding bg-background">
         <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <FadeIn>
@@ -103,13 +114,13 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Three pillars */}
+      {/* Three capability pillars */}
       <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
           <SectionTitle
-            eyebrow="Framework"
-            title="People · Operations · Technology"
-            description="Three integrated pillars that define how MSG designs and delivers enterprise workforce solutions."
+            eyebrow="Capabilities"
+            title="Three pillars. One transformation partner."
+            description="Strategic Advisory, Workforce Solutions, and Workforce Technology—integrated to help enterprises improve, operate, transform, grow, and scale."
           />
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {aboutContent.pillars.map((pillar, index) => {
@@ -137,17 +148,70 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Services overview */}
+      {/* Strategic Advisory — Featured (largest after hero) */}
+      <section className="section-padding relative overflow-hidden bg-[#0B1F33] text-white">
+        <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-[#0B3A6E]/40 blur-3xl" />
+        <div className="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-orange/10 blur-3xl" />
+        <Container className="relative">
+          <div className="max-w-3xl">
+            <Badge className="bg-orange/20 text-orange hover:bg-orange/20">
+              {advisory.badge}
+            </Badge>
+            <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+              Strategic Advisory
+            </h2>
+            <p className="mt-2 text-lg font-medium text-white/90 sm:text-xl">
+              {strategicAdvisoryContent.headline}
+            </p>
+            <p className="mt-5 text-base leading-relaxed text-white/70 sm:text-lg">
+              {advisory.description}
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {strategicAdvisoryContent.serviceLines.map((line) => (
+              <div
+                key={line.id}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+              >
+                <h3 className="text-lg font-semibold text-white">{line.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/65">
+                  {line.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <Button asChild variant="accent" size="lg">
+              <Link href="/services/strategic-advisory">
+                Explore Strategic Advisory
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              className="border border-white/20 bg-transparent text-white hover:bg-white/10"
+            >
+              <Link href="/request-consultation?intent=strategic-advisory">
+                Request Strategic Assessment
+              </Link>
+            </Button>
+          </div>
+        </Container>
+      </section>
+
+      {/* Workforce Solutions */}
       <section className="section-padding bg-background">
         <Container>
           <SectionTitle
-            eyebrow="Services"
-            title="Enterprise workforce services"
-            description="Core MSG capabilities for organizations that need reliable people operations—not manpower placement alone."
+            eyebrow="Workforce Solutions"
+            title="End-to-end workforce delivery"
+            description={workforce.summary}
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {aboutContent.coreServices.map((service, index) => (
-              <FadeIn key={service.title} delay={index * 0.04}>
+            {workforceSubServices.map((service, index) => (
+              <FadeIn key={service.slug} delay={index * 0.04}>
                 <Link href={service.href} className="group block h-full">
                   <Card className="h-full transition duration-300 hover:-translate-y-0.5 hover:border-[#0B3A6E]/40 hover:shadow-md">
                     <CardHeader>
@@ -157,10 +221,7 @@ export default function HomePage() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm leading-relaxed text-muted-foreground">
-                        {service.description}
-                      </p>
-                      <p className="mt-3 text-sm font-medium text-foreground/80">
-                        {service.benefit}
+                        {service.summary}
                       </p>
                       <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[#0B3A6E] dark:text-blue-300">
                         Learn more{" "}
@@ -174,19 +235,80 @@ export default function HomePage() {
           </div>
           <div className="mt-10 text-center">
             <Button asChild variant="outline">
-              <Link href="/services">View all services</Link>
+              <Link href="/services/workforce-solutions">
+                View Workforce Solutions
+              </Link>
             </Button>
           </div>
         </Container>
       </section>
 
-      {/* Industries we support */}
+      {/* Workforce Technology */}
       <section className="section-padding bg-gray-bg dark:bg-background">
+        <Container className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <Badge className="bg-orange/15 text-orange hover:bg-orange/15">
+              {siteConfig.products.proqpay.label}
+            </Badge>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+              Workforce Technology
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              {technology.positioning} ProQPay is the first product—built for payroll
+              process visibility, approval discipline, and operational control.
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Future products (HR Platform, Workforce Analytics, AI Solutions, and
+              more) are planned with Coming Soon status—no fabricated features.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button asChild className="bg-[#0B3A6E] text-white hover:bg-[#0a3360]">
+                <Link href="/technology">Explore Technology</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/products/proqpay">Explore ProQPay</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              Flagship product
+            </p>
+            <p className="mt-2 font-heading text-2xl font-bold">
+              Pro<span className="text-orange">Q</span>Pay
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              {siteConfig.products.proqpay.headline}
+            </p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {[
+                "Payroll process visibility",
+                "Employee data",
+                "Attendance integration",
+                "Reporting",
+                "Approval workflow",
+                "Secure access",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-start gap-2 rounded-xl border border-border bg-background px-3 py-3 text-sm"
+                >
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0B3A6E] dark:text-blue-300" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Industries */}
+      <section className="section-padding bg-background">
         <Container>
           <SectionTitle
             eyebrow="Industries"
             title="Industries we support"
-            description="MSG supports workforce and operational needs across multiple sectors. This is a capability map—not a list of named client endorsements."
+            description="MSG supports workforce delivery and business transformation across multiple sectors—not manpower placement alone."
           />
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {industriesWeSupport.map((industry) => (
@@ -202,18 +324,18 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* How MSG works */}
-      <section className="section-padding bg-background">
+      {/* How We Work */}
+      <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
           <SectionTitle
             eyebrow="Process"
-            title="How MSG works"
-            description="A disciplined operating flow from requirement understanding to continuous improvement."
+            title="How we work"
+            description="A disciplined flow from understanding business needs to continuous improvement."
           />
           <div className="mt-10 overflow-hidden rounded-3xl border border-border shadow-sm">
             <Image
               src="/images/home/workforce-hero.svg"
-              alt="MSG workforce process: understand, mobilize, operate, improve"
+              alt="MSG process: understand, design, mobilize, operate, measure, improve"
               width={1200}
               height={800}
               className="h-auto w-full object-cover"
@@ -226,71 +348,13 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ProQPay highlight */}
-      <section className="section-padding bg-[#0B1F33] text-white">
-        <Container className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <Badge className="bg-orange/20 text-orange hover:bg-orange/20">
-              {siteConfig.products.proqpay.label}
-            </Badge>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              {siteConfig.products.proqpay.headline}
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-white/75">
-              {siteConfig.products.proqpay.description}
-            </p>
-            <p className="mt-3 text-sm text-white/55">
-              ProQPay is an MSG technology product — not the company itself.
-              Product preview UI below is conceptual.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild variant="accent">
-                <Link href="/contact?intent=payroll-demo">Request ProQPay Demo</Link>
-              </Button>
-              <Button
-                asChild
-                className="border border-white/20 bg-transparent text-white hover:bg-white/10"
-              >
-                <Link href="/products/proqpay">Explore ProQPay</Link>
-              </Button>
-            </div>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45">
-              Product preview
-            </p>
-            <p className="mt-2 font-heading text-2xl font-bold">
-              Pro<span className="text-orange">Q</span>Pay
-            </p>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {[
-                "Payroll process visibility",
-                "Employee data",
-                "Attendance integration",
-                "Reporting",
-                "Approval workflow",
-                "Secure access",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm text-white/85"
-                >
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
       {/* Why MSG */}
       <section className="section-padding bg-background">
         <Container>
           <SectionTitle
             eyebrow="Why MSG"
-            title="Why organizations work with MSG"
-            description="Practical reasons for enterprises that need reliable workforce operations."
+            title="Improve · Operate · Transform · Grow · Scale"
+            description="MSG helps companies go beyond workforce supply—to stronger business performance."
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {whyMsg.map((item) => (
@@ -309,7 +373,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Operational capability stories */}
+      {/* Operational Capability */}
       <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
           <SectionTitle
@@ -344,7 +408,7 @@ export default function HomePage() {
             <SectionTitle
               eyebrow="News"
               title="Latest insights"
-              description="Perspectives for workforce, operations, and payroll leaders."
+              description="Perspectives on business transformation, operational excellence, workforce, and technology."
             />
             <Button asChild variant="outline" size="sm">
               <Link href="/news">View all</Link>
@@ -373,12 +437,12 @@ export default function HomePage() {
       </section>
 
       <CtaBand
-        title="Build a Stronger Workforce Operation"
-        description="Diskusikan kebutuhan tenaga kerja, operational support, engineering talent, atau payroll digital perusahaan Anda bersama MSG."
+        title="Discuss Your Business"
+        description="Talk with MSG about strategic advisory, workforce solutions, or workforce technology. Schedule a business consultation with our team."
         primaryHref="/request-consultation"
-        primaryLabel="Request Consultation"
-        secondaryHref="/contact"
-        secondaryLabel="Contact MSG"
+        primaryLabel="Schedule Business Consultation"
+        secondaryHref="/services/strategic-advisory"
+        secondaryLabel="Talk to Our Advisory Team"
       />
     </>
   );

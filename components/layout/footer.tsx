@@ -48,12 +48,12 @@ export function Footer() {
           <div>
             <Logo variant="light" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
-              {siteConfig.legalName} — Enterprise workforce solutions for Indonesian
-              businesses.
+              {siteConfig.legalName} — Enterprise Workforce Solutions & Business
+              Transformation Partner for Indonesian businesses.
             </p>
             <p className="mt-3 text-sm text-white/55">{siteConfig.websiteDisplay}</p>
             <p className="mt-4 text-xs font-medium uppercase tracking-[0.16em] text-white/40">
-              People · Operations · Technology
+              Improve · Operate · Transform · Grow · Scale
             </p>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">

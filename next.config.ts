@@ -110,6 +110,17 @@ const nextConfig: NextConfig = {
         destination: "/faq",
         permanent: false,
       },
+      // Technology alias (canonical overview at /technology)
+      {
+        source: "/workforce-technology",
+        destination: "/technology",
+        permanent: true,
+      },
+      {
+        source: "/services/workforce-technology",
+        destination: "/technology",
+        permanent: true,
+      },
     ];
   },
 };

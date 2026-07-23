@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
@@ -10,8 +11,13 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { getService, serviceSlugs } from "@/lib/content/services";
 import { Check } from "lucide-react";
 
+/** Dedicated pages exist for these slugs */
+const dedicatedSlugs = new Set(["strategic-advisory", "workforce-solutions"]);
+
 export function generateStaticParams() {
-  return serviceSlugs.map((slug) => ({ slug }));
+  return serviceSlugs
+    .filter((slug) => !dedicatedSlugs.has(slug))
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -35,8 +41,23 @@ export default async function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (dedicatedSlugs.has(slug)) notFound();
   const service = getService(slug);
   if (!service) notFound();
+
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    ...(service.parent
+      ? [
+          {
+            label: "Workforce Solutions",
+            href: "/services/workforce-solutions",
+          },
+        ]
+      : []),
+    { label: service.title },
+  ];
 
   return (
     <>
@@ -44,19 +65,41 @@ export default async function ServiceDetailPage({
         data={breadcrumbJsonLd([
           { name: "Home", path: "/" },
           { name: "Services", path: "/services" },
+          ...(service.parent
+            ? [
+                {
+                  name: "Workforce Solutions",
+                  path: "/services/workforce-solutions",
+                },
+              ]
+            : []),
           { name: service.title, path: `/services/${slug}` },
         ])}
       />
       <PageHero
         title={service.title}
         description={service.description}
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Services", href: "/services" },
-          { label: service.title },
-        ]}
-        cta={{ label: "Request Consultation", href: "/request-consultation" }}
+        breadcrumbs={breadcrumbs}
+        cta={{
+          label: "Talk to Our Workforce Experts",
+          href: "/request-consultation?intent=workforce-solutions",
+        }}
       />
+      {service.parent ? (
+        <div className="border-b border-border bg-gray-bg py-3 dark:bg-background">
+          <Container>
+            <p className="text-sm text-muted-foreground">
+              Part of{" "}
+              <Link
+                href="/services/workforce-solutions"
+                className="font-semibold text-[#0B3A6E] hover:underline dark:text-blue-300"
+              >
+                Workforce Solutions
+              </Link>
+            </p>
+          </Container>
+        </div>
+      ) : null}
 
       <section className="section-padding">
         <Container className="grid gap-12 lg:grid-cols-2">
@@ -191,8 +234,8 @@ export default async function ServiceDetailPage({
       <CtaBand
         title={`Discuss ${service.title} with MSG`}
         description="Share your workforce requirements, locations, and operating constraints. MSG will help design a practical service model."
-        primaryHref="/request-consultation"
-        primaryLabel="Request Consultation"
+        primaryHref="/request-consultation?intent=workforce-solutions"
+        primaryLabel="Talk to Our Workforce Experts"
         secondaryHref="/contact"
         secondaryLabel="Contact MSG"
       />

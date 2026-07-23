@@ -95,8 +95,13 @@ export function Navbar() {
                         className="block rounded-xl px-3 py-2.5 transition hover:bg-muted"
                         onClick={() => setOpenMenu(null)}
                       >
-                        <div className="text-sm font-semibold text-foreground">
+                        <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
                           {child.title}
+                          {"badge" in child && child.badge ? (
+                            <span className="rounded-full bg-orange/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-orange">
+                              {child.badge}
+                            </span>
+                          ) : null}
                         </div>
                         {child.description ? (
                           <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
@@ -117,7 +122,7 @@ export function Navbar() {
           <Button
             asChild
             size="sm"
-            className="bg-[#0B3A6E] text-white hover:bg-[#0a3360] hover:-translate-y-px transition-transform"
+            className="bg-[#0B3A6E] text-white transition-transform hover:-translate-y-px hover:bg-[#0a3360]"
           >
             <Link href="/request-consultation">Request Consultation</Link>
           </Button>

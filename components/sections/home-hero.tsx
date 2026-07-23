@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
 
 const floatingCards = [
-  { label: "Workforce Active", detail: "Deployment ready" },
-  { label: "Operational Coverage", detail: "Multi-location support" },
-  { label: "Payroll Visibility", detail: "ProQPay enabled" },
-  { label: "Compliance Monitoring", detail: "Process discipline" },
+  { label: "Strategic Advisory", detail: "Featured service" },
+  { label: "Workforce Solutions", detail: "End-to-end delivery" },
+  { label: "Workforce Technology", detail: "ProQPay enabled" },
+  { label: "Business Transformation", detail: "Improve · Grow · Scale" },
 ];
 
 export function HomeHero() {
@@ -25,20 +25,20 @@ export function HomeHero() {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
               {siteConfig.hero.eyebrow}
             </p>
-            <h1 className="mt-5 text-[2.35rem] font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
+            <h1 className="mt-5 text-[2.15rem] font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl xl:text-[3.75rem]">
               {siteConfig.hero.headline}
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
               {siteConfig.hero.subheadline}
             </p>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/55">
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/55">
               {siteConfig.hero.subheadlineEn}
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Button
                 asChild
                 size="lg"
-                className="bg-white text-[#0B3A6E] hover:bg-white/90 hover:-translate-y-px transition-transform"
+                className="bg-white text-[#0B3A6E] transition-transform hover:-translate-y-px hover:bg-white/90"
               >
                 <Link href="/request-consultation">Request Consultation</Link>
               </Button>

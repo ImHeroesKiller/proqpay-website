@@ -10,7 +10,7 @@ import { ArrowRight } from "lucide-react";
 export const metadata = buildMetadata({
   title: "Industries",
   description:
-    "Industries MSG supports: technology, construction and engineering, financial services, manufacturing, energy, logistics, retail, and professional services.",
+    "Industries MSG supports with workforce solutions and business transformation: technology, construction, financial services, manufacturing, energy, logistics, retail, and professional services.",
   path: "/industries",
 });
 
@@ -19,19 +19,22 @@ export default function IndustriesPage() {
     <>
       <PageHero
         title="Industries we support"
-        description="MSG designs workforce and operational support models for organizations across key Indonesian business sectors. This is a capability map—not a list of named client endorsements."
+        description="MSG supports workforce delivery and business transformation across key Indonesian sectors—not manpower placement alone. This is a capability map—not a list of named client endorsements."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Industries" },
         ]}
-        cta={{ label: "Request Consultation", href: "/request-consultation" }}
+        cta={{
+          label: "Schedule Business Consultation",
+          href: "/request-consultation",
+        }}
       />
       <section className="section-padding">
         <Container>
           <p className="mx-auto mb-10 max-w-3xl text-center text-sm text-muted-foreground">
             MSG does not claim exclusive experience in every sector listed. Use
-            these pages to explore how our workforce model can be applied to
-            your industry context.
+            these pages to explore how advisory, workforce solutions, and
+            technology can support your industry context.
           </p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry) => (

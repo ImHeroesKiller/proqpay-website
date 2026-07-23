@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 export const metadata = buildMetadata({
   title: "About MSG",
   description:
-    "About PT Mandiri Semesta Gemilang (MSG): Indonesian enterprise workforce solutions company established in 2019. People · Operations · Technology.",
+    "About PT Mandiri Semesta Gemilang (MSG): Enterprise Workforce Solutions & Business Transformation Partner established in 2019. Strategic Advisory, Workforce Solutions, Workforce Technology.",
   path: "/about",
 });
 
@@ -22,12 +22,15 @@ export default function AboutPage() {
     <>
       <PageHero
         title="About MSG"
-        description={`${siteConfig.legalName} is an Indonesian enterprise workforce solutions company. We help organizations grow through people, operational excellence, and technology.`}
+        description={`${siteConfig.legalName} is an Enterprise Workforce Solutions & Business Transformation Partner. We help organizations improve, operate, transform, grow, and scale.`}
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "About" },
         ]}
-        cta={{ label: "Request Consultation", href: "/request-consultation" }}
+        cta={{
+          label: "Schedule Business Consultation",
+          href: "/request-consultation",
+        }}
       />
 
       <section className="section-padding">
@@ -42,8 +45,8 @@ export default function AboutPage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
               { label: "Established", value: String(siteConfig.founded) },
-              { label: "Positioning", value: "Enterprise Workforce" },
-              { label: "Framework", value: "People · Ops · Tech" },
+              { label: "Positioning", value: "Transformation Partner" },
+              { label: "Capabilities", value: "Advisory · Workforce · Tech" },
             ].map((item) => (
               <div
                 key={item.label}
@@ -58,11 +61,12 @@ export default function AboutPage() {
           </div>
 
           <h2 className="mt-16 text-2xl font-bold sm:text-3xl">
-            People · Operations · Technology
+            Three core capabilities
           </h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            MSG integrates three pillars so workforce delivery stays reliable as
-            the business grows.
+            MSG integrates Strategic Advisory, Workforce Solutions, and Workforce
+            Technology so enterprises can improve performance and transform with
+            operational accountability.
           </p>
           <div className="mt-8 overflow-hidden rounded-3xl border border-border shadow-sm">
             <Image
@@ -247,11 +251,11 @@ export default function AboutPage() {
 
       <CtaBand
         title="Partner with MSG"
-        description="Discuss workforce outsourcing, engineering talent, business support, managed operations, or ProQPay with our team."
+        description="Discuss Strategic Advisory, Workforce Solutions, or Workforce Technology with our team."
         primaryHref="/request-consultation"
-        primaryLabel="Request Consultation"
-        secondaryHref="/contact"
-        secondaryLabel="Contact MSG"
+        primaryLabel="Schedule Business Consultation"
+        secondaryHref="/services/strategic-advisory"
+        secondaryLabel="Talk to Our Advisory Team"
       />
     </>
   );

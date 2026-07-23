@@ -2,6 +2,7 @@ export type NavLink = {
   title: string;
   href: string;
   description?: string;
+  badge?: string;
 };
 
 export type NavItem = {
@@ -18,24 +19,23 @@ export const mainNavigation: NavItem[] = [
     href: "/services",
     children: [
       {
-        title: "Workforce Outsourcing",
-        href: "/services/workforce-outsourcing",
-        description: "Plan, source, deploy, and manage enterprise workforce capacity.",
+        title: "Strategic Advisory",
+        href: "/services/strategic-advisory",
+        description:
+          "Business recovery, growth, investment readiness, M&A, and transformation.",
+        badge: "Featured",
       },
       {
-        title: "Engineering Talent",
-        href: "/services/engineering-talent",
-        description: "Technical and engineering professionals for project delivery.",
+        title: "Workforce Solutions",
+        href: "/services/workforce-solutions",
+        description:
+          "Outsourcing, engineering talent, business support, and managed workforce.",
       },
       {
-        title: "Business Support",
-        href: "/services/business-support",
-        description: "Admin, finance, customer service, and back-office support.",
-      },
-      {
-        title: "Managed Workforce",
-        href: "/services/managed-workforce",
-        description: "End-to-end workforce operations with governance and reporting.",
+        title: "Workforce Technology",
+        href: "/technology",
+        description:
+          "Technology that empowers workforce operations—starting with ProQPay.",
       },
     ],
   },
@@ -67,26 +67,23 @@ export const mainNavigation: NavItem[] = [
     ],
   },
   {
-    title: "Products",
-    href: "/products",
+    title: "Technology",
+    href: "/technology",
     children: [
       {
         title: "ProQPay",
         href: "/products/proqpay",
         description: "Payroll visibility for modern workforce operations.",
       },
+      {
+        title: "Workforce Technology",
+        href: "/technology",
+        description: "Product stack and future workforce platforms.",
+      },
     ],
   },
   { title: "Careers", href: "/careers" },
-  {
-    title: "Resources",
-    href: "/resources",
-    children: [
-      { title: "News", href: "/news", description: "Insights and company updates." },
-      { title: "FAQ", href: "/faq", description: "Common questions answered." },
-      { title: "Guides", href: "/resources/guides", description: "Practical operating guides." },
-    ],
-  },
+  { title: "News", href: "/news" },
   { title: "Contact", href: "/contact" },
 ];
 
@@ -98,13 +95,14 @@ export const footerNavigation = {
     { title: "Careers", href: "/careers" },
   ],
   services: [
+    { title: "Strategic Advisory", href: "/services/strategic-advisory" },
+    { title: "Workforce Solutions", href: "/services/workforce-solutions" },
+    { title: "Workforce Technology", href: "/technology" },
     { title: "Workforce Outsourcing", href: "/services/workforce-outsourcing" },
-    { title: "Engineering Talent", href: "/services/engineering-talent" },
-    { title: "Business Support", href: "/services/business-support" },
-    { title: "Managed Workforce", href: "/services/managed-workforce" },
   ],
   products: [
     { title: "ProQPay", href: "/products/proqpay" },
+    { title: "Technology Overview", href: "/technology" },
     { title: "Product Login", href: "https://proqpay.msg-os.com/login" },
     { title: "Request Demo", href: "/contact?intent=payroll-demo" },
   ],

@@ -1,67 +1,65 @@
 /** Central About + homepage content — update here, not in page components. */
 export const aboutContent = {
   whoWeAre: [
-    "PT Mandiri Semesta Gemilang (MSG) is an Indonesian enterprise workforce solutions company established in 2019.",
-    "We help organizations scale through people, operational discipline, and technology—not manpower placement alone.",
-    "Our work spans workforce outsourcing, engineering talent, business support services, managed workforce operations, and digital products such as ProQPay.",
+    "PT Mandiri Semesta Gemilang (MSG) is an Indonesian Enterprise Workforce Solutions & Business Transformation Partner established in 2019.",
+    "We help organizations improve, operate, transform, grow, and scale—not only by providing workforce capacity, but by combining strategic advisory, end-to-end workforce solutions, and workforce technology.",
+    "Our three core capabilities are Strategic Advisory, Workforce Solutions, and Workforce Technology (including ProQPay).",
   ],
   moreThanManpower: {
-    title: "More Than Manpower",
+    title: "Integrated Workforce Solutions",
     body: [
-      "MSG does not only place people. We help organizations design, mobilize, operate, and improve workforce operations.",
-      "From sourcing and onboarding to attendance coordination, payroll administration support, reporting, and technology enablement, MSG works as an operational partner—not a transactional staffing channel.",
+      "MSG is not only a workforce provider. We partner with enterprises to build, improve, manage, transform, and develop their business through people, operations, and technology.",
+      "From strategic assessment and operational redesign to workforce delivery and digital payroll visibility, MSG works as a transformation-minded operating partner—not a transactional staffing channel.",
     ],
     quote:
-      "People, operations, and technology working as one—so workforce delivery stays reliable as the business grows.",
+      "Improve. Operate. Transform. Grow. Scale.—with people, operations, and technology working as one.",
   },
   pillars: [
     {
-      id: "people",
-      title: "People",
+      id: "advisory",
+      title: "Strategic Advisory",
       description:
-        "Workforce sourcing, onboarding, deployment, performance support, and employee administration aligned to organizational and project needs.",
+        "Business recovery, growth strategy, investment readiness, M&A preparation, operational excellence, and business transformation advisory.",
     },
     {
-      id: "operations",
-      title: "Operations",
+      id: "workforce",
+      title: "Workforce Solutions",
       description:
-        "Operational governance, attendance, payroll coordination, compliance-aware processes, reporting, and service monitoring.",
+        "End-to-end workforce outsourcing, engineering talent, business support, and managed workforce operations.",
     },
     {
       id: "technology",
-      title: "Technology",
+      title: "Workforce Technology",
       description:
-        "Digital workforce tools, dashboards, data visibility, payroll platforms such as ProQPay, and process automation that improve decision-making.",
+        "Technology that empowers workforce operations—starting with ProQPay, with room to expand into analytics, HR platforms, and AI-enabled tools.",
     },
   ],
   vision:
-    "To be a trusted provider of enterprise workforce solutions in Indonesia—helping organizations grow through disciplined people operations and practical technology.",
+    "To be a trusted Enterprise Workforce Solutions & Business Transformation Partner in Indonesia—helping organizations improve performance through advisory, disciplined people operations, and practical technology.",
   mission:
-    "To empower businesses with reliable workforce delivery, operational excellence, and technology-enabled visibility—building long-term partnerships based on integrity, accountability, and service excellence.",
+    "To empower businesses with strategic advisory, reliable workforce delivery, operational excellence, and technology-enabled visibility—building long-term partnerships based on integrity, accountability, and service excellence.",
   coreServices: [
     {
-      title: "Workforce Outsourcing",
-      description: "Plan, source, deploy, and manage enterprise workforce capacity.",
-      href: "/services/workforce-outsourcing",
-      benefit: "Scalable staffing with structured continuity support.",
+      title: "Strategic Advisory",
+      description:
+        "Business recovery, growth, investment readiness, M&A advisory, and transformation.",
+      href: "/services/strategic-advisory",
+      benefit: "Featured service for companies preparing for the next stage of growth.",
+      badge: "Featured Service",
     },
     {
-      title: "Engineering Talent",
-      description: "Technical and engineering professionals for project delivery.",
-      href: "/services/engineering-talent",
-      benefit: "Specialized talent with flexible deployment models.",
+      title: "Workforce Solutions",
+      description:
+        "Outsourcing, engineering talent, business support, and managed workforce under one umbrella.",
+      href: "/services/workforce-solutions",
+      benefit: "End-to-end people operations with structured continuity.",
     },
     {
-      title: "Business Support Services",
-      description: "Admin, finance, customer service, and back-office support.",
-      href: "/services/business-support",
-      benefit: "Reliable support capacity without unnecessary fixed headcount.",
-    },
-    {
-      title: "Managed Workforce Operations",
-      description: "End-to-end workforce governance, monitoring, and reporting.",
-      href: "/services/managed-workforce",
-      benefit: "Operational visibility with continuous improvement.",
+      title: "Workforce Technology",
+      description:
+        "Digital products that strengthen payroll visibility and workforce operations.",
+      href: "/technology",
+      benefit: "Technology that empowers workforce operations.",
     },
   ],
   values: [
@@ -94,32 +92,32 @@ export const aboutContent = {
     {
       step: 1,
       title: "Understand",
-      description: "Understand workforce and operational requirements.",
+      description: "Understand business, workforce, and operational requirements.",
     },
     {
       step: 2,
       title: "Design",
-      description: "Design the right service model and controls.",
+      description: "Design the right advisory, service, or technology model.",
     },
     {
       step: 3,
       title: "Mobilize",
-      description: "Source, screen, and mobilize talent.",
+      description: "Mobilize talent, routines, and implementation support.",
     },
     {
       step: 4,
       title: "Operate",
-      description: "Run workforce administration and operations.",
+      description: "Run workforce administration, operations, and delivery.",
     },
     {
       step: 5,
       title: "Measure",
-      description: "Monitor service performance and delivery quality.",
+      description: "Monitor performance, service quality, and business impact.",
     },
     {
       step: 6,
       title: "Improve",
-      description: "Improve continuously using operational data.",
+      description: "Improve continuously using operational and business feedback.",
     },
   ],
   timeline: [
@@ -131,8 +129,9 @@ export const aboutContent = {
     },
     {
       year: "2024–2026",
-      title: "Technology integration",
-      description: "ProQPay advanced as MSG’s flagship payroll product.",
+      title: "Advisory & technology",
+      description:
+        "Strengthened positioning as transformation partner; ProQPay advanced as flagship workforce technology.",
     },
   ],
   legalInfo: {
@@ -147,46 +146,52 @@ export const aboutContent = {
 
 export const trustStrip = [
   { label: "Established", value: "2019" },
-  { label: "Focus", value: "Enterprise Workforce" },
-  { label: "Model", value: "People · Operations · Technology" },
+  { label: "Positioning", value: "Transformation Partner" },
+  { label: "Capabilities", value: "Advisory · Workforce · Tech" },
   { label: "Coverage", value: "Indonesian Businesses" },
   { label: "Technology", value: "ProQPay Enabled" },
 ];
 
 export const whyMsg = [
   {
-    title: "Enterprise-focused workforce model",
+    title: "Improve",
     description:
-      "Service design built for organizations that need structure, scale, and accountability—not one-off placement.",
+      "Strengthen margins, cashflow, operating discipline, and workforce performance with structured assessment and action.",
   },
   {
-    title: "Operational discipline",
+    title: "Operate",
     description:
-      "Clear routines for deployment, attendance, issue handling, and reporting.",
+      "Run reliable day-to-day workforce operations—from deployment and administration to multi-site coordination.",
   },
   {
-    title: "Flexible service configuration",
+    title: "Transform",
     description:
-      "Workforce, engineering talent, business support, or managed operations—configured to your operating model.",
+      "Redesign organization, operations, workforce models, and digital roadmaps for sustainable business transformation.",
   },
   {
-    title: "Technology-enabled visibility",
+    title: "Grow",
     description:
-      "Digital tools and products such as ProQPay strengthen payroll and workforce transparency.",
+      "Scale capacity and capability with flexible workforce models and growth-oriented advisory support.",
   },
   {
-    title: "Responsive account management",
+    title: "Scale",
     description:
-      "Dedicated coordination so issues are escalated and resolved with clear ownership.",
+      "Extend coverage across locations and functions with governance, technology visibility, and continuous improvement.",
   },
   {
-    title: "Compliance-oriented processes",
+    title: "Integrated delivery",
     description:
-      "Practices designed with awareness of Indonesian labor and operational requirements.",
+      "Strategic Advisory, Workforce Solutions, and Workforce Technology under one accountable partner—not fragmented vendors.",
   },
 ];
 
 export const operationalCapabilities = [
+  {
+    title: "Strategic business assessment",
+    description:
+      "Health, operational, and financial diagnostics that inform recovery and growth decisions.",
+    tag: "Advisory",
+  },
   {
     title: "Large workforce mobilization",
     description:
@@ -212,16 +217,10 @@ export const operationalCapabilities = [
     tag: "Engineering",
   },
   {
-    title: "Performance reporting",
+    title: "Technology-enabled visibility",
     description:
-      "Service and workforce visibility for managers and stakeholders.",
-    tag: "Visibility",
-  },
-  {
-    title: "Scalable operational support",
-    description:
-      "Support models that can expand or adapt as business demand changes.",
-    tag: "Scale",
+      "ProQPay and workforce technology for payroll control and operational insight.",
+    tag: "Technology",
   },
 ];
 
@@ -284,12 +283,12 @@ export const careerValues = [
   {
     title: "Meaningful work",
     description:
-      "Contribute to workforce operations that help Indonesian organizations run better.",
+      "Contribute to workforce and transformation work that helps Indonesian organizations perform better.",
   },
   {
     title: "Professional growth",
     description:
-      "Build experience across people operations, service delivery, and technology-enabled workflows.",
+      "Build experience across advisory support, people operations, service delivery, and technology-enabled workflows.",
   },
   {
     title: "Integrity and respect",
@@ -299,7 +298,7 @@ export const careerValues = [
   {
     title: "Client impact",
     description:
-      "See the connection between daily work and reliable service outcomes for clients.",
+      "See the connection between daily work and reliable outcomes for enterprise clients.",
   },
 ];
 
@@ -342,3 +341,12 @@ export const operationalExcellence = [
     description: "Designed to provide timely visibility for managers and clients.",
   },
 ];
+
+export const newsCategories = [
+  "Business Transformation",
+  "Operational Excellence",
+  "Leadership",
+  "Workforce",
+  "Technology",
+  "Industry Insights",
+] as const;

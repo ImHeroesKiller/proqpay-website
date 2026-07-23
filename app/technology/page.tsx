@@ -6,16 +6,22 @@ import { CtaBand } from "@/components/sections/cta-band";
 import { ProcessFlow } from "@/components/shared/process-flow";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
+import {
+  futureTechnologyProducts,
+  servicePillars,
+} from "@/lib/content/services";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Layers, ShieldCheck, Workflow } from "lucide-react";
 
+const pillar = servicePillars.find((p) => p.id === "workforce-technology")!;
+
 export const metadata = buildMetadata({
-  title: "Products",
+  title: "Workforce Technology",
   description:
-    "MSG Workforce Technology products including ProQPay — technology that empowers workforce operations.",
-  path: "/products",
+    "MSG Workforce Technology: technology that empowers workforce operations. ProQPay is the flagship product, with future platforms planned.",
+  path: "/technology",
 });
 
 const productPipeline = [
@@ -45,17 +51,20 @@ const productPipeline = [
   },
 ];
 
-export default function ProductsPage() {
+export default function TechnologyPage() {
   return (
     <>
       <PageHero
-        title="Workforce Technology Products"
-        description="Technology that empowers workforce operations. ProQPay is the flagship product in the MSG technology stack."
+        title="Workforce Technology"
+        description={pillar.positioning}
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "Technology", href: "/technology" },
-          { label: "Products" },
+          { label: "Technology" },
         ]}
+        cta={{
+          label: "Request ProQPay Demo",
+          href: "/contact?intent=payroll-demo",
+        }}
       />
 
       <section className="section-padding">
@@ -149,6 +158,31 @@ export default function ProductsPage() {
 
       <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
+          <h2 className="text-2xl font-bold sm:text-3xl">Future products</h2>
+          <p className="mt-2 max-w-2xl text-muted-foreground">
+            Architecture ready for expansion. Products below are planned with{" "}
+            <strong>Coming Soon</strong> status—not live feature claims.
+          </p>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {futureTechnologyProducts.map((product) => (
+              <Card key={product.title} className="h-full">
+                <CardHeader>
+                  <Badge variant="secondary" className="w-fit">
+                    {product.status}
+                  </Badge>
+                  <CardTitle className="text-lg">{product.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm leading-relaxed text-muted-foreground">
+                  {product.description}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="section-padding">
+        <Container>
           <h2 className="text-2xl font-bold sm:text-3xl">How MSG builds products</h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">
             A practical product development flow grounded in workforce operations.
@@ -159,46 +193,11 @@ export default function ProductsPage() {
         </Container>
       </section>
 
-      <section className="section-padding">
-        <Container>
-          <h2 className="text-2xl font-bold sm:text-3xl">Product roadmap themes</h2>
-          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Future modules may expand the MSG technology stack. Themes below are
-            directional and not a commitment of release dates.
-          </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "Workforce visibility extensions",
-                body: "Deeper operational dashboards connecting attendance, deployment, and payroll readiness.",
-              },
-              {
-                title: "Compliance support modules",
-                body: "Structured support for statutory workflows as product modules mature.",
-              },
-              {
-                title: "Integration surface",
-                body: "APIs and connectors for HRIS, attendance, and finance systems where deployments require it.",
-              },
-            ].map((item) => (
-              <Card key={item.title} className="h-full">
-                <CardHeader>
-                  <CardTitle className="text-lg">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm leading-relaxed text-muted-foreground">
-                  {item.body}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </section>
-
       <CtaBand
-        title="Interested in ProQPay?"
-        description="Request a payroll demo or discuss how MSG technology can support your workforce operations."
+        title="Interested in Workforce Technology?"
+        description="Request a ProQPay demo or discuss how MSG technology can support your workforce operations."
         primaryHref="/contact?intent=payroll-demo"
-        primaryLabel="Payroll Demo"
+        primaryLabel="Request ProQPay Demo"
         secondaryHref="/products/proqpay"
         secondaryLabel="Explore ProQPay"
       />

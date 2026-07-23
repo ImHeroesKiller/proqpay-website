@@ -31,7 +31,7 @@ export default function CareersPage() {
     <>
       <PageHero
         title="Careers at MSG"
-        description="Build your career with an enterprise workforce solutions company focused on people, operational excellence, and technology."
+        description="Build your career with an Enterprise Workforce Solutions & Business Transformation Partner focused on advisory, people operations, and technology."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Careers" },

@@ -1,5 +1,5 @@
 import { siteConfig } from "@/lib/site-config";
-import { services } from "@/lib/content/services";
+import { services, strategicAdvisoryContent, servicePillars } from "@/lib/content/services";
 import { industries } from "@/lib/content/industries";
 import { faqs } from "@/lib/content/faq";
 import { aboutContent } from "@/lib/content/about";
@@ -34,31 +34,75 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         "gemilang",
         "berdiri",
         "2019",
+        "transformasi",
+        "transformation",
       ],
       content: [
-        `${siteConfig.legalName} (MSG) adalah perusahaan enterprise workforce solutions Indonesia.`,
+        `${siteConfig.legalName} (MSG) adalah Enterprise Workforce Solutions & Business Transformation Partner di Indonesia.`,
         `Berdiri tahun ${siteConfig.founded}.`,
         `Positioning: ${siteConfig.positioning}`,
-        `Framework: People · Operations · Technology.`,
+        `Tiga pilar: Strategic Advisory, Workforce Solutions, Workforce Technology.`,
         `Tagline: ${siteConfig.tagline}.`,
-        "MSG lebih dari sekadar penyedia tenaga kerja: membantu membangun, mengelola, dan mengembangkan operasi workforce.",
+        "MSG membantu perusahaan improve, operate, transform, grow, dan scale—bukan hanya menyalurkan tenaga kerja.",
       ].join(" "),
     },
     {
       id: "pillars",
-      title: "People Operations Technology",
+      title: "Tiga pilar MSG",
       tags: [
-        "people",
-        "operations",
-        "technology",
         "pilar",
         "framework",
         "model",
         "cara kerja",
+        "advisory",
+        "workforce",
+        "technology",
+        "strategic",
       ],
       content: aboutContent.pillars
         .map((p) => `${p.title}: ${p.description}`)
         .join(" "),
+    },
+    {
+      id: "strategic-advisory",
+      title: "Strategic Advisory",
+      tags: [
+        "strategic advisory",
+        "advisory",
+        "konsultan",
+        "business recovery",
+        "recovery",
+        "cashflow",
+        "restrukturisasi",
+        "restructuring",
+        "investment readiness",
+        "investor",
+        "valuation",
+        "due diligence",
+        "m&a",
+        "merger",
+        "akuisisi",
+        "acquisition",
+        "jual perusahaan",
+        "exit",
+        "business transformation",
+        "transformasi",
+        "operational excellence",
+        "corporate advisory",
+        "outsourcing consulting",
+      ],
+      content: [
+        "Strategic Advisory adalah Featured Service MSG.",
+        strategicAdvisoryContent.subheadline,
+        "Cakupan: Business Recovery, Outsourcing Business Advisory, Investment Readiness, M&A Advisory, Business Transformation.",
+        ...strategicAdvisoryContent.serviceLines.map(
+          (s) => `${s.title}: ${s.items.join(", ")}`,
+        ),
+        `Disclaimer: ${strategicAdvisoryContent.disclaimer}`,
+        "URL: /services/strategic-advisory",
+        "CTA: Request Strategic Assessment / Talk to Our Advisory Team",
+        "Jika user ingin jual perusahaan, cari investor, kesulitan cashflow, merger/akuisisi, atau transformasi bisnis → arahkan ke Strategic Advisory.",
+      ].join(" "),
     },
     {
       id: "contact",
@@ -84,6 +128,7 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         `Kantor: ${siteConfig.contact.addressDetail}`,
         `Website: ${siteConfig.websiteDisplay}`,
         `Konsultasi: /request-consultation atau /contact`,
+        `Strategic assessment: /request-consultation?intent=strategic-advisory`,
       ].join(" · "),
     },
     {
@@ -118,14 +163,15 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         "platform",
         "demo",
         "login",
+        "workforce technology",
       ],
       content: [
-        `${proqpayProduct.name} adalah produk teknologi MSG (${proqpayProduct.label}).`,
-        proqpayProduct.headline,
+        `${proqpayProduct.name} adalah produk Workforce Technology MSG (${siteConfig.products.proqpay.label}).`,
+        siteConfig.products.proqpay.headline,
         proqpayProduct.description,
         `App: ${siteConfig.appUrl}`,
         `Login: ${siteConfig.appLoginUrl}`,
-        `Halaman produk: /products/proqpay`,
+        `Halaman: /technology dan /products/proqpay`,
         "Default model: client-funded payroll. Working capital bersifat opsional dan terpisah.",
       ].join(" "),
     },
@@ -169,6 +215,20 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         .join(" · "),
     },
     {
+      id: "workforce-technology-future",
+      title: "Future Workforce Technology",
+      tags: [
+        "hr platform",
+        "analytics",
+        "ai",
+        "dashboard",
+        "coming soon",
+        "technology",
+      ],
+      content:
+        "Future products (Coming Soon, not live features): HR Platform, Workforce Analytics, AI Solutions, Operational Dashboard. Architecture ready for expansion under Workforce Technology.",
+    },
+    {
       id: "careers",
       title: "Karir di MSG",
       tags: [
@@ -201,15 +261,41 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         "penawaran",
         "mulai",
         "next",
+        "assessment",
       ],
       content: [
         "Request consultation: /request-consultation",
+        "Strategic assessment: /request-consultation?intent=strategic-advisory",
         "Contact form: /contact",
         "ProQPay demo: /contact?intent=payroll-demo atau /products/proqpay",
         "Jangan sebut harga pasti jika belum ada data resmi; arahkan ke konsultasi.",
       ].join(" "),
     },
   ];
+
+  for (const pillar of servicePillars) {
+    chunks.push({
+      id: `pillar-${pillar.id}`,
+      title: pillar.title,
+      tags: [
+        pillar.id,
+        pillar.title.toLowerCase(),
+        "layanan",
+        "service",
+        "pilar",
+        ...pillar.solutions.slice(0, 6).map((s) => s.toLowerCase()),
+      ],
+      content: [
+        pillar.title,
+        pillar.summary,
+        pillar.description,
+        pillar.positioning,
+        `Solutions: ${pillar.solutions.join("; ")}`,
+        `Benefits: ${pillar.benefits.join("; ")}`,
+        `URL: ${pillar.href}`,
+      ].join(" "),
+    });
+  }
 
   for (const service of services) {
     chunks.push({
@@ -225,6 +311,7 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         "engineering",
         "managed",
         "business support",
+        "advisory",
         ...service.capabilities.slice(0, 8).map((c) => c.toLowerCase()),
       ],
       content: [
@@ -233,7 +320,7 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         service.description,
         `Benefit: ${service.benefit}`,
         `Outcome: ${service.outcome}`,
-        `Scope: ${service.capabilities.join("; ")}`,
+        `Scope: ${service.capabilities.slice(0, 12).join("; ")}`,
         `URL: /services/${service.slug}`,
       ].join(" "),
     });

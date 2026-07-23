@@ -12,6 +12,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/about",
     "/services",
+    "/services/strategic-advisory",
+    "/services/workforce-solutions",
+    "/technology",
     "/products",
     "/products/proqpay",
     "/industries",
@@ -30,7 +33,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${base}${path}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : path === "/products/proqpay" ? 0.9 : 0.7,
+    priority:
+      path === ""
+        ? 1
+        : path === "/services/strategic-advisory" ||
+            path === "/technology" ||
+            path === "/products/proqpay"
+          ? 0.9
+          : 0.7,
   }));
 
   const services = serviceSlugs.map((slug) => ({

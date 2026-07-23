@@ -1,19 +1,19 @@
-import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
 import { CtaBand } from "@/components/sections/cta-band";
 import { ProcessFlow } from "@/components/shared/process-flow";
-import { services, serviceGroups } from "@/lib/content/services";
+import { servicePillars } from "@/lib/content/services";
 import { aboutContent } from "@/lib/content/about";
 import { buildMetadata } from "@/lib/seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight, Check } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Services",
   description:
-    "MSG enterprise workforce services: workforce outsourcing, engineering talent, business support services, and managed workforce operations.",
+    "MSG services: Strategic Advisory (featured), Workforce Solutions, and Workforce Technology—enterprise workforce solutions and business transformation for Indonesian organizations.",
   path: "/services",
 });
 
@@ -21,108 +21,92 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        title="Enterprise workforce services"
-        description="MSG helps organizations build, manage, and improve workforce operations through people, operational discipline, and technology—not manpower placement alone."
+        title="Enterprise services for performance and transformation"
+        description="Three integrated capabilities: Strategic Advisory, Workforce Solutions, and Workforce Technology. MSG helps organizations improve, operate, transform, grow, and scale."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Services" },
         ]}
-        cta={{ label: "Request Consultation", href: "/request-consultation" }}
+        cta={{
+          label: "Schedule Business Consultation",
+          href: "/request-consultation",
+        }}
       />
+
+      <section className="section-padding">
+        <Container className="space-y-10">
+          {servicePillars.map((pillar) => (
+            <Link
+              key={pillar.id}
+              href={pillar.href}
+              className="group block"
+            >
+              <Card
+                className={`overflow-hidden transition duration-300 hover:-translate-y-0.5 hover:shadow-md ${
+                  pillar.badge
+                    ? "border-[#0B3A6E]/40 ring-1 ring-[#0B3A6E]/15"
+                    : "hover:border-[#0B3A6E]/40"
+                }`}
+              >
+                <div className="grid lg:grid-cols-[1.1fr_1fr]">
+                  <CardHeader className="space-y-4 p-8 sm:p-10">
+                    {pillar.badge ? (
+                      <Badge className="w-fit bg-orange/15 text-orange hover:bg-orange/15">
+                        {pillar.badge}
+                      </Badge>
+                    ) : null}
+                    <CardTitle className="text-2xl sm:text-3xl group-hover:text-[#0B3A6E] dark:group-hover:text-blue-300">
+                      {pillar.title}
+                    </CardTitle>
+                    <p className="text-base leading-relaxed text-muted-foreground">
+                      {pillar.description}
+                    </p>
+                    <p className="text-sm font-medium text-foreground/85">
+                      {pillar.positioning}
+                    </p>
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#0B3A6E] dark:text-blue-300">
+                      Explore {pillar.title}{" "}
+                      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                    </span>
+                  </CardHeader>
+                  <CardContent className="border-t border-border bg-gray-bg p-8 dark:bg-background/50 sm:p-10 lg:border-l lg:border-t-0">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                      How we help
+                    </p>
+                    <ul className="mt-4 space-y-3">
+                      {pillar.solutions.slice(0, 5).map((item) => (
+                        <li key={item} className="flex gap-3 text-sm leading-relaxed">
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#0B3A6E] dark:text-blue-300" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </div>
+              </Card>
+            </Link>
+          ))}
+        </Container>
+      </section>
 
       <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
           <h2 className="text-2xl font-bold sm:text-3xl">How service delivery works</h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">
-            A shared operating flow across MSG workforce and operations services.
+            A shared operating rhythm across advisory, workforce, and technology
+            engagements.
           </p>
-          <div className="mt-8 overflow-hidden rounded-3xl border border-border shadow-sm">
-            <Image
-              src="/images/services/service-flow.svg"
-              alt="MSG service delivery process flow"
-              width={1400}
-              height={420}
-              className="h-auto w-full"
-              unoptimized
-            />
-          </div>
           <div className="mt-10">
             <ProcessFlow steps={aboutContent.howWeWork} variant="cycle" />
           </div>
         </Container>
       </section>
 
-      <section className="section-padding">
-        <Container className="space-y-16">
-          {serviceGroups.map((group) => {
-            const groupServices = services.filter((s) => s.group === group.id);
-            return (
-              <div key={group.id}>
-                <h2 className="text-2xl font-bold">{group.title}</h2>
-                <p className="mt-2 max-w-2xl text-muted-foreground">
-                  {group.description}
-                </p>
-                <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {groupServices.map((service) => (
-                    <Link
-                      key={service.slug}
-                      href={`/services/${service.slug}`}
-                      className="group block h-full"
-                    >
-                      <Card className="h-full transition duration-300 hover:-translate-y-0.5 hover:border-[#0B3A6E]/40 hover:shadow-md">
-                        <CardHeader>
-                          <CardTitle className="text-lg group-hover:text-[#0B3A6E] dark:group-hover:text-blue-300">
-                            {service.title}
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-3">
-                          <p className="text-sm text-muted-foreground">
-                            {service.summary}
-                          </p>
-                          <p className="text-sm font-medium text-foreground/85">
-                            {service.benefit}
-                          </p>
-                          <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#0B3A6E] dark:text-blue-300">
-                            Learn more{" "}
-                            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-                          </span>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  ))}
-                  {group.id === "technology" ? (
-                    <Link href="/products/proqpay" className="group block h-full">
-                      <Card className="h-full border-[#0B3A6E]/25 transition duration-300 hover:-translate-y-0.5 hover:border-[#0B3A6E]/50 hover:shadow-md">
-                        <CardHeader>
-                          <CardTitle className="text-lg">ProQPay</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-3">
-                          <p className="text-sm text-muted-foreground">
-                            MSG&apos;s payroll technology product for visibility,
-                            approval, disbursement, and reporting.
-                          </p>
-                          <p className="text-sm font-medium">
-                            Payroll visibility for modern workforce operations.
-                          </p>
-                          <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#0B3A6E] dark:text-blue-300">
-                            Explore product{" "}
-                            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-                          </span>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  ) : null}
-                </div>
-              </div>
-            );
-          })}
-        </Container>
-      </section>
       <CtaBand
-        title="Discuss your workforce needs"
-        description="Talk with MSG about workforce outsourcing, engineering talent, business support, managed operations, or ProQPay."
+        title="Discuss Your Business"
+        description="Talk with MSG about Strategic Advisory, Workforce Solutions, or Workforce Technology."
         primaryHref="/request-consultation"
-        primaryLabel="Request Consultation"
+        primaryLabel="Schedule Business Consultation"
         secondaryHref="/contact"
         secondaryLabel="Contact MSG"
       />

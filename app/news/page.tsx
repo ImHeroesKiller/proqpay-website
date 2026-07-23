@@ -3,12 +3,14 @@ import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
 import { getBlogPosts } from "@/lib/mdx";
 import { buildMetadata } from "@/lib/seo";
+import { newsCategories } from "@/lib/content/about";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export const metadata = buildMetadata({
   title: "News",
   description:
-    "Insights and updates on enterprise workforce solutions, operations, and payroll technology from MSG.",
+    "Insights on business transformation, operational excellence, leadership, workforce, technology, and industry topics from MSG.",
   path: "/news",
 });
 
@@ -19,12 +21,26 @@ export default function NewsPage() {
     <>
       <PageHero
         title="News & insights"
-        description="Perspectives for HR directors, operations leaders, and finance teams building reliable workforce operations."
+        description="Perspectives for leaders focused on business transformation, operational excellence, workforce, and technology."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "News" },
         ]}
       />
+      <section className="border-b border-border bg-gray-bg py-6 dark:bg-background">
+        <Container>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Article categories
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {newsCategories.map((category) => (
+              <Badge key={category} variant="secondary">
+                {category}
+              </Badge>
+            ))}
+          </div>
+        </Container>
+      </section>
       <section className="section-padding">
         <Container className="grid gap-6 lg:grid-cols-3">
           {posts.map((post) => (
