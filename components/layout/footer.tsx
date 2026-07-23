@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Logo } from "@/components/layout/logo";
 import { Container } from "@/components/shared/container";
 import { footerNavigation } from "@/lib/content/navigation";
+import { isManagedPortfolioPublished } from "@/lib/content/portfolio";
 import { siteConfig } from "@/lib/site-config";
 
 function FooterColumn({
@@ -41,6 +42,13 @@ function FooterColumn({
 }
 
 export function Footer() {
+  const portfolioPublished = isManagedPortfolioPublished();
+  const portfolioLinks = portfolioPublished
+    ? footerNavigation.portfolio
+    : footerNavigation.portfolio.filter(
+        (link) => link.href === "/portfolio" || link.href === "/contact/strategic-interest",
+      );
+
   return (
     <footer className="bg-[#0B1F33] text-white">
       <Container className="section-padding">
@@ -59,7 +67,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
             <FooterColumn title="Company" links={footerNavigation.company} />
             <FooterColumn title="Services" links={footerNavigation.services} />
-            <FooterColumn title="Portfolio" links={footerNavigation.portfolio} />
+            <FooterColumn title="Portfolio" links={portfolioLinks} />
             <FooterColumn title="Products" links={footerNavigation.products} />
             <FooterColumn title="Resources" links={footerNavigation.resources} />
             <FooterColumn title="Legal" links={footerNavigation.legal} />
