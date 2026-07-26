@@ -84,28 +84,27 @@ export function HomeProductHighlight() {
           </FadeIn>
 
           <FadeIn delay={0.06}>
-            <div className="group relative aspect-[16/10] overflow-hidden rounded-3xl border border-border shadow-md">
-              <Image
-                src="/images/hero/proqpay-hero.webp"
-                alt="ProQPay dashboard displayed on a laptop in a modern office"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center transition duration-700 group-hover:scale-[1.02]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#061A33]/28 via-transparent to-[#061A33]/58 md:bg-gradient-to-r md:from-[#061A33]/62 md:via-[#0B3A6E]/18 md:to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                <div className="max-w-sm rounded-2xl border border-white/20 bg-[#061A33]/52 p-4 text-white shadow-lg backdrop-blur-md">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/70">
-                    Product preview
-                  </p>
-                  <p className="mt-1 text-sm font-medium text-white">
-                    ProQPay workforce operations dashboard
-                  </p>
-                  <p className="mt-1 text-xs leading-relaxed text-white/70">
-                    Clear operational visibility across payroll, employees, approvals,
-                    and reporting.
-                  </p>
-                </div>
+            <div className="overflow-hidden rounded-3xl border border-border bg-[#061A33] shadow-md">
+              <div className="group relative aspect-video overflow-hidden">
+                <Image
+                  src="/images/hero/proqpay-hero.webp"
+                  alt="ProQPay dashboard showing payroll and employee data on a laptop"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center transition duration-700 group-hover:scale-[1.015]"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#061A33]/18 via-transparent to-transparent" />
+              </div>
+              <div className="border-t border-white/10 bg-[#061A33] px-5 py-4 text-white sm:px-6">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
+                  Product preview
+                </p>
+                <p className="mt-1 text-sm font-medium text-white">
+                  ProQPay workforce operations dashboard
+                </p>
+                <p className="mt-1 text-xs leading-relaxed text-white/65">
+                  Payroll, employee data, approvals, and reporting remain clearly visible.
+                </p>
               </div>
             </div>
           </FadeIn>
