@@ -85,15 +85,15 @@ export function HomeProductHighlight() {
 
           <FadeIn delay={0.06}>
             <div className="overflow-hidden rounded-3xl border border-border bg-[#061A33] shadow-md">
-              <div className="group relative aspect-video overflow-hidden">
+              <div className="group relative aspect-video overflow-hidden bg-white">
                 <Image
-                  src="/images/hero/proqpay-hero.webp"
-                  alt="ProQPay dashboard showing payroll and employee data on a laptop"
+                  src="/images/products/proqpay-image -hero.png"
+                  alt="ProQPay payroll dashboard showing employee and workforce data"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover object-center transition duration-700 group-hover:scale-[1.015]"
+                  className="object-contain object-center transition duration-700 group-hover:scale-[1.01]"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#061A33]/18 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#061A33]/10 via-transparent to-transparent" />
               </div>
               <div className="border-t border-white/10 bg-[#061A33] px-5 py-4 text-white sm:px-6">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
