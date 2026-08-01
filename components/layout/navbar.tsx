@@ -87,29 +87,54 @@ export function Navbar() {
                     className="absolute left-0 top-full z-50 w-80 rounded-2xl border border-border bg-background p-2 shadow-lg"
                     role="menu"
                   >
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href + child.title}
-                        href={child.href}
-                        role="menuitem"
-                        className="block rounded-xl px-3 py-2.5 transition hover:bg-muted"
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                          {child.title}
-                          {"badge" in child && child.badge ? (
-                            <span className="rounded-full bg-orange/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-orange">
-                              {child.badge}
-                            </span>
+                    {item.children.map((child) => {
+                      const isExternal = child.href.startsWith("http");
+                      const linkClassName =
+                        "block rounded-xl px-3 py-2.5 transition hover:bg-muted";
+                      const content = (
+                        <>
+                          <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                            {child.title}
+                            {"badge" in child && child.badge ? (
+                              <span className="rounded-full bg-orange/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-orange">
+                                {child.badge}
+                              </span>
+                            ) : null}
+                          </div>
+                          {child.description ? (
+                            <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                              {child.description}
+                            </p>
                           ) : null}
-                        </div>
-                        {child.description ? (
-                          <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
-                            {child.description}
-                          </p>
-                        ) : null}
-                      </Link>
-                    ))}
+                        </>
+                      );
+                      if (isExternal) {
+                        return (
+                          <a
+                            key={child.href + child.title}
+                            href={child.href}
+                            role="menuitem"
+                            className={linkClassName}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setOpenMenu(null)}
+                          >
+                            {content}
+                          </a>
+                        );
+                      }
+                      return (
+                        <Link
+                          key={child.href + child.title}
+                          href={child.href}
+                          role="menuitem"
+                          className={linkClassName}
+                          onClick={() => setOpenMenu(null)}
+                        >
+                          {content}
+                        </Link>
+                      );
+                    })}
                   </div>
                 ) : null}
               </div>
@@ -152,16 +177,29 @@ export function Navbar() {
                     >
                       {item.title}
                     </Link>
-                    {item.children?.map((child) => (
-                      <Link
-                        key={child.href + child.title}
-                        href={child.href}
-                        className="block px-3 py-1.5 text-sm text-muted-foreground"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {child.title}
-                      </Link>
-                    ))}
+                    {item.children?.map((child) =>
+                      child.href.startsWith("http") ? (
+                        <a
+                          key={child.href + child.title}
+                          href={child.href}
+                          className="block px-3 py-1.5 text-sm text-muted-foreground"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {child.title}
+                        </a>
+                      ) : (
+                        <Link
+                          key={child.href + child.title}
+                          href={child.href}
+                          className="block px-3 py-1.5 text-sm text-muted-foreground"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {child.title}
+                        </Link>
+                      ),
+                    )}
                   </div>
                 ))}
                 <div className="mt-6 space-y-2 px-1">

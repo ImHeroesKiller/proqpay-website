@@ -6,15 +6,16 @@ import { CtaBand } from "@/components/sections/cta-band";
 import { ProcessFlow } from "@/components/shared/process-flow";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
+import { technologyPortals } from "@/lib/content/portals";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Layers, ShieldCheck, Workflow } from "lucide-react";
+import { ArrowRight, ExternalLink, Layers, ShieldCheck, Workflow } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "MSG Workforce Technology products including ProQPay — technology that empowers workforce operations.",
+    "MSG Workforce Technology products including ProQPay, OMS PERADA (UVP Perkasa), and ARAH fleet management prototype.",
   path: "/products",
 });
 
@@ -149,6 +150,81 @@ export default function ProductsPage() {
 
       <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-2xl font-bold sm:text-3xl">
+                Technology portals & prototypes
+              </h2>
+              <p className="mt-2 max-w-2xl text-muted-foreground">
+                Live order management for PERADA (UVP Perkasa) and a fleet
+                control prototype for monitoring operations.
+              </p>
+            </div>
+          </div>
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            {technologyPortals.map((portal) => (
+              <Card
+                key={portal.id}
+                className={
+                  portal.status === "live"
+                    ? "border-orange/30 shadow-sm"
+                    : "h-full"
+                }
+              >
+                <CardHeader className="space-y-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge
+                      variant={portal.status === "live" ? "accent" : "secondary"}
+                      className="w-fit"
+                    >
+                      {portal.badge}
+                    </Badge>
+                    <Badge variant="outline" className="w-fit">
+                      {portal.statusLabel}
+                    </Badge>
+                  </div>
+                  <CardTitle className="font-heading text-xl sm:text-2xl">
+                    {portal.title}
+                  </CardTitle>
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    {portal.brand}
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {portal.description}
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    {portal.capabilities.map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-orange" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="pt-2">
+                    <Button asChild variant={portal.status === "live" ? "accent" : "outline"}>
+                      <a
+                        href={portal.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5"
+                      >
+                        {portal.ctaLabel}
+                        <ExternalLink className="h-4 w-4" aria-hidden />
+                        <span className="sr-only">(opens in a new tab)</span>
+                      </a>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="section-padding">
+        <Container>
           <h2 className="text-2xl font-bold sm:text-3xl">How MSG builds products</h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">
             A practical product development flow grounded in workforce operations.
@@ -159,7 +235,7 @@ export default function ProductsPage() {
         </Container>
       </section>
 
-      <section className="section-padding">
+      <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
           <h2 className="text-2xl font-bold sm:text-3xl">Product roadmap themes</h2>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">

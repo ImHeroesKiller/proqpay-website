@@ -235,6 +235,28 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         "Future products (Coming Soon, not live features): HR Platform, Workforce Analytics, AI Solutions, Operational Dashboard. Architecture ready for expansion under Workforce Technology.",
     },
     {
+      id: "technology-portals",
+      title: "OMS PERADA & ARAH portals",
+      tags: [
+        "oms",
+        "perada",
+        "perkasa",
+        "order management",
+        "arah",
+        "fleet",
+        "portal",
+        "prototype",
+        "uvp",
+      ],
+      content: [
+        "Order Management System PERADA (OMS PERADA) adalah portal order management dan salah satu UVP Perkasa.",
+        "Login OMS PERADA: https://oms.perada.net/login",
+        "ARAH — Fleet Management System adalah prototype untuk controlling dan monitoring fleet.",
+        "Prototype ARAH: https://arah-app-delta.vercel.app/",
+        "Ditampilkan di /products dan /technology#portals.",
+      ].join(" "),
+    },
+    {
       id: "careers",
       title: "Karir di MSG",
       tags: [

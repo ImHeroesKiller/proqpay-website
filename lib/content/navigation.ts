@@ -98,9 +98,19 @@ export const mainNavigation: NavItem[] = [
         description: "Payroll visibility for modern workforce operations.",
       },
       {
+        title: "OMS PERADA",
+        href: "https://oms.perada.net/login",
+        description: "Order Management System PERADA — UVP Perkasa.",
+      },
+      {
+        title: "ARAH Fleet",
+        href: "https://arah-app-delta.vercel.app/",
+        description: "Fleet management prototype for control and monitoring.",
+      },
+      {
         title: "Workforce Technology",
         href: "/technology",
-        description: "Product stack and future workforce platforms.",
+        description: "Product stack, portals, and future workforce platforms.",
       },
     ],
   },
@@ -132,6 +142,8 @@ export const footerNavigation = {
   ],
   products: [
     { title: "ProQPay", href: "/products/proqpay" },
+    { title: "OMS PERADA", href: "https://oms.perada.net/login" },
+    { title: "ARAH Fleet Prototype", href: "https://arah-app-delta.vercel.app/" },
     { title: "Technology Overview", href: "/technology" },
     { title: "Product Login", href: "https://proqpay.msg-os.com/login" },
     { title: "Request Demo", href: "/contact?intent=payroll-demo" },

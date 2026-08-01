@@ -21,6 +21,7 @@ function FooterColumn({
               <a
                 href={link.href}
                 className="text-sm text-white/70 transition hover:text-white"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 {link.title}
