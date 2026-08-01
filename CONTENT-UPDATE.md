@@ -14,7 +14,6 @@ Most visitor-facing content is centralized. Prefer editing data files over page 
 | Navigation + footer links | `lib/content/navigation.ts` |
 | FAQ | `lib/content/faq.ts` |
 | ProQPay product copy | `lib/content/proqpay.ts` |
-| Technology portals (OMS PERADA, ARAH) | `lib/content/portals.ts` |
 | Blog/news MDX | `content/blog/*.mdx` |
 | Guides MDX | `content/guides/*.mdx` |
 | Chatbot knowledge | `lib/chat/knowledge.ts` + `lib/chat-system-prompt.ts` |
