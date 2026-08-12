@@ -76,7 +76,7 @@ export default function ProQPayProductPage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild variant="accent" size="lg">
-                <Link href="/contact?intent=payroll-demo">Request Demo</Link>
+                <Link href="/payroll/register">Register Payroll Service</Link>
               </Button>
               <Button
                 asChild
@@ -280,8 +280,8 @@ export default function ProQPayProductPage() {
       <CtaBand
         title="Request a ProQPay demo"
         description="See payroll processing, approvals, disbursement, and working capital support in a guided walkthrough."
-        primaryHref="/contact?intent=payroll-demo"
-        primaryLabel="Request Demo"
+        primaryHref="/payroll/register"
+        primaryLabel="Register Payroll Service"
         secondaryHref={siteConfig.appUrl}
         secondaryLabel="Open App"
       />

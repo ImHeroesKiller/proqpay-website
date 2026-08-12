@@ -24,6 +24,7 @@ const routes = [
   "/contact",
   "/contact/strategic-interest",
   "/request-consultation",
+  "/payroll/register",
   "/portfolio",
   "/portfolio/mitra-kreasi-bersama",
   "/privacy",

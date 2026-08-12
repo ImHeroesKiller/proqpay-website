@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "msg-payroll-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  "r2_buckets": [{ "binding": "DOCUMENTS", "bucket_name": "msg-payroll-documents" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "msg-payroll", "database_id": "9419cc6f-5f51-456b-b978-4f5349c99286", "migrations_dir": "migrations" }]
+}

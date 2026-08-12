@@ -99,6 +99,9 @@ export default function TechnologyPage() {
                 ))}
               </ul>
               <div className="flex flex-wrap gap-3 pt-2">
+                <Button asChild>
+                  <Link href="/payroll/register">Register Payroll Service</Link>
+                </Button>
                 <Button asChild variant="accent">
                   <Link href="/products/proqpay">
                     Explore ProQPay <ArrowRight className="h-4 w-4" />
@@ -199,8 +202,8 @@ export default function TechnologyPage() {
       <CtaBand
         title="Interested in Workforce Technology?"
         description="Request a ProQPay demo or discuss how MSG technology can support your workforce operations."
-        primaryHref="/contact?intent=payroll-demo"
-        primaryLabel="Request ProQPay Demo"
+        primaryHref="/payroll/register"
+        primaryLabel="Register Payroll Service"
         secondaryHref="/products/proqpay"
         secondaryLabel="Explore ProQPay"
       />

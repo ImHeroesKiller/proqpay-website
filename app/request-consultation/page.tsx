@@ -2,6 +2,8 @@ import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
 import { ConsultationForm } from "@/components/forms/consultation-form";
 import { buildMetadata } from "@/lib/seo";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export const metadata = buildMetadata({
   title: "Request Consultation",
@@ -36,6 +38,7 @@ export default async function RequestConsultationPage({
       <section className="section-padding">
         <Container className="max-w-2xl">
           <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
+            <Button asChild variant="accent" className="mb-6 w-full"><Link href="/payroll/register">Register Payroll Service</Link></Button>
             <ConsultationForm defaultIntent={intent} />
           </div>
         </Container>

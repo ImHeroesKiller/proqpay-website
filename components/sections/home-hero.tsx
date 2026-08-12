@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/shared/container";
 import { FadeIn } from "@/components/shared/fade-in";
@@ -21,7 +20,7 @@ export function HomeHero() {
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-white/10" />
 
       <Container className="relative py-16 sm:py-20 lg:py-24">
-        <div className="grid items-end gap-10 lg:grid-cols-[1.12fr_0.88fr]">
+        <div className="max-w-4xl">
           <div className="max-w-3xl">
             <FadeIn>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
@@ -55,19 +54,6 @@ export function HomeHero() {
             </FadeIn>
           </div>
 
-          <FadeIn delay={0.08}>
-            <div className="relative mx-auto hidden w-full max-w-[470px] lg:block">
-              <div className="pointer-events-none absolute inset-x-8 bottom-2 h-24 rounded-full bg-[#0B3A6E]/45 blur-3xl" />
-              <Image
-                src="/images/home/Indonesia-worker.png"
-                alt="Young Indonesian male and female office professionals"
-                width={900}
-                height={1000}
-                priority
-                className="relative z-10 h-auto max-h-[520px] w-full object-contain object-bottom drop-shadow-2xl"
-              />
-            </div>
-          </FadeIn>
         </div>
 
         <FadeIn delay={0.1}>

@@ -5,6 +5,8 @@ import { siteConfig } from "@/lib/site-config";
 import { buildMetadata } from "@/lib/seo";
 import type { ContactFormValues } from "@/lib/validations/contact";
 import { Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export const metadata = buildMetadata({
   title: "Contact",
@@ -103,6 +105,7 @@ export default async function ContactPage({
             </div>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
+            <Button asChild variant="accent" className="mb-6 w-full"><Link href="/payroll/register">Register Payroll Service</Link></Button>
             <h2 className="text-2xl font-bold">Send a message</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               Everything routes through MSG corporate operations.
