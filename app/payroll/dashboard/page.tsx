@@ -1,2 +1,1 @@
-import { ClientDashboard } from "@/components/payroll-registration/client-dashboard"; import { buildMetadata } from "@/lib/seo";
-export const metadata=buildMetadata({title:"Payroll Client Dashboard",description:"Track your MSG Payroll Service application.",path:"/payroll/dashboard"}); export default function Page(){return <main className="min-h-[70vh] bg-muted/30 py-12"><ClientDashboard/></main>}
+import {ClientPortalHome} from "@/components/payroll-registration/client-portal-home";export const metadata={title:"Client Portal | MSG",robots:{index:false,follow:false}};export default function Page(){return <ClientPortalHome/>}

@@ -1,1 +1,1 @@
-import { AdminDashboard } from "@/components/payroll-registration/admin-dashboard"; export const metadata={title:"Payroll Admin | MSG",robots:{index:false,follow:false}};export default function Page(){return <main className="min-h-screen bg-muted/30 py-12"><AdminDashboard/></main>}
+import {AdminPortalDashboard} from "@/components/payroll-registration/admin-portal-dashboard";export const metadata={title:"Admin Portal | MSG",robots:{index:false,follow:false}};export default function Page(){return <AdminPortalDashboard/>}

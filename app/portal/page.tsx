@@ -1,0 +1,1 @@
+import {PortalLogin} from "@/components/payroll-registration/portal-login";export const metadata={title:"MSG Portal Login",robots:{index:false,follow:false}};export default function Page(){return <PortalLogin/>}

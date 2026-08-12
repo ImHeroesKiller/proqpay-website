@@ -1,3 +1,1 @@
-import { NextResponse } from "next/server";
-import { payrollWorker } from "@/lib/payroll/client";
-export async function GET(request:Request){const token=request.headers.get("x-client-token")??"";if(token.length<60)return NextResponse.json({error:"Unauthorized"},{status:401});const response=await payrollWorker("/client/application",{headers:{"x-client-token":token}});return new NextResponse(response.body,{status:response.status,headers:{"content-type":"application/json"}})}
+import {NextResponse} from "next/server";import {payrollWorker} from "@/lib/payroll/client";import {portalToken} from "@/lib/payroll/auth";export async function GET(request:Request){const token=portalToken(request);if(!token)return NextResponse.json({error:"Unauthorized"},{status:401});const response=await payrollWorker("/portal/client-application",{headers:{"x-portal-token":token}});return new NextResponse(response.body,{status:response.status,headers:{"content-type":"application/json"}})}
