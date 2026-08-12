@@ -106,6 +106,7 @@ export const mainNavigation: NavItem[] = [
   },
   { title: "Careers", href: "/careers" },
   { title: "News", href: "/news" },
+  { title: "Payroll Registration", href: "/payroll/register" },
   { title: "Contact", href: "/contact" },
 ];
 

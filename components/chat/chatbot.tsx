@@ -30,7 +30,7 @@ const WELCOME: UiMessage = {
   id: "welcome",
   role: "assistant",
   content:
-    "Halo! Aku Sinta, asisten virtual MSG. Bisa bantu jelasin layanan workforce, ProQPay, atau cara hubungi tim kami. Mau tanya apa dulu?",
+    "Halo! Saya IDA, Intelligent Digital Assistant MSG. Saya bisa membantu layanan MSG, registrasi payroll, portal klien, dan proses assessment. Apa yang ingin Anda cari?",
 };
 
 const SUGGESTIONS = [
@@ -188,7 +188,7 @@ export function Chatbot() {
         <div
           id={panelId}
           role="dialog"
-          aria-label="Sinta — MSG Assistant"
+          aria-label="IDA — MSG Assistant"
           aria-modal="false"
           className="flex h-[min(34rem,calc(100vh-6rem))] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl"
         >
@@ -197,7 +197,7 @@ export function Chatbot() {
               <span className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-white/25">
                 <Image
                   src={AVATAR_SRC}
-                  alt="Sinta, asisten virtual MSG"
+                  alt="IDA, Intelligent Digital Assistant MSG"
                   width={40}
                   height={40}
                   className="h-full w-full object-cover"
@@ -205,7 +205,7 @@ export function Chatbot() {
                 />
               </span>
               <div>
-                <p className="text-sm font-semibold">Sinta</p>
+                <p className="text-sm font-semibold">IDA</p>
                 <p className="text-[11px] text-white/70">MSG Assistant · Online</p>
               </div>
             </div>
@@ -288,7 +288,7 @@ export function Chatbot() {
                   <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#0B3A6E] [animation-delay:-0.1s]" />
                   <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#0B3A6E]" />
                 </span>
-                Sinta sedang mengetik…
+                IDA sedang mengetik…
               </div>
             ) : null}
 
@@ -345,7 +345,7 @@ export function Chatbot() {
                     void sendMessage(input);
                   }
                 }}
-                placeholder="Tanya Sinta tentang MSG…"
+                placeholder="Tanya IDA tentang MSG…"
                 className="max-h-28 min-h-[44px] flex-1 resize-none rounded-xl border border-input bg-background px-3 py-2.5 text-sm shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-orange/70"
                 disabled={loading}
               />
@@ -360,7 +360,7 @@ export function Chatbot() {
               </Button>
             </div>
             <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
-              Sinta bisa keliru. Untuk keputusan bisnis, hubungi tim MSG langsung.
+              IDA dapat keliru. Assessment dan keputusan bisnis tetap memerlukan review manusia.
             </p>
           </form>
         </div>
@@ -390,7 +390,7 @@ export function Chatbot() {
                 className="h-full w-full object-cover"
               />
             </span>
-            <span>Tanya Sinta</span>
+            <span>Tanya IDA</span>
             <MessageCircle className="h-4 w-4 opacity-80" aria-hidden />
           </>
         )}

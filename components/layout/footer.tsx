@@ -101,6 +101,7 @@ export function Footer() {
             <Link href="/payroll/register" className="hover:text-white/70">Payroll Registration</Link>
             <Link href="/payroll/dashboard" className="hover:text-white/70">Client Portal</Link>
             <Link href="/admin/assessment" className="hover:text-white/70">Admin Portal</Link>
+            <Link href="/admin/users" className="hover:text-white/70">User Management</Link>
             <Link href="/privacy" className="hover:text-white/70">
               Privacy
             </Link>

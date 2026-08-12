@@ -124,7 +124,7 @@ export function Navbar() {
             size="sm"
             className="bg-[#0B3A6E] text-white transition-transform hover:-translate-y-px hover:bg-[#0a3360]"
           >
-            <Link href="/request-consultation">Request Consultation</Link>
+            <Link href="/payroll/register">Register Payroll</Link>
           </Button>
         </div>
 
@@ -170,10 +170,10 @@ export function Navbar() {
                     className="w-full bg-[#0B3A6E] text-white hover:bg-[#0a3360]"
                   >
                     <Link
-                      href="/request-consultation"
+                      href="/payroll/register"
                       onClick={() => setMobileOpen(false)}
                     >
-                      Request Consultation
+                      Register Payroll
                     </Link>
                   </Button>
                   <Button asChild variant="outline" className="w-full">

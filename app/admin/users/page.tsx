@@ -1,0 +1,1 @@
+import {UserManagement} from "@/components/payroll-registration/user-management";export const metadata={title:"User Management | MSG",robots:{index:false,follow:false}};export default function Page(){return <UserManagement/>}

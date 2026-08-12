@@ -22,7 +22,7 @@ const sections = [
     body: [
       "Information you provide directly, such as name, company, email, phone number, role, workforce requirements, message content, and career-related materials you choose to send.",
       "Technical information collected automatically, such as browser type, device category, approximate location derived from IP (if available), pages visited, and basic usage logs needed to operate and secure the website.",
-      "Chatbot conversation content you send to Sinta (MSG Assistant), used to respond to your questions and improve support quality during the session.",
+      "Chatbot conversation content you send to IDA (MSG Intelligent Digital Assistant), used to respond to your questions and improve support quality during the session.",
     ],
   },
   {

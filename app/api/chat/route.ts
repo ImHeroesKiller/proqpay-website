@@ -180,7 +180,7 @@ export async function POST(request: Request) {
       summary: [
         memory.summary,
         `User: ${last.content.slice(0, 120)}`,
-        `Sinta: ${text.slice(0, 160)}`,
+        `IDA: ${text.slice(0, 160)}`,
       ]
         .filter(Boolean)
         .join(" · ")
