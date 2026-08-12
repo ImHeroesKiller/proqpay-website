@@ -1,0 +1,1 @@
+import {AdminFollowUp} from "@/components/payroll-registration/admin-follow-up";export const metadata={title:"Client Follow-up | MSG",robots:{index:false,follow:false}};export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;return <AdminFollowUp id={id}/>}
