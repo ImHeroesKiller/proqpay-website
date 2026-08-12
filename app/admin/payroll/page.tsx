@@ -1,0 +1,1 @@
+import { AdminDashboard } from "@/components/payroll-registration/admin-dashboard"; export const metadata={title:"Payroll Admin | MSG",robots:{index:false,follow:false}};export default function Page(){return <main className="min-h-screen bg-muted/30 py-12"><AdminDashboard/></main>}

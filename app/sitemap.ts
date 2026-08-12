@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/request-consultation",
     "/payroll/register",
+    "/payroll",
     ...(isStrategicInterestEnabled() ? ["/contact/strategic-interest"] : []),
     "/privacy",
     "/terms",
