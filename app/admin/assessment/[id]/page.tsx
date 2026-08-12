@@ -1,0 +1,1 @@
+import { AssessmentWorkspace } from "@/components/payroll-registration/assessment-workspace";export const metadata={title:"Assessment Workspace | MSG",robots:{index:false,follow:false}};export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;return <main className="min-h-screen bg-muted/30"><AssessmentWorkspace id={id}/></main>}

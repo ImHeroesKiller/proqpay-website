@@ -1,0 +1,1 @@
+import { AssessmentQueue } from "@/components/payroll-registration/assessment-queue";export const metadata={title:"Due Diligence Assessment | MSG",robots:{index:false,follow:false}};export default function Page(){return <main className="min-h-screen bg-muted/30 py-12"><AssessmentQueue/></main>}
