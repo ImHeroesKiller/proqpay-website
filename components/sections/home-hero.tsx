@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 const floatingCards = [
   { label: "Strategic Advisory", detail: "Featured service" },
   { label: "Workforce Solutions", detail: "End-to-end delivery" },
-  { label: "Workforce Technology", detail: "ProQPay enabled" },
+  { label: "Technology", detail: "ProQPay Lite enabled" },
   { label: "Business Transformation", detail: "Improve · Grow · Scale" },
 ];
 
@@ -53,7 +53,6 @@ export function HomeHero() {
               </div>
             </FadeIn>
           </div>
-
         </div>
 
         <FadeIn delay={0.1}>

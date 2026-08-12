@@ -1,5 +1,9 @@
 import { siteConfig } from "@/lib/site-config";
-import { services, strategicAdvisoryContent, servicePillars } from "@/lib/content/services";
+import {
+  services,
+  strategicAdvisoryContent,
+  servicePillars,
+} from "@/lib/content/services";
 import { industries } from "@/lib/content/industries";
 import { faqs } from "@/lib/content/faq";
 import { aboutContent } from "@/lib/content/about";
@@ -44,10 +48,10 @@ export function buildKnowledgeBase(): KnowledgeChunk[] {
         "transformation",
       ],
       content: [
-        `${siteConfig.legalName} (MSG) adalah Enterprise Workforce Solutions & Business Transformation Partner di Indonesia.`,
+        `${siteConfig.legalName} (MSG) adalah Workforce Management Partner di Indonesia.`,
         `Berdiri tahun ${siteConfig.founded}.`,
         `Positioning: ${siteConfig.positioning}`,
-        `Tiga pilar: Strategic Advisory, Workforce Solutions, Workforce Technology.`,
+        `Tiga pilar: Strategic Advisory, Workforce Solutions, dan Technology.`,
         `Tagline: ${siteConfig.tagline}.`,
         "MSG membantu perusahaan improve, operate, transform, grow, dan scale—bukan hanya menyalurkan tenaga kerja.",
       ].join(" "),

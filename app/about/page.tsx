@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 export const metadata = buildMetadata({
   title: "About MSG",
   description:
-    "About PT Mandiri Semesta Gemilang (MSG): Enterprise Workforce Solutions & Business Transformation Partner established in 2019. Strategic Advisory, Workforce Solutions, Workforce Technology.",
+    "About PT Mandiri Semesta Gemilang (MSG), a Workforce Management Partner established in 2019.",
   path: "/about",
 });
 
@@ -22,11 +22,8 @@ export default function AboutPage() {
     <>
       <PageHero
         title="About MSG"
-        description={`${siteConfig.legalName} is an Enterprise Workforce Solutions & Business Transformation Partner. We help organizations improve, operate, transform, grow, and scale.`}
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "About" },
-        ]}
+        description={`${siteConfig.legalName} is a Workforce Management Partner integrating strategy, people, operations, and technology.`}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
         cta={{
           label: "Schedule Business Consultation",
           href: "/request-consultation",
@@ -45,8 +42,11 @@ export default function AboutPage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
               { label: "Established", value: String(siteConfig.founded) },
-              { label: "Positioning", value: "Transformation Partner" },
-              { label: "Capabilities", value: "Advisory · Workforce · Tech" },
+              { label: "Positioning", value: "Workforce Management Partner" },
+              {
+                label: "Capabilities",
+                value: "Strategy · People · Technology",
+              },
             ].map((item) => (
               <div
                 key={item.label}
@@ -64,9 +64,9 @@ export default function AboutPage() {
             Three core capabilities
           </h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            MSG integrates Strategic Advisory, Workforce Solutions, and Workforce
-            Technology so enterprises can improve performance and transform with
-            operational accountability.
+            MSG integrates Strategic Advisory, Workforce Solutions, and
+            Workforce Technology so enterprises can improve performance and
+            transform with operational accountability.
           </p>
           <div className="mt-8 overflow-hidden rounded-3xl border border-border shadow-sm">
             <Image
@@ -110,7 +110,9 @@ export default function AboutPage() {
             </Card>
           </div>
 
-          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">Company values</h2>
+          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">
+            Company values
+          </h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {aboutContent.values.map((value) => (
               <div
@@ -127,14 +129,16 @@ export default function AboutPage() {
 
           <h2 className="mt-16 text-2xl font-bold sm:text-3xl">How we work</h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Six-step delivery cycle from understanding requirements to continuous
-            improvement.
+            Six-step delivery cycle from understanding requirements to
+            continuous improvement.
           </p>
           <div className="mt-8">
             <ProcessFlow steps={aboutContent.howWeWork} variant="cycle" />
           </div>
 
-          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">Core services</h2>
+          <h2 className="mt-16 text-2xl font-bold sm:text-3xl">
+            Core services
+          </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {aboutContent.coreServices.map((service) => (
               <Link
@@ -213,7 +217,9 @@ export default function AboutPage() {
           </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-border bg-card p-5 text-sm">
-              <p className="font-semibold">{aboutContent.legalInfo.companyName}</p>
+              <p className="font-semibold">
+                {aboutContent.legalInfo.companyName}
+              </p>
               <p className="mt-2 text-muted-foreground">
                 Established {aboutContent.legalInfo.founded}
               </p>

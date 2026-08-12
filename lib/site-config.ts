@@ -2,11 +2,11 @@ export const siteConfig = {
   name: "MSG",
   legalName: "PT Mandiri Semesta Gemilang",
   brand: "MSG",
-  tagline: "Enterprise Workforce Solutions & Business Transformation",
+  tagline: "Workforce Management Partner",
   supportingLine:
-    "Strategic advisory, workforce solutions, and workforce technology for Indonesian enterprises.",
+    "People. Operations. Technology. Integrated solutions for sustainable business growth.",
   description:
-    "PT Mandiri Semesta Gemilang (MSG) is an Enterprise Workforce Solutions & Business Transformation Partner. We help organizations improve, operate, transform, grow, and scale through Strategic Advisory, Workforce Solutions, and Workforce Technology.",
+    "PT Mandiri Semesta Gemilang (MSG) is a Workforce Management Partner integrating strategy, people, and technology through Strategic Advisory, Workforce Solutions, and Technology.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.msg-os.com",
   websiteDisplay: "www.msg-os.com",
   /** ProQPay payroll application (subdomain) */
@@ -17,11 +17,10 @@ export const siteConfig = {
     : "https://proqpay.msg-os.com/login",
   locale: "en_US",
   founded: 2019,
-  companyMessage:
-    "Enterprise Workforce Solutions & Business Transformation Partner",
-  slogan: "Improve · Operate · Transform · Grow · Scale",
+  companyMessage: "Workforce Management Partner",
+  slogan: "People · Operations · Technology",
   positioning:
-    "PT Mandiri Semesta Gemilang is an Enterprise Workforce Solutions & Business Transformation Partner that helps organizations build, improve, manage, transform, and grow through Strategic Advisory, Workforce Solutions, and Workforce Technology.",
+    "PT Mandiri Semesta Gemilang integrates strategy, people, and technology to deliver end-to-end solutions that drive business transformation and sustainable growth.",
   seoKeywords: [
     "business advisory Indonesia",
     "business transformation",
@@ -36,11 +35,11 @@ export const siteConfig = {
   ],
   hero: {
     eyebrow: "PT Mandiri Semesta Gemilang",
-    headline: "Building Better Businesses Through People, Operations & Technology",
+    headline: "One Partner. Integrated Solutions. Measurable Impact.",
     subheadline:
-      "MSG membantu organisasi meningkatkan performa bisnis melalui strategic advisory, workforce solutions, dan workforce technology.",
+      "MSG mengintegrasikan strategi, people, dan technology untuk mendorong transformasi bisnis dan pertumbuhan berkelanjutan.",
     subheadlineEn:
-      "MSG helps organizations improve business performance through strategic advisory, workforce solutions, and workforce technology.",
+      "MSG integrates strategy, people, and technology to drive business transformation and sustainable growth.",
   },
   contact: {
     email: "info@msg-os.com",
@@ -64,10 +63,10 @@ export const siteConfig = {
   products: {
     proqpay: {
       name: "ProQPay",
-      label: "Workforce Technology · Flagship Product",
-      headline: "Technology that empowers workforce operations.",
+      label: "Technology Solution · Payroll Platform",
+      headline: "One payroll platform. Three levels of service.",
       description:
-        "ProQPay is MSG's payroll technology product for processing, approval, disbursement, working capital support, and reporting—built for modern enterprise workforce operations.",
+        "ProQPay Lite supports payment processing, managed payroll, and automation and integration through one controlled payroll ecosystem.",
       appUrl:
         process.env.NEXT_PUBLIC_PROQPAY_APP_URL ?? "https://proqpay.msg-os.com",
     },

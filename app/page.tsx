@@ -39,7 +39,7 @@ import {
 import { getBlogPosts } from "@/lib/mdx";
 
 export const metadata = buildMetadata({
-  title: `${siteConfig.legalName} | Enterprise Workforce Solutions & Business Transformation`,
+  title: `${siteConfig.legalName} | Workforce Management Partner`,
   description: siteConfig.description,
   path: "/",
 });
@@ -134,8 +134,8 @@ export default function HomePage() {
         <Container>
           <SectionTitle
             eyebrow="Capabilities"
-            title="Three pillars. One transformation partner."
-            description="Strategic Advisory, Workforce Solutions, and Workforce Technology—integrated to help enterprises improve, operate, transform, grow, and scale."
+            title="One partner. Integrated solutions. Measurable impact."
+            description="Strategic Advisory, Workforce Solutions, and Technology—integrated through people, operations, and practical digital platforms."
           />
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {aboutContent.pillars.map((pillar, index) => {
@@ -148,7 +148,9 @@ export default function HomePage() {
                       <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0B3A6E]/10 text-[#0B3A6E] dark:bg-blue-400/10 dark:text-blue-300">
                         <Icon className="h-5 w-5" aria-hidden />
                       </div>
-                      <CardTitle className="mt-2 text-xl">{pillar.title}</CardTitle>
+                      <CardTitle className="mt-2 text-xl">
+                        {pillar.title}
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm leading-relaxed text-muted-foreground">
@@ -189,7 +191,9 @@ export default function HomePage() {
                 key={line.id}
                 className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
               >
-                <h3 className="text-lg font-semibold text-white">{line.title}</h3>
+                <h3 className="text-lg font-semibold text-white">
+                  {line.title}
+                </h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/65">
                   {line.description}
                 </p>
@@ -271,7 +275,7 @@ export default function HomePage() {
       <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
           <SectionTitle
-            eyebrow="Workforce Technology"
+            eyebrow="Technology Solutions"
             title="A growing technology stack"
             description={`${technology.positioning} ProQPay is the flagship product; additional platforms are planned without overstating unreleased features.`}
           />
@@ -293,7 +297,11 @@ export default function HomePage() {
                 href: "/technology#future",
               },
             ].map((item) => (
-              <Link key={item.title} href={item.href} className="group block h-full">
+              <Link
+                key={item.title}
+                href={item.href}
+                className="group block h-full"
+              >
                 <Card className="h-full transition hover:border-[#0B3A6E]/40 hover:shadow-sm">
                   <CardHeader>
                     <CardTitle className="text-lg group-hover:text-[#0B3A6E] dark:group-hover:text-blue-300">
@@ -361,7 +369,7 @@ export default function HomePage() {
         <Container>
           <SectionTitle
             eyebrow="Why MSG"
-            title="Improve · Operate · Transform · Grow · Scale"
+            title="People · Operations · Technology"
             description="MSG helps companies go beyond workforce supply—to stronger business performance."
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

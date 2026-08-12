@@ -32,7 +32,14 @@ export const mainNavigation: NavItem[] = [
           "Outsourcing, engineering talent, business support, and managed workforce.",
       },
       {
-        title: "Workforce Technology",
+        title: "Payroll Services & Registration",
+        href: "/payroll/register",
+        description:
+          "Register for MSG payroll processing, multi-bank disbursement, working capital, and reporting services.",
+        badge: "Register",
+      },
+      {
+        title: "Technology Solutions",
         href: "/technology",
         description:
           "Technology that empowers workforce operations—starting with ProQPay.",
@@ -46,8 +53,7 @@ export const mainNavigation: NavItem[] = [
       {
         title: "Managed Portfolio",
         href: "/portfolio",
-        description:
-          "Companies strengthened through MSG Strategic Advisory.",
+        description: "Companies strengthened through MSG Strategic Advisory.",
       },
       {
         title: "PT Mitra Kreasi Bersama",
@@ -98,7 +104,7 @@ export const mainNavigation: NavItem[] = [
         description: "Payroll visibility for modern workforce operations.",
       },
       {
-        title: "Workforce Technology",
+        title: "Technology Solutions",
         href: "/technology",
         description: "Product stack and future workforce platforms.",
       },
@@ -106,7 +112,6 @@ export const mainNavigation: NavItem[] = [
   },
   { title: "Careers", href: "/careers" },
   { title: "News", href: "/news" },
-  { title: "Payroll Registration", href: "/payroll/register" },
   { title: "Contact", href: "/contact" },
 ];
 
@@ -120,7 +125,8 @@ export const footerNavigation = {
   services: [
     { title: "Strategic Advisory", href: "/services/strategic-advisory" },
     { title: "Workforce Solutions", href: "/services/workforce-solutions" },
-    { title: "Workforce Technology", href: "/technology" },
+    { title: "Technology Solutions", href: "/technology" },
+    { title: "Payroll Services & Registration", href: "/payroll/register" },
     { title: "Workforce Outsourcing", href: "/services/workforce-outsourcing" },
   ],
   portfolio: [

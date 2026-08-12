@@ -13,7 +13,7 @@ import { ArrowRight, Check } from "lucide-react";
 export const metadata = buildMetadata({
   title: "Services",
   description:
-    "MSG services: Strategic Advisory (featured), Workforce Solutions, and Workforce Technology—enterprise workforce solutions and business transformation for Indonesian organizations.",
+    "MSG services: Strategic Advisory, Workforce Solutions, Payroll Services, and Technology for Indonesian organizations.",
   path: "/services",
 });
 
@@ -22,11 +22,8 @@ export default function ServicesPage() {
     <>
       <PageHero
         title="Enterprise services for performance and transformation"
-        description="Three integrated capabilities: Strategic Advisory, Workforce Solutions, and Workforce Technology. MSG helps organizations improve, operate, transform, grow, and scale."
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Services" },
-        ]}
+        description="Three integrated capabilities: Strategic Advisory, Workforce Solutions, and Technology. One partner for people, operations, and measurable impact."
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
         cta={{
           label: "Schedule Business Consultation",
           href: "/request-consultation",
@@ -36,11 +33,7 @@ export default function ServicesPage() {
       <section className="section-padding">
         <Container className="space-y-10">
           {servicePillars.map((pillar) => (
-            <Link
-              key={pillar.id}
-              href={pillar.href}
-              className="group block"
-            >
+            <Link key={pillar.id} href={pillar.href} className="group block">
               <Card
                 className={`overflow-hidden transition duration-300 hover:-translate-y-0.5 hover:shadow-md ${
                   pillar.badge
@@ -75,7 +68,10 @@ export default function ServicesPage() {
                     </p>
                     <ul className="mt-4 space-y-3">
                       {pillar.solutions.slice(0, 5).map((item) => (
-                        <li key={item} className="flex gap-3 text-sm leading-relaxed">
+                        <li
+                          key={item}
+                          className="flex gap-3 text-sm leading-relaxed"
+                        >
                           <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#0B3A6E] dark:text-blue-300" />
                           <span>{item}</span>
                         </li>
@@ -91,7 +87,9 @@ export default function ServicesPage() {
 
       <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
-          <h2 className="text-2xl font-bold sm:text-3xl">How service delivery works</h2>
+          <h2 className="text-2xl font-bold sm:text-3xl">
+            How service delivery works
+          </h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">
             A shared operating rhythm across advisory, workforce, and technology
             engagements.

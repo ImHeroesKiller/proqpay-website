@@ -1,18 +1,17 @@
 /** Central About + homepage content — update here, not in page components. */
 export const aboutContent = {
   whoWeAre: [
-    "PT Mandiri Semesta Gemilang (MSG) is an Indonesian Enterprise Workforce Solutions & Business Transformation Partner established in 2019.",
-    "We help organizations improve, operate, transform, grow, and scale—not only by providing workforce capacity, but by combining strategic advisory, end-to-end workforce solutions, and workforce technology.",
-    "Our three core capabilities are Strategic Advisory, Workforce Solutions, and Workforce Technology (including ProQPay).",
+    "PT Mandiri Semesta Gemilang (MSG) is a Workforce Management Partner established in 2019.",
+    "We integrate strategy, people, and technology to deliver end-to-end solutions that drive business transformation and sustainable growth.",
+    "Our three core capabilities are Strategic Advisory, Workforce Solutions, and Technology, including ProQPay Lite as our integrated payroll platform.",
   ],
   moreThanManpower: {
-    title: "Integrated Workforce Solutions",
+    title: "People. Operations. Technology.",
     body: [
-      "MSG is not only a workforce provider. We partner with enterprises to build, improve, manage, transform, and develop their business through people, operations, and technology.",
-      "From strategic assessment and operational redesign to workforce delivery and digital payroll visibility, MSG works as a transformation-minded operating partner—not a transactional staffing channel.",
+      "MSG combines strategic insight, reliable workforce operations, and practical technology in one accountable partnership.",
+      "From business transformation and investment readiness to outsourcing, payroll services, managed operations, and digital integration, our solutions are designed around measurable outcomes.",
     ],
-    quote:
-      "Improve. Operate. Transform. Grow. Scale.—with people, operations, and technology working as one.",
+    quote: "One Partner. Integrated Solutions. Measurable Impact.",
   },
   pillars: [
     {
@@ -29,22 +28,23 @@ export const aboutContent = {
     },
     {
       id: "technology",
-      title: "Workforce Technology",
+      title: "Technology",
       description:
-        "Technology that empowers workforce operations—starting with ProQPay, with room to expand into analytics, HR platforms, and AI-enabled tools.",
+        "Workforce management technology, data and analytics, and digital integration—led by ProQPay Lite.",
     },
   ],
   vision:
-    "To be a trusted Enterprise Workforce Solutions & Business Transformation Partner in Indonesia—helping organizations improve performance through advisory, disciplined people operations, and practical technology.",
+    "To be a trusted Workforce Management Partner that helps organizations grow through integrated strategy, people, operations, and technology.",
   mission:
-    "To empower businesses with strategic advisory, reliable workforce delivery, operational excellence, and technology-enabled visibility—building long-term partnerships based on integrity, accountability, and service excellence.",
+    "To deliver flexible, integrated, technology-enabled solutions with disciplined operations, measurable outcomes, and long-term partnership.",
   coreServices: [
     {
       title: "Strategic Advisory",
       description:
         "Business recovery, growth, investment readiness, M&A advisory, and transformation.",
       href: "/services/strategic-advisory",
-      benefit: "Featured service for companies preparing for the next stage of growth.",
+      benefit:
+        "Featured service for companies preparing for the next stage of growth.",
       badge: "Featured Service",
     },
     {
@@ -55,17 +55,19 @@ export const aboutContent = {
       benefit: "End-to-end people operations with structured continuity.",
     },
     {
-      title: "Workforce Technology",
+      title: "Technology",
       description:
-        "Digital products that strengthen payroll visibility and workforce operations.",
+        "Workforce management technology, data and analytics, and digital integration.",
       href: "/technology",
-      benefit: "Technology that empowers workforce operations.",
+      benefit:
+        "Integrated technology with smarter operations and better outcomes.",
     },
   ],
   values: [
     {
       title: "Integrity",
-      description: "Honest communication, transparent processes, and reliable commitments.",
+      description:
+        "Honest communication, transparent processes, and reliable commitments.",
     },
     {
       title: "Accountability",
@@ -77,22 +79,26 @@ export const aboutContent = {
     },
     {
       title: "Collaboration",
-      description: "We operate as an extension of client teams and stakeholders.",
+      description:
+        "We operate as an extension of client teams and stakeholders.",
     },
     {
       title: "Agility",
-      description: "Flexible service models that adapt to changing operational needs.",
+      description:
+        "Flexible service models that adapt to changing operational needs.",
     },
     {
       title: "Continuous Improvement",
-      description: "Use operational data and feedback to refine delivery over time.",
+      description:
+        "Use operational data and feedback to refine delivery over time.",
     },
   ],
   howWeWork: [
     {
       step: 1,
       title: "Understand",
-      description: "Understand business, workforce, and operational requirements.",
+      description:
+        "Understand business, workforce, and operational requirements.",
     },
     {
       step: 2,
@@ -117,11 +123,16 @@ export const aboutContent = {
     {
       step: 6,
       title: "Improve",
-      description: "Improve continuously using operational and business feedback.",
+      description:
+        "Improve continuously using operational and business feedback.",
     },
   ],
   timeline: [
-    { year: "2019", title: "Founded", description: "MSG established in Indonesia." },
+    {
+      year: "2019",
+      title: "Founded",
+      description: "MSG established in Indonesia.",
+    },
     {
       year: "2020–2023",
       title: "Service growth",
@@ -146,8 +157,8 @@ export const aboutContent = {
 
 export const trustStrip = [
   { label: "Established", value: "2019" },
-  { label: "Positioning", value: "Transformation Partner" },
-  { label: "Capabilities", value: "Advisory · Workforce · Tech" },
+  { label: "Positioning", value: "Workforce Management Partner" },
+  { label: "Capabilities", value: "Strategy · People · Technology" },
   { label: "Coverage", value: "Indonesian Businesses" },
   { label: "Technology", value: "ProQPay Enabled" },
 ];
@@ -338,7 +349,8 @@ export const operationalExcellence = [
   },
   {
     title: "Timely operational visibility",
-    description: "Designed to provide timely visibility for managers and clients.",
+    description:
+      "Designed to provide timely visibility for managers and clients.",
   },
 ];
 

@@ -1,7 +1,5 @@
 export type ServiceGroupId =
-  | "strategic-advisory"
-  | "workforce-solutions"
-  | "workforce-technology";
+  "strategic-advisory" | "workforce-solutions" | "workforce-technology";
 
 export type Service = {
   slug: string;
@@ -47,9 +45,9 @@ export const servicePillars: ServicePillar[] = [
     badge: "Featured Service",
     href: "/services/strategic-advisory",
     summary:
-      "Business recovery, growth, and transformation advisory for enterprises preparing for the next stage of performance.",
+      "Business transformation, investment readiness, and outsourcing advisory for stronger, more resilient businesses.",
     description:
-      "MSG helps organizations strengthen profitability, rebuild operating models, prepare for investment or M&A, and execute business transformation—through structured advisory grounded in operations and workforce reality.",
+      "MSG partners with leadership teams to solve complex challenges, unlock opportunities, and build stronger, more resilient businesses through practical strategy and insight-driven solutions.",
     positioning:
       "Flagship advisory focused on Business Recovery, Business Growth, and Business Transformation—not consulting decks alone.",
     challenges: [
@@ -60,12 +58,9 @@ export const servicePillars: ServicePillar[] = [
       "Organization and workforce models that no longer match growth ambitions",
     ],
     solutions: [
-      "Business health, operational, and financial assessments",
-      "Cost efficiency, margin, and cashflow improvement programs",
-      "Outsourcing business advisory and service redesign",
-      "Investment readiness and due diligence preparation",
-      "M&A advisory and business transition support",
-      "Organization redesign, operational excellence, and digital/AI roadmaps",
+      "Strategy, operating model, process improvement, digital enablement, and change management",
+      "Financial due diligence, valuation support, governance, reporting, and investor materials",
+      "Outsourcing strategy, vendor assessment, transition management, and contract performance governance",
     ],
     benefits: [
       "Clearer path from assessment to executable improvement",
@@ -78,12 +73,14 @@ export const servicePillars: ServicePillar[] = [
       {
         step: 1,
         title: "Discover",
-        description: "Understand business context, constraints, and priorities.",
+        description:
+          "Understand business context, constraints, and priorities.",
       },
       {
         step: 2,
         title: "Assess",
-        description: "Evaluate health, operations, workforce, and financial drivers.",
+        description:
+          "Evaluate health, operations, workforce, and financial drivers.",
       },
       {
         step: 3,
@@ -93,12 +90,14 @@ export const servicePillars: ServicePillar[] = [
       {
         step: 4,
         title: "Align",
-        description: "Align leadership on priorities, governance, and sequencing.",
+        description:
+          "Align leadership on priorities, governance, and sequencing.",
       },
       {
         step: 5,
         title: "Execute support",
-        description: "Support implementation with operational and workforce expertise.",
+        description:
+          "Support implementation with operational and workforce expertise.",
       },
       {
         step: 6,
@@ -116,9 +115,9 @@ export const servicePillars: ServicePillar[] = [
     title: "Workforce Solutions",
     href: "/services/workforce-solutions",
     summary:
-      "End-to-end workforce solutions—from planning and recruitment to deployment, administration, payroll coordination, and managed operations.",
+      "Flexible workforce solutions spanning outsourcing, payroll services, and managed service outsourcing.",
     description:
-      "MSG provides enterprise workforce delivery under one umbrella: Workforce Outsourcing, Engineering Talent, Business Support, and Managed Workforce—so organizations can scale people operations with structure and continuity.",
+      "MSG helps businesses operate efficiently, scale confidently, and stay focused through end-to-end outsourcing, payroll services, and managed workforce operations.",
     positioning:
       "End-to-end workforce solutions that connect planning, talent, operations, and governance.",
     challenges: [
@@ -161,7 +160,8 @@ export const servicePillars: ServicePillar[] = [
       {
         step: 4,
         title: "Operate",
-        description: "Run attendance, admin, payroll coordination, and support.",
+        description:
+          "Run attendance, admin, payroll coordination, and support.",
       },
       {
         step: 5,
@@ -181,13 +181,14 @@ export const servicePillars: ServicePillar[] = [
   },
   {
     id: "workforce-technology",
-    title: "Workforce Technology",
+    title: "Technology",
     href: "/technology",
     summary:
-      "Technology that empowers workforce operations—starting with ProQPay, with room to grow into broader digital workforce products.",
+      "Workforce management technology, data and analytics, and digital integration led by ProQPay Lite.",
     description:
       "MSG builds and deploys workforce technology that strengthens payroll visibility, operational control, and decision-making. ProQPay is the first product; future platforms will expand the stack without overstating unreleased features.",
-    positioning: "Technology that empowers workforce operations—not payroll software alone.",
+    positioning:
+      "Technology that empowers workforce operations—not payroll software alone.",
     challenges: [
       "Payroll and workforce data lack timely visibility",
       "Approval and disbursement processes are hard to control at scale",
@@ -210,22 +211,26 @@ export const servicePillars: ServicePillar[] = [
       {
         step: 1,
         title: "Identify friction",
-        description: "Map payroll, admin, and visibility gaps technology can solve.",
+        description:
+          "Map payroll, admin, and visibility gaps technology can solve.",
       },
       {
         step: 2,
         title: "Design controls",
-        description: "Define workflows, approvals, auditability, and boundaries.",
+        description:
+          "Define workflows, approvals, auditability, and boundaries.",
       },
       {
         step: 3,
         title: "Deploy product",
-        description: "Implement usable modules for daily operations and finance teams.",
+        description:
+          "Implement usable modules for daily operations and finance teams.",
       },
       {
         step: 4,
         title: "Improve",
-        description: "Refine with field feedback from real payroll and workforce cycles.",
+        description:
+          "Refine with field feedback from real payroll and workforce cycles.",
       },
     ],
     cta: {
@@ -355,12 +360,14 @@ export const strategicAdvisoryContent = {
     {
       step: 2,
       title: "Diagnostic assessment",
-      description: "Assess business, operations, workforce, and financial drivers.",
+      description:
+        "Assess business, operations, workforce, and financial drivers.",
     },
     {
       step: 3,
       title: "Roadmap design",
-      description: "Prioritize recovery, growth, or transformation initiatives.",
+      description:
+        "Prioritize recovery, growth, or transformation initiatives.",
     },
     {
       step: 4,
@@ -544,7 +551,8 @@ export const services: Service[] = [
       "MSG helps enterprises plan, source, deploy, and manage workforce capacity—from administrative roles to field teams—with structured recruitment, onboarding, attendance coordination, payroll administration support, and continuity management aligned to Indonesian labor practices.",
     outcome:
       "Reliable headcount readiness with controlled deployment and ongoing operational support.",
-    benefit: "Scalable staffing with structured supervision and continuity support.",
+    benefit:
+      "Scalable staffing with structured supervision and continuity support.",
     painPoints: [
       "Hiring velocity does not match operational demand",
       "Multi-site teams are hard to supervise consistently",
@@ -589,7 +597,8 @@ export const services: Service[] = [
       {
         step: 4,
         title: "Operate",
-        description: "Run attendance, admin, payroll coordination, and support.",
+        description:
+          "Run attendance, admin, payroll coordination, and support.",
       },
       {
         step: 5,
@@ -819,7 +828,8 @@ export const services: Service[] = [
       "MSG delivers end-to-end workforce operations management—covering governance, service-level monitoring, workforce analytics, multi-location coordination, issue management, performance reporting, and continuous improvement—so people operations run with discipline and visibility.",
     outcome:
       "A managed operating model that connects workforce delivery, control, and improvement.",
-    benefit: "End-to-end workforce governance with measurable operational visibility.",
+    benefit:
+      "End-to-end workforce governance with measurable operational visibility.",
     painPoints: [
       "Workforce operations are fragmented across vendors and teams",
       "Service performance is hard to measure consistently",

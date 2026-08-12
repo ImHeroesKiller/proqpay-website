@@ -1,15 +1,695 @@
-"use client";import Image from "next/image";import Link from "next/link";import {useEffect,useState} from "react";import {ArrowLeft,CheckCircle2,ExternalLink,Printer,RefreshCw} from "lucide-react";import {Button} from "@/components/ui/button";import {Badge} from "@/components/ui/badge";import {Input} from "@/components/ui/input";import {Label} from "@/components/ui/label";import {Textarea} from "@/components/ui/textarea";
-type Row=Record<string,string|number|null>;type Data={assessment:Row;application?:Row;documents?:Row[];findings:Row[];research:Row[];decision?:Row|null;researchProviders?:{duckDuckGo:boolean;tavily:boolean}};const parse=(v:unknown)=>{try{return JSON.parse(String(v||"{}"))}catch{return {}}};
-export function AssessmentWorkspace({id}:{id:string}){const [data,setData]=useState<Data|null>(null);const [message,setMessage]=useState("");const [decision,setDecision]=useState("DOCUMENT_REVIEW");const [reviewer,setReviewer]=useState("");const [reason,setReason]=useState("");const [saving,setSaving]=useState(false);const load=async()=>{const r=await fetch(`/api/admin/payroll/applications/${id}/assessment`);if(r.status===401){window.location.href="/portal";return}if(r.status===404){setData(null);return}const b=await r.json();r.ok?setData(b):setMessage(b.error||"Data tidak dapat dimuat")};useEffect(()=>{void load()},[id]);const run=async()=>{setMessage("Assessment dan web research sedang diproses...");const r=await fetch(`/api/admin/payroll/applications/${id}/assessment`,{method:"POST"});const b=await r.json();setMessage(r.ok?`Assessment completed: ${b.overallScore}/100`:b.error);if(r.ok)await load()};const save=async()=>{if(reviewer.trim().length<2||reason.trim().length<5){setMessage("Isi nama reviewer dan alasan minimal 5 karakter.");return}setSaving(true);const recommendation=String(data?.assessment.recommendation||"");const r=await fetch(`/api/admin/payroll/applications/${id}/assessment/decision`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({decision,reviewer,reason,overrideReason:decision!==recommendation?reason:undefined})});const b=await r.json();setMessage(r.ok?"Human decision berhasil disimpan.":b.error||"Gagal menyimpan keputusan.");if(r.ok)await load();setSaving(false)};if(!data)return <main className="container-pro py-16"><Button asChild variant="ghost"><Link href="/admin/assessment"><ArrowLeft/>Assessment Queue</Link></Button><div className="mt-8 rounded-2xl border bg-white p-8 text-center"><h1 className="text-2xl font-bold">Assessment belum dijalankan</h1><Button className="mt-5" variant="accent" onClick={run}>Run Assessment</Button>{message&&<p className="mt-4">{message}</p>}</div></main>;
-const a=data.assessment,app=data.application||{},company=parse(app.company_json),payroll=parse(app.payroll_json),funding=parse(app.funding_json),isId=!company.country||/indonesia/i.test(String(company.country)),recommendation=String(a.recommendation),risk=String(a.risk_level);return <main className="assessment-page bg-[#eef2f6] py-8"><div className="container-pro"><div className="mb-6 flex flex-wrap items-center justify-between gap-3 print:hidden"><Button asChild variant="ghost"><Link href="/admin/assessment"><ArrowLeft/>Assessment Queue</Link></Button><div className="flex gap-2"><Button variant="outline" onClick={()=>window.print()}><Printer/>Print / Save PDF</Button><Button variant="accent" onClick={run}><RefreshCw/>Re-run Assessment</Button></div></div>{message&&<p className="mb-5 rounded-xl bg-white p-3 text-sm print:hidden">{message}</p>}
-<article id="assessment-report" className="mx-auto max-w-5xl overflow-hidden rounded-3xl bg-white shadow-sm print:max-w-none print:rounded-none print:shadow-none"><header className="report-header bg-[#0B1F33] p-8 text-white sm:p-10"><div className="flex items-start justify-between gap-6"><div><Image src="/brand/logo-msg.webp" width={150} height={52} alt="MSG" className="mb-8 h-12 w-auto rounded bg-white p-2"/><p className="text-xs font-bold uppercase tracking-[.2em] text-orange">Confidential · Internal Use Only</p><h1 className="mt-3 text-3xl font-bold">{isId?"Laporan Due Diligence Counterparty":"Counterparty Due Diligence Report"}</h1><p className="mt-2 text-lg text-white/75">{company.legalName}</p></div><RiskPill value={risk}/></div><div className="mt-8 grid gap-3 border-t border-white/15 pt-5 text-xs text-white/65 sm:grid-cols-3"><span>{String(app.registration_number)}</span><span>{new Date(String(a.created_at)).toLocaleDateString(isId?"id-ID":"en-GB")}</span><span>{company.country||"Indonesia"} · {isId?"Bahasa Indonesia":"English"}</span></div></header>
-<div className="space-y-5 p-6 sm:p-8"><section className="grid gap-4 lg:grid-cols-[1.3fr_.7fr]"><div className="rounded-2xl border p-6"><Eyebrow>Executive Summary</Eyebrow><p className="mt-3 leading-relaxed text-slate-700">{a.ai_summary}</p><div className="mt-5 grid gap-3 sm:grid-cols-3"><Score label="Overall" value={`${a.overall_score}/100`} score={Number(a.overall_score)}/><Score label="Risk" value={risk.replaceAll("_"," ")} score={Number(a.overall_score)}/><Score label="Credit Limit" value={money(a.recommended_credit_limit)} score={Number(a.overall_score)}/></div></div><div className="rounded-2xl border-2 border-orange bg-orange/10 p-6"><Eyebrow>Proposed Outcome</Eyebrow><h2 className="mt-3 text-2xl font-bold text-[#0B3A6E]">{recommendation.replaceAll("_"," ")}</h2><p className="mt-3 text-sm text-slate-700">{recommendation==="APPROVED"?"Eligible for final human approval.":"Do not fund yet. Complete the required controls and human review."}</p></div></section>
-<Section n="1" title={isId?"Profil Perusahaan":"Company Profile"}><Grid data={{"Legal name":company.legalName,"Business type":company.businessType,"Tax ID":company.npwp,"Registration ID":company.nib,"Founded":company.foundedYear,"Industry":company.industry,"Address":company.address,"City / State":`${company.city||"—"} / ${company.province||"—"}`,"Country":company.country||"Indonesia","Website":company.website}}/></Section>
-<Section n="2" title="Risk Matrix & Session Recommendations"><div className="grid gap-3">{data.findings.map(f=><div key={String(f.id)} className={`rounded-xl border-l-4 p-4 ${riskColor(String(f.risk_level))}`}><div className="flex flex-wrap items-center justify-between gap-2"><strong>{f.category}</strong><RiskPill value={String(f.risk_level)}/></div><p className="mt-2 font-medium">{f.finding}</p><p className="mt-1 text-xs text-slate-600">{f.evidence}</p><p className="mt-3 text-xs font-semibold text-[#0B3A6E]">Recommendation: {recommendFor(String(f.category),String(f.risk_level))}</p></div>)}</div><div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-6">{[["Legal","legal_score"],["Financial","financial_score"],["Credit","credit_score"],["Operational","operational_score"],["Management","management_score"],["Compliance","compliance_score"]].map(([l,k])=><Score key={k} label={l} value={`${a[k]}/100`} score={Number(a[k])}/>)}</div></Section>
-<Section n="3" title="Payroll Funding Exposure"><Grid data={{"Monthly payroll":money(payroll.monthlyPayroll),"Requested funding":money(funding.amount),"Exposure ratio":Number(a.payroll_exposure_ratio||0).toFixed(2),"Recommended limit":money(a.recommended_credit_limit),"Requested term":funding.paymentTerm,"Repayment source":funding.repaymentSource}}/><Callout tone="amber">No overlapping payroll exposure. Cycle sebelumnya harus lunas sebelum cycle berikutnya didanai.</Callout></Section>
-<Section n="4" title="Document & Financial Due Diligence"><DocList docs={data.documents||[]}/><Callout tone={(data.documents||[]).length<3?"red":"green"}>{(data.documents||[]).length<3?"Dokumen belum memadai. Lengkapi financial statements, rekening koran 6–12 bulan, AR/AP aging, payroll history, BPJS dan pajak.":"Dokumen telah diterima dan tetap memerlukan verifikasi isi serta keaslian oleh reviewer."}</Callout></Section>
-<Section n="5" title="Credit Decision"><div className="grid gap-4 sm:grid-cols-2"><Grid data={{"AI recommendation":recommendation.replaceAll("_"," "),"Risk rating":risk.replaceAll("_"," "),"Recommended limit":money(a.recommended_credit_limit)}}/><Grid data={{"Human decision":data.decision?String(data.decision.decision).replaceAll("_"," "):"PENDING","Reviewer":data.decision?.reviewer,"Rationale":data.decision?.reason}}/></div></Section>
-<Section n="6" title="Web Research Summary"><div className="mb-4 flex gap-2"><Badge>DuckDuckGo</Badge><Badge className={data.researchProviders?.tavily?"bg-emerald-100 text-emerald-800":"bg-slate-100 text-slate-600"}>Tavily {data.researchProviders?.tavily?"Active":"Inactive"}</Badge></div><p className="mb-4 text-sm text-slate-600">Top relevant results only. Web findings are leads for human verification, not conclusive evidence.</p><div className="grid gap-3 sm:grid-cols-2">{dedupeResearch(data.research).slice(0,8).map((r,index)=><a key={String(r.id)} href={String(r.url)} target="_blank" rel="noreferrer" className={`${index>=2?"print:hidden ":""}rounded-xl border p-4 transition hover:border-orange`}><div className="flex justify-between gap-3"><strong className="line-clamp-2 text-sm">{clean(String(r.title))}</strong><ExternalLink className="h-4 w-4 shrink-0"/></div><p className="mt-1 text-[11px] font-semibold uppercase text-[#0B3A6E]">{domain(String(r.url))} · {String(r.sentiment).replaceAll("_"," ")}</p><p className="mt-2 text-xs leading-relaxed text-slate-600">{short(clean(String(r.summary)),300)}</p></a>)}</div></Section>
-{data.decision&&["APPROVED","APPROVED_WITH_CONDITION"].includes(String(data.decision.decision))&&<section className="approval-signature break-before-page p-8"><div className="rounded-2xl border-2 border-emerald-500 bg-emerald-50 p-6"><p className="text-xs font-bold uppercase tracking-[.18em] text-emerald-700">Final Approval</p><h2 className="mt-2 text-2xl font-bold text-emerald-950">{String(data.decision.decision).replaceAll("_"," ")}</h2><p className="mt-2 text-sm text-emerald-900">{String(data.decision.reason||"")}</p></div><div className="mt-12 grid grid-cols-2 gap-16"><div><p className="text-xs uppercase text-slate-500">Prepared / Reviewed by</p><div className="mt-20 border-t border-slate-800 pt-2"><p className="font-bold">MSG Risk Operations</p><p className="text-xs text-slate-500">Due Diligence Reviewer</p></div></div><div><p className="text-xs uppercase text-slate-500">Approved by</p><div className="mt-20 border-t border-slate-800 pt-2"><p className="font-bold">{String(data.decision.reviewer||"Approver")}</p><p className="text-xs text-slate-500">Authorized Approver · {new Date(String(data.decision.created_at)).toLocaleDateString("id-ID")}</p></div></div></div></section>}<footer className="report-footer border-t bg-slate-50 p-6 text-xs text-slate-500"><p>Dokumen ini merupakan preliminary desk review internal, bukan audit, opini hukum, laporan biro kredit, atau jaminan kemampuan bayar. Final decision memerlukan verifikasi dokumen asli dan persetujuan pejabat berwenang.</p><div className="mt-3 flex justify-between"><span>PT Mandiri Semesta Gemilang</span><span>Confidential · {String(app.registration_number)}</span></div></footer></div></article>
-<section className="mx-auto mt-6 max-w-5xl rounded-2xl border bg-white p-6 print:hidden"><h2 className="text-xl font-bold">Human Approval Decision</h2>{data.decision&&<div className="mt-4 flex gap-3 rounded-xl bg-emerald-50 p-4 text-emerald-950"><CheckCircle2/><div><strong>{String(data.decision.decision).replaceAll("_"," ")}</strong><p className="text-sm">{data.decision.reviewer} · {data.decision.reason}</p></div></div>}<div className="mt-4 grid gap-4 sm:grid-cols-2"><div><Label>Decision</Label><select className="mt-2 h-11 w-full rounded-xl border px-3" value={decision} onChange={e=>setDecision(e.target.value)}>{["DOCUMENT_PENDING","DOCUMENT_REVIEW","CREDIT_REVIEW","COMMERCIAL_REVIEW","APPROVED","APPROVED_WITH_CONDITION","REJECTED"].map(s=><option key={s}>{s}</option>)}</select></div><div><Label>Reviewer Name</Label><Input className="mt-2" value={reviewer} onChange={e=>setReviewer(e.target.value)}/></div></div><Label className="mt-4">Decision reason / override rationale</Label><Textarea className="mt-2" value={reason} onChange={e=>setReason(e.target.value)}/><Button className="mt-4" disabled={saving} onClick={save}>{saving?"Saving...":"Save Human Decision"}</Button></section></div></main>}
-function Section({n,title,children}:{n:string;title:string;children:React.ReactNode}){return <section className="break-inside-avoid rounded-2xl border p-6"><div className="mb-4 flex items-center gap-3"><span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0B3A6E] text-sm font-bold text-white">{n}</span><h2 className="text-xl font-bold text-[#0B3A6E]">{title}</h2></div>{children}</section>}function Eyebrow({children}:{children:React.ReactNode}){return <p className="text-xs font-bold uppercase tracking-[.16em] text-orange">{children}</p>}function Score({label,value,score}:{label:string;value:string;score:number}){return <div className={`rounded-xl p-3 ${score>=75?"bg-emerald-50 text-emerald-900":score>=60?"bg-amber-50 text-amber-900":"bg-red-50 text-red-900"}`}><p className="text-[10px] uppercase opacity-70">{label}</p><p className="mt-1 font-bold">{value}</p></div>}function Grid({data}:{data:Record<string,unknown>}){return <dl className="grid gap-3 sm:grid-cols-2">{Object.entries(data).map(([k,v])=><div key={k} className="rounded-lg bg-slate-50 p-3"><dt className="text-[10px] uppercase text-slate-500">{k}</dt><dd className="mt-1 break-words font-medium">{String(v||"—")}</dd></div>)}</dl>}function RiskPill({value}:{value:string}){const v=value.toUpperCase();return <span className={`rounded-full px-3 py-1 text-[10px] font-bold ${v.includes("LOW")?"bg-emerald-100 text-emerald-800":v.includes("MODERATE")||v.includes("MEDIUM")?"bg-amber-100 text-amber-800":"bg-red-100 text-red-800"}`}>{v.replaceAll("_"," ")}</span>}function Callout({tone,children}:{tone:"amber"|"red"|"green";children:React.ReactNode}){const c=tone==="green"?"bg-emerald-50 text-emerald-900":tone==="red"?"bg-red-50 text-red-900":"bg-amber-50 text-amber-900";return <p className={`mt-4 rounded-xl p-4 text-sm font-medium ${c}`}>{children}</p>}function DocList({docs}:{docs:Row[]}){return <div className="grid gap-2 sm:grid-cols-2">{docs.map(d=><div key={String(d.id)} className="rounded-lg border p-3 text-sm"><strong>{d.document_type}</strong><p className="truncate text-xs text-slate-500">{d.original_filename} · {d.category}</p></div>)}</div>}function money(v:unknown){return `IDR ${Number(v||0).toLocaleString("id-ID")}`}function short(v:string,n:number){return v.length>n?`${v.slice(0,n).trim()}…`:v}function clean(v:string){return v.replace(/[#*_`>|]/g," ").replace(/\s+/g," ").trim()}function domain(v:string){try{return new URL(v).hostname.replace("www.","")}catch{return "source"}}function dedupeResearch(rows:Row[]){const seen=new Set<string>();return rows.filter(r=>{const d=domain(String(r.url));const key=`${d}:${String(r.title).slice(0,50)}`;if(seen.has(key))return false;seen.add(key);return String(r.summary||"").length>20})}function riskColor(v:string){return v==="HIGH"?"border-red-500 bg-red-50":v==="MEDIUM"?"border-amber-500 bg-amber-50":"border-emerald-500 bg-emerald-50"}function recommendFor(category:string,risk:string){if(risk==="HIGH")return `Complete ${category.toLowerCase()} verification before approval.`;if(risk==="MEDIUM")return `Proceed with conditions and reviewer validation for ${category.toLowerCase()}.`;return `Maintain evidence and continue standard monitoring.`}
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  ExternalLink,
+  FileStack,
+  Printer,
+  RefreshCw,
+  X,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+type Row = Record<string, string | number | null>;
+type Data = {
+  assessment: Row;
+  application?: Row;
+  documents?: Row[];
+  findings: Row[];
+  research: Row[];
+  decision?: Row | null;
+  researchProviders?: { duckDuckGo: boolean; tavily: boolean };
+};
+const parse = (v: unknown) => {
+  try {
+    return JSON.parse(String(v || "{}"));
+  } catch {
+    return {};
+  }
+};
+export function AssessmentWorkspace({ id }: { id: string }) {
+  const [data, setData] = useState<Data | null>(null);
+  const [message, setMessage] = useState("");
+  const [decision, setDecision] = useState("DOCUMENT_REVIEW");
+  const [reviewer, setReviewer] = useState("");
+  const [reason, setReason] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewBusy, setPreviewBusy] = useState(false);
+  const load = useCallback(async () => {
+    const r = await fetch(`/api/admin/payroll/applications/${id}/assessment`);
+    if (r.status === 401) {
+      window.location.href = "/portal";
+      return;
+    }
+    if (r.status === 404) {
+      setData(null);
+      return;
+    }
+    const b = await r.json();
+    if (r.ok) setData(b);
+    else setMessage(b.error || "Data tidak dapat dimuat");
+  }, [id]);
+  useEffect(() => {
+    void load();
+  }, [load]);
+  const run = async () => {
+    setMessage("Assessment dan web research sedang diproses...");
+    const r = await fetch(`/api/admin/payroll/applications/${id}/assessment`, {
+      method: "POST",
+    });
+    const b = await r.json();
+    setMessage(r.ok ? `Assessment completed: ${b.overallScore}/100` : b.error);
+    if (r.ok) await load();
+  };
+  const openPreview = async () => {
+    setPreviewOpen(true);
+    setPreviewBusy(true);
+    requestAnimationFrame(async () => {
+      const source = document.getElementById("assessment-report"),
+        target = document.getElementById("assessment-paged-preview");
+      if (!source || !target) return;
+      target.innerHTML = "";
+      const { Previewer } = await import("pagedjs");
+      await new Previewer().preview(source.innerHTML, [], target);
+      setPreviewBusy(false);
+    });
+  };
+  const save = async () => {
+    if (reviewer.trim().length < 2 || reason.trim().length < 5) {
+      setMessage("Isi nama reviewer dan alasan minimal 5 karakter.");
+      return;
+    }
+    setSaving(true);
+    const recommendation = String(data?.assessment.recommendation || "");
+    const r = await fetch(
+      `/api/admin/payroll/applications/${id}/assessment/decision`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          decision,
+          reviewer,
+          reason,
+          overrideReason: decision !== recommendation ? reason : undefined,
+        }),
+      },
+    );
+    const b = await r.json();
+    setMessage(
+      r.ok
+        ? "Human decision berhasil disimpan."
+        : b.error || "Gagal menyimpan keputusan.",
+    );
+    if (r.ok) await load();
+    setSaving(false);
+  };
+  if (!data)
+    return (
+      <main className="container-pro py-16">
+        <Button asChild variant="ghost">
+          <Link href="/admin/assessment">
+            <ArrowLeft />
+            Assessment Queue
+          </Link>
+        </Button>
+        <div className="mt-8 rounded-2xl border bg-white p-8 text-center">
+          <h1 className="text-2xl font-bold">Assessment belum dijalankan</h1>
+          <Button className="mt-5" variant="accent" onClick={run}>
+            Run Assessment
+          </Button>
+          {message && <p className="mt-4">{message}</p>}
+        </div>
+      </main>
+    );
+  const a = data.assessment,
+    app = data.application || {},
+    company = parse(app.company_json),
+    payroll = parse(app.payroll_json),
+    funding = parse(app.funding_json),
+    isId = !company.country || /indonesia/i.test(String(company.country)),
+    recommendation = String(a.recommendation),
+    risk = String(a.risk_level);
+  return (
+    <main className="assessment-page bg-[#eef2f6] py-8">
+      <div className="container-pro">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 print:hidden">
+          <Button asChild variant="ghost">
+            <Link href="/admin/assessment">
+              <ArrowLeft />
+              Assessment Queue
+            </Link>
+          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button variant="outline" onClick={openPreview}>
+              <FileStack />
+              A4 Document View
+            </Button>
+            <Button variant="outline" onClick={() => window.print()}>
+              <Printer />
+              Print / Save PDF
+            </Button>
+            <Button variant="accent" onClick={run}>
+              <RefreshCw />
+              Re-run Assessment
+            </Button>
+          </div>
+        </div>
+        {message && (
+          <p className="mb-5 rounded-xl bg-white p-3 text-sm print:hidden">
+            {message}
+          </p>
+        )}
+        <article
+          id="assessment-report"
+          className="assessment-document mx-auto max-w-5xl overflow-hidden rounded-3xl bg-white shadow-sm print:max-w-none print:rounded-none print:shadow-none"
+        >
+          <header className="report-header bg-[#0B1F33] p-8 text-white sm:p-10">
+            <div className="flex items-start justify-between gap-6">
+              <div>
+                <Image
+                  src="/brand/logo-msg.webp"
+                  width={150}
+                  height={52}
+                  alt="MSG"
+                  className="mb-8 h-12 w-auto rounded bg-white p-2"
+                />
+                <p className="text-xs font-bold uppercase tracking-[.2em] text-orange">
+                  Confidential · Internal Use Only
+                </p>
+                <h1 className="mt-3 text-3xl font-bold">
+                  {isId
+                    ? "Laporan Due Diligence Counterparty"
+                    : "Counterparty Due Diligence Report"}
+                </h1>
+                <p className="mt-2 text-lg text-white/75">
+                  {company.legalName}
+                </p>
+              </div>
+              <RiskPill value={risk} />
+            </div>
+            <div className="mt-8 grid gap-3 border-t border-white/15 pt-5 text-xs text-white/65 sm:grid-cols-3">
+              <span>{String(app.registration_number)}</span>
+              <span>
+                {new Date(String(a.created_at)).toLocaleDateString(
+                  isId ? "id-ID" : "en-GB",
+                )}
+              </span>
+              <span>
+                {company.country || "Indonesia"} ·{" "}
+                {isId ? "Bahasa Indonesia" : "English"}
+              </span>
+            </div>
+          </header>
+          <div className="space-y-5 p-6 sm:p-8">
+            <section className="grid gap-4 lg:grid-cols-[1.3fr_.7fr]">
+              <div className="rounded-2xl border p-6">
+                <Eyebrow>Executive Summary</Eyebrow>
+                <p className="mt-3 leading-relaxed text-slate-700">
+                  {a.ai_summary}
+                </p>
+                <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                  <Score
+                    label="Overall"
+                    value={`${a.overall_score}/100`}
+                    score={Number(a.overall_score)}
+                  />
+                  <Score
+                    label="Risk"
+                    value={risk.replaceAll("_", " ")}
+                    score={Number(a.overall_score)}
+                  />
+                  <Score
+                    label="Credit Limit"
+                    value={money(a.recommended_credit_limit)}
+                    score={Number(a.overall_score)}
+                  />
+                </div>
+              </div>
+              <div className="rounded-2xl border-2 border-orange bg-orange/10 p-6">
+                <Eyebrow>Proposed Outcome</Eyebrow>
+                <h2 className="mt-3 text-2xl font-bold text-[#0B3A6E]">
+                  {recommendation.replaceAll("_", " ")}
+                </h2>
+                <p className="mt-3 text-sm text-slate-700">
+                  {recommendation === "APPROVED"
+                    ? "Eligible for final human approval."
+                    : "Do not fund yet. Complete the required controls and human review."}
+                </p>
+              </div>
+            </section>
+            <Section
+              n="1"
+              title={isId ? "Profil Perusahaan" : "Company Profile"}
+            >
+              <Grid
+                data={{
+                  "Legal name": company.legalName,
+                  "Business type": company.businessType,
+                  "Tax ID": company.npwp,
+                  "Registration ID": company.nib,
+                  Founded: company.foundedYear,
+                  Industry: company.industry,
+                  Address: company.address,
+                  "City / State": `${company.city || "—"} / ${company.province || "—"}`,
+                  Country: company.country || "Indonesia",
+                  Website: company.website,
+                }}
+              />
+            </Section>
+            <Section n="2" title="Risk Matrix & Session Recommendations">
+              <div className="grid gap-3">
+                {data.findings.map((f) => (
+                  <div
+                    key={String(f.id)}
+                    className={`rounded-xl border-l-4 p-4 ${riskColor(String(f.risk_level))}`}
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <strong>{f.category}</strong>
+                      <RiskPill value={String(f.risk_level)} />
+                    </div>
+                    <p className="mt-2 font-medium">{f.finding}</p>
+                    <p className="mt-1 text-xs text-slate-600">{f.evidence}</p>
+                    <p className="mt-3 text-xs font-semibold text-[#0B3A6E]">
+                      Recommendation:{" "}
+                      {recommendFor(String(f.category), String(f.risk_level))}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-6">
+                {[
+                  ["Legal", "legal_score"],
+                  ["Financial", "financial_score"],
+                  ["Credit", "credit_score"],
+                  ["Operational", "operational_score"],
+                  ["Management", "management_score"],
+                  ["Compliance", "compliance_score"],
+                ].map(([l, k]) => (
+                  <Score
+                    key={k}
+                    label={l}
+                    value={`${a[k]}/100`}
+                    score={Number(a[k])}
+                  />
+                ))}
+              </div>
+            </Section>
+            <Section n="3" title="Payroll Funding Exposure">
+              <Grid
+                data={{
+                  "Monthly payroll": money(payroll.monthlyPayroll),
+                  "Requested funding": money(funding.amount),
+                  "Exposure ratio": Number(
+                    a.payroll_exposure_ratio || 0,
+                  ).toFixed(2),
+                  "Recommended limit": money(a.recommended_credit_limit),
+                  "Requested term": funding.paymentTerm,
+                  "Repayment source": funding.repaymentSource,
+                }}
+              />
+              <Callout tone="amber">
+                No overlapping payroll exposure. Cycle sebelumnya harus lunas
+                sebelum cycle berikutnya didanai.
+              </Callout>
+            </Section>
+            <Section n="4" title="Document & Financial Due Diligence">
+              <DocList docs={data.documents || []} />
+              <Callout
+                tone={(data.documents || []).length < 3 ? "red" : "green"}
+              >
+                {(data.documents || []).length < 3
+                  ? "Dokumen belum memadai. Lengkapi financial statements, rekening koran 6–12 bulan, AR/AP aging, payroll history, BPJS dan pajak."
+                  : "Dokumen telah diterima dan tetap memerlukan verifikasi isi serta keaslian oleh reviewer."}
+              </Callout>
+            </Section>
+            <Section n="5" title="Credit Decision">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Grid
+                  data={{
+                    "AI recommendation": recommendation.replaceAll("_", " "),
+                    "Risk rating": risk.replaceAll("_", " "),
+                    "Recommended limit": money(a.recommended_credit_limit),
+                  }}
+                />
+                <Grid
+                  data={{
+                    "Human decision": data.decision
+                      ? String(data.decision.decision).replaceAll("_", " ")
+                      : "PENDING",
+                    Reviewer: data.decision?.reviewer,
+                    Rationale: data.decision?.reason,
+                  }}
+                />
+              </div>
+            </Section>
+            <Section n="6" title="Web Research Summary">
+              <div className="mb-4 flex gap-2">
+                <Badge>DuckDuckGo</Badge>
+                <Badge
+                  className={
+                    data.researchProviders?.tavily
+                      ? "bg-emerald-100 text-emerald-800"
+                      : "bg-slate-100 text-slate-600"
+                  }
+                >
+                  Tavily{" "}
+                  {data.researchProviders?.tavily ? "Active" : "Inactive"}
+                </Badge>
+              </div>
+              <p className="mb-4 text-sm text-slate-600">
+                Top relevant results only. Web findings are leads for human
+                verification, not conclusive evidence.
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {dedupeResearch(data.research)
+                  .slice(0, 8)
+                  .map((r, index) => (
+                    <a
+                      key={String(r.id)}
+                      href={String(r.url)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`${index >= 2 ? "print:hidden " : ""}rounded-xl border p-4 transition hover:border-orange`}
+                    >
+                      <div className="flex justify-between gap-3">
+                        <strong className="line-clamp-2 text-sm">
+                          {clean(String(r.title))}
+                        </strong>
+                        <ExternalLink className="h-4 w-4 shrink-0" />
+                      </div>
+                      <p className="mt-1 text-[11px] font-semibold uppercase text-[#0B3A6E]">
+                        {domain(String(r.url))} ·{" "}
+                        {String(r.sentiment).replaceAll("_", " ")}
+                      </p>
+                      <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                        {short(clean(String(r.summary)), 300)}
+                      </p>
+                    </a>
+                  ))}
+              </div>
+            </Section>
+            {data.decision &&
+              ["APPROVED", "APPROVED_WITH_CONDITION"].includes(
+                String(data.decision.decision),
+              ) && (
+                <section className="approval-signature break-before-page p-8">
+                  <div className="rounded-2xl border-2 border-emerald-500 bg-emerald-50 p-6">
+                    <p className="text-xs font-bold uppercase tracking-[.18em] text-emerald-700">
+                      Final Approval
+                    </p>
+                    <h2 className="mt-2 text-2xl font-bold text-emerald-950">
+                      {String(data.decision.decision).replaceAll("_", " ")}
+                    </h2>
+                    <p className="mt-2 text-sm text-emerald-900">
+                      {String(data.decision.reason || "")}
+                    </p>
+                  </div>
+                  <div className="mt-12 grid grid-cols-2 gap-16">
+                    <div>
+                      <p className="text-xs uppercase text-slate-500">
+                        Prepared / Reviewed by
+                      </p>
+                      <div className="mt-20 border-t border-slate-800 pt-2">
+                        <p className="font-bold">MSG Risk Operations</p>
+                        <p className="text-xs text-slate-500">
+                          Due Diligence Reviewer
+                        </p>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase text-slate-500">
+                        Approved by
+                      </p>
+                      <div className="mt-20 border-t border-slate-800 pt-2">
+                        <p className="font-bold">
+                          {String(data.decision.reviewer || "Approver")}
+                        </p>
+                        <p className="text-xs text-slate-500">
+                          Authorized Approver ·{" "}
+                          {new Date(
+                            String(data.decision.created_at),
+                          ).toLocaleDateString("id-ID")}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              )}
+            <footer className="report-footer border-t bg-slate-50 p-6 text-xs text-slate-500">
+              <p>
+                Dokumen ini merupakan preliminary desk review internal, bukan
+                audit, opini hukum, laporan biro kredit, atau jaminan kemampuan
+                bayar. Final decision memerlukan verifikasi dokumen asli dan
+                persetujuan pejabat berwenang.
+              </p>
+              <div className="mt-3 flex justify-between">
+                <span>PT Mandiri Semesta Gemilang</span>
+                <span>Confidential · {String(app.registration_number)}</span>
+              </div>
+            </footer>
+          </div>
+        </article>
+        <section className="mx-auto mt-6 max-w-5xl rounded-2xl border bg-white p-6 print:hidden">
+          <h2 className="text-xl font-bold">Human Approval Decision</h2>
+          {data.decision && (
+            <div className="mt-4 flex gap-3 rounded-xl bg-emerald-50 p-4 text-emerald-950">
+              <CheckCircle2 />
+              <div>
+                <strong>
+                  {String(data.decision.decision).replaceAll("_", " ")}
+                </strong>
+                <p className="text-sm">
+                  {data.decision.reviewer} · {data.decision.reason}
+                </p>
+              </div>
+            </div>
+          )}
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div>
+              <Label>Decision</Label>
+              <select
+                className="mt-2 h-11 w-full rounded-xl border px-3"
+                value={decision}
+                onChange={(e) => setDecision(e.target.value)}
+              >
+                {[
+                  "DOCUMENT_PENDING",
+                  "DOCUMENT_REVIEW",
+                  "CREDIT_REVIEW",
+                  "COMMERCIAL_REVIEW",
+                  "APPROVED",
+                  "APPROVED_WITH_CONDITION",
+                  "REJECTED",
+                ].map((s) => (
+                  <option key={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <Label>Reviewer Name</Label>
+              <Input
+                className="mt-2"
+                value={reviewer}
+                onChange={(e) => setReviewer(e.target.value)}
+              />
+            </div>
+          </div>
+          <Label className="mt-4">Decision reason / override rationale</Label>
+          <Textarea
+            className="mt-2"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+          />
+          <Button className="mt-4" disabled={saving} onClick={save}>
+            {saving ? "Saving..." : "Save Human Decision"}
+          </Button>
+        </section>
+      </div>
+      {previewOpen && (
+        <div className="fixed inset-0 z-[100] overflow-y-auto bg-slate-950/80 p-4 print:hidden">
+          <div className="sticky top-0 z-10 mx-auto mb-4 flex max-w-6xl items-center justify-between rounded-xl bg-white p-3 shadow-lg">
+            <div>
+              <strong>A4 Document Preview</strong>
+              <p className="text-xs text-muted-foreground">
+                Paged.js preview · hasil print mengikuti struktur halaman yang
+                sama.
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => window.print()}>
+                <Printer />
+                Print / Save PDF
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Close preview"
+                onClick={() => setPreviewOpen(false)}
+              >
+                <X />
+              </Button>
+            </div>
+          </div>
+          {previewBusy && (
+            <p className="mx-auto max-w-sm rounded-xl bg-white p-4 text-center">
+              Menyiapkan halaman A4...
+            </p>
+          )}
+          <div
+            id="assessment-paged-preview"
+            className="assessment-paged-preview"
+          />
+        </div>
+      )}
+    </main>
+  );
+}
+function Section({
+  n,
+  title,
+  children,
+}: {
+  n: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="break-inside-avoid rounded-2xl border p-6">
+      <div className="mb-4 flex items-center gap-3">
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0B3A6E] text-sm font-bold text-white">
+          {n}
+        </span>
+        <h2 className="text-xl font-bold text-[#0B3A6E]">{title}</h2>
+      </div>
+      {children}
+    </section>
+  );
+}
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-xs font-bold uppercase tracking-[.16em] text-orange">
+      {children}
+    </p>
+  );
+}
+function Score({
+  label,
+  value,
+  score,
+}: {
+  label: string;
+  value: string;
+  score: number;
+}) {
+  return (
+    <div
+      className={`rounded-xl p-3 ${score >= 75 ? "bg-emerald-50 text-emerald-900" : score >= 60 ? "bg-amber-50 text-amber-900" : "bg-red-50 text-red-900"}`}
+    >
+      <p className="text-[10px] uppercase opacity-70">{label}</p>
+      <p className="mt-1 font-bold">{value}</p>
+    </div>
+  );
+}
+function Grid({ data }: { data: Record<string, unknown> }) {
+  return (
+    <dl className="grid gap-3 sm:grid-cols-2">
+      {Object.entries(data).map(([k, v]) => (
+        <div key={k} className="rounded-lg bg-slate-50 p-3">
+          <dt className="text-[10px] uppercase text-slate-500">{k}</dt>
+          <dd className="mt-1 break-words font-medium">{String(v || "—")}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+function RiskPill({ value }: { value: string }) {
+  const v = value.toUpperCase();
+  return (
+    <span
+      className={`rounded-full px-3 py-1 text-[10px] font-bold ${v.includes("LOW") ? "bg-emerald-100 text-emerald-800" : v.includes("MODERATE") || v.includes("MEDIUM") ? "bg-amber-100 text-amber-800" : "bg-red-100 text-red-800"}`}
+    >
+      {v.replaceAll("_", " ")}
+    </span>
+  );
+}
+function Callout({
+  tone,
+  children,
+}: {
+  tone: "amber" | "red" | "green";
+  children: React.ReactNode;
+}) {
+  const c =
+    tone === "green"
+      ? "bg-emerald-50 text-emerald-900"
+      : tone === "red"
+        ? "bg-red-50 text-red-900"
+        : "bg-amber-50 text-amber-900";
+  return (
+    <p className={`mt-4 rounded-xl p-4 text-sm font-medium ${c}`}>{children}</p>
+  );
+}
+function DocList({ docs }: { docs: Row[] }) {
+  return (
+    <div className="grid gap-2 sm:grid-cols-2">
+      {docs.map((d) => (
+        <div key={String(d.id)} className="rounded-lg border p-3 text-sm">
+          <strong>{d.document_type}</strong>
+          <p className="truncate text-xs text-slate-500">
+            {d.original_filename} · {d.category}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+function money(v: unknown) {
+  return `IDR ${Number(v || 0).toLocaleString("id-ID")}`;
+}
+function short(v: string, n: number) {
+  return v.length > n ? `${v.slice(0, n).trim()}…` : v;
+}
+function clean(v: string) {
+  return v
+    .replace(/[#*_`>|]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+function domain(v: string) {
+  try {
+    return new URL(v).hostname.replace("www.", "");
+  } catch {
+    return "source";
+  }
+}
+function dedupeResearch(rows: Row[]) {
+  const seen = new Set<string>();
+  return rows.filter((r) => {
+    const d = domain(String(r.url));
+    const key = `${d}:${String(r.title).slice(0, 50)}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return String(r.summary || "").length > 20;
+  });
+}
+function riskColor(v: string) {
+  return v === "HIGH"
+    ? "border-red-500 bg-red-50"
+    : v === "MEDIUM"
+      ? "border-amber-500 bg-amber-50"
+      : "border-emerald-500 bg-emerald-50";
+}
+function recommendFor(category: string, risk: string) {
+  if (risk === "HIGH")
+    return `Complete ${category.toLowerCase()} verification before approval.`;
+  if (risk === "MEDIUM")
+    return `Proceed with conditions and reviewer validation for ${category.toLowerCase()}.`;
+  return `Maintain evidence and continue standard monitoring.`;
+}

@@ -40,7 +40,10 @@ export function Navbar() {
       <div className="container-pro flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
         <Logo compact />
 
-        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
+        <nav
+          className="hidden items-center gap-0.5 xl:flex"
+          aria-label="Primary"
+        >
           {mainNavigation.map((item) => {
             const hasChildren = Boolean(item.children?.length);
             const isOpen = openMenu === item.title;
@@ -92,7 +95,11 @@ export function Navbar() {
                         key={child.href + child.title}
                         href={child.href}
                         role="menuitem"
-                        className="block rounded-xl px-3 py-2.5 transition hover:bg-muted"
+                        className={cn(
+                          "block rounded-xl px-3 py-2.5 transition hover:bg-muted",
+                          child.href === "/payroll/register" &&
+                            "border border-orange/30 bg-orange/10 hover:bg-orange/15",
+                        )}
                         onClick={() => setOpenMenu(null)}
                       >
                         <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
@@ -133,7 +140,11 @@ export function Navbar() {
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Open menu">
-                {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {mobileOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
               </Button>
             </SheetTrigger>
             <SheetContent className="w-full max-w-md">
@@ -156,7 +167,11 @@ export function Navbar() {
                       <Link
                         key={child.href + child.title}
                         href={child.href}
-                        className="block px-3 py-1.5 text-sm text-muted-foreground"
+                        className={cn(
+                          "block rounded-lg px-3 py-1.5 text-sm text-muted-foreground",
+                          child.href === "/payroll/register" &&
+                            "my-1 border border-orange/30 bg-orange/10 font-semibold text-foreground",
+                        )}
                         onClick={() => setMobileOpen(false)}
                       >
                         {child.title}

@@ -2,12 +2,12 @@ export const faqs = [
   {
     question: "What is MSG?",
     answer:
-      "PT Mandiri Semesta Gemilang (MSG) is an Indonesian Enterprise Workforce Solutions & Business Transformation Partner. We help organizations improve, operate, transform, grow, and scale through Strategic Advisory, Workforce Solutions, and Workforce Technology.",
+      "PT Mandiri Semesta Gemilang (MSG) is an Indonesian Workforce Management Partner integrating strategy, people, operations, and technology.",
   },
   {
     question: "What services does MSG provide?",
     answer:
-      "MSG delivers three integrated pillars: Strategic Advisory (featured), Workforce Solutions (outsourcing, engineering talent, business support, managed workforce), and Workforce Technology (including ProQPay).",
+      "MSG delivers three integrated pillars: Strategic Advisory, Workforce Solutions (outsourcing, payroll services, and managed service outsourcing), and Technology (including ProQPay Lite).",
   },
   {
     question: "What is Strategic Advisory?",
@@ -17,7 +17,7 @@ export const faqs = [
   {
     question: "Is ProQPay the same as MSG?",
     answer:
-      "No. MSG is the company. ProQPay is MSG’s flagship Workforce Technology product for payroll visibility and operational control.",
+      "No. MSG is the company. ProQPay Lite is MSG’s payroll platform spanning payment processing, managed payroll, and automation and integration.",
   },
   {
     question: "How is MSG different from a traditional manpower provider?",
