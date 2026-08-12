@@ -5,7 +5,7 @@ const optionalText = z.string().trim().max(500).optional().default("");
 export const payrollApplicationSchema = z.object({
   id: z.string().uuid().optional(),
   company: z.object({
-    legalName: z.string().trim().min(2).max(200), businessType: z.string().trim().min(2), npwp: z.string().trim().min(15).max(30),
+    legalName: z.string().trim().min(2).max(200), businessType: z.string().trim().min(2), country: z.string().trim().min(2).max(100).default("Indonesia"), npwp: z.string().trim().min(5).max(30),
     industry: z.string().trim().min(2), foundedYear: z.coerce.number().int().min(1900).max(new Date().getFullYear()), address: z.string().trim().min(5).max(500),
     city: z.string().trim().min(2), province: z.string().trim().min(2), brand: optionalText, website: optionalText, nib: optionalText,
   }),
