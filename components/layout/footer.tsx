@@ -98,6 +98,9 @@ export function Footer() {
             © {new Date().getFullYear()} {siteConfig.legalName}. All rights reserved.
           </p>
           <div className="flex gap-4 text-white/40">
+            <Link href="/payroll/register" className="hover:text-white/70">Payroll Registration</Link>
+            <Link href="/payroll/dashboard" className="hover:text-white/70">Client Portal</Link>
+            <Link href="/admin/assessment" className="hover:text-white/70">Admin Portal</Link>
             <Link href="/privacy" className="hover:text-white/70">
               Privacy
             </Link>
