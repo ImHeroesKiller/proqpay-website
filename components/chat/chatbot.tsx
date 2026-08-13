@@ -2,10 +2,19 @@
 
 import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
-import { MessageCircle, Send, X, User } from "lucide-react";
+import {
+  CheckCircle2,
+  FileSearch,
+  MessageCircle,
+  Paperclip,
+  Send,
+  X,
+  User,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MarkdownMessage } from "@/components/chat/markdown-message";
 import { cn } from "@/lib/utils";
+import type { PayrollOcrResult } from "@/lib/payroll/ocr-schema";
 
 type ChatRole = "user" | "assistant";
 
@@ -30,10 +39,11 @@ const WELCOME: UiMessage = {
   id: "welcome",
   role: "assistant",
   content:
-    "Halo! Saya IDA, Intelligent Digital Assistant MSG. Saya bisa membantu layanan MSG, registrasi payroll, portal klien, dan proses assessment. Apa yang ingin Anda cari?",
+    "Halo! Saya IDA, Intelligent Digital Assistant MSG. Saya bisa membantu layanan MSG, membaca dokumen untuk mengisi draft registrasi payroll, portal klien, dan proses assessment. Apa yang ingin Anda lakukan?",
 };
 
 const SUGGESTIONS = [
+  "Isi form payroll dari dokumen",
   "Apa saja layanan MSG?",
   "Apa itu ProQPay?",
   "Mau request consultation",
@@ -55,6 +65,8 @@ export function Chatbot() {
   const [memory, setMemory] = useState<ShortMemory>({});
   const [sessionId, setSessionId] = useState("");
   const [loading, setLoading] = useState(false);
+  const [files, setFiles] = useState<FileList | null>(null);
+  const [extraction, setExtraction] = useState<PayrollOcrResult | null>(null);
   const [error, setError] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [hydrated, setHydrated] = useState(false);
@@ -112,7 +124,15 @@ export function Chatbot() {
 
   async function sendMessage(raw: string) {
     const text = raw.trim();
-    if (!text || loading) return;
+    if ((!text && !files?.length) || loading) return;
+
+    if (files?.length) {
+      await analyzeDocuments(
+        text ||
+          "Tolong baca dokumen ini dan siapkan data untuk form registrasi payroll.",
+      );
+      return;
+    }
 
     setError("");
     setInput("");
@@ -138,9 +158,7 @@ export function Chatbot() {
           sessionId,
           memory,
           messages:
-            history.length > 0
-              ? history
-              : [{ role: "user", content: text }],
+            history.length > 0 ? history : [{ role: "user", content: text }],
         }),
       });
       const data = (await res.json().catch(() => null)) as {
@@ -170,11 +188,97 @@ export function Chatbot() {
     }
   }
 
+  async function analyzeDocuments(instruction: string) {
+    if (!files?.length || loading) return;
+    setError("");
+    const selected = Array.from(files);
+    const oversized = selected.find((file) => file.size > 2 * 1024 * 1024);
+    if (oversized) {
+      setError(`${oversized.name} melebihi batas 2 MB.`);
+      return;
+    }
+    const userMsg: UiMessage = {
+      id: `u-${Date.now()}`,
+      role: "user",
+      content: `${instruction}\n\n📎 ${selected.map((file) => file.name).join(", ")}`,
+    };
+    setMessages((current) => [...current, userMsg]);
+    setInput("");
+    setLoading(true);
+    setExtraction(null);
+    try {
+      const payload = new FormData();
+      selected.forEach((file) => payload.append("files", file));
+      const response = await fetch("/api/chat/payroll-ocr", {
+        method: "POST",
+        body: payload,
+      });
+      const body = (await response.json()) as {
+        extraction?: PayrollOcrResult;
+        error?: string;
+      };
+      if (!response.ok || !body.extraction)
+        throw new Error(body.error || "OCR gagal diproses.");
+      const extracted = body.extraction;
+      setExtraction(extracted);
+      setFiles(null);
+      setMessages((current) => [
+        ...current,
+        {
+          id: `a-${Date.now()}`,
+          role: "assistant",
+          content: `Saya menemukan **${extracted.fields.length} field** dari ${selected.length} dokumen. Periksa daftar hasil OCR di bawah. Saya hanya akan mengisi draft setelah Anda menekan **Konfirmasi & Isi Form**.`,
+        },
+      ]);
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "OCR gagal diproses.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function applyExtraction() {
+    if (!extraction) return;
+    const values = Object.fromEntries(
+      extraction.fields.map((field) => [field.key, field.value]),
+    );
+    let current: Record<string, unknown> = {};
+    try {
+      current = JSON.parse(localStorage.getItem("msg-payroll-draft") || "{}");
+    } catch {
+      current = {};
+    }
+    localStorage.setItem(
+      "msg-payroll-draft",
+      JSON.stringify({ ...current, ...values }),
+    );
+    localStorage.setItem(
+      "msg-payroll-ida-prefill",
+      JSON.stringify({
+        at: new Date().toISOString(),
+        fieldCount: extraction.fields.length,
+      }),
+    );
+    setMessages((messages) => [
+      ...messages,
+      {
+        id: `a-${Date.now()}`,
+        role: "assistant",
+        content:
+          "Draft form telah diisi. Silakan periksa setiap field dan lampirkan dokumen wajib, lalu submit secara manual jika seluruh data sudah benar.",
+      },
+    ]);
+    setExtraction(null);
+    window.location.href = "/payroll/register/form?source=ida";
+  }
+
   function clearChat() {
     setMessages([WELCOME]);
     setMemory({});
     setSessionId(createSessionId());
     setError("");
+    setFiles(null);
+    setExtraction(null);
     try {
       sessionStorage.removeItem(STORAGE_KEY);
     } catch {
@@ -206,7 +310,9 @@ export function Chatbot() {
               </span>
               <div>
                 <p className="text-sm font-semibold">IDA</p>
-                <p className="text-[11px] text-white/70">MSG Assistant · Online</p>
+                <p className="text-[11px] text-white/70">
+                  MSG Assistant · Online
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-1">
@@ -292,6 +398,75 @@ export function Chatbot() {
               </div>
             ) : null}
 
+            {extraction ? (
+              <section className="ml-9 rounded-2xl border border-[#0B3A6E]/20 bg-card p-4 shadow-sm">
+                <div className="flex items-start gap-2">
+                  <FileSearch className="mt-0.5 h-5 w-5 shrink-0 text-[#0B3A6E]" />
+                  <div>
+                    <h3 className="text-sm font-bold">
+                      Hasil OCR Registrasi Payroll
+                    </h3>
+                    <p className="text-xs text-muted-foreground">
+                      {extraction.companyName ||
+                        "Perusahaan belum teridentifikasi"}{" "}
+                      · {extraction.documentTypes.join(", ")}
+                    </p>
+                  </div>
+                </div>
+                <ul className="mt-3 max-h-56 space-y-2 overflow-y-auto pr-1">
+                  {extraction.fields.map((field) => (
+                    <li
+                      key={field.key}
+                      className="rounded-xl bg-muted/60 p-2.5"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <strong className="text-xs">{field.label}</strong>
+                        <span
+                          className={cn(
+                            "rounded-full px-2 py-0.5 text-[9px] font-bold uppercase",
+                            field.confidence === "high"
+                              ? "bg-emerald-100 text-emerald-800"
+                              : field.confidence === "medium"
+                                ? "bg-amber-100 text-amber-800"
+                                : "bg-red-100 text-red-800",
+                          )}
+                        >
+                          {field.confidence}
+                        </span>
+                      </div>
+                      <p className="mt-1 break-words text-xs">{field.value}</p>
+                      <p className="mt-1 text-[10px] text-muted-foreground">
+                        Sumber: {field.source}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+                {extraction.warnings.length ? (
+                  <div className="mt-3 rounded-xl bg-amber-50 p-2.5 text-[11px] text-amber-900">
+                    <strong>Perlu diperiksa:</strong>
+                    <ul className="mt-1 list-disc pl-4">
+                      {extraction.warnings.map((warning) => (
+                        <li key={warning}>{warning}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setExtraction(null)}
+                  >
+                    Batalkan
+                  </Button>
+                  <Button size="sm" onClick={applyExtraction}>
+                    <CheckCircle2 />
+                    Konfirmasi & Isi Form
+                  </Button>
+                </div>
+              </section>
+            ) : null}
+
             {messages.length <= 1 && !loading ? (
               <div className="flex flex-wrap gap-2 pt-1">
                 {SUGGESTIONS.map((s) => (
@@ -329,7 +504,47 @@ export function Chatbot() {
                 {error}
               </p>
             ) : null}
+            {files?.length ? (
+              <div className="mb-2 flex items-center justify-between rounded-lg bg-muted px-3 py-2 text-xs">
+                <span className="truncate">
+                  {files.length} file:{" "}
+                  {Array.from(files)
+                    .map((file) => file.name)
+                    .join(", ")}
+                </span>
+                <button
+                  type="button"
+                  className="ml-2 font-bold"
+                  onClick={() => setFiles(null)}
+                  aria-label="Hapus lampiran"
+                >
+                  ×
+                </button>
+              </div>
+            ) : null}
             <div className="flex items-end gap-2">
+              <label
+                className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-input hover:bg-muted"
+                title="Lampirkan dokumen untuk OCR"
+              >
+                <Paperclip className="h-4 w-4" />
+                <span className="sr-only">Lampirkan dokumen</span>
+                <input
+                  className="sr-only"
+                  type="file"
+                  multiple
+                  accept=".pdf,.png,.jpg,.jpeg,.webp"
+                  onChange={(event) => {
+                    if (
+                      event.target.files?.length &&
+                      event.target.files.length <= 5
+                    )
+                      setFiles(event.target.files);
+                    else if (event.target.files?.length)
+                      setError("Maksimal 5 file dalam satu proses OCR.");
+                  }}
+                />
+              </label>
               <label htmlFor="msg-chat-input" className="sr-only">
                 Pesan
               </label>
@@ -345,14 +560,18 @@ export function Chatbot() {
                     void sendMessage(input);
                   }
                 }}
-                placeholder="Tanya IDA tentang MSG…"
+                placeholder={
+                  files?.length
+                    ? "Minta IDA isi form dari dokumen ini…"
+                    : "Tanya IDA atau lampirkan dokumen…"
+                }
                 className="max-h-28 min-h-[44px] flex-1 resize-none rounded-xl border border-input bg-background px-3 py-2.5 text-sm shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-orange/70"
                 disabled={loading}
               />
               <Button
                 type="submit"
                 size="icon"
-                disabled={loading || !input.trim()}
+                disabled={loading || (!input.trim() && !files?.length)}
                 className="h-11 w-11 shrink-0 bg-[#0B3A6E] text-white hover:bg-[#0a3360]"
                 aria-label="Kirim pesan"
               >
@@ -360,7 +579,8 @@ export function Chatbot() {
               </Button>
             </div>
             <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
-              IDA dapat keliru. Assessment dan keputusan bisnis tetap memerlukan review manusia.
+              OCR diproses sementara oleh penyedia AI dan dapat keliru. Periksa
+              hasil; IDA tidak pernah melakukan submit.
             </p>
           </form>
         </div>

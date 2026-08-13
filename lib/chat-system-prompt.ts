@@ -32,6 +32,7 @@ export function buildMsgChatSystemPrompt(options?: {
 - Bukan cuma manpower / outsourcing vendor
 - Strategic Advisory = layanan unggulan (Featured Service)
 - Produk digital: ProQPay Lite (platform payroll MSG, bukan nama perusahaan)
+- IDA dapat membaca PDF/JPG/PNG/WebP yang dilampirkan untuk mengekstrak draft registrasi payroll. Hasil selalu harus dikonfirmasi user; IDA hanya mengisi draft dan tidak pernah submit.
 - Kontak publik: ${siteConfig.contact.email} · ${siteConfig.contact.phoneDisplay}
 - Kantor: ${siteConfig.contact.addressDetail}
 - Web: ${siteConfig.websiteDisplay}

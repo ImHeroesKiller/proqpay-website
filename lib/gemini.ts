@@ -83,8 +83,14 @@ async function generateWithKey(
       maxOutputTokens: 512,
     },
     safetySettings: [
-      { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
-      { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+      {
+        category: "HARM_CATEGORY_HARASSMENT",
+        threshold: "BLOCK_MEDIUM_AND_ABOVE",
+      },
+      {
+        category: "HARM_CATEGORY_HATE_SPEECH",
+        threshold: "BLOCK_MEDIUM_AND_ABOVE",
+      },
       {
         category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
         threshold: "BLOCK_MEDIUM_AND_ABOVE",
@@ -113,14 +119,19 @@ async function generateWithKey(
 
   if (!res.ok) {
     const message = data?.error?.message || `Gemini HTTP ${res.status}`;
-    const err = new Error(message) as Error & { status?: number; retryable?: boolean };
+    const err = new Error(message) as Error & {
+      status?: number;
+      retryable?: boolean;
+    };
     err.status = res.status;
     err.retryable = res.status === 429 || res.status >= 500;
     throw err;
   }
 
   if (data?.promptFeedback?.blockReason) {
-    throw new Error("Message was blocked by safety filters. Please rephrase your question.");
+    throw new Error(
+      "Message was blocked by safety filters. Please rephrase your question.",
+    );
   }
 
   const text = data?.candidates?.[0]?.content?.parts
@@ -157,10 +168,79 @@ export async function generateChatReply(options: {
       return { text, usedKey: name };
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error));
-      console.warn(`[gemini] ${name} failed, trying next key:`, lastError.message);
+      console.warn(
+        `[gemini] ${name} failed, trying next key:`,
+        lastError.message,
+      );
       // Continue to next worker key for fallback
     }
   }
 
   throw lastError || new Error("All Gemini worker keys failed.");
+}
+
+export async function generatePayrollOcr(options: {
+  prompt: string;
+  files: File[];
+}): Promise<{ data: unknown; model: string }> {
+  const keys = collectWorkerKeys();
+  if (!keys.length) throw new Error("Gemini OCR is not configured.");
+  const models = ["gemini-3.5-flash", "gemini-3.5-flash-lite"];
+  const parts: Array<Record<string, unknown>> = [{ text: options.prompt }];
+  for (const file of options.files) {
+    parts.push({ text: `Nama sumber dokumen: ${file.name}` });
+    parts.push({
+      inlineData: {
+        mimeType: file.type,
+        data: Buffer.from(await file.arrayBuffer()).toString("base64"),
+      },
+    });
+  }
+  let lastError: Error | null = null;
+  for (const model of models) {
+    for (const { name, key } of keys) {
+      try {
+        const response = await fetch(
+          `${GEMINI_API_BASE}/models/${model}:generateContent?key=${encodeURIComponent(key)}`,
+          {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              contents: [{ role: "user", parts }],
+              generationConfig: {
+                temperature: 0.1,
+                maxOutputTokens: 4096,
+                responseMimeType: "application/json",
+              },
+            }),
+          },
+        );
+        const body = (await response.json()) as {
+          error?: { message?: string };
+          candidates?: Array<{
+            content?: { parts?: Array<{ text?: string }> };
+          }>;
+        };
+        if (!response.ok)
+          throw new Error(
+            body.error?.message || `${model} HTTP ${response.status}`,
+          );
+        const text = body.candidates?.[0]?.content?.parts
+          ?.map((part) => part.text || "")
+          .join("")
+          .trim();
+        if (!text) throw new Error(`${model} returned no OCR data.`);
+        return {
+          data: JSON.parse(text.replace(/^```json\s*|\s*```$/g, "")),
+          model,
+        };
+      } catch (error) {
+        lastError = error instanceof Error ? error : new Error(String(error));
+        console.warn(
+          `[gemini-ocr] ${model}/${name} failed: ${lastError.message}`,
+        );
+      }
+    }
+  }
+  throw lastError || new Error("All Gemini OCR models failed.");
 }

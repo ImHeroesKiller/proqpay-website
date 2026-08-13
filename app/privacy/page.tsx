@@ -23,6 +23,7 @@ const sections = [
       "Information you provide directly, such as name, company, email, phone number, role, workforce requirements, message content, and career-related materials you choose to send.",
       "Technical information collected automatically, such as browser type, device category, approximate location derived from IP (if available), pages visited, and basic usage logs needed to operate and secure the website.",
       "Chatbot conversation content you send to IDA (MSG Intelligent Digital Assistant), used to respond to your questions and improve support quality during the session.",
+      "Documents and images that you intentionally attach to IDA for payroll registration assistance. These files are processed temporarily for OCR and structured data extraction; extracted fields are shown for your confirmation before being stored as a browser-side draft.",
     ],
   },
   {
@@ -32,6 +33,7 @@ const sections = [
       "Coordinate commercial discussions related to workforce solutions and ProQPay.",
       "Process career interest submissions you send voluntarily.",
       "Operate, secure, and improve the website, forms, and chatbot experience.",
+      "Extract registration data from documents you attach to IDA, subject to your review and confirmation. IDA does not submit payroll registration on your behalf.",
       "Meet legal, compliance, and record-keeping obligations applicable to our operations in Indonesia.",
     ],
   },
@@ -113,7 +115,9 @@ export default function PrivacyPage() {
           <div className="mt-8 space-y-10">
             {sections.map((section) => (
               <div key={section.title}>
-                <h2 className="text-xl font-bold tracking-tight">{section.title}</h2>
+                <h2 className="text-xl font-bold tracking-tight">
+                  {section.title}
+                </h2>
                 <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">
                   {section.body.map((p) => (
                     <p key={p.slice(0, 48)}>{p}</p>
