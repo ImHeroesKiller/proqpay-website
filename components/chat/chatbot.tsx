@@ -35,6 +35,8 @@ type ShortMemory = {
 
 const STORAGE_KEY = "msg-chat-v1";
 const AVATAR_SRC = "/images/chat/assistant-avatar.webp";
+const OCR_BATCH_SIZE = 4;
+const OCR_BATCH_ATTEMPTS = 2;
 
 const WELCOME: UiMessage = {
   id: "welcome",
@@ -225,8 +227,12 @@ export function Chatbot() {
       }
 
       const batches = Array.from(
-        { length: Math.ceil(prepared.length / 5) },
-        (_, index) => prepared.slice(index * 5, index * 5 + 5),
+        { length: Math.ceil(prepared.length / OCR_BATCH_SIZE) },
+        (_, index) =>
+          prepared.slice(
+            index * OCR_BATCH_SIZE,
+            index * OCR_BATCH_SIZE + OCR_BATCH_SIZE,
+          ),
       );
       const combined: PayrollOcrResult = {
         companyName: "",
@@ -238,21 +244,45 @@ export function Chatbot() {
       const fieldMap = new Map<string, PayrollOcrResult["fields"][number]>();
 
       for (let index = 0; index < batches.length; index += 1) {
-        setOcrProgress(`Membaca dokumen: batch ${index + 1}/${batches.length}`);
-        const payload = new FormData();
-        batches[index].forEach((file) => payload.append("files", file));
-        const response = await fetch("/api/chat/payroll-ocr", {
-          method: "POST",
-          body: payload,
-        });
-        const body = (await response.json()) as {
-          extraction?: PayrollOcrResult;
-          error?: string;
-        };
-        if (!response.ok || !body.extraction)
-          throw new Error(
-            body.error || `OCR batch ${index + 1} gagal diproses.`,
+        let body: { extraction?: PayrollOcrResult; error?: string } | null =
+          null;
+        for (let attempt = 1; attempt <= OCR_BATCH_ATTEMPTS; attempt += 1) {
+          setOcrProgress(
+            attempt === 1
+              ? `Membaca dokumen: batch ${index + 1}/${batches.length}`
+              : `Mengulang batch ${index + 1}/${batches.length}...`,
           );
+          const payload = new FormData();
+          batches[index].forEach((file) => payload.append("files", file));
+          let response: Response;
+          try {
+            response = await fetch("/api/chat/payroll-ocr", {
+              method: "POST",
+              body: payload,
+            });
+          } catch (requestError) {
+            if (attempt === OCR_BATCH_ATTEMPTS) throw requestError;
+            continue;
+          }
+          const raw = await response.text();
+          try {
+            body = JSON.parse(raw) as typeof body;
+          } catch {
+            body = { error: `Server OCR merespons ${response.status}.` };
+          }
+          if (response.ok && body?.extraction) break;
+          const retryable = response.status === 504 || response.status >= 500;
+          if (!retryable || attempt === OCR_BATCH_ATTEMPTS) {
+            throw new Error(
+              body?.error || `OCR batch ${index + 1} gagal diproses.`,
+            );
+          }
+        }
+        if (!body?.extraction) {
+          throw new Error(
+            body?.error || `OCR batch ${index + 1} gagal diproses.`,
+          );
+        }
         const part = body.extraction;
         if (!combined.companyName && part.companyName)
           combined.companyName = part.companyName;

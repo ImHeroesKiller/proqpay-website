@@ -6,7 +6,9 @@ import {
 } from "@/lib/payroll/ocr-schema";
 
 export const runtime = "nodejs";
-export const maxDuration = 60;
+// Scanned multi-page documents can require several Gemini fallbacks. Vercel
+// supports longer Node.js functions, so do not cut the request off at 60s.
+export const maxDuration = 300;
 
 const ALLOWED = new Set([
   "application/pdf",
@@ -27,12 +29,13 @@ function allowedRequest(request: Request) {
     rate.set(ip, { count: 1, reset: now + 10 * 60_000 });
     return true;
   }
-  if (current.count >= 20) return false;
+  if (current.count >= 30) return false;
   current.count += 1;
   return true;
 }
 
 export async function POST(request: Request) {
+  const startedAt = Date.now();
   if (!allowedRequest(request))
     return NextResponse.json(
       { error: "Batas OCR tercapai. Coba kembali beberapa menit lagi." },
@@ -69,12 +72,20 @@ export async function POST(request: Request) {
         .filter((field) => field.value.trim())
         .map((field) => [field.key, field]),
     );
+    console.info("[IDA OCR] completed", {
+      fileCount: files.length,
+      model: generated.model,
+      durationMs: Date.now() - startedAt,
+    });
     return NextResponse.json({
       extraction: { ...result, fields: [...unique.values()] },
       model: generated.model,
     });
   } catch (error) {
-    console.error("[IDA OCR]", error instanceof Error ? error.message : error);
+    console.error("[IDA OCR] failed", {
+      durationMs: Date.now() - startedAt,
+      error: error instanceof Error ? error.message : String(error),
+    });
     return NextResponse.json(
       {
         error:

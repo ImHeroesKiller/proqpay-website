@@ -199,12 +199,14 @@ export async function generatePayrollOcr(options: {
   let lastError: Error | null = null;
   for (const model of models) {
     for (const { name, key } of keys) {
+      const startedAt = Date.now();
       try {
         const response = await fetch(
           `${GEMINI_API_BASE}/models/${model}:generateContent?key=${encodeURIComponent(key)}`,
           {
             method: "POST",
             headers: { "content-type": "application/json" },
+            signal: AbortSignal.timeout(45_000),
             body: JSON.stringify({
               contents: [{ role: "user", parts }],
               generationConfig: {
@@ -230,6 +232,11 @@ export async function generatePayrollOcr(options: {
           .join("")
           .trim();
         if (!text) throw new Error(`${model} returned no OCR data.`);
+        console.info("[gemini-ocr] completed", {
+          model,
+          worker: name,
+          durationMs: Date.now() - startedAt,
+        });
         return {
           data: JSON.parse(text.replace(/^```json\s*|\s*```$/g, "")),
           model,
@@ -237,7 +244,7 @@ export async function generatePayrollOcr(options: {
       } catch (error) {
         lastError = error instanceof Error ? error : new Error(String(error));
         console.warn(
-          `[gemini-ocr] ${model}/${name} failed: ${lastError.message}`,
+          `[gemini-ocr] ${model}/${name} failed after ${Date.now() - startedAt}ms: ${lastError.message}`,
         );
       }
     }
