@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { MarkdownMessage } from "@/components/chat/markdown-message";
 import { cn } from "@/lib/utils";
 import type { PayrollOcrResult } from "@/lib/payroll/ocr-schema";
+import { rasterizePdfForOcr } from "@/lib/payroll/pdf-rasterizer";
 
 type ChatRole = "user" | "assistant";
 
@@ -65,6 +66,7 @@ export function Chatbot() {
   const [memory, setMemory] = useState<ShortMemory>({});
   const [sessionId, setSessionId] = useState("");
   const [loading, setLoading] = useState(false);
+  const [ocrProgress, setOcrProgress] = useState("");
   const [files, setFiles] = useState<FileList | null>(null);
   const [extraction, setExtraction] = useState<PayrollOcrResult | null>(null);
   const [error, setError] = useState("");
@@ -192,7 +194,9 @@ export function Chatbot() {
     if (!files?.length || loading) return;
     setError("");
     const selected = Array.from(files);
-    const oversized = selected.find((file) => file.size > 2 * 1024 * 1024);
+    const oversized = selected.find(
+      (file) => file.type !== "application/pdf" && file.size > 2 * 1024 * 1024,
+    );
     if (oversized) {
       setError(`${oversized.name} melebihi batas 2 MB.`);
       return;
@@ -205,21 +209,75 @@ export function Chatbot() {
     setMessages((current) => [...current, userMsg]);
     setInput("");
     setLoading(true);
+    setOcrProgress("Menyiapkan dokumen...");
     setExtraction(null);
     try {
-      const payload = new FormData();
-      selected.forEach((file) => payload.append("files", file));
-      const response = await fetch("/api/chat/payroll-ocr", {
-        method: "POST",
-        body: payload,
-      });
-      const body = (await response.json()) as {
-        extraction?: PayrollOcrResult;
-        error?: string;
+      const prepared: File[] = [];
+      for (const file of selected) {
+        if (file.type === "application/pdf" && file.size > 2 * 1024 * 1024) {
+          const pages = await rasterizePdfForOcr(file, (page, total) =>
+            setOcrProgress(`Menyiapkan ${file.name}: halaman ${page}/${total}`),
+          );
+          prepared.push(...pages);
+        } else {
+          prepared.push(file);
+        }
+      }
+
+      const batches = Array.from(
+        { length: Math.ceil(prepared.length / 5) },
+        (_, index) => prepared.slice(index * 5, index * 5 + 5),
+      );
+      const combined: PayrollOcrResult = {
+        companyName: "",
+        documentTypes: [],
+        fields: [],
+        warnings: [],
       };
-      if (!response.ok || !body.extraction)
-        throw new Error(body.error || "OCR gagal diproses.");
-      const extracted = body.extraction;
+      const confidence = { low: 1, medium: 2, high: 3 } as const;
+      const fieldMap = new Map<string, PayrollOcrResult["fields"][number]>();
+
+      for (let index = 0; index < batches.length; index += 1) {
+        setOcrProgress(`Membaca dokumen: batch ${index + 1}/${batches.length}`);
+        const payload = new FormData();
+        batches[index].forEach((file) => payload.append("files", file));
+        const response = await fetch("/api/chat/payroll-ocr", {
+          method: "POST",
+          body: payload,
+        });
+        const body = (await response.json()) as {
+          extraction?: PayrollOcrResult;
+          error?: string;
+        };
+        if (!response.ok || !body.extraction)
+          throw new Error(
+            body.error || `OCR batch ${index + 1} gagal diproses.`,
+          );
+        const part = body.extraction;
+        if (!combined.companyName && part.companyName)
+          combined.companyName = part.companyName;
+        combined.documentTypes.push(...part.documentTypes);
+        combined.warnings.push(...part.warnings);
+        for (const field of part.fields) {
+          const current = fieldMap.get(field.key);
+          if (
+            !current ||
+            confidence[field.confidence] > confidence[current.confidence]
+          ) {
+            fieldMap.set(field.key, field);
+          } else if (current.value !== field.value) {
+            combined.warnings.push(
+              `Konflik ${field.label}: "${current.value}" vs "${field.value}". Gunakan dokumen resmi terbaru.`,
+            );
+          }
+        }
+      }
+      const extracted: PayrollOcrResult = {
+        ...combined,
+        documentTypes: [...new Set(combined.documentTypes)],
+        warnings: [...new Set(combined.warnings)],
+        fields: [...fieldMap.values()],
+      };
       setExtraction(extracted);
       setFiles(null);
       setMessages((current) => [
@@ -233,6 +291,7 @@ export function Chatbot() {
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "OCR gagal diproses.");
     } finally {
+      setOcrProgress("");
       setLoading(false);
     }
   }
@@ -394,7 +453,7 @@ export function Chatbot() {
                   <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#0B3A6E] [animation-delay:-0.1s]" />
                   <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#0B3A6E]" />
                 </span>
-                IDA sedang mengetik…
+                {ocrProgress || "IDA sedang mengetik…"}
               </div>
             ) : null}
 
@@ -579,8 +638,8 @@ export function Chatbot() {
               </Button>
             </div>
             <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
-              OCR diproses sementara oleh penyedia AI dan dapat keliru. Periksa
-              hasil; IDA tidak pernah melakukan submit.
+              PDF sampai 20 MB/60 halaman; file lain 2 MB. OCR dapat keliru; IDA
+              tidak pernah melakukan submit.
             </p>
           </form>
         </div>

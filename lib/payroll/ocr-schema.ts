@@ -37,17 +37,35 @@ export const payrollOcrFieldKeys = [
 
 export const payrollOcrFieldSchema = z.object({
   key: z.enum(payrollOcrFieldKeys),
-  label: z.string(),
-  value: z.string(),
+  label: z
+    .string()
+    .nullable()
+    .transform((value) => value || "Field terdeteksi"),
+  value: z
+    .union([z.string(), z.number()])
+    .nullable()
+    .transform((value) => (value == null ? "" : String(value))),
   confidence: z.enum(["high", "medium", "low"]),
-  source: z.string(),
+  source: z
+    .string()
+    .nullable()
+    .transform((value) => value || "Dokumen terlampir"),
 });
 
 export const payrollOcrResultSchema = z.object({
-  companyName: z.string(),
-  documentTypes: z.array(z.string()),
+  companyName: z
+    .string()
+    .nullable()
+    .transform((value) => value || ""),
+  documentTypes: z
+    .array(z.string())
+    .nullable()
+    .transform((value) => value || []),
   fields: z.array(payrollOcrFieldSchema),
-  warnings: z.array(z.string()),
+  warnings: z
+    .array(z.string())
+    .nullable()
+    .transform((value) => value || []),
 });
 
 export type PayrollOcrResult = z.infer<typeof payrollOcrResultSchema>;

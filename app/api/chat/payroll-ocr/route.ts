@@ -27,7 +27,7 @@ function allowedRequest(request: Request) {
     rate.set(ip, { count: 1, reset: now + 10 * 60_000 });
     return true;
   }
-  if (current.count >= 5) return false;
+  if (current.count >= 20) return false;
   current.count += 1;
   return true;
 }
