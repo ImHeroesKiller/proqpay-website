@@ -17,6 +17,11 @@ export const proqpayProduct = {
       "Sensitive payroll activity requires traceability and access control",
     ],
   },
+  solution: {
+    title: "One controlled payroll workflow",
+    description:
+      "ProQPay connects payroll preparation, approval, salary disbursement workflow, reconciliation, audit, and reporting. Client-funded payroll is the normal operating path; optional payroll funding is assessed separately.",
+  },
   engagementModels: [
     {
       title: "ProQPay Platform",
@@ -71,6 +76,15 @@ export const proqpayProduct = {
         "Retain traceable records of material payroll actions, approvals, and workflow status.",
       status: "Available" as const,
     },
+  ],
+  roadmap: [
+    { title: "Native tax automation", status: "Planned" as const },
+    { title: "Native BPJS automation", status: "Planned" as const },
+    { title: "Employee Self-Service", status: "In Development" as const },
+    { title: "HRIS integrations", status: "Planned" as const },
+    { title: "AI Payroll Checker", status: "Planned" as const },
+    { title: "Earned Wage Access", status: "Planned" as const },
+    { title: "Open API", status: "Planned" as const },
   ],
   modules: [
     {
