@@ -63,10 +63,10 @@ export const siteConfig = {
   products: {
     proqpay: {
       name: "ProQPay",
-      label: "Technology Solution · Payroll Platform",
-      headline: "One payroll platform. Three levels of service.",
+      label: "Technology Solution · Enterprise Payroll Platform",
+      headline: "One controlled payroll workflow.",
       description:
-        "ProQPay Lite supports payment processing, managed payroll, and automation and integration through one controlled payroll ecosystem.",
+        "ProQPay is MSG's enterprise payroll operating platform for payroll processing, multi-level approval, salary disbursement, reconciliation, audit, and reporting.",
       appUrl:
         process.env.NEXT_PUBLIC_PROQPAY_APP_URL ?? "https://proqpay.msg-os.com",
     },
