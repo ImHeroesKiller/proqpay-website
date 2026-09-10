@@ -31,7 +31,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const { website: _honeypot, ...submission } = parsed.data;
+    const submission = { ...parsed.data };
+    delete submission.website;
+
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
     };
