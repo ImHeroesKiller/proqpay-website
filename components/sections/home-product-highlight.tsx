@@ -69,7 +69,7 @@ export function HomeProductHighlight() {
                   <Link href="/products/proqpay">Explore ProQPay</Link>
                 </Button>
                 <Button asChild variant="outline">
-                  <Link href="/request-consultation?intent=payroll">
+                  <Link href="/request-consultation?intent=payroll-assessment">
                     Request Payroll Assessment
                   </Link>
                 </Button>
