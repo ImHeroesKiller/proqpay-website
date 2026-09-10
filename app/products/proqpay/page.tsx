@@ -62,7 +62,7 @@ export default function ProQPayProductPage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild variant="accent" size="lg">
-                <Link href="/request-consultation?intent=payroll">
+                <Link href="/request-consultation?intent=payroll-assessment">
                   Request Payroll Assessment
                 </Link>
               </Button>
@@ -206,7 +206,7 @@ export default function ProQPayProductPage() {
       <CtaBand
         title="Start with your payroll requirement"
         description="Talk with MSG first to define the operating model, service scope, controls, and whether optional payroll funding is relevant to your company."
-        primaryHref="/request-consultation?intent=payroll"
+        primaryHref="/request-consultation?intent=payroll-assessment"
         primaryLabel="Request Payroll Assessment"
         secondaryHref="/payroll/register"
         secondaryLabel="Start Client Registration"
