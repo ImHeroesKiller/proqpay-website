@@ -32,17 +32,16 @@ export const mainNavigation: NavItem[] = [
           "Outsourcing, engineering talent, business support, and managed workforce.",
       },
       {
-        title: "Payroll Services & Registration",
-        href: "/payroll/register",
+        title: "Payroll Service",
+        href: "/payroll",
         description:
-          "Register for MSG payroll processing, multi-bank disbursement, working capital, and reporting services.",
-        badge: "Register",
+          "Managed payroll processing, administration, disbursement, reporting, and optional funding powered by ProQPay.",
       },
       {
         title: "Technology Solutions",
         href: "/technology",
         description:
-          "Technology that empowers workforce operations—starting with ProQPay.",
+          "Practical workforce technology led by the ProQPay enterprise payroll platform.",
       },
     ],
   },
@@ -101,12 +100,13 @@ export const mainNavigation: NavItem[] = [
       {
         title: "ProQPay",
         href: "/products/proqpay",
-        description: "Payroll visibility for modern workforce operations.",
+        description:
+          "Enterprise payroll operating platform for processing, approvals, disbursement, reconciliation, and reporting.",
       },
       {
-        title: "Technology Solutions",
+        title: "Workforce Technology",
         href: "/technology",
-        description: "Product stack and future workforce platforms.",
+        description: "How MSG designs practical technology around real operations.",
       },
     ],
   },
@@ -125,8 +125,8 @@ export const footerNavigation = {
   services: [
     { title: "Strategic Advisory", href: "/services/strategic-advisory" },
     { title: "Workforce Solutions", href: "/services/workforce-solutions" },
+    { title: "Payroll Service", href: "/payroll" },
     { title: "Technology Solutions", href: "/technology" },
-    { title: "Payroll Services & Registration", href: "/payroll/register" },
     { title: "Workforce Outsourcing", href: "/services/workforce-outsourcing" },
   ],
   portfolio: [
@@ -141,7 +141,7 @@ export const footerNavigation = {
     { title: "ProQPay", href: "/products/proqpay" },
     { title: "Technology Overview", href: "/technology" },
     { title: "Product Login", href: "https://proqpay.msg-os.com/login" },
-    { title: "Request Demo", href: "/contact?intent=payroll-demo" },
+    { title: "Payroll Assessment", href: "/request-consultation?intent=payroll" },
   ],
   resources: [
     { title: "News", href: "/news" },
