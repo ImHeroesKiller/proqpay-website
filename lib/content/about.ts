@@ -3,7 +3,7 @@ export const aboutContent = {
   whoWeAre: [
     "PT Mandiri Semesta Gemilang (MSG) is a Workforce Management Partner established in 2019.",
     "We integrate strategy, people, and technology to deliver end-to-end solutions that drive business transformation and sustainable growth.",
-    "Our three core capabilities are Strategic Advisory, Workforce Solutions, and Technology, including ProQPay Lite as our integrated payroll platform.",
+    "Our three core capabilities are Strategic Advisory, Workforce Solutions, and Workforce Technology, led by ProQPay as MSG's enterprise payroll operating platform.",
   ],
   moreThanManpower: {
     title: "People. Operations. Technology.",
@@ -28,9 +28,9 @@ export const aboutContent = {
     },
     {
       id: "technology",
-      title: "Technology",
+      title: "Workforce Technology",
       description:
-        "Workforce management technology, data and analytics, and digital integration—led by ProQPay Lite.",
+        "Practical workforce technology and digital integration, led by ProQPay for controlled enterprise payroll operations.",
     },
   ],
   vision:
@@ -55,12 +55,12 @@ export const aboutContent = {
       benefit: "End-to-end people operations with structured continuity.",
     },
     {
-      title: "Technology",
+      title: "Workforce Technology",
       description:
-        "Workforce management technology, data and analytics, and digital integration.",
+        "Practical workforce technology, payroll control, data visibility, and digital integration.",
       href: "/technology",
       benefit:
-        "Integrated technology with smarter operations and better outcomes.",
+        "Technology built around real operating workflows, led by ProQPay.",
     },
   ],
   values: [
