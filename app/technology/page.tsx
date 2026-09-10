@@ -1,53 +1,46 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, Layers, ShieldCheck, Workflow } from "lucide-react";
 import { PageHero } from "@/components/shared/page-hero";
 import { Container } from "@/components/shared/container";
 import { CtaBand } from "@/components/sections/cta-band";
 import { ProcessFlow } from "@/components/shared/process-flow";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
-import {
-  futureTechnologyProducts,
-  servicePillars,
-} from "@/lib/content/services";
+import { servicePillars } from "@/lib/content/services";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Layers, ShieldCheck, Workflow } from "lucide-react";
 
 const pillar = servicePillars.find((p) => p.id === "workforce-technology")!;
 
 export const metadata = buildMetadata({
   title: "Workforce Technology",
   description:
-    "MSG Workforce Technology: technology that empowers workforce operations. ProQPay is the flagship product, with future platforms planned.",
+    "MSG Workforce Technology focuses on practical workforce systems, led by ProQPay as the enterprise payroll operating platform.",
   path: "/technology",
 });
 
 const productPipeline = [
   {
     step: 1,
-    title: "Identify operational friction",
-    description:
-      "Map payroll, workforce admin, and visibility gaps that technology can solve.",
+    title: "Identify friction",
+    description: "Map operational problems that technology can solve clearly.",
   },
   {
     step: 2,
-    title: "Design product controls",
-    description:
-      "Define workflows, approvals, auditability, and integration boundaries.",
+    title: "Design controls",
+    description: "Define workflow, approvals, auditability, and ownership.",
   },
   {
     step: 3,
-    title: "Ship usable modules",
-    description:
-      "Deliver practical capabilities that operations and finance teams can run daily.",
+    title: "Deploy usable capability",
+    description: "Ship practical tools that operations and finance can use every day.",
   },
   {
     step: 4,
-    title: "Improve with field feedback",
-    description:
-      "Refine based on real payroll cycles, multi-entity complexity, and client feedback.",
+    title: "Improve from usage",
+    description: "Refine the product from real operating cycles and client feedback.",
   },
 ];
 
@@ -62,8 +55,8 @@ export default function TechnologyPage() {
           { label: "Technology" },
         ]}
         cta={{
-          label: "Request ProQPay Demo",
-          href: "/contact?intent=payroll-demo",
+          label: "Explore ProQPay",
+          href: "/products/proqpay",
         }}
       />
 
@@ -74,12 +67,10 @@ export default function TechnologyPage() {
               <Badge variant="accent" className="w-fit">
                 {siteConfig.products.proqpay.label}
               </Badge>
-              <CardTitle className="mt-3 font-heading text-2xl">
-                Pro<span className="text-orange">Q</span>Pay
-              </CardTitle>
+              <CardTitle className="mt-3 text-2xl">ProQPay</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-lg font-semibold text-foreground">
                 {siteConfig.products.proqpay.headline}
               </p>
               <p className="text-sm leading-relaxed text-muted-foreground">
@@ -87,10 +78,10 @@ export default function TechnologyPage() {
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {[
-                  "Payroll validation and multi-level approval",
-                  "Client-funded execution orchestration",
-                  "Optional working capital workflow",
-                  "Reconciliation, audit trail, and reporting",
+                  "Payroll processing and multi-level approval",
+                  "Salary disbursement workflow",
+                  "Reconciliation, reporting, and audit trail",
+                  "Optional payroll funding for assessed clients",
                 ].map((item) => (
                   <li key={item} className="flex gap-2">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-orange" />
@@ -99,18 +90,15 @@ export default function TechnologyPage() {
                 ))}
               </ul>
               <div className="flex flex-wrap gap-3 pt-2">
-                <Button asChild>
-                  <Link href="/payroll/register">Register Payroll Service</Link>
-                </Button>
                 <Button asChild variant="accent">
                   <Link href="/products/proqpay">
                     Explore ProQPay <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
                 <Button asChild variant="outline">
-                  <a href={siteConfig.appUrl} rel="noopener noreferrer">
-                    Open App
-                  </a>
+                  <Link href="/request-consultation?intent=payroll">
+                    Request Payroll Assessment
+                  </Link>
                 </Button>
               </div>
             </CardContent>
@@ -130,15 +118,11 @@ export default function TechnologyPage() {
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-orange">
                   Product philosophy
                 </p>
-                <h2 className="mt-2 text-xl font-bold">
-                  Built for operations, not demo theatre
-                </h2>
+                <h2 className="mt-2 text-xl font-bold">Built around real operations</h2>
               </div>
             </div>
             <p className="relative mt-5 text-sm leading-relaxed text-white/75">
-              MSG develops technology where operational friction is real: payroll
-              visibility, approval discipline, disbursement orchestration, and
-              auditability for Indonesian enterprise workforce environments.
+              MSG develops technology where operating control matters: payroll visibility, approval discipline, payment workflow, reconciliation, and auditability for enterprise workforce environments.
             </p>
             <div className="relative mt-6 grid gap-3 sm:grid-cols-3">
               {[
@@ -159,40 +143,17 @@ export default function TechnologyPage() {
         </Container>
       </section>
 
-      <section
-        id="future"
-        className="section-padding scroll-mt-28 bg-gray-bg dark:bg-background"
-      >
+      <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
-          <h2 className="text-2xl font-bold sm:text-3xl">Future products</h2>
-          <p className="mt-2 max-w-2xl text-muted-foreground">
-            Architecture ready for expansion. Products below are planned with{" "}
-            <strong>Coming Soon</strong> status—not live feature claims.
-          </p>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {futureTechnologyProducts.map((product) => (
-              <Card key={product.title} className="h-full">
-                <CardHeader>
-                  <Badge variant="secondary" className="w-fit">
-                    {product.status}
-                  </Badge>
-                  <CardTitle className="text-lg">{product.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm leading-relaxed text-muted-foreground">
-                  {product.description}
-                </CardContent>
-              </Card>
-            ))}
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">
+              Product Development
+            </p>
+            <h2 className="mt-3 text-2xl font-bold sm:text-3xl">How MSG builds workforce technology</h2>
+            <p className="mt-2 text-muted-foreground">
+              We keep the public story focused on usable capability today. Future product ideas stay outside the main sales journey until they are ready to be scoped with clients.
+            </p>
           </div>
-        </Container>
-      </section>
-
-      <section className="section-padding">
-        <Container>
-          <h2 className="text-2xl font-bold sm:text-3xl">How MSG builds products</h2>
-          <p className="mt-2 max-w-2xl text-muted-foreground">
-            A practical product development flow grounded in workforce operations.
-          </p>
           <div className="mt-10">
             <ProcessFlow steps={productPipeline} variant="horizontal" tone="orange" />
           </div>
@@ -200,10 +161,10 @@ export default function TechnologyPage() {
       </section>
 
       <CtaBand
-        title="Interested in Workforce Technology?"
-        description="Request a ProQPay demo or discuss how MSG technology can support your workforce operations."
-        primaryHref="/payroll/register"
-        primaryLabel="Register Payroll Service"
+        title="Start with the workforce problem"
+        description="Discuss your payroll or workforce technology requirement with MSG, then choose the right product and service model."
+        primaryHref="/request-consultation?intent=payroll"
+        primaryLabel="Request Payroll Assessment"
         secondaryHref="/products/proqpay"
         secondaryLabel="Explore ProQPay"
       />
