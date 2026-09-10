@@ -22,27 +22,27 @@ const capabilityCards = [
 
 export function HomeHero() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#0B1930] text-white">
+    <section className="relative isolate overflow-hidden bg-[#0B1930] text-white lg:min-h-[clamp(460px,34.5vw,620px)]">
       <HeroVideo />
 
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-white/10" />
 
-      <Container className="relative py-16 sm:py-20 lg:py-24">
+      <Container className="relative py-12 sm:py-14 lg:flex lg:min-h-[clamp(460px,34.5vw,620px)] lg:flex-col lg:justify-center lg:py-10">
         <div className="max-w-3xl">
           <FadeIn>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
               {siteConfig.hero.eyebrow}
             </p>
-            <h1 className="mt-5 text-[2.15rem] font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.35rem] xl:text-[3.6rem]">
+            <h1 className="mt-4 text-[2.15rem] font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.15rem] xl:text-[3.45rem]">
               {siteConfig.hero.headline}
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
               {siteConfig.hero.subheadline}
             </p>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/55">
+            <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-white/55">
               {siteConfig.hero.subheadlineEn}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button
                 asChild
                 size="lg"
@@ -62,11 +62,11 @@ export function HomeHero() {
         </div>
 
         <FadeIn delay={0.1}>
-          <ul className="mt-10 grid gap-3 md:grid-cols-3">
+          <ul className="mt-8 grid gap-3 md:grid-cols-3">
             {capabilityCards.map((card) => (
               <li
                 key={card.label}
-                className="rounded-xl border border-white/15 bg-white/5 px-4 py-4 backdrop-blur-md"
+                className="rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 backdrop-blur-md"
               >
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-white/50">
                   {card.label}
