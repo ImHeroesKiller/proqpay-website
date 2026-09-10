@@ -53,6 +53,9 @@ export async function POST(
     if (!allowedDocuments.includes(file.type as (typeof allowedDocuments)[number])) {
       return NextResponse.json({ error: "Invalid file type." }, { status: 400 });
     }
+    if (category === "company-profile" && file.type !== "application/pdf") {
+      return NextResponse.json({ error: "Company Profile must be a PDF file." }, { status: 400 });
+    }
 
     const extension = file.name.split(".").pop()?.toLowerCase() ?? "";
     if (!extensionsByMime[file.type]?.includes(extension)) {
