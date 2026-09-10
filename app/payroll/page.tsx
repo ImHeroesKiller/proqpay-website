@@ -62,7 +62,7 @@ export default function PayrollLanding() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild variant="accent" size="lg">
-              <Link href="/request-consultation?intent=payroll">
+              <Link href="/request-consultation?intent=payroll-assessment">
                 Request Payroll Assessment <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
