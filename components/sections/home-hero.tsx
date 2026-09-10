@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
 
 const floatingCards = [
-  { label: "Strategic Advisory", detail: "Featured service" },
+  { label: "Strategic Advisory", detail: "Business transformation" },
   { label: "Workforce Solutions", detail: "End-to-end delivery" },
-  { label: "Technology", detail: "ProQPay Lite enabled" },
-  { label: "Business Transformation", detail: "Improve · Grow · Scale" },
+  { label: "Workforce Technology", detail: "ProQPay enabled" },
+  { label: "Business Impact", detail: "Improve · Grow · Scale" },
 ];
 
 export function HomeHero() {
