@@ -34,7 +34,7 @@ export function HeroVideo() {
       {!reducedMotion ? (
         <video
           ref={videoRef}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-center"
           autoPlay
           muted
           loop
@@ -42,15 +42,15 @@ export function HeroVideo() {
           preload="metadata"
           aria-hidden="true"
         >
-          <source src="/videos/hero-workforce.mp4" type="video/mp4" />
+          <source src="/videos/msg-hero-15s-web.mp4" type="video/mp4" />
         </video>
       ) : (
         <div className="h-full w-full bg-[#0B3A6E]" aria-hidden="true" />
       )}
-      {/* Navy overlays for text readability */}
-      <div className="absolute inset-0 bg-[#0B1930]/72" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0B1930]/90 via-[#0B3A6E]/55 to-[#0B1930]/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1930]/80 via-transparent to-[#0B1930]/35" />
+      {/* Keep the metropolitan footage visible while preserving headline contrast. */}
+      <div className="absolute inset-0 bg-[#0B1930]/52" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0B1930]/92 via-[#0B3A6E]/42 to-[#0B1930]/18" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1930]/68 via-transparent to-[#0B1930]/24" />
     </div>
   );
 }
