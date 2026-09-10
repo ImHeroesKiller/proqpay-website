@@ -131,7 +131,7 @@ export function Navbar() {
             size="sm"
             className="bg-[#0B3A6E] text-white transition-transform hover:-translate-y-px hover:bg-[#0a3360]"
           >
-            <Link href="/payroll/register">Register Payroll</Link>
+            <Link href="/request-consultation?intent=payroll">Payroll Assessment</Link>
           </Button>
         </div>
 
@@ -185,15 +185,15 @@ export function Navbar() {
                     className="w-full bg-[#0B3A6E] text-white hover:bg-[#0a3360]"
                   >
                     <Link
-                      href="/payroll/register"
+                      href="/request-consultation?intent=payroll"
                       onClick={() => setMobileOpen(false)}
                     >
-                      Register Payroll
+                      Payroll Assessment
                     </Link>
                   </Button>
                   <Button asChild variant="outline" className="w-full">
-                    <Link href="/contact" onClick={() => setMobileOpen(false)}>
-                      Contact MSG
+                    <Link href="/payroll/register" onClick={() => setMobileOpen(false)}>
+                      Start Client Registration
                     </Link>
                   </Button>
                 </div>
