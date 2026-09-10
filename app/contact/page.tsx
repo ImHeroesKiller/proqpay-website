@@ -3,13 +3,16 @@ import { Container } from "@/components/shared/container";
 import { ContactForm } from "@/components/forms/contact-form";
 import { siteConfig } from "@/lib/site-config";
 import { buildMetadata } from "@/lib/seo";
-import type { ContactFormValues } from "@/lib/validations/contact";
+import {
+  contactIntentEnum,
+  type ContactFormValues,
+} from "@/lib/validations/contact";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Contact",
   description:
-    "Contact PT Mandiri Semesta Gemilang (MSG). Sales, support, payroll demo, partnership, and career inquiries.",
+    "Contact PT Mandiri Semesta Gemilang (MSG). Strategic advisory, workforce solutions, payroll assessment, technology, partnership, and support inquiries.",
   path: "/contact",
 });
 
@@ -19,27 +22,16 @@ export default async function ContactPage({
   searchParams: Promise<{ intent?: string }>;
 }) {
   const params = await searchParams;
-  const allowed: ContactFormValues["intent"][] = [
-    "workforce-outsourcing",
-    "engineering-talent",
-    "business-support",
-    "managed-workforce",
-    "payroll-demo",
-    "partnership",
-    "career",
-    "sales",
-    "support",
-    "general",
-  ];
-  const intent = allowed.includes(params.intent as ContactFormValues["intent"])
-    ? (params.intent as ContactFormValues["intent"])
+  const parsedIntent = contactIntentEnum.safeParse(params.intent);
+  const intent: ContactFormValues["intent"] = parsedIntent.success
+    ? parsedIntent.data
     : "general";
 
   return (
     <>
       <PageHero
         title="Contact MSG"
-        description="One corporate contact channel for sales, support, payroll demo, partnership, and career inquiries."
+        description="One corporate contact channel for strategic advisory, workforce solutions, payroll assessment, technology, partnership, and support inquiries."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Contact" },
@@ -99,13 +91,13 @@ export default async function ContactPage({
               </div>
             </div>
             <div className="rounded-2xl border border-dashed border-border bg-muted/30 p-5 text-sm text-muted-foreground">
-              Categories: Sales · Support · Payroll Demo · Partnership · Career
+              Strategic Advisory · Workforce Solutions · Payroll Assessment · Workforce Technology · Partnership · Support
             </div>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
             <h2 className="text-2xl font-bold">Send a message</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Everything routes through MSG corporate operations.
+              Choose the closest service interest so your inquiry reaches the right MSG team.
             </p>
             <div className="mt-6">
               <ContactForm defaultIntent={intent} />
