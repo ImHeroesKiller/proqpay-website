@@ -1,6 +1,10 @@
 import { z } from "zod";
 
 export const contactIntentEnum = z.enum([
+  "strategic-advisory",
+  "workforce-solutions",
+  "workforce-technology",
+  "payroll-assessment",
   "workforce-outsourcing",
   "engineering-talent",
   "business-support",
@@ -40,6 +44,10 @@ export const consultationFormSchema = contactFormSchema.extend({
   employeeCount: z.string().optional(),
   preferredDate: z.string().optional(),
   intent: z.enum([
+    "strategic-advisory",
+    "workforce-solutions",
+    "workforce-technology",
+    "payroll-assessment",
     "workforce-outsourcing",
     "engineering-talent",
     "business-support",
@@ -57,6 +65,10 @@ export const intentOptions: {
   value: ContactFormValues["intent"];
   label: string;
 }[] = [
+  { value: "strategic-advisory", label: "Strategic Advisory" },
+  { value: "workforce-solutions", label: "Workforce Solutions" },
+  { value: "workforce-technology", label: "Workforce Technology" },
+  { value: "payroll-assessment", label: "Payroll Assessment" },
   { value: "workforce-outsourcing", label: "Workforce Outsourcing" },
   { value: "engineering-talent", label: "Engineering Talent" },
   { value: "business-support", label: "Business Support" },
