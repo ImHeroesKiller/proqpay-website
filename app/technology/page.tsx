@@ -96,7 +96,7 @@ export default function TechnologyPage() {
                   </Link>
                 </Button>
                 <Button asChild variant="outline">
-                  <Link href="/request-consultation?intent=payroll">
+                  <Link href="/request-consultation?intent=payroll-assessment">
                     Request Payroll Assessment
                   </Link>
                 </Button>
@@ -163,7 +163,7 @@ export default function TechnologyPage() {
       <CtaBand
         title="Start with the workforce problem"
         description="Discuss your payroll or workforce technology requirement with MSG, then choose the right product and service model."
-        primaryHref="/request-consultation?intent=payroll"
+        primaryHref="/request-consultation?intent=payroll-assessment"
         primaryLabel="Request Payroll Assessment"
         secondaryHref="/products/proqpay"
         secondaryLabel="Explore ProQPay"
