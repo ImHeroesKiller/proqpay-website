@@ -7,11 +7,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 const highlights = [
-  "Payroll Management",
-  "Attendance & Workforce Data",
-  "Employee Administration",
-  "Approval Workflows",
-  "Operational Reporting",
+  "Payroll Processing",
+  "Multi-Level Approval",
+  "Salary Disbursement",
+  "Reconciliation",
+  "Reporting & Audit",
 ];
 
 export function HomeProductHighlight() {
@@ -21,37 +21,34 @@ export function HomeProductHighlight() {
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <FadeIn>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0B3A6E] dark:text-blue-300">
-              Product Highlight
+              Workforce Technology
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.5rem]">
-              Technology Built for Better Workforce Operations
+              One controlled payroll workflow from processing to reconciliation.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              MSG develops workforce technology that improves operational
-              visibility, payroll control, employee administration, and
-              management decision-making.
+              ProQPay is MSG&apos;s enterprise payroll operating platform for payroll
+              processing, approval, salary disbursement, reconciliation, audit, and
+              reporting.
             </p>
 
             <div className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-8">
               <Badge className="bg-orange/15 text-orange hover:bg-orange/15">
                 Featured Product
               </Badge>
-              <div className="mt-4 flex items-center gap-4">
+              <div className="mt-5">
                 <Image
                   src="/brand/logo-proqpay.png"
-                  alt="ProQPay logo"
-                  width={160}
-                  height={56}
-                  className="h-10 w-auto object-contain"
+                  alt="ProQPay"
+                  width={190}
+                  height={66}
+                  className="h-11 w-auto object-contain"
                 />
-                <h3 className="font-heading text-2xl font-bold tracking-tight">
-                  Pro<span className="text-orange">Q</span>Pay
-                </h3>
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                ProQPay is MSG’s workforce technology platform designed to support
-                payroll, attendance, employee administration, approval workflows,
-                and operational visibility.
+              <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+                Use ProQPay as a technology platform, engage MSG to operate a managed
+                payroll service powered by ProQPay, or request optional payroll funding
+                if your company qualifies through assessment.
               </p>
               <ul className="mt-6 grid gap-2 sm:grid-cols-2">
                 {highlights.map((item) => (
@@ -72,11 +69,8 @@ export function HomeProductHighlight() {
                   <Link href="/products/proqpay">Explore ProQPay</Link>
                 </Button>
                 <Button asChild variant="outline">
-                  <Link href="/technology">View Workforce Technology</Link>
-                </Button>
-                <Button asChild variant="outline">
-                  <Link href="/contact?intent=payroll-demo">
-                    Request Product Demo
+                  <Link href="/request-consultation?intent=payroll">
+                    Request Payroll Assessment
                   </Link>
                 </Button>
               </div>
@@ -88,7 +82,7 @@ export function HomeProductHighlight() {
               <div className="group relative aspect-video overflow-hidden bg-white">
                 <Image
                   src="/images/products/proqpay-image -hero.png"
-                  alt="ProQPay payroll dashboard showing employee and workforce data"
+                  alt="ProQPay payroll dashboard showing employee and payroll data"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-contain object-center transition duration-700 group-hover:scale-[1.01]"
@@ -100,10 +94,10 @@ export function HomeProductHighlight() {
                   Product preview
                 </p>
                 <p className="mt-1 text-sm font-medium text-white">
-                  ProQPay workforce operations dashboard
+                  ProQPay payroll operating dashboard
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-white/65">
-                  Payroll, employee data, approvals, and reporting remain clearly visible.
+                  Processing, approvals, disbursement status, reconciliation, and reporting in one workflow.
                 </p>
               </div>
             </div>
