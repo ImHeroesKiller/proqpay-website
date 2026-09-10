@@ -141,7 +141,10 @@ export const footerNavigation = {
     { title: "ProQPay", href: "/products/proqpay" },
     { title: "Technology Overview", href: "/technology" },
     { title: "Product Login", href: "https://proqpay.msg-os.com/login" },
-    { title: "Payroll Assessment", href: "/request-consultation?intent=payroll" },
+    {
+      title: "Payroll Assessment",
+      href: "/request-consultation?intent=payroll-assessment",
+    },
   ],
   resources: [
     { title: "News", href: "/news" },
