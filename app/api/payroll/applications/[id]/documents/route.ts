@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { payrollWorker } from "@/lib/payroll/client";
 import { allowedDocuments } from "@/lib/validations/payroll-registration";
@@ -6,6 +7,7 @@ export const runtime = "nodejs";
 
 const DEFAULT_LIMIT = 10 * 1024 * 1024;
 const FINANCIAL_LIMIT = 20 * 1024 * 1024;
+const UPLOAD_COOKIE = "msg_payroll_upload_token";
 const allowedCategories = new Set([
   "company-profile",
   "legal",
@@ -32,6 +34,11 @@ export async function POST(
       return NextResponse.json({ error: "Invalid application." }, { status: 400 });
     }
 
+    const token = (await cookies()).get(UPLOAD_COOKIE)?.value ?? "";
+    if (token.length < 60) {
+      return NextResponse.json({ error: "Upload session expired. Please submit the registration again." }, { status: 401 });
+    }
+
     const form = await request.formData();
     const file = form.get("file");
     const category = String(form.get("category") ?? "").toLowerCase();
@@ -43,7 +50,7 @@ export async function POST(
     if (!category || !allowedCategories.has(category) || !documentType || documentType.length > 80) {
       return NextResponse.json({ error: "Invalid document metadata." }, { status: 400 });
     }
-    if (!allowedDocuments.includes(file.type as never)) {
+    if (!allowedDocuments.includes(file.type as (typeof allowedDocuments)[number])) {
       return NextResponse.json({ error: "Invalid file type." }, { status: 400 });
     }
 
@@ -69,6 +76,7 @@ export async function POST(
     upstream.set("documentType", documentType);
     const response = await payrollWorker(`/applications/${id}/documents`, {
       method: "POST",
+      headers: { "x-client-token": token },
       body: upstream,
     });
     return new NextResponse(response.body, {
