@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Check, ArrowRight } from "lucide-react";
 import { Container } from "@/components/shared/container";
 import { CtaBand } from "@/components/sections/cta-band";
 import { FaqSection } from "@/components/sections/faq-section";
@@ -11,56 +12,41 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
 import { proqpayFaqs, proqpayProduct } from "@/lib/content/proqpay";
-import { Check } from "lucide-react";
 
 const payrollFlow = [
   {
     step: 1,
-    title: "Prepare & validate",
-    description: "Attendance, pay items, exceptions, and readiness checks.",
+    title: "Prepare",
+    description: "Bring payroll inputs and exceptions into one controlled cycle.",
   },
   {
     step: 2,
-    title: "Multi-level approval",
-    description: "Configurable HR and finance authorization before money moves.",
+    title: "Approve",
+    description: "HR and finance review and authorize payroll before payment.",
   },
   {
     step: 3,
-    title: "Payment instructions",
-    description: "Client-funded orchestration with optional working capital path.",
+    title: "Disburse",
+    description: "Generate and track salary payment instructions through the agreed funding path.",
   },
   {
     step: 4,
-    title: "Reconcile & report",
-    description: "Settlement visibility, audit trail, and leadership reporting.",
+    title: "Reconcile",
+    description: "Close the cycle with payment status, audit trail, and reporting.",
   },
 ];
 
 export const metadata = buildMetadata({
-  title: "ProQPay",
+  title: "ProQPay | Enterprise Payroll Operating Platform",
   description: proqpayProduct.description,
   path: "/products/proqpay",
 });
 
-function StatusBadge({ status }: { status: string }) {
-  const variant =
-    status === "Available"
-      ? "accent"
-      : status === "In Development"
-        ? "secondary"
-        : "outline";
-  return (
-    <Badge variant={variant as "accent" | "secondary" | "outline"}>{status}</Badge>
-  );
-}
-
-/** SaaS product experience — distinct from corporate MSG homepage. */
 export default function ProQPayProductPage() {
   return (
     <div className="bg-background">
-      {/* Product hero — Stripe/Deel style density */}
       <section className="border-b border-border bg-[#0B1F33] text-white">
-        <Container className="grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
+        <Container className="grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-20">
           <div>
             <div className="mb-6">
               <ProQPayLogo variant="light" />
@@ -74,144 +60,109 @@ export default function ProQPayProductPage() {
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/75">
               {proqpayProduct.description}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild variant="accent" size="lg">
-                <Link href="/payroll/register">Register Payroll Service</Link>
+                <Link href="/request-consultation?intent=payroll">
+                  Request Payroll Assessment
+                </Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 className="border border-white/20 bg-transparent text-white hover:bg-white/10"
               >
-                <a href={siteConfig.appUrl} rel="noopener noreferrer">
-                  Open App
-                </a>
+                <Link href="/payroll/register">Start Client Registration</Link>
               </Button>
             </div>
-            <p className="mt-4 text-xs text-white/45">
-              Product of PT Mandiri Semesta Gemilang · msg-os.com
-            </p>
+            <a
+              href={siteConfig.appUrl}
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-white/65 transition hover:text-white"
+            >
+              Existing client? Open ProQPay <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
-          <div
-            className="overflow-hidden rounded-2xl border border-white/10 bg-[#102A43] shadow-sm"
-            aria-hidden
-          >
-            <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-              <span className="ml-2 text-xs text-white/45">Payroll Console</span>
+
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-white shadow-xl">
+            <div className="relative aspect-video">
+              <Image
+                src="/images/products/proqpay-image -hero.png"
+                alt="ProQPay enterprise payroll dashboard"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain object-center"
+                priority
+              />
             </div>
-            <div className="space-y-3 p-4">
-              <div className="grid grid-cols-3 gap-2">
-                {["Runs", "Approvals", "Paid"].map((label) => (
-                  <div
-                    key={label}
-                    className="rounded-xl border border-white/10 bg-white/5 p-3"
-                  >
-                    <div className="text-[10px] uppercase text-white/40">{label}</div>
-                    <div className="mt-1 h-2 w-12 rounded bg-orange/50" />
-                  </div>
-                ))}
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                <div className="mb-3 flex justify-between text-xs text-white/50">
-                  <span>Current cycle</span>
-                  <span className="text-orange">In review</span>
-                </div>
-                {[70, 45, 88, 52].map((w, i) => (
-                  <div key={i} className="mb-2 h-2 rounded bg-white/10">
-                    <div
-                      className="h-2 rounded bg-orange/70"
-                      style={{ width: `${w}%` }}
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="border-t border-slate-200 bg-white px-5 py-4 text-slate-900">
+              <p className="text-sm font-semibold">One payroll operating workflow</p>
+              <p className="mt-1 text-xs text-slate-500">
+                Processing · Approval · Disbursement · Reconciliation · Reporting
+              </p>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Problem */}
-      <section className="section-padding">
-        <Container className="grid gap-10 lg:grid-cols-2">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">
-              Payroll problems
-            </p>
-            <h2 className="mt-3 text-3xl font-bold">{proqpayProduct.problem.title}</h2>
-            <p className="mt-4 text-muted-foreground">
-              {proqpayProduct.problem.description}
-            </p>
-          </div>
-          <ul className="space-y-3">
-            {proqpayProduct.problem.points.map((point) => (
-              <li
-                key={point}
-                className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-muted-foreground"
-              >
-                {point}
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* Solution */}
       <section className="section-padding bg-gray-bg dark:bg-background">
-        <Container className="max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">
-            Solution
-          </p>
-          <h2 className="mt-3 text-3xl font-bold">{proqpayProduct.solution.title}</h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            {proqpayProduct.solution.description}
-          </p>
+        <Container>
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">
+              How to use ProQPay
+            </p>
+            <h2 className="mt-3 text-3xl font-bold">One platform, three engagement models</h2>
+            <p className="mt-3 text-muted-foreground">
+              ProQPay is the technology. MSG Payroll Service is the managed service powered by ProQPay. Payroll Funding is an optional facility for eligible clients.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {proqpayProduct.engagementModels.map((model) => (
+              <Card key={model.title} className="h-full border-border/80">
+                <CardHeader>
+                  <CardTitle className="text-xl">{model.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm leading-relaxed text-muted-foreground">
+                  {model.description}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </Container>
       </section>
 
-      {/* Payroll process graph */}
       <section className="section-padding">
         <Container>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">
-            Process
+            Operating Flow
           </p>
-          <h2 className="mt-3 text-3xl font-bold">Payroll operating flow</h2>
+          <h2 className="mt-3 text-3xl font-bold">From payroll preparation to reconciliation</h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">
-            A clear control plane from preparation through reconciliation.
+            A clear sequence of responsibilities keeps payroll controlled before, during, and after salary payment.
           </p>
-          <div className="mt-8 overflow-hidden rounded-3xl border border-border shadow-sm">
-            <Image
-              src="/images/products/proqpay-flow.svg"
-              alt="ProQPay payroll process: validate, approve, instruct, reconcile"
-              width={1200}
-              height={400}
-              className="h-auto w-full"
-              unoptimized
-            />
-          </div>
           <div className="mt-10">
             <ProcessFlow steps={payrollFlow} variant="horizontal" tone="orange" />
           </div>
         </Container>
       </section>
 
-      {/* Features */}
-      <section className="section-padding">
+      <section className="section-padding bg-gray-bg dark:bg-background">
         <Container>
-          <h2 className="text-3xl font-bold">Features</h2>
-          <p className="mt-2 max-w-2xl text-muted-foreground">
-            Status labels show what is available versus planned or in development.
-          </p>
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">
+              Available Today
+            </p>
+            <h2 className="mt-3 text-3xl font-bold">Core payroll capabilities</h2>
+            <p className="mt-3 text-muted-foreground">
+              The public product page focuses on capabilities that can be discussed and scoped today rather than future roadmap items.
+            </p>
+          </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {proqpayProduct.features.map((feature) => (
-              <Card key={feature.title} className="transition hover:border-orange/40">
-                <CardHeader className="space-y-3">
-                  <StatusBadge status={feature.status} />
+              <Card key={feature.title} className="h-full transition hover:border-orange/40">
+                <CardHeader>
                   <CardTitle className="text-lg">{feature.title}</CardTitle>
                 </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
+                <CardContent className="text-sm leading-relaxed text-muted-foreground">
                   {feature.description}
                 </CardContent>
               </Card>
@@ -220,70 +171,45 @@ export default function ProQPayProductPage() {
         </Container>
       </section>
 
-      {/* Modules detail */}
       <section className="section-padding bg-[#0B1F33] text-white">
-        <Container>
-          <h2 className="text-3xl font-bold">Working capital, workflow & reports</h2>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {proqpayProduct.modules.map((module) => (
-              <div
-                key={module.title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5"
-              >
-                <h3 className="font-semibold text-orange">{module.title}</h3>
-                <p className="mt-2 text-sm text-white/70">{module.body}</p>
-              </div>
-            ))}
+        <Container className="grid gap-10 lg:grid-cols-2 lg:items-start">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">
+              Controls
+            </p>
+            <h2 className="mt-3 text-3xl font-bold">Security & auditability</h2>
+            <ul className="mt-6 space-y-3">
+              {[
+                "Role-based access for sensitive payroll data",
+                "Approval history for material payroll decisions",
+                "Separation of prepare, approve, and pay responsibilities",
+                "Traceable workflow status across the payroll cycle",
+              ].map((item) => (
+                <li key={item} className="flex gap-3 text-sm text-white/80">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
-        </Container>
-      </section>
-
-      {/* Roadmap */}
-      <section className="section-padding">
-        <Container>
-          <h2 className="text-3xl font-bold">Roadmap</h2>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {proqpayProduct.roadmap.map((item) => (
-              <div
-                key={item.title}
-                className="flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3"
-              >
-                <span className="text-sm font-medium">{item.title}</span>
-                <StatusBadge status={item.status} />
-              </div>
-            ))}
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <p className="text-sm font-semibold text-orange">PPh 21 & BPJS scope</p>
+            <p className="mt-3 text-sm leading-relaxed text-white/70">
+              MSG Managed Payroll can support agreed PPh 21 and BPJS administration as part of the service scope. Native ProQPay automation is only represented as live when confirmed for the client implementation.
+            </p>
           </div>
-        </Container>
-      </section>
-
-      <section className="section-padding bg-gray-bg dark:bg-background">
-        <Container>
-          <h2 className="text-2xl font-bold">Security & auditability</h2>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-            {[
-              "Role-based access for sensitive payroll data",
-              "Approval history for material decisions",
-              "Separation of prepare, approve, and pay",
-              "Multi-entity control model",
-            ].map((item) => (
-              <li key={item} className="flex gap-3 text-sm">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
-                {item}
-              </li>
-            ))}
-          </ul>
         </Container>
       </section>
 
       <FaqSection items={proqpayFaqs} />
 
       <CtaBand
-        title="Request a ProQPay demo"
-        description="See payroll processing, approvals, disbursement, and working capital support in a guided walkthrough."
-        primaryHref="/payroll/register"
-        primaryLabel="Register Payroll Service"
-        secondaryHref={siteConfig.appUrl}
-        secondaryLabel="Open App"
+        title="Start with your payroll requirement"
+        description="Talk with MSG first to define the operating model, service scope, controls, and whether optional payroll funding is relevant to your company."
+        primaryHref="/request-consultation?intent=payroll"
+        primaryLabel="Request Payroll Assessment"
+        secondaryHref="/payroll/register"
+        secondaryLabel="Start Client Registration"
       />
     </div>
   );
