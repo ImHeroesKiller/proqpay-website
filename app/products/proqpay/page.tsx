@@ -153,7 +153,7 @@ export default function ProQPayProductPage() {
             </p>
             <h2 className="mt-3 text-3xl font-bold">Core payroll capabilities</h2>
             <p className="mt-3 text-muted-foreground">
-              The public product page focuses on capabilities that can be discussed and scoped today rather than future roadmap items.
+              These are the core capabilities available for client scoping and implementation today.
             </p>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

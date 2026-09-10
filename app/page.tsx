@@ -19,7 +19,7 @@ import {
 } from "@/lib/content/portfolio";
 
 export const metadata = buildMetadata({
-  title: `${siteConfig.legalName} | Workforce Management Partner`,
+  title: `${siteConfig.legalName} | ${siteConfig.companyMessage}`,
   description: siteConfig.description,
   path: "/",
 });

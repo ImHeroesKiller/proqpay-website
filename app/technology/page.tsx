@@ -151,7 +151,7 @@ export default function TechnologyPage() {
             </p>
             <h2 className="mt-3 text-2xl font-bold sm:text-3xl">How MSG builds workforce technology</h2>
             <p className="mt-2 text-muted-foreground">
-              We keep the public story focused on usable capability today. Future product ideas stay outside the main sales journey until they are ready to be scoped with clients.
+              MSG develops workforce technology from real operating problems, then refines it through controlled implementation and client feedback.
             </p>
           </div>
           <div className="mt-10">

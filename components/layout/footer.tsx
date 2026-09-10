@@ -48,14 +48,14 @@ export function Footer() {
           <div>
             <Logo variant="light" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
-              {siteConfig.legalName} — Workforce Management Partner integrating
-              strategy, people, operations, and technology.
+              {siteConfig.legalName} — {siteConfig.tagline}, integrating strategic
+              advisory, workforce operations, and practical technology.
             </p>
             <p className="mt-3 text-sm text-white/55">
               {siteConfig.websiteDisplay}
             </p>
             <p className="mt-4 text-xs font-medium uppercase tracking-[0.16em] text-white/40">
-              People · Operations · Technology
+              Strategy · People · Operations · Technology
             </p>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">

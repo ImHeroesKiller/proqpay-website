@@ -2,11 +2,11 @@ export const siteConfig = {
   name: "MSG",
   legalName: "PT Mandiri Semesta Gemilang",
   brand: "MSG",
-  tagline: "Workforce Management Partner",
+  tagline: "Enterprise Workforce & Business Transformation Partner",
   supportingLine:
-    "People. Operations. Technology. Integrated solutions for sustainable business growth.",
+    "Strategy. People. Operations. Technology. Integrated for measurable business impact.",
   description:
-    "PT Mandiri Semesta Gemilang (MSG) is a Workforce Management Partner integrating strategy, people, and technology through Strategic Advisory, Workforce Solutions, and Technology.",
+    "PT Mandiri Semesta Gemilang (MSG) is an Enterprise Workforce & Business Transformation Partner integrating Strategic Advisory, Workforce Solutions, and Workforce Technology.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.msg-os.com",
   websiteDisplay: "www.msg-os.com",
   /** ProQPay payroll application (subdomain) */
@@ -17,10 +17,10 @@ export const siteConfig = {
     : "https://proqpay.msg-os.com/login",
   locale: "en_US",
   founded: 2019,
-  companyMessage: "Workforce Management Partner",
+  companyMessage: "Enterprise Workforce & Business Transformation Partner",
   slogan: "People · Operations · Technology",
   positioning:
-    "PT Mandiri Semesta Gemilang integrates strategy, people, and technology to deliver end-to-end solutions that drive business transformation and sustainable growth.",
+    "PT Mandiri Semesta Gemilang integrates strategic advisory, workforce operations, and practical technology to improve business performance and enable sustainable growth.",
   seoKeywords: [
     "business advisory Indonesia",
     "business transformation",
@@ -34,12 +34,12 @@ export const siteConfig = {
     "workforce technology",
   ],
   hero: {
-    eyebrow: "PT Mandiri Semesta Gemilang",
+    eyebrow: "Enterprise Workforce & Business Transformation Partner",
     headline: "One Partner. Integrated Solutions. Measurable Impact.",
     subheadline:
-      "MSG mengintegrasikan strategi, people, dan technology untuk mendorong transformasi bisnis dan pertumbuhan berkelanjutan.",
+      "MSG mengintegrasikan strategic advisory, workforce operations, dan technology untuk membantu perusahaan meningkatkan kinerja, mengelola tenaga kerja, dan bertumbuh secara berkelanjutan.",
     subheadlineEn:
-      "MSG integrates strategy, people, and technology to drive business transformation and sustainable growth.",
+      "MSG integrates strategic advisory, workforce operations, and technology to improve performance, strengthen workforce execution, and enable sustainable growth.",
   },
   contact: {
     email: "info@msg-os.com",
