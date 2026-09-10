@@ -98,6 +98,9 @@ async function uploadDocument(
   if (!(file instanceof File)) return json({ error: "File is required" }, 400);
   if (!folder || !documentType) return json({ error: "Invalid document metadata" }, 400);
   if (!allowed[file.type]) return json({ error: "Invalid MIME type" }, 400);
+  if (category === "company-profile" && file.type !== "application/pdf") {
+    return json({ error: "Company Profile must be a PDF file" }, 400);
+  }
 
   const extension = file.name.split(".").pop()?.toLowerCase() ?? "";
   if (!allowed[file.type].includes(extension)) {
